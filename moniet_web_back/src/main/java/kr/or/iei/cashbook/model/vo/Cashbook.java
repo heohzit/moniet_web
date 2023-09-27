@@ -18,7 +18,7 @@ public class Cashbook {
 	private String cashbookDate;
 	private int cashbookLoop;
 	private int loopMonth;
-	private int cashbookAsset;
+	private int cashbookAsset;	//1:현금, 2:신용카드,3:체크카드, 4이체, 5:기타
 	private int cashbookCategory;
 	private int cashbookMoney;
 	private String cashbookContent;
