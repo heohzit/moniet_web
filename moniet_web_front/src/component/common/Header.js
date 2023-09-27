@@ -15,7 +15,7 @@ const NaviSide = () => {
     <div className="nav-side">
       <ul>
         <li>
-          <Link to="#">대시보드</Link>
+          <Link to="/dashboard">대시보드</Link>
         </li>
         <li>
           <Link to="#">내역</Link>
@@ -24,7 +24,7 @@ const NaviSide = () => {
           <Link to="#">달력</Link>
         </li>
         <li>
-          <Link to="#">머니챌린지</Link>
+          <Link to="challenge">머니챌린지</Link>
         </li>
         <li>
           <Link to="#">커뮤니티</Link>
