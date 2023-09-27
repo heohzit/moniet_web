@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Spring]]></title><description><![CDATA[Level up your Java code and explore what Spring can do for you.]]></description><link>https://spring.io</link><generator>GatsbyJS</generator><lastBuildDate>Tue, 26 Sep 2023 15:18:32 GMT</lastBuildDate><item><title><![CDATA[This Week in Spring - September 26th, 2023]]></title><link>https://spring.io/blog/2023/09/26/this-week-in-spring-september-26th-2023</link><guid isPermaLink="true">https://spring.io/blog/2023/09/26/this-week-in-spring-september-26th-2023</guid><dc:creator><![CDATA[Josh Long]]></dc:creator><pubDate>Tue, 26 Sep 2023 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;Hi, Spring fans! Welcome to another installment of &lt;em&gt;This Week in Spring&lt;/em&gt;! How are you? It&apos;s September 26th, 2023, and I am in sunny Singapore for SpringOne at VMWare Explore Singapore. If you&apos;re around, don&apos;t forget to say hi!&lt;/p&gt;
+&lt;p&gt;It&apos;s gonna be a fun and busy week in Singapore, and then next week I&apos;m off to Antwerp, Belgium, for the amazing Devoxx BE 2023. Then, I&apos;m off to Morocco, for Devoxx MA 2023. Then, I&apos;m off to Amsterdam for SpringOne Tour Amsterdam. If you&apos;re in any of these places, do not hesitate to reach out and say hi! I&apos;d love to chat! And with that, we&apos;ve got a ton of things to cover so let&apos;s dive right into it!&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Java 21 is here, and I wrote a huuuuge explainer about all the new features in this blog here: &lt;a href=&quot;https://spring.io/blog/2023/09/20/hello-java-21&quot;&gt;Hello, Java 21&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;If you want to watch your knowledge instead of read it, &lt;a href=&quot;https://www.youtube.com/watch?v=8VJ_dSdV3pY&quot;&gt;you might watch this video instead&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Want to learn more about one key dimension of the new features in Java 21? Check out this article from Java language architect Brian Goetz from 2022: &lt;a href=&quot;https://www.infoq.com/articles/data-oriented-programming-java/&quot;&gt;Data Oriented Programming in Java&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://cloud.google.com/blog/products/application-development/develop-and-test-spring-boot-applications-consistently/&quot;&gt;How Google Cloud emulators and Testcontainers speed up development | Google Cloud Blog&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://twitter.com/juliendubois/status/1705305573627965499&quot;&gt;Want to use Oracle OpenJDK 21 in Github Actions? Julien Dubois has you sorted&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://spring.io/blog/2023/09/22/simplified-event-externalization-with-spring-modulith&quot;&gt;Simplified Event Externalization with Spring Modulith&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://spring.io/blog/2023/09/21/spring-cloud-dataflow-2-11-0-released&quot;&gt;Spring Cloud Dataflow 2.11.0 Released&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://m.youtube.com/watch?si=npRfyttagbPKwcPb&amp;#x26;v=430YOyMNjhs&amp;#x26;feature=youtu.be&quot;&gt;Spring Modulith ? A Deep Dive (Workshop) - YouTube&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://spring.io/blog/2023/09/19/spring-for-graphql-1-0-5-1-1-6-1-2-3-released&quot;&gt;Spring for GraphQL 1.0.5, 1.1.6, 1.2.3 released&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://kubernetes.io/blog/2023/09/25/kubeadm-use-etcd-learner-mode/&quot;&gt;Blog: kubeadm: Use etcd Learner to Join a Control Plane Node Safely&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content:encoded></item><item><title><![CDATA[Paketo Buildpacks Bionic End Of Support]]></title><link>https://spring.io/blog/2023/09/22/paketo-buildpacks-bionic-end-of-support</link><guid isPermaLink="true">https://spring.io/blog/2023/09/22/paketo-buildpacks-bionic-end-of-support</guid><dc:creator><![CDATA[Scott Frederick]]></dc:creator><pubDate>Fri, 22 Sep 2023 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;The Spring Boot plugins for Maven and Gradle provide the ability to &lt;a href=&quot;https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#container-images.buildpacks&quot;&gt;build Docker images using Cloud Native Buildpacks&lt;/a&gt;. By default, Spring Boot uses the CNB builders provided by the &lt;a href=&quot;https://paketo.io/&quot;&gt;Paketo Buildpacks&lt;/a&gt; project.&lt;/p&gt;
+&lt;h1&gt;What&apos;s Changed&lt;/h1&gt;
+&lt;p&gt;The Paketo Buildpacks project has announced that Ubuntu 18.04 Bionic-based builders are no longer supported, in favor of Ubuntu 22.04 Jammy-based builders. See the &lt;a href=&quot;https://blog.paketo.io/posts/bionic-eos/&quot;&gt;Paketo announcement&lt;/a&gt; for more details on the builders that are affected by this change.&lt;/p&gt;
+&lt;p&gt;The Maven and Gradle plugins for Spring Boot versions 3.1 and earlier use the Bionic Base Builder by default when building images to run applications on a JVM, and the Bionic Tiny Builder by default when building images from native executables using GraalVM. Paketo Jammy builders will be the default starting with Spring Boot 3.2.&lt;/p&gt;
+&lt;p&gt;Users of Spring Boot 3.1 and earlier should make changes to their build configurations to migrate to the Paketo Jammy builders in order to receive regular updates to buildpacks and the dependencies that buildpacks install.&lt;/p&gt;
+&lt;h1&gt;Migration&lt;/h1&gt;
+&lt;h2&gt;Maven&lt;/h2&gt;
+&lt;p&gt;To use the Paketo Jammy builder in a Spring Boot build using Maven, the builder should be configured as shown in this example:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-xml&quot;&gt;&amp;#x3C;project&gt;
+    &amp;#x3C;build&gt;
+        &amp;#x3C;plugins&gt;
+            &amp;#x3C;plugin&gt;
+                &amp;#x3C;groupId&gt;org.springframework.boot&amp;#x3C;/groupId&gt;
+                &amp;#x3C;artifactId&gt;spring-boot-maven-plugin&amp;#x3C;/artifactId&gt;
+                &amp;#x3C;configuration&gt;
+                    &amp;#x3C;image&gt;
+                        &amp;#x3C;builder&gt;paketobuildpacks/builder-jammy-base:latest&amp;#x3C;/builder&gt;
+                    &amp;#x3C;/image&gt;
+                &amp;#x3C;/configuration&gt;
+            &amp;#x3C;/plugin&gt;
+        &amp;#x3C;/plugins&gt;
+    &amp;#x3C;/build&gt;
+&amp;#x3C;/project&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;See the Spring Boot Maven plugin &lt;a href=&quot;https://docs.spring.io/spring-boot/docs/current/maven-plugin/reference/htmlsingle/#build-image.customization&quot;&gt;documentation&lt;/a&gt; for more information on configuring the plugin.&lt;/p&gt;
+&lt;h2&gt;Gradle&lt;/h2&gt;
+&lt;p&gt;When using Gradle with Groovy, the builder should be configured as shown in this example:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-groovy&quot;&gt;tasks.named(&quot;bootBuildImage&quot;) {
+	builder = &quot;paketobuildpacks/builder-jammy-base:latest&quot;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;When using Gradle with Kotlin, the builder should be configured as shown in this example:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-kotlin&quot;&gt;tasks.named&amp;#x3C;BootBuildImage&gt;(&quot;bootBuildImage&quot;) {
+	builder.set(&quot;paketobuildpacks/builder-jammy-base:latest&quot;)
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;See the Spring Boot Gradle plugin &lt;a href=&quot;https://docs.spring.io/spring-boot/docs/current/gradle-plugin/reference/htmlsingle/#build-image.customization&quot;&gt;documentation&lt;/a&gt; for more information on configuring the plugin.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[Simplified Event Externalization with Spring Modulith]]></title><link>https://spring.io/blog/2023/09/22/simplified-event-externalization-with-spring-modulith</link><guid isPermaLink="true">https://spring.io/blog/2023/09/22/simplified-event-externalization-with-spring-modulith</guid><dc:creator><![CDATA[Oliver Drotbohm]]></dc:creator><pubDate>Fri, 22 Sep 2023 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;Transactional service methods are a common pattern in Spring applications. These methods trigger a state transition important to the business. This usually involves a core domain abstraction, such as an aggregate and its corresponding repository. A stereotypical example of such an arrangement might look like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;@Service
+@RequiredArgsConstructor
+class OrderManagement {
+
+  private final OrderRepository orders;
+
+  @Transactional
+  Order complete(Order order) {
+     return orders.save(order.complete());
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;As state transitions like these might be interesting to third parties, we might want to involve a message broker to publish a message for general distribution across other systems. A naive approach to implement this would be to hide that kind of interaction in another Spring service, inject that into our primary bean and invoke a method that would ultimately interact with the broker.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;@Service
+@RequiredArgsConstructor
+class OrderManagement {
+
+  private final OrderRepository orders;
+  private final MessageSender sender;
+
+  @Transactional
+  Order complete(Order order) {
+
+     var result = orders.save(order.complete());
+
+     sender.publishMessage(¡¦);
+
+     return result;
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2&gt;Problems&lt;/h2&gt;
+&lt;p&gt;Unfortunately, this approach suffers from a variety of problems:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;As the method runs within a transaction, it has already acquired a database connection. Interaction with other infrastructure is costly and, thus, likely significantly extends the length of the transaction, preventing the connection from being returned early, which might lead to connection pool saturation and, thus, poor performance.&lt;/li&gt;
+&lt;li&gt;While we have elegantly wrapped the interaction with the broker behind a nice-looking facade, our &lt;code&gt;completeOrder(¡¦)&lt;/code&gt; method is now susceptible to more infrastructure problems. Failing to access the broker rolls back the transactions and prevent orders from completion. Our system might be technically available but entirely unable to do anything useful due to a downstream infrastructure problem.&lt;/li&gt;
+&lt;li&gt;Lastly, we have created a consistency issue in case the message publication succeeds but the database transaction ends up rolling back eventually.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;A common pattern to solve these problems is publishing an application event from the service, which, at first glance, doesn&apos;t look too different from what we had laid out before.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;@Service
+@RequiredArgsConstructor
+class OrderManagement {
+
+  private final OrderRepository orders;
+  private final ApplicationEventPublisher events; 
+
+  @Transactional
+  Order complete(Order order) {
+
+     var result = orders.save(order.complete());
+
+     events.publishEvent(
+         new OrderCompleted(result.getId(), result.getCustomerId()));
+
+     return result;
+  }
+
+  record OrderCompleted(OrderId orderId, CustomerId customerId) {}
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The primary difference here is that the event published is a simple object handed around &lt;em&gt;within&lt;/em&gt; the JVM in the first place. The actual interaction with the broker would then be implemented in an &lt;code&gt;@Async&lt;/code&gt; &lt;code&gt;@TransactionalEventListener&lt;/code&gt;. By default, such a listener will be invoked after the original business transaction has committed, which resolves issue 3. Marking the listener with &lt;code&gt;@Async&lt;/code&gt; causes the event handling being executed on a separate thread, which in turn solves problem 1.&lt;/p&gt;
+&lt;h2&gt;Spring Modulith Event Externalization&lt;/h2&gt;
+&lt;p&gt;The implementation of the listener is a rather mundane exercise: we have to select a broker-specific client (Spring Kafka, Spring AMQP, JMS, and others), marshal the event, determine a routing target, and (optional and depending on the broker) a routing key. Spring Modulith 1.1 M1 ships such an integration out of the box. To use it with Kafka, for example, you would add the corresponding artifact to your project¡¯s class path:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;#x3C;dependency&gt;
+  &amp;#x3C;groupId&gt;org.springframework.modulith&amp;#x3C;/groupId&gt;
+  &amp;#x3C;artifactId&gt;spring-modulith-events-api&amp;#x3C;/artifactId&gt;
+&amp;#x3C;/dependency&gt;
+&amp;#x3C;dependency&gt;
+  &amp;#x3C;groupId&gt;org.springframework.modulith&amp;#x3C;/groupId&gt;
+  &amp;#x3C;artifactId&gt;spring-modulith-events-kafka&amp;#x3C;/artifactId&gt;
+  &amp;#x3C;scope&gt;runtime&amp;#x3C;/scope&gt;
+&amp;#x3C;/dependency&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The presence of the latter JAR registers a listener, as described above. To get an application event transparently published to a broker, you can annotate it with the &lt;code&gt;@Externalized&lt;/code&gt; annotation provided by either Spring Modulith&apos;s (the first JAR) or jMolecules&apos; (not shown), like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;import org.springframework.modulith.events.Externalized;
+
+@Externalized(&quot;orders.OrderCompleted::#{customerId()}&quot;)
+record OrderCompleted(OrderId orderId, CustomerId customerId) {}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The presence of the annotation triggers instances of that class being selected for publication. We have defined &lt;code&gt;orders.OrderCompleted&lt;/code&gt; as a routing target. The SpEL expression, &lt;code&gt;#{customerId()}&lt;/code&gt;, selects the accessor method to be invoked on the event to produce a routing key, which triggers the correct partition assignment. If you prefer describing event selection and routing in code, check out how to use &lt;a href=&quot;https://docs.spring.io/spring-modulith/reference/1.1/events.html#externalization.api&quot;&gt;&lt;code&gt;EventExternalizationConfiguration&lt;/code&gt;&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;Error Scenarios&lt;/h2&gt;
+&lt;p&gt;This is all pretty convenient, and we have elegantly solved two of our three problems already. But what about the error scenario? What if the message publication fails? The original business transaction has already committed, but we have now lost the internal event publication. Fortunately, that case is already solved by Spring Modulith&apos;s &lt;a href=&quot;https://docs.spring.io/spring-modulith/reference/1.1/events.html#publication-registry&quot;&gt;Event Publication Registry&lt;/a&gt;. It creates a registry entry for every transactional event listener interested in an event being published and marks that entry completed only if the listener succeeds. Failing to send the message to the broker results in the entry staying around, being subject to resubmission attempts later.&lt;/p&gt;
+&lt;h2&gt;Summary&lt;/h2&gt;
+&lt;p&gt;Interacting with third infrastructure within a primary business transaction should be avoided for performance, reliability, and consistency reasons. Spring Modulith 1.1 allows easily publishing application events to message brokers by marking event types for externalization and defining routing targets and keys. For more information, refer to the &lt;a href=&quot;https://docs.spring.io/spring-modulith/reference/1.1/events.html#externalization&quot;&gt;reference documentation&lt;/a&gt;.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[Spring Modulith 1.1 M1 and 1.0.1 released]]></title><link>https://spring.io/blog/2023/09/21/spring-modulith-1-1-m1-and-1-0-1-released</link><guid isPermaLink="true">https://spring.io/blog/2023/09/21/spring-modulith-1-1-m1-and-1-0-1-released</guid><dc:creator><![CDATA[Oliver Drotbohm]]></dc:creator><pubDate>Thu, 21 Sep 2023 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;On behalf of the community, I am happy to announce the release of Spring Modulith 1.1 M1 and 1.0.1. While the latter primarily ships minor bug fixes, the former packages quite a few new features, such as:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Support to externalize application events into Kafka, AMQP and JMS &lt;a href=&quot;https://github.com/spring-projects/spring-modulith/issues/248&quot;&gt;GH-248&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;APIs to access completed and incomplete event publications &lt;a href=&quot;https://github.com/spring-projects/spring-modulith/issues/294&quot;&gt;GH-294&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Support for Neo4j as persistence store to back the Event Publication Registry &lt;a href=&quot;https://github.com/spring-projects/spring-modulith/issues/301&quot;&gt;GH-301&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;We will have a blog post elaborating on the former coming soon. Feel free to check out the &lt;a href=&quot;https://github.com/spring-projects/spring-modulith/releases/tag/1.1.0-M1&quot;&gt;full change log&lt;/a&gt; and &lt;a href=&quot;https://docs.spring.io/spring-modulith/reference/1.1/index.html&quot;&gt;revamped reference documentation&lt;/a&gt; in the meantime. Thanks to everyone who contributed!&lt;/p&gt;</content:encoded></item><item><title><![CDATA[A Bootiful Podcast: Java community legend Sharat Chander ]]></title><link>https://spring.io/blog/2023/09/21/a-bootiful-podcast-java-community-legend-sharat-chander</link><guid isPermaLink="true">https://spring.io/blog/2023/09/21/a-bootiful-podcast-java-community-legend-sharat-chander</guid><dc:creator><![CDATA[Josh Long]]></dc:creator><pubDate>Thu, 21 Sep 2023 00:00:00 GMT</pubDate><content:encoded>&lt;iframe title=&quot;Java community legend Sharat Chander, just in time for Java 21&quot; allowtransparency=&quot;true&quot; height=&quot;150&quot; width=&quot;100%&quot; style=&quot;border: none; min-width: min(100%, 430px);height:150px;&quot; scrolling=&quot;no&quot; data-name=&quot;pb-iframe-player&quot; src=&quot;https://www.podbean.com/player-v2/?i=bcddh-14af961-pb&amp;from=pb6admin&amp;share=1&amp;download=1&amp;rtl=0&amp;fonts=Arial&amp;skin=1&amp;font-color=&amp;logo_link=episode_page&amp;btn-skin=7&quot; loading=&quot;lazy&quot;&gt;&lt;/iframe&gt;
+&lt;p&gt;Hi, Spring fans! Java 21 is out and in order to celebrate, I talk to Java community legend &lt;a href=&quot;https://twitter.com/https://twitter.com/sharatchandler&quot;&gt;Sharat Chander&lt;/a&gt;.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[Spring Boot 3.2.0-M3 available now]]></title><link>https://spring.io/blog/2023/09/21/spring-boot-3-2-0-m3-available-now</link><guid isPermaLink="true">https://spring.io/blog/2023/09/21/spring-boot-3-2-0-m3-available-now</guid><dc:creator><![CDATA[Moritz Halbritter]]></dc:creator><pubDate>Thu, 21 Sep 2023 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;On behalf of the team and everyone who has contributed, I&apos;m happy to announce that Spring Boot &lt;code&gt;3.2.0-M3&lt;/code&gt; has been released and is now available from &lt;a href=&quot;https://repo.spring.io/milestone&quot;&gt;https://repo.spring.io/milestone&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;This release includes &lt;a href=&quot;https://github.com/spring-projects/spring-boot/releases/tag/v3.2.0-M3&quot;&gt;97 enhancements, documentation improvements, dependency upgrades, and bug fixes&lt;/a&gt;. Notable new features include:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Support for Jetty 12&lt;/li&gt;
+&lt;li&gt;Support for Spring for Apache Pulsar&lt;/li&gt;
+&lt;li&gt;Docker Compose Support for Neo4j&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Please see the &lt;a href=&quot;https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-3.2.0-M3-Release-Notes&quot;&gt;release notes&lt;/a&gt; for more details and upgrade instructions.&lt;/p&gt;
+&lt;p&gt;Thanks to all those who have contributed with issue reports and pull requests.&lt;/p&gt;
+&lt;h3&gt;How can you help?&lt;/h3&gt;
+&lt;p&gt;If you&apos;re interested in helping out, check out the &lt;a href=&quot;https://github.com/spring-projects/spring-boot/labels/status%3A%20ideal-for-contribution&quot;&gt;&quot;ideal for contribution&quot; tag&lt;/a&gt; in the issue repository. If you have general questions, please ask on &lt;a href=&quot;https://stackoverflow.com&quot;&gt;stackoverflow.com&lt;/a&gt; using the &lt;a href=&quot;https://stackoverflow.com/tags/spring-boot&quot;&gt;&lt;code&gt;spring-boot&lt;/code&gt; tag&lt;/a&gt; or chat with the community on &lt;a href=&quot;https://gitter.im/spring-projects/spring-boot&quot;&gt;Gitter&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://spring.io/projects/spring-boot/&quot;&gt;Project Page&lt;/a&gt; | &lt;a href=&quot;https://github.com/spring-projects/spring-boot&quot;&gt;GitHub&lt;/a&gt; | &lt;a href=&quot;https://github.com/spring-projects/spring-boot/issues&quot;&gt;Issues&lt;/a&gt; | &lt;a href=&quot;https://docs.spring.io/spring-boot/docs/3.2.0-M3/reference/html&quot;&gt;Documentation&lt;/a&gt; | &lt;a href=&quot;https://stackoverflow.com/questions/tagged/spring-boot&quot;&gt;Stack Overflow&lt;/a&gt; | &lt;a href=&quot;https://gitter.im/spring-projects/spring-boot&quot;&gt;Gitter&lt;/a&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[Spring Boot 3.1.4 available now]]></title><link>https://spring.io/blog/2023/09/21/spring-boot-3-1-4-available-now</link><guid isPermaLink="true">https://spring.io/blog/2023/09/21/spring-boot-3-1-4-available-now</guid><dc:creator><![CDATA[Moritz Halbritter]]></dc:creator><pubDate>Thu, 21 Sep 2023 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;On behalf of the team and everyone who has contributed, I&apos;m happy to announce that Spring Boot &lt;code&gt;3.1.4&lt;/code&gt; has been released and is now available from Maven Central.&lt;/p&gt;
+&lt;p&gt;This release includes &lt;a href=&quot;https://github.com/spring-projects/spring-boot/releases/tag/v3.1.4&quot;&gt;50 bug fixes, documentation improvements, and dependency upgrades&lt;/a&gt;. Thanks to all those who have contributed with issue reports and pull requests.&lt;/p&gt;
+&lt;h3&gt;How can you help?&lt;/h3&gt;
+&lt;p&gt;If you&apos;re interested in helping out, check out the &lt;a href=&quot;https://github.com/spring-projects/spring-boot/labels/status%3A%20ideal-for-contribution&quot;&gt;&quot;ideal for contribution&quot; tag&lt;/a&gt; in the issue repository. If you have general questions, please ask on &lt;a href=&quot;https://stackoverflow.com&quot;&gt;stackoverflow.com&lt;/a&gt; using the &lt;a href=&quot;https://stackoverflow.com/tags/spring-boot&quot;&gt;&lt;code&gt;spring-boot&lt;/code&gt; tag&lt;/a&gt; or chat with the community on &lt;a href=&quot;https://gitter.im/spring-projects/spring-boot&quot;&gt;Gitter&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://spring.io/projects/spring-boot/&quot;&gt;Project Page&lt;/a&gt; | &lt;a href=&quot;https://github.com/spring-projects/spring-boot&quot;&gt;GitHub&lt;/a&gt; | &lt;a href=&quot;https://github.com/spring-projects/spring-boot/issues&quot;&gt;Issues&lt;/a&gt; | &lt;a href=&quot;https://docs.spring.io/spring-boot/docs/3.1.4/reference/html&quot;&gt;Documentation&lt;/a&gt; | &lt;a href=&quot;https://stackoverflow.com/questions/tagged/spring-boot&quot;&gt;Stack Overflow&lt;/a&gt; | &lt;a href=&quot;https://gitter.im/spring-projects/spring-boot&quot;&gt;Gitter&lt;/a&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[Spring Boot 3.0.11 available now]]></title><link>https://spring.io/blog/2023/09/21/spring-boot-3-0-11-available-now</link><guid isPermaLink="true">https://spring.io/blog/2023/09/21/spring-boot-3-0-11-available-now</guid><dc:creator><![CDATA[Moritz Halbritter]]></dc:creator><pubDate>Thu, 21 Sep 2023 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;On behalf of the team and everyone who has contributed, I&apos;m happy to announce that Spring Boot &lt;code&gt;3.0.11&lt;/code&gt; has been released and is now available from Maven Central.&lt;/p&gt;
+&lt;p&gt;This release includes &lt;a href=&quot;https://github.com/spring-projects/spring-boot/releases/tag/v3.0.11&quot;&gt;40 bug fixes, documentation improvements, and dependency upgrades&lt;/a&gt;. Thanks to all those who have contributed with issue reports and pull requests.&lt;/p&gt;
+&lt;h3&gt;How can you help?&lt;/h3&gt;
+&lt;p&gt;If you&apos;re interested in helping out, check out the &lt;a href=&quot;https://github.com/spring-projects/spring-boot/labels/status%3A%20ideal-for-contribution&quot;&gt;&quot;ideal for contribution&quot; tag&lt;/a&gt; in the issue repository. If you have general questions, please ask on &lt;a href=&quot;https://stackoverflow.com&quot;&gt;stackoverflow.com&lt;/a&gt; using the &lt;a href=&quot;https://stackoverflow.com/tags/spring-boot&quot;&gt;&lt;code&gt;spring-boot&lt;/code&gt; tag&lt;/a&gt; or chat with the community on &lt;a href=&quot;https://gitter.im/spring-projects/spring-boot&quot;&gt;Gitter&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://spring.io/projects/spring-boot/&quot;&gt;Project Page&lt;/a&gt; | &lt;a href=&quot;https://github.com/spring-projects/spring-boot&quot;&gt;GitHub&lt;/a&gt; | &lt;a href=&quot;https://github.com/spring-projects/spring-boot/issues&quot;&gt;Issues&lt;/a&gt; | &lt;a href=&quot;https://docs.spring.io/spring-boot/docs/3.0.11/reference/html&quot;&gt;Documentation&lt;/a&gt; | &lt;a href=&quot;https://stackoverflow.com/questions/tagged/spring-boot&quot;&gt;Stack Overflow&lt;/a&gt; | &lt;a href=&quot;https://gitter.im/spring-projects/spring-boot&quot;&gt;Gitter&lt;/a&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[Spring Boot 2.7.16 available now]]></title><link>https://spring.io/blog/2023/09/21/spring-boot-2-7-16-available-now</link><guid isPermaLink="true">https://spring.io/blog/2023/09/21/spring-boot-2-7-16-available-now</guid><dc:creator><![CDATA[Moritz Halbritter]]></dc:creator><pubDate>Thu, 21 Sep 2023 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;On behalf of the team and everyone who has contributed, I&apos;m happy to announce that Spring Boot &lt;code&gt;2.7.16&lt;/code&gt; has been released and is now available from Maven Central.&lt;/p&gt;
+&lt;p&gt;This release includes &lt;a href=&quot;https://github.com/spring-projects/spring-boot/releases/tag/v2.7.16&quot;&gt;24 bug fixes, documentation improvements, and dependency upgrades&lt;/a&gt;. Thanks to all those who have contributed with issue reports and pull requests.&lt;/p&gt;
+&lt;h3&gt;How can you help?&lt;/h3&gt;
+&lt;p&gt;If you&apos;re interested in helping out, check out the &lt;a href=&quot;https://github.com/spring-projects/spring-boot/labels/status%3A%20ideal-for-contribution&quot;&gt;&quot;ideal for contribution&quot; tag&lt;/a&gt; in the issue repository. If you have general questions, please ask on &lt;a href=&quot;https://stackoverflow.com&quot;&gt;stackoverflow.com&lt;/a&gt; using the &lt;a href=&quot;https://stackoverflow.com/tags/spring-boot&quot;&gt;&lt;code&gt;spring-boot&lt;/code&gt; tag&lt;/a&gt; or chat with the community on &lt;a href=&quot;https://gitter.im/spring-projects/spring-boot&quot;&gt;Gitter&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://spring.io/projects/spring-boot/&quot;&gt;Project Page&lt;/a&gt; | &lt;a href=&quot;https://github.com/spring-projects/spring-boot&quot;&gt;GitHub&lt;/a&gt; | &lt;a href=&quot;https://github.com/spring-projects/spring-boot/issues&quot;&gt;Issues&lt;/a&gt; | &lt;a href=&quot;https://docs.spring.io/spring-boot/docs/2.7.16/reference/html&quot;&gt;Documentation&lt;/a&gt; | &lt;a href=&quot;https://stackoverflow.com/questions/tagged/spring-boot&quot;&gt;Stack Overflow&lt;/a&gt; | &lt;a href=&quot;https://gitter.im/spring-projects/spring-boot&quot;&gt;Gitter&lt;/a&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[Spring Integration 6.2.0 Milestone 3 Available]]></title><link>https://spring.io/blog/2023/09/20/spring-integration-6-2-0-milestone-3-available</link><guid isPermaLink="true">https://spring.io/blog/2023/09/20/spring-integration-6-2-0-milestone-3-available</guid><dc:creator><![CDATA[Artem Bilan]]></dc:creator><pubDate>Wed, 20 Sep 2023 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;Dear Spring community,&lt;/p&gt;
+&lt;p&gt;On behalf of Spring Integration team, it is my pleasure to announce &lt;code&gt;6.2.0-M3&lt;/code&gt; version which is available from &lt;a href=&quot;https://repo.spring.io/milestone&quot;&gt;Spring Milestone&lt;/a&gt; repository.&lt;/p&gt;
+&lt;p&gt;In addition, bug fixes version &lt;code&gt;6.1.3&lt;/code&gt; has been released as well into Maven Central.&lt;/p&gt;
+&lt;p&gt;Since the previously announced &lt;a href=&quot;https://spring.io/blog/2023/07/19/spring-integrtion-6-2-milestone-1-available&quot;&gt;Milestone 1&lt;/a&gt;, these changes have made it into a new Spring Integration generation:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;The documentation migrated to Antora site generator and hosted alongside with other migrated Spring projects &lt;a href=&quot;https://docs.spring.io/spring-integration/reference/6.2/index.html&quot;&gt;here&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The project build lifecycle is now connected to &lt;a href=&quot;https://ge.spring.io/scans?search.rootProjectNames=spring-integration&quot;&gt;Gradle Enterprise&lt;/a&gt;, so every one contributing can now benefit from remote shared cache for Gradle tasks&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The &lt;code&gt;LockRegistry&lt;/code&gt; interface provides a template-like &lt;code&gt;executeLocked()&lt;/code&gt; API:&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre&gt;&lt;code class=&quot;language-java&quot;&gt; registry.executeLocked(&quot;someLockKey&quot;, () -&gt; someExclusiveResourceCall());
+&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;The remote files channel adapters ((S)FTP, SMB) now can be configured with their specific &lt;code&gt;AbstractLastModifiedFileListFilter&amp;#x3C;F&gt;&lt;/code&gt; implementation&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The custom &lt;code&gt;SftpClient&lt;/code&gt; can now be configured on extension of the &lt;code&gt;DefaultSftpSessionFactory&lt;/code&gt; via overridden &lt;code&gt;createSftpClient()&lt;/code&gt; method.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Some other minor improvements and bug-fixes back-ported to other supported versions.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;My personal appreciation for community contributors: &lt;a href=&quot;https://github.com/AdamaSorho&quot;&gt;Adama Sorho&lt;/a&gt;, &lt;a href=&quot;https://github.com/mhyeon-lee&quot;&gt;Myeonghyeon-Lee&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;See &lt;a href=&quot;https://docs.spring.io/spring-integration/docs/6.2.0-M3/reference/html/whats-new.html#whats-new&quot;&gt;What&apos;s New&lt;/a&gt; in the documentation and don&apos;t forget about a &lt;a href=&quot;https://github.com/spring-projects/spring-integration/wiki/Spring-Integration-6.1-to-6.2-Migration-Guide&quot;&gt;Migration Guide&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Now we are heading to Release Candidate phase in October where we are going to wrap up new features and breaking changes for Spring Integration &lt;code&gt;6.2&lt;/code&gt;, therefore this is the last chance to contribute something what cannot wait for the next version.&lt;/p&gt;
+&lt;p&gt;Cheers,?&lt;br&gt;
+Artem&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://projects.spring.io/spring-integration/&quot;&gt;Project Page&lt;/a&gt; | &lt;a href=&quot;https://github.com/spring-projects/spring-integration/issues&quot;&gt;GitHub Issues&lt;/a&gt; | &lt;a href=&quot;https://github.com/spring-projects/spring-integration/blob/main/CONTRIBUTING.adoc&quot;&gt;Contributing&lt;/a&gt; | &lt;a href=&quot;http://stackoverflow.com/questions/tagged/spring-integration&quot;&gt;Help&lt;/a&gt;&lt;/p&gt;</content:encoded></item></channel></rss>
