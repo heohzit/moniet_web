@@ -18,7 +18,7 @@ const NaviSide = () => {
           <Link to="/dashboard">대시보드</Link>
         </li>
         <li>
-          <Link to="#">내역</Link>
+          <Link to="/cashbook">내역</Link>
         </li>
         <li>
           <Link to="#">달력</Link>

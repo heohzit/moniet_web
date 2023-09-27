@@ -10,10 +10,6 @@ function App() {
   return (
     <div className="App">
       <Header></Header>
-      <Link to="/cashbook" title="cashbook">
-        {/*사이드메뉴생기면 삭제 예정 */}
-        <span>일단 캐시북</span>
-      </Link>
 
       <div className="App-content">
         <Routes>
