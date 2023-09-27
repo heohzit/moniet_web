@@ -1,0 +1,54 @@
+@font-face {
+  font-family: ns-l;
+  src: url(/public/font/NotoSansKR-Light.ttf);
+}
+@font-face {
+  font-family: ns-r;
+  src: url(/public/font/NotoSansKR-Regular.ttf);
+}
+@font-face {
+  font-family: ns-m;
+  src: url(/public/font/NotoSansKR-Medium.ttf);
+}
+@font-face {
+  font-family: ns-b;
+  src: url(/public/font/NotoSansKR-Bold.ttf);
+}
+@font-face {
+  font-family: ns-eb;
+  src: url(/public/font/NotoSansKR-ExtraBold.ttf);
+}
+@font-face {
+  font-family: ns-black;
+  src: url(/public/font/NotoSansKR-Black.ttf);
+}
+* {
+  margin: 0;
+  padding: 0;
+  font-family: ns-r;
+}
+a {
+  text-decoration: none;
+}
+/*헤더 css*/
+.header-wrap {
+  width: 1200px;
+  margin: 0 auto;
+  justify-content: space-between;
+  align-items: center;
+}
+.nav-side {
+  width: 200px;
+}
+.nav-side > ul {
+  list-style-type: none;
+  box-sizing: border-box;
+  padding-top: 30px;
+  margin: 0;
+}
+.nav-side > ul > li > a {
+  display: block;
+  padding: 10px;
+  font-family: ns-b;
+  position: relative;
+}
