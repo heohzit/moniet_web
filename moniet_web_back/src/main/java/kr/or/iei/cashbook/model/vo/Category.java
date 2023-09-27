@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Alias(value="cashbook")
+@Alias(value="category")
 public class Category {
 
 	private int categoryNo;
