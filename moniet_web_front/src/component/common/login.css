@@ -1,0 +1,24 @@
+a {
+  text-decoration: none;
+}
+.login-wrap {
+  width: 1200px;
+  margin: 0 auto;
+}
+.login-title {
+  font-size: 36px;
+  text-align: center;
+  color: #010440;
+  padding: 50px 0px;
+}
+.login-content {
+  width: 400px;
+  margin: 0 auto;
+}
+.login-input > input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 15px;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
