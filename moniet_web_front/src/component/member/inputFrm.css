@@ -1,0 +1,12 @@
+.input-form {
+    display: block;
+    /* div 로 크기 조절*/
+    width: 100%;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    border-radius: 3px;
+    outline: none;
+    padding: 0.5rem;
+}
+

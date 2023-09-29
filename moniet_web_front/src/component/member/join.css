@@ -1,0 +1,11 @@
+.join-wrap{
+    width: 500px;
+    margin: 0 auto;
+    padding: 30px;
+}
+.join-title{
+    font-size: 24px;
+    font-family: ns-b;
+    text-align: center;
+    padding: 50px 0px;
+}
