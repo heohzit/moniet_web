@@ -9,3 +9,11 @@
     text-align: center;
     padding: 50px 0px;
 }
+.join-input-wrap{
+    margin-bottom: 10px;
+}
+.check-msg{
+    color: red;
+    padding-left: 5px;
+    font-size: 13px;
+}
