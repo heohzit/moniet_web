@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Input from "./InputFrm";
 import "./join.css";
+import axios from "axios";
 
 const Join = () => {
     const [memberId, setMemberId] =  useState("");
@@ -15,7 +16,18 @@ const Join = () => {
         if(!idReg.test(memberId)){
             setCheckIdMsg("아이디는 영어 대/소문자/숫자로 4~8글자를 입력해주세요.")
         }else{
-        
+         axios
+         .get("/member/checkId/" + memberId) // /member/checkId/input value
+         .then((res) => {
+            if(res.data == 0) {
+                setCheckIdMsg("");
+            } else {
+                setCheckIdMsg("이미 사용중인 아이디입니다.");
+            }
+        })  
+         .catch((res) => {
+            console.log(res);
+        });
         }
     };
     const pwCheck=()=>{
@@ -67,6 +79,9 @@ const Join = () => {
             content="memberPhone" 
             label="전화번호"
             />
+            <div className="join-button">
+                <button type="button">회원가입</button>
+            </div>
         </div>
     );
 };
