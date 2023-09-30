@@ -2,6 +2,8 @@ import { useState } from "react";
 import Input from "./InputFrm";
 import "./join.css";
 import axios from "axios";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const Join = () => {
     const [memberId, setMemberId] =  useState("");
@@ -11,6 +13,7 @@ const Join = () => {
     const [memberPhone, setMemberPhone] = useState("");
     const [checkIdMsg, setCheckIdMsg] = useState("");
     const [checkPwMsg, setCheckPwMsg] = useState("");
+    const navigate = useNavigate();
     const idCheck = ()=>{
         const idReg = /^[a-zA-Z0-9]{4,8}$/;
         if(!idReg.test(memberId)){
@@ -36,6 +39,26 @@ const Join = () => {
             }else{
                 setCheckPwMsg("");
             }
+    };
+    //회원가입
+    const join = () => {
+        if(checkIdMsg === "" && checkPwMsg === ""){
+            const member = { memberId, memberPw, memberName, memberPhone };
+            axios
+            .post("/member/join/", member)
+            .then((res)=>{
+                if(res.data === 1) {
+                    navigate("/login");
+                }else{
+                    Swal.fire("회원가입 실패")
+                }
+            })
+            .catch((res)=>{
+                console.log(res.data);
+            });
+        }else{
+           alert("필수 정보 항목을 입력해주세요.");
+        }
     };
     return(
         <div className="join-wrap">
@@ -80,7 +103,7 @@ const Join = () => {
             label="전화번호"
             />
             <div className="join-button">
-                <button type="button">회원가입</button>
+                <button type="button" onClick={join}>회원가입</button>
             </div>
         </div>
     );
