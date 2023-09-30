@@ -39,6 +39,7 @@ const HeaderLink = ()=> {
   return (
     <div className="header-link">
       <Link to="/join">회원가입(임시)</Link>
+      <Link to="/login">로그인</Link>
     </div>
   )
 }
