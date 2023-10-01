@@ -36,4 +36,11 @@ public class MemberController {
 		int result = memberService.insertMember(member);
 		return result;
 	}
+	
+	//login
+	@PostMapping(value="/login")
+	public String login(@RequestBody Member member) {
+		String result = memberService.login(member);
+		return result;
+	}
 }

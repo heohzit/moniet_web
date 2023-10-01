@@ -2,11 +2,24 @@ import { useState } from "react";
 import "./login.css";
 import Input from "./InputFrm";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 
 const Login = () => {
     const [memberId, setMemberId] = useState("");
     const [memberPw, setMemberPw] = useState("");
+
+    const login = ()=>{
+      const member = { memberId, memberPw };
+      axios
+      .post("/member/login",member)
+      .then((res)=>{
+        console.lot(res.data);
+      })
+      .catch((res)=>{
+        console.lot(res.data);
+      });
+    }
 
   return (
     <div className="login-wrap">
@@ -35,7 +48,7 @@ const Login = () => {
         <Link to="#">비밀번호찾기</Link>
       </div>
       <div className="login-button-wrap">
-        <button>로그인</button>
+        <button onClick={login}>로그인</button>
       </div>
     </div>
   );
