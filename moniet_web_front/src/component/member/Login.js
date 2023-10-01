@@ -1,20 +1,25 @@
 import { useState } from "react";
 import "./login.css";
 import Input from "./InputFrm";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 
 const Login = () => {
     const [memberId, setMemberId] = useState("");
     const [memberPw, setMemberPw] = useState("");
+    const navigate = useNavigate();
 
     const login = ()=>{
       const member = { memberId, memberPw };
       axios
       .post("/member/login",member)
       .then((res)=>{
-        console.lot(res.data);
+        if(res.data === "실패") {
+          alert("아이디 또는 비밀번호를 확인하세요");
+        }else {
+          navigate("/");
+        }
       })
       .catch((res)=>{
         console.lot(res.data);

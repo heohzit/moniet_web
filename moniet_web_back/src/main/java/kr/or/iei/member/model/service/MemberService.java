@@ -39,8 +39,6 @@ public class MemberService {
 	public String login(Member member) {
 		Member m = memberDao.selectOneMember(member.getMemberId());
 		if(m != null && bCryptPasswordEncoder.matches(member.getMemberPw(), m.getMemberPw())) {
-			// return "성공";
-			//로그인 성공시 토큰 발급
 			return jwtUtil.createToken(member.getMemberId(), secretKey, expiredMs);
 		}else {
 			return "실패";
