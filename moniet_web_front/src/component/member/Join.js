@@ -20,13 +20,9 @@ const Join = () => {
             setCheckIdMsg("아이디는 영어 대/소문자/숫자로 4~8글자를 입력해주세요.")
         }else{
          axios
-         .get("/member/checkId/" + memberId) // /member/checkId/input value
+         .get("/member/checkId/", { params : {memberId : memberId} }) // /member/checkId/input value
          .then((res) => {
-            if(res.data == 0) {
-                setCheckIdMsg("");
-            } else {
-                setCheckIdMsg("이미 사용중인 아이디입니다.");
-            }
+            console.log(res);
         })  
          .catch((res) => {
             console.log(res);
