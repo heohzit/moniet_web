@@ -1,5 +1,7 @@
 import ChallengeFrm from "./ChallengeFrm";
 import { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const ChallengeWrite = () => {
   const [challengeTitle, setChallengeTitle] = useState("");
@@ -8,6 +10,21 @@ const ChallengeWrite = () => {
   const [challengeAmount, setChallengeAmount] = useState("");
   const [challengeStart, setChallengeStart] = useState("");
   const [challengeEnd, setChallengeEnd] = useState("");
+  const navigate = useNavigate();
+
+  const write = () => {
+    axios
+      .post("/challenge/insert")
+      .then((res) => {
+        console.log(res.data);
+        if (res.data > 0) {
+          navigate("/challenge");
+        }
+      })
+      .catch((res) => {
+        console.log(res.response.status);
+      });
+  };
   return (
     <div>
       <div className="challenge-frm-title">챌린지 작성</div>
@@ -25,6 +42,7 @@ const ChallengeWrite = () => {
         challengeEnd={challengeEnd}
         setChallengeEnd={setChallengeEnd}
         buttonEvent={write}
+        type="write"
       ></ChallengeFrm>
     </div>
   );
