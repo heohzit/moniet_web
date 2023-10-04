@@ -35,11 +35,13 @@ const Cashbook = () => {
     return num;
   };
 
-  const [selectDate, setSelectDate] = useState({
-    startDate: new Date(),
-    endDate: addDays(new Date(), 1),
-    key: "selection",
-  });
+  const [dateRange, setDateRange] = useState([
+    {
+      startDate: new Date(),
+      endDate: addDays(new Date(), 1),
+      key: "selection",
+    },
+  ]);
 
   return (
     <div className="cashbook-all-wrap">
@@ -47,7 +49,14 @@ const Cashbook = () => {
       <div className="cashbook-content">
         <div className="cashbook-date-range">
           <img className="date-range-icon" src="/icon/left-btn.png" />
-
+          <DateRange
+            editableDateInputs={true}
+            onChange={(item) => setDateRange([item.selection])}
+            moveRangeOnFirstSelection={false}
+            ranges={dateRange}
+            months={2}
+            direction="horizontal"
+          />
           <img className="date-range-icon" src="/icon/right-btn.png" />
         </div>
         <div className="cashbook-btn-zone">
@@ -136,7 +145,13 @@ const CashbookItem = (props) => {
       <td>{cashbook.cashbookDate}</td>
       <td>{assetToString(cashbook.cashbookAsset)}</td>
       <td>{cashbook.categoryTitle}</td>
-      <td>
+      <td
+        className={`${
+          cashbook.cashbookFinance === 1
+            ? "money-color"
+            : "money-color-spending"
+        }`}
+      >
         <AddComma num={cashbook.cashbookMoney} />
       </td>
       <td>{cashbook.cashbookContent}</td>
