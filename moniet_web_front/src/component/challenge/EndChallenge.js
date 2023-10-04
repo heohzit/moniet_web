@@ -6,7 +6,7 @@ const EndChallenge = () => {
   const [challengeList, setChallengeList] = useState([]);
   useEffect(() => {
     axios
-      .get("/challenge/challengeList")
+      .get("/challenge/challengeList2")
       .then((res) => {
         console.log(res.data);
         setChallengeList(res.data.challengeList);
@@ -18,7 +18,7 @@ const EndChallenge = () => {
 
   return (
     <div className="challenge-content">
-      <div className="challenge-detail">진행중인 머니챌린지 리스트</div>
+      <div className="challenge-detail">종료된 머니챌린지 리스트</div>
       <div className="challenge-list-wrap">
         {challengeList.map((challenge, index) => {
           return (

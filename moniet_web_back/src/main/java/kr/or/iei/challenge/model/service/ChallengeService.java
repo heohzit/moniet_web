@@ -16,8 +16,16 @@ public class ChallengeService {
 	private ChallengeDao challengeDao;
 	
 	//챌린지 목록
-	public Map challengeList() {
-		List challengeList = challengeDao.challengeList();
+	public Map challengeList1() {
+		List challengeList = challengeDao.challengeList1();
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("challengeList", challengeList);
+		return map;
+	}
+	
+	//챌린지 목록
+	public Map challengeList2() {
+		List challengeList = challengeDao.challengeList2();
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("challengeList", challengeList);
 		return map;

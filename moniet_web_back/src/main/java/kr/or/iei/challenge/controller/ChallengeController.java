@@ -23,9 +23,16 @@ public class ChallengeController {
 	private ChallengeService challengeService;
 	
 	//챌린지 목록
-	@GetMapping(value="/challengeList")
-	public Map challengeList () {
-		Map map =challengeService.challengeList();
+	@GetMapping(value="/challengeList1")
+	public Map challengeList1 () {
+		Map map =challengeService.challengeList1();
+		return map;
+	}
+	
+	//챌린지 목록
+	@GetMapping(value="/challengeList2")
+	public Map challengeList2 () {
+		Map map =challengeService.challengeList2();
 		return map;
 	}
 	

@@ -10,7 +10,11 @@ import kr.or.iei.challenge.model.vo.Challenge;
 public interface ChallengeDao {
 	
 	//챌린지 목록
-	List challengeList();
+	List challengeList1();
+	
+	//챌린지 목록
+	List challengeList2();
+		
 	
 	//챌린지 상세보기
 	Challenge selectOneChallenge(int challengeNo);
