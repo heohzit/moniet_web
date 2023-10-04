@@ -21,4 +21,9 @@
   		 join member on (member_no2 = member_no)
   		 where challenge_no = #{challengeNo}
 	</select>
+	
+	<!--챌린지 만들기-->
+  	<insert id="insertChallenge">
+  		insert into challenge values(challenge_seq.nextval,7777,#{challengeTitle},#{challengeContent},#{challengeKind},#{challengeAmount},#{challengeStart},#{challengeEnd},1,1)
+  	</insert>
 </mapper>

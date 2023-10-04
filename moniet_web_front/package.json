@@ -6,6 +6,7 @@
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "@tomickigrzegorz/react-circular-progress-bar": "^1.1.2",
     "axios": "^1.5.1",
     "dayjs": "^1.11.10",
     "http-proxy-middleware": "^2.0.6",

@@ -28,4 +28,10 @@ public class ChallengeService {
 		Challenge c = challengeDao.selectOneChallenge(challengeNo);
 		return c;
 	}
+	
+	//챌린지 만들기
+	public int insertChallenge(Challenge c) {
+		int result = challengeDao.insertChallenge(c);
+		return result;
+	}
 }

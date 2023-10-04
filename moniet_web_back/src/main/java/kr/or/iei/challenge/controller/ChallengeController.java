@@ -5,7 +5,11 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,7 +22,7 @@ public class ChallengeController {
 	@Autowired
 	private ChallengeService challengeService;
 	
-	//챌린지목록
+	//챌린지 목록
 	@GetMapping(value="/challengeList")
 	public Map challengeList () {
 		Map map =challengeService.challengeList();
@@ -30,4 +34,12 @@ public class ChallengeController {
 	public Challenge view(@PathVariable int challengeNo) {
 		return challengeService.selectOneChallenge(challengeNo);
 	}
+	
+	//챌린지 만들기
+	@PostMapping(value="/insert")
+	public int insertChallenge (@RequestBody Challenge c) {
+		int result = challengeService.insertChallenge(c);
+		return result;
+	}
+	
 }

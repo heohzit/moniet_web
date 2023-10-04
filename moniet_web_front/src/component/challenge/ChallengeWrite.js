@@ -4,17 +4,31 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const ChallengeWrite = () => {
+  const [challengeKind, setChallengeKind] = useState("");
   const [challengeTitle, setChallengeTitle] = useState("");
   const [challengeContent, setChallengeContent] = useState("");
-  const [challengeKind, setChallengeKind] = useState("");
   const [challengeAmount, setChallengeAmount] = useState("");
   const [challengeStart, setChallengeStart] = useState("");
   const [challengeEnd, setChallengeEnd] = useState("");
   const navigate = useNavigate();
 
   const write = () => {
+    console.log(challengeTitle);
+    console.log(challengeContent);
+    console.log(challengeAmount);
+    console.log(challengeStart);
+    console.log(challengeEnd);
+    console.log(challengeKind);
+    const challenge = {
+      challengeKind,
+      challengeTitle,
+      challengeContent,
+      challengeAmount,
+      challengeStart,
+      challengeEnd,
+    };
     axios
-      .post("/challenge/insert")
+      .post("/challenge/insert", challenge)
       .then((res) => {
         console.log(res.data);
         if (res.data > 0) {
@@ -29,12 +43,12 @@ const ChallengeWrite = () => {
     <div>
       <div className="challenge-frm-title">챌린지 작성</div>
       <ChallengeFrm
-        challengetTitle={challengeTitle}
+        challengeKind={challengeKind}
+        setChallengeKind={setChallengeKind}
+        challengeTitle={challengeTitle}
         setChallengeTitle={setChallengeTitle}
         challengeContent={challengeContent}
         setChallengeContent={setChallengeContent}
-        challengeKind={challengeKind}
-        setChallengeKind={setChallengeKind}
         challengeAmount={challengeAmount}
         setChallengeAmount={setChallengeAmount}
         challengeStart={challengeStart}

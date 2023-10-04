@@ -1,14 +1,15 @@
 import "./challenge.css";
 import { Button3 } from "../util/Buttons";
 import Input from "../util/InputFrm";
+import { useState } from "react";
 
 const ChallengeFrm = (props) => {
+  const challengeKind = props.challengeKind;
+  const setChallengeKind = props.setChallengeKind;
   const challengeTitle = props.challengeTitle;
   const setChallengeTitle = props.setChallengeTitle;
   const challengeContent = props.challengeContent;
   const setChallengeContent = props.setChallengeContent;
-  const challengeKind = props.challengeKind;
-  const setChallengeKind = props.setChallengeKind;
   const challengeAmount = props.challengeAmount;
   const setChallengeAmount = props.setChallengeAmount;
   const challengeStart = props.challengeStart;
@@ -17,6 +18,15 @@ const ChallengeFrm = (props) => {
   const setChallengeEnd = props.setChallengeEnd;
   const buttonEvent = props.buttonEvent;
   const type = props.type;
+
+  const onChangeHanlder = (e) => {
+    setChallengeKind(e.currentTarget.value);
+  };
+  const Options = [
+    { value: "선택" },
+    { key: 1, value: "저축 챌린지" },
+    { key: 2, value: "지출 챌린지" },
+  ];
   return (
     <div>
       <div className="challenge-frm-top">
@@ -28,9 +38,12 @@ const ChallengeFrm = (props) => {
                   <label htmlFor="challengeKind">머니챌린지 선택</label>
                 </td>
                 <td>
-                  <select>
-                    <option>저축 챌린지</option>
-                    <option>지출 챌린지</option>
+                  <select onChange={onChangeHanlder} value={challengeKind}>
+                    {Options.map((item, index) => (
+                      <option key={item.key} value={item.key}>
+                        {item.value}
+                      </option>
+                    ))}
                   </select>
                 </td>
               </tr>
