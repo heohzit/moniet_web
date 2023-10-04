@@ -15,4 +15,7 @@ public interface ChallengeDao {
 	//챌린지 상세보기
 	Challenge selectOneChallenge(int challengeNo);
 
+	//챌린지 만들기
+	int insertChallenge(Challenge c);
+
 }

@@ -1,4 +1,4 @@
-//import { CircularProgressBar } from "@tomickigrzegorz/react-circular-progress-bar";
+import { CircularProgressBar } from "@tomickigrzegorz/react-circular-progress-bar";
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -23,7 +23,7 @@ const ChallengeView = (props) => {
   }, []);
 
   // 목표 금액 설정
-  const goalAmount = 100000;
+  const goalAmount = [[challenge.challengeAmount]];
   // 현재 금액 설정
   const currentAmount = 50000;
   // 진행률 계산
@@ -32,9 +32,8 @@ const ChallengeView = (props) => {
   return (
     <div className="challenge-content">
       <div className="challenge-detail">머니챌린지 상세보기</div>
-      {/*
       <div>목표 금액: {goalAmount.toLocaleString()}원</div>
-      //<div>현재 금액: {currentAmount.toLocaleString()}원</div>
+      <div>현재 금액: {currentAmount.toLocaleString()}원</div>
       <CircularProgressBar
         colorCircle="#ededed"
         colorSlice="#e54e21"
@@ -46,7 +45,6 @@ const ChallengeView = (props) => {
       >
         <div>{`진행률: ${progress.toFixed(2)}%`}</div>
       </CircularProgressBar>
-        */}
       <div className="challenge-view-title">{challenge.challengeTitle}</div>
       <div className="challenge-view-info">
         <div>{challenge.challengeStart}</div>

@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { Button3 } from "../util/Buttons";
 
 const IngChallenge = () => {
   const [challengeList, setChallengeList] = useState([]);
@@ -15,9 +16,15 @@ const IngChallenge = () => {
         console.log(res.response.status);
       });
   }, []);
-
+  const navigate = useNavigate();
+  const write = () => {
+    navigate("write");
+  };
   return (
     <div className="challenge-content">
+      <div className="board-write-btn">
+        <Button3 text="글쓰기" clickEvent={write}></Button3>
+      </div>
       <div className="challenge-detail">진행중인 머니챌린지 리스트</div>
       <div className="challenge-list-wrap">
         {challengeList.map((challenge, index) => {
@@ -42,7 +49,7 @@ const ChallengeItem = (props) => {
     <div className="challenge-item" onClick={challengeView}>
       <div className="challenge-item-info">
         <div>{challenge.challengeTitle}</div>
-        <div>{challenge.challengeAmount}</div>
+        <div>{challenge.challengeAmount.toLocaleString()}</div>
         <Dayday></Dayday>
       </div>
     </div>

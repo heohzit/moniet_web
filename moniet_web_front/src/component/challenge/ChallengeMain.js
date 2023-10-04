@@ -17,9 +17,11 @@ const ChallengeMain = () => {
       <div className="challenge-title">MONEY CHALLENGE</div>
       <div className="challengeMenu-detail">
         <ChallengeMenu></ChallengeMenu>
+        {/*
         <div className="board-write-btn">
           <Button3 text="글쓰기" clickEvent={write}></Button3>
         </div>
+      */}
       </div>
       <Routes>
         <Route path="view" element={<ChallengeView></ChallengeView>}></Route>
