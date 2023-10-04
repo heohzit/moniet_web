@@ -11,22 +11,47 @@ const Join = () => {
   const [memberPwRe, setMemberPwRe] = useState("");
   const [memberName, setMemberName] = useState("");
   const [memberPhone, setMemberPhone] = useState("");
+  const [memberEmail, setMemberEmail] = useState("");
   const [checkIdMsg, setCheckIdMsg] = useState("");
   const [checkPwMsg, setCheckPwMsg] = useState("");
+  const [checkNameMsg, setCheckNameMsg] = useState("");
+  const [checkPhoneMsg, setCheckPhoneMsg] = useState("");
   const navigate = useNavigate();
+
   const idCheck = () => {
     const idReg = /^[a-zA-Z0-9]{4,8}$/;
     if (!idReg.test(memberId)) {
       setCheckIdMsg("아이디는 영어 대/소문자/숫자로 4~8글자를 입력해주세요.");
     } else {
       axios
-        .get("/member/checkId/", { params: { memberId: memberId } }) // /member/checkId/input value
+        .get("/member/checkId/", { params: { memberId: memberId } })
         .then((res) => {
-          setCheckIdMsg("이미 사용중인 아이디 입니다.");
+          console.log(res.data);
+          if (res.data == 0) {
+            setCheckIdMsg("");
+          } else {
+            setCheckIdMsg("이미 사용중인 아이디 입니다.");
+          }
         })
         .catch((res) => {
           console.log(res);
         });
+    }
+  };
+  const nameCheck = () => {
+    const nameReg = /^[가-힣]{2,4}$/;
+    if (!nameReg.test(memberName)) {
+      setCheckNameMsg("이름은 한글로 2~4글자를 입력해주세요.");
+    } else {
+      setCheckNameMsg("");
+    }
+  };
+  const phoneCheck = () => {
+    const phoneReg = /^[0-9]{3}-[0-9]{3,4}-[0-9]{4}$/;
+    if (!phoneReg.test(memberPhone)) {
+      setCheckPhoneMsg("'-'을 포함하여 올바른 형식으로 입력해주세요.");
+    } else {
+      setCheckPhoneMsg("");
     }
   };
   const pwCheck = () => {
@@ -38,10 +63,21 @@ const Join = () => {
   };
   //회원가입
   const join = () => {
-    if (checkIdMsg === "" && checkPwMsg === "") {
-      const member = { memberId, memberPw, memberName, memberPhone };
+    if (
+      checkIdMsg === "" &&
+      checkPwMsg === "" &&
+      checkNameMsg === "" &&
+      checkPhoneMsg === ""
+    ) {
+      const member = {
+        memberId,
+        memberPw,
+        memberName,
+        memberPhone,
+        memberEmail,
+      };
       axios
-        .post("/member/join/", member)
+        .post("/member/join", member)
         .then((res) => {
           if (res.data === 1) {
             navigate("/login");
@@ -90,6 +126,8 @@ const Join = () => {
         type="type"
         content="memberName"
         label="이름"
+        checkMsg={checkNameMsg}
+        blurEvent={nameCheck}
       />
       <JoinInputWrap
         data={memberPhone}
@@ -97,6 +135,15 @@ const Join = () => {
         type="type"
         content="memberPhone"
         label="전화번호"
+        checkMsg={checkPhoneMsg}
+        blurEvent={phoneCheck}
+      />
+      <JoinInputWrap
+        data={memberEmail}
+        setData={setMemberEmail}
+        type="type"
+        content="memberEmail"
+        label="이메일"
       />
       <div className="join-button">
         <button type="button" onClick={join}>

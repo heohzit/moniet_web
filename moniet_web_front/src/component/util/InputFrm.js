@@ -1,3 +1,5 @@
+import "./inputFrm.css";
+
 const Input = (props) => {
   const data = props.data;
   const setData = props.setData;

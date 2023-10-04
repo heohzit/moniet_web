@@ -27,7 +27,7 @@ function App() {
           />
           <Route path="/cashbook/*" element={<Cashbook />} />
           <Route
-            path="/community"
+            path="/community/*"
             element={<CommunityMain />}
             isLogin={isLogin}
             setIsLogin={setIsLogin}
