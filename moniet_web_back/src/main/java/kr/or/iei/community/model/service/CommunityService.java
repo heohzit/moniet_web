@@ -15,7 +15,7 @@ public class CommunityService {
 	
 	public List communityList(int reqPage) {
 		List list = communityDao.communityList();
-		return null;
+		return list;
 	}
 
 }

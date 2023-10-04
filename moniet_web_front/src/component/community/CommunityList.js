@@ -1,6 +1,7 @@
 import { Button1, Button2, Button3, Button4 } from "../util/Buttons";
 import "./community.css";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const CommuintyList = (props) => {
@@ -13,7 +14,8 @@ const CommuintyList = (props) => {
       .get("/community/list/" + reqPage)
       .then((res) => {
         console.log(res.data);
-        setCommunityList(res.data.communityList);
+        setCommunityList(res.data);
+        // setCommunityList(res.data.communityList);
       })
       .catch((res) => {
         console.log(res.response.status);
@@ -42,9 +44,27 @@ const CommuintyList = (props) => {
 };
 
 const CommunityItem = (props) => {
+  const community = props.community;
+  const navigate = useNavigate();
+  const communityView = () => {};
+
   return (
-    <div>
-      <div>네</div>
+    <div className="community-item">
+      <div className="community-item-img">
+        {community.communityThumb === null ? (
+          <img src="/image/default.png" />
+        ) : (
+          <img src={"/community" + community.communityThumb} />
+        )}
+      </div>
+      <div className="community-item-info">
+        <div className="community-item-title">{community.communityTitle}</div>
+        <div className="community-item-subtitle">
+          {community.communitySubTitle}
+        </div>
+        <div className="community-item-date">{community.communityDate}</div>
+        <div className="community-item-parti">{community.communityParti}</div>
+      </div>
     </div>
   );
 };
