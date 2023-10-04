@@ -19,7 +19,6 @@ public class MemberController {
 	
 	//id 중복체크
 	@GetMapping(value="/checkId")
-	//@PathVariable : 경로에 있는 변수 , memberId
 	public int checkId(String memberId) {
 		Member m = memberService.selectOneMember(memberId);
 		if(m == null) {
@@ -28,8 +27,7 @@ public class MemberController {
 			return 1;
 		}
 	}
-	/*
-	
+
 	//회원가입
 	//service 호출 시 메소드 이름이 Member로 끝나면서 매개변수가 Member 타입이면 비밀번호 암호화 수행
 	@PostMapping(value="/join")
@@ -44,5 +42,4 @@ public class MemberController {
 		String result = memberService.login(member);
 		return result;
 	}
-	*/
 }

@@ -16,5 +16,7 @@ public class Member {
 	private String memberPw;
 	private String memberName;
 	private String memberPhone;
-	private int memberType;
+	private String memberEmail;
+	private int memberGrade;
+	private int challengeStatus;
 }
