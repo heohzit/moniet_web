@@ -1,3 +1,14 @@
 .date-range-icon {
   width: 30px;
 }
+.cashbook-btn-zone {
+  display: flex;
+  height: 60px;
+}
+.cashbook-btn-zone > button:nth-child(2) {
+  color: #6a6da6;
+}
+
+.cashbook-btn-zone > button:nth-child(3) {
+  color: #e66eb2;
+}
