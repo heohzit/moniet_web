@@ -5,6 +5,7 @@ import Main from "./component/common/Main";
 import Dashboard from "./component/dashboard/Dashboard";
 import ChallengeMain from "./component/challenge/ChallengeMain";
 import Cashbook from "./component/cashbook/Cashbook";
+import CommunityMain from "./component/community/CommunityMain";
 import Join from "./component/member/Join";
 import Login from "./component/member/Login";
 
@@ -20,8 +21,9 @@ function App() {
           <Route
             path="/challenge/*"
             element={<ChallengeMain></ChallengeMain>}
-          ></Route>
+          />
           <Route path="/cashbook/*" element={<Cashbook />} />
+          <Route path="/community" element={<CommunityMain />} />
           <Route path="/join" element={<Join />} />
           <Route path="/login" element={<Login />} />
         </Routes>

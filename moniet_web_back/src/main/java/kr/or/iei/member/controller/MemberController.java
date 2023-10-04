@@ -22,7 +22,6 @@ public class MemberController {
 	//@PathVariable : 경로에 있는 변수 , memberId
 	public int checkId(String memberId) {
 		Member m = memberService.selectOneMember(memberId);
-		System.out.println(m);
 		if(m == null) {
 			return 0;
 		}else {

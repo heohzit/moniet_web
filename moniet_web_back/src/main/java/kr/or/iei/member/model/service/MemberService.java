@@ -30,7 +30,6 @@ public class MemberService {
 	*/
 
 	public Member selectOneMember(String memberId) {
-		System.out.println(memberId);
 		return memberDao.selectOneMember(memberId);
 	}
 	

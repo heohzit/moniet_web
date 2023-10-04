@@ -28,7 +28,7 @@ const NaviSide = () => {
           <Link to="/challenge">머니챌린지</Link>
         </li>
         <li>
-          <Link to="#">커뮤니티</Link>
+          <Link to="/community">커뮤니티</Link>
         </li>
       </ul>
     </div>
