@@ -4,14 +4,16 @@ import CommunityView from "./CommunityView";
 import CommunityWrite from "./CommunityWrite";
 import CommunityList from "./CommunityList";
 
-const CommunityMain = () => {
+const CommunityMain = (props) => {
+  const isLogin = props.isLogin;
+
   return (
     <div className="community-all-wrap">
       <div className="community-title">커뮤니티</div>
       <Routes>
         <Route path="write" element={<CommunityWrite />} />
         <Route path="view" element={<CommunityView />} />
-        <Route path="*" element={<CommunityList />} />
+        <Route path="*" element={<CommunityList isLogin={isLogin} />} />
       </Routes>
     </div>
   );

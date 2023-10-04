@@ -1,3 +1,5 @@
+import "./button.css";
+
 const Button1 = (props) => {
   const clickEvent = props.clickEvent;
   const text = props.text;
@@ -34,4 +36,16 @@ const Button3 = (props) => {
   );
 };
 
-export { Button1, Button2, Button3 };
+const Button4 = (props) => {
+  const clickEvent = props.clickEvent;
+  const text = props.text;
+  return (
+    <>
+      <button className="btn st4" type="button" onClick={clickEvent}>
+        {text}
+      </button>
+    </>
+  );
+};
+
+export { Button1, Button2, Button3, Button4 };
