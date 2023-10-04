@@ -1,5 +1,7 @@
 import Input from "../util/InputFrm";
 import "./community.css";
+import { TextEditor1, TextEditor2 } from "../util/TextEditor";
+import { Button1, Button2, Button3, Button4 } from "../util/Buttons";
 
 const CommunityFrm = (props) => {
   const communityTitle = props.communityTitle;
@@ -12,6 +14,9 @@ const CommunityFrm = (props) => {
   const setCommunityContent = props.setCommunityContent;
   const communityImg = props.communityImg;
   const setCommunityImg = props.setCommunityImg;
+  const buttonEvent = props.buttonEvent;
+
+  const type = props.type;
 
   const thumbnailChange = (e) => {};
 
@@ -75,7 +80,17 @@ const CommunityFrm = (props) => {
         </div>
       </div>
 
-      <div className="community-content-box"></div>
+      <div className="community-content-box">
+        <TextEditor1 data={communityContent} setData={setCommunityContent} />
+      </div>
+
+      <div className="community-btn-box">
+        {type === "modify" ? (
+          <Button1 text="수정하기" clickEvent={buttonEvent} />
+        ) : (
+          <Button1 text="작성하기" clickEvent={buttonEvent} />
+        )}
+      </div>
     </div>
   );
 };

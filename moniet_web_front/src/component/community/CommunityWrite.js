@@ -2,6 +2,7 @@ import CommunityFrm from "./CommunityFrm";
 import "./community.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const CommunityWrite = () => {
   const [communityTitle, setCommunityTitle] = useState("");
@@ -11,6 +12,10 @@ const CommunityWrite = () => {
   const [communityImg, setCommunityImg] = useState(null);
 
   const navigate = useNavigate();
+
+  const write = () => {
+    Swal.fire("하이");
+  };
 
   return (
     <div>
@@ -25,7 +30,7 @@ const CommunityWrite = () => {
         setCommunityContent={setCommunityContent}
         communityImg={communityImg}
         setCommunityImg={setCommunityImg}
-        // buttonEvent={write}
+        buttonEvent={write}
         type="write"
       />
     </div>
