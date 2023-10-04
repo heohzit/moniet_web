@@ -4,11 +4,15 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Input from "../util/InputFrm";
+import Select from "../util/Select";
 
 const CommuintyList = (props) => {
   const isLogin = props.isLogin;
   const [communityList, setCommunityList] = useState([]);
   const [reqPage, setReqPage] = useState(1);
+
+  const [communityTitle, setCommunityTitle] = useState("");
+  const [communityWriter, setCommunityWriter] = useState("");
 
   useEffect(() => {
     axios
@@ -31,11 +35,20 @@ const CommuintyList = (props) => {
   return (
     <div>
       {/* {isLogin ? ( */}
-      <div className="community-search-box">
-        <Input />
-      </div>
-      <div className="community-write-btn">
-        <Button1 text="글쓰기" clickEvent={write} />
+      <div className="community-top-wrap">
+        <div className="community-search-box">
+          <Select />
+          <ListInputWrap
+            data={communityTitle}
+            setData={setCommunityTitle}
+            type="type"
+            content="searchBox"
+          />
+          <Button1 text="검색" clickEvent={""} />
+        </div>
+        <div className="community-write-btn">
+          <Button2 text="글쓰기" clickEvent={write} />
+        </div>
       </div>
       {/* ) : ( */}
       {/* "" */}
@@ -78,6 +91,23 @@ const CommunityItem = (props) => {
           </div>
           <div className="community-item-date">{community.communityDate}</div>
           <div className="community-item-parti">{community.communityParti}</div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const ListInputWrap = (props) => {
+  const data = props.data;
+  const setData = props.setData;
+  const type = props.type;
+  const content = props.content;
+
+  return (
+    <div className="list-input-wrap">
+      <div>
+        <div className="input">
+          <Input data={data} setData={setData} type={type} content={content} />
         </div>
       </div>
     </div>
