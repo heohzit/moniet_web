@@ -5,3 +5,6 @@ npm install axios               23.09.27
 //cashbook에서 날짜 범위 선택용
 npm install dayjs               23.10.04
 npm install react-date-range    23.10.04
+
+//회원가입 이메일 인증용
+npm i nodemailer                23.10.04
