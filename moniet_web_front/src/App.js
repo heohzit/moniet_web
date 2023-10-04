@@ -3,7 +3,7 @@ import Footer from "./component/common/Footer";
 import { Link, Route, Routes } from "react-router-dom";
 import Main from "./component/common/Main";
 import Dashboard from "./component/dashboard/Dashboard";
-import Challenge from "./component/challenge/Challenge";
+import ChallengeMain from "./component/challenge/ChallengeMain";
 import Cashbook from "./component/cashbook/Cashbook";
 import CommunityMain from "./component/community/CommunityMain";
 import Join from "./component/member/Join";
@@ -18,7 +18,10 @@ function App() {
         <Routes>
           <Route path="/" element={<Main></Main>}></Route>
           <Route path="/dashboard" element={<Dashboard></Dashboard>}></Route>
-          <Route path="/challenge" element={<Challenge></Challenge>}></Route>
+          <Route
+            path="/challenge/*"
+            element={<ChallengeMain></ChallengeMain>}
+          />
           <Route path="/cashbook/*" element={<Cashbook />} />
           <Route path="/community" element={<CommunityMain />} />
           <Route path="/join" element={<Join />} />
