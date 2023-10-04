@@ -6,6 +6,7 @@ import axios from "axios";
 import { DateRange, DateRangePicker } from "react-date-range";
 import { addDays } from "date-fns";
 import { Button5 } from "../util/Buttons";
+import AddComma from "./AddComma";
 
 const Cashbook = () => {
   const [cashbookList, setCashbookList] = useState([]);
@@ -82,14 +83,14 @@ const Cashbook = () => {
           <table>
             <thead>
               <tr>
-                <td>
+                <td width={"5%"}>
                   <input type="checkbox" />
                 </td>
-                <td>날짜</td>
-                <td>자산</td>
-                <td>분류</td>
-                <td>금액</td>
-                <td>내용</td>
+                <td width={"20%"}>날짜</td>
+                <td width={"20%"}>자산</td>
+                <td width={"20%"}>분류</td>
+                <td width={"20%"}>금액</td>
+                <td width={"20%"}>내용</td>
               </tr>
             </thead>
             <tbody>
@@ -112,22 +113,32 @@ const Cashbook = () => {
 
 const CashbookItem = (props) => {
   const cashbook = props.cashbook;
-  const [asset, setAsset] = useState([
-    { 1: 현금 },
-    { 2: 신용카드 },
-    { 3: 체크카드 },
-    { 4: 이체 },
-    { 5: 기타 },
-  ]);
+  const assetToString = (num) => {
+    switch (num) {
+      case 1:
+        return "현금";
+      case 2:
+        return "신용카드";
+      case 3:
+        return "체크카드";
+      case 4:
+        return "이체";
+      case 5:
+        return "기타";
+    }
+  };
+
   return (
     <tr>
       <td>
         <input type="checkbox" />
       </td>
       <td>{cashbook.cashbookDate}</td>
-      <td>{cashbook.cashbookAsset}</td>
-      <td>{cashbook.cashbookCategory}</td>
-      <td>{cashbook.cashbookMoney}</td>
+      <td>{assetToString(cashbook.cashbookAsset)}</td>
+      <td>{cashbook.categoryTitle}</td>
+      <td>
+        <AddComma num={cashbook.cashbookMoney} />
+      </td>
       <td>{cashbook.cashbookContent}</td>
     </tr>
   );
