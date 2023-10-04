@@ -3,6 +3,31 @@
 <mapper namespace = "kr.or.iei.cashbook.model.dao.CashbookDao">
   
   <select id="cashbookList" resultType="cashbook">
-  	select * from cashbook
+  	select
+  		cashbook_no, member_no, cashbook_finance, to_char(cashbook_date, 'yyyy-mm-dd') as cashbook_date,
+  		cashbook_loop, loop_month, cashbook_asset, cashbook_category,
+  		(select category_title from category_tbl where category_no = cashbook.cashbook_category) as CATEGORY_TITLE,
+  		cashbook_money, cashbook_content, cashbook_memo
+  	from cashbook order by 1 desc
   </select>
+  
+  	<select id="totalSum" resultType="int">
+		select sum(CASHBOOK_MONEY) from cashbook
+	</select>
+	<select id="sumOfIncome" resultType="int">
+		select sum(CASHBOOK_MONEY) from cashbook where CASHBOOK_FINANCE=1
+	</select>
+	<select id="sumOfSpending" resultType="int">
+		select sum(CASHBOOK_MONEY) from cashbook where CASHBOOK_FINANCE=2
+	</select>
+	
+	<select id="totalCount" resultType="int">
+		select count(CASHBOOK_MONEY) from cashbook
+	</select>
+	<select id="countOfIncome" resultType="int">
+		select count(CASHBOOK_MONEY) from cashbook where CASHBOOK_FINANCE=1
+	</select>
+	<select id="countOfSpending" resultType="int">
+		select count(CASHBOOK_MONEY) from cashbook where CASHBOOK_FINANCE=2
+	</select>
 </mapper>

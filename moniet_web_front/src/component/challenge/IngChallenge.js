@@ -2,12 +2,11 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button3 } from "../util/Buttons";
-
 const IngChallenge = () => {
   const [challengeList, setChallengeList] = useState([]);
   useEffect(() => {
     axios
-      .get("/challenge/challengeList")
+      .get("/challenge/challengeList1")
       .then((res) => {
         console.log(res.data);
         setChallengeList(res.data.challengeList);
@@ -22,9 +21,6 @@ const IngChallenge = () => {
   };
   return (
     <div className="challenge-content">
-      <div className="board-write-btn">
-        <Button3 text="글쓰기" clickEvent={write}></Button3>
-      </div>
       <div className="challenge-detail">진행중인 머니챌린지 리스트</div>
       <div className="challenge-list-wrap">
         {challengeList.map((challenge, index) => {
@@ -36,7 +32,6 @@ const IngChallenge = () => {
     </div>
   );
 };
-
 const ChallengeItem = (props) => {
   const challenge = props.challenge;
   const navigate = useNavigate();
@@ -55,9 +50,9 @@ const ChallengeItem = (props) => {
     </div>
   );
 };
-
-const Dayday = () => {
-  const [targetDate, setTargetDate] = useState(new Date("2023-12-31")); // 원하는 날짜로 설정
+const Dayday = (props) => {
+  const challenge = props.challenge;
+  const [targetDate, setTargetDate] = useState(new Date("2023-12-31"));
   const calculateDday = () => {
     const currentDate = new Date();
     const timeDifference = targetDate - currentDate;
@@ -65,15 +60,12 @@ const Dayday = () => {
     const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
     return { days };
   };
-
   const [dday, setDday] = useState(calculateDday());
-
   useEffect(() => {
     const interval = setInterval(() => {
       const ddayData = calculateDday();
       setDday(ddayData);
     }, 1000);
-
     return () => {
       clearInterval(interval);
     };

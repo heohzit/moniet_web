@@ -1,6 +1,8 @@
 package kr.or.iei.cashbook.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,8 +19,16 @@ public class CashbookController {
 	private CashbookService cashbookService;
 	
 	@GetMapping(value="/list")
-	public List cashbookList() {
+	public Map cashbookList() {
 		List cashbookList = cashbookService.cashbookList();
-		return cashbookList;
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("cashbookList", cashbookList);
+		return map;
+	}
+	
+	@GetMapping(value="/total")
+	public Map cashbookSum() {
+		Map map = cashbookService.sumOfCashbook();
+		return map;
 	}
 }

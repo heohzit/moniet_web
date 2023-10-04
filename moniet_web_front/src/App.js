@@ -23,7 +23,9 @@ function App() {
           <Route path="/dashboard" element={<Dashboard></Dashboard>}></Route>
           <Route
             path="/challenge/*"
-            element={<ChallengeMain></ChallengeMain>}
+            element={<ChallengeMain />}
+            isLogin={isLogin}
+            setIsLogin={setIsLogin}
           />
           <Route path="/cashbook/*" element={<Cashbook />} />
           <Route

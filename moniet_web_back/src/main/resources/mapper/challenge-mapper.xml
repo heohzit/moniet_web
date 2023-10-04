@@ -3,8 +3,31 @@
 <mapper namespace= "kr.or.iei.challenge.model.dao.ChallengeDao">
 
 	<!--챌린지 목록-->
-	<select id="challengeList" resultType="challenge">
-		select * from challenge
+	<select id="challengeList1" resultType="challenge">
+		select 
+			challenge_no,
+  			challenge_title,
+  			challenge_content,
+  			challenge_kind,
+  			challenge_amount,
+  			to_char(challenge_start,'yyyy-mm-dd') as challenge_start,
+  			to_char(challenge_end,'yyyy-mm-dd') as challenge_end
+		 from challenge
+		 where challenge_result = 1
+	</select>
+	
+		<!--챌린지 목록-->
+	<select id="challengeList2" resultType="challenge">
+		select 
+			challenge_no,
+  			challenge_title,
+  			challenge_content,
+  			challenge_kind,
+  			challenge_amount,
+  			to_char(challenge_start,'yyyy-mm-dd') as challenge_start,
+  			to_char(challenge_end,'yyyy-mm-dd') as challenge_end
+		 from challenge
+		  where challenge_result = 2
 	</select>
 	
 	<!--챌린지 상세보기-->

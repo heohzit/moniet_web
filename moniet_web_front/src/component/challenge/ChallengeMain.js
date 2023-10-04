@@ -1,33 +1,21 @@
 import "./challenge.css";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import ChallengeWrite from "./ChallengeWrite";
-import ChallengeMenu from "./ChallengeMenu";
-import EndChallenge from "./EndChallenge";
-import IngChallenge from "./IngChallenge";
-import { Button3 } from "../util/Buttons";
 import ChallengeView from "./ChallengeView";
+import ChallengeList from "./ChallengeList";
+import IngChallenge from "./IngChallenge";
+import EndChallenge from "./EndChallenge";
 
-const ChallengeMain = () => {
-  const navigate = useNavigate();
-  const write = () => {
-    navigate("write");
-  };
+const ChallengeMain = (props) => {
+  const isLogin = props.isLogin;
   return (
     <div className="challenge-main-wrap">
       <div className="challenge-title">MONEY CHALLENGE</div>
-      <div className="challengeMenu-detail">
-        <ChallengeMenu></ChallengeMenu>
-        {/*
-        <div className="board-write-btn">
-          <Button3 text="글쓰기" clickEvent={write}></Button3>
-        </div>
-      */}
-      </div>
+      <div className="challengeMenu-detail"></div>
       <Routes>
         <Route path="view" element={<ChallengeView></ChallengeView>}></Route>
         <Route path="write" element={<ChallengeWrite></ChallengeWrite>}></Route>
-        <Route path="end" element={<EndChallenge></EndChallenge>}></Route>
-        <Route path="*" element={<IngChallenge></IngChallenge>}></Route>
+        <Route path="*" element={<ChallengeList></ChallengeList>}></Route>
       </Routes>
     </div>
   );
