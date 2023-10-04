@@ -8,8 +8,11 @@ import Cashbook from "./component/cashbook/Cashbook";
 import CommunityMain from "./component/community/CommunityMain";
 import Join from "./component/member/Join";
 import Login from "./component/member/Login";
+import { useState, useEffect } from "react";
 
 function App() {
+  const [isLogin, setIsLogin] = useState(true);
+
   return (
     <div className="App">
       <Header></Header>
@@ -23,7 +26,12 @@ function App() {
             element={<ChallengeMain></ChallengeMain>}
           />
           <Route path="/cashbook/*" element={<Cashbook />} />
-          <Route path="/community" element={<CommunityMain />} />
+          <Route
+            path="/community"
+            element={<CommunityMain />}
+            isLogin={isLogin}
+            setIsLogin={setIsLogin}
+          />
           <Route path="/join" element={<Join />} />
           <Route path="/login" element={<Login />} />
         </Routes>

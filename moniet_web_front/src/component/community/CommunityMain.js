@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import "./community.css";
 import CommunityView from "./CommunityView";
 import CommunityWrite from "./CommunityWrite";
+import CommunityList from "./CommunityList";
 
 const CommunityMain = () => {
   return (
@@ -10,6 +11,7 @@ const CommunityMain = () => {
       <Routes>
         <Route path="write" element={<CommunityWrite />} />
         <Route path="view" element={<CommunityView />} />
+        <Route path="*" element={<CommunityList />} />
       </Routes>
     </div>
   );
