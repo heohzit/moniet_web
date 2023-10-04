@@ -20,7 +20,7 @@
 }
 
 .community-search-box > .list-input-wrap {
-  width: 60%;
+  width: 65%;
 }
 
 .list-input-wrap > div > .input > #searchBox {
@@ -28,7 +28,7 @@
 }
 
 .community-search-box > button {
-  width: 20%;
+  width: 15%;
 }
 
 .community-write-btn {
