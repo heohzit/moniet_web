@@ -6,6 +6,7 @@ const Header = () => {
       <div className="header-title">
         <Link to="/">머니어터</Link>
       </div>
+      <HeaderLink/>
       <NaviSide></NaviSide>
     </header>
   );
@@ -18,7 +19,7 @@ const NaviSide = () => {
           <Link to="/dashboard">대시보드</Link>
         </li>
         <li>
-          <Link to="#">내역</Link>
+          <Link to="/cashbook">내역</Link>
         </li>
         <li>
           <Link to="#">달력</Link>
@@ -33,4 +34,13 @@ const NaviSide = () => {
     </div>
   );
 };
+
+const HeaderLink = ()=> {
+  return (
+    <div className="header-link">
+      <Link to="/join">회원가입(임시)</Link>
+      <Link to="/login">로그인</Link>
+    </div>
+  )
+}
 export default Header;

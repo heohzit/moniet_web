@@ -15,11 +15,6 @@ public class Member {
 	private String memberId;
 	private String memberPw;
 	private String memberName;
-	private int memberGender;
 	private String memberPhone;
-	private String memberEmail;
-	private int memberGrade;
-	private String regDate;
-	private String memberProfile;
-	private int socialLogin;
+	private int memberType;
 }
