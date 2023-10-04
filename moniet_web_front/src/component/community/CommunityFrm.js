@@ -81,7 +81,11 @@ const CommunityFrm = (props) => {
       </div>
 
       <div className="community-content-box">
-        <TextEditor1 data={communityContent} setData={setCommunityContent} />
+        <TextEditor2
+          data={communityContent}
+          setData={setCommunityContent}
+          url="/community/contentImg"
+        />
       </div>
 
       <div className="community-btn-box">

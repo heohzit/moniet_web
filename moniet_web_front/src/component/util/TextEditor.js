@@ -56,6 +56,7 @@ const TextEditor1 = (props) => {
   );
 };
 
+Quill.register("modules/ImageResize", ImageResize);
 const TextEditor2 = (props) => {
   const data = props.data;
   const setData = props.setData;
