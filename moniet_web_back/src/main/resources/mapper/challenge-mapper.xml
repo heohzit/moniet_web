@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace= "kr.or.iei.challenge.model.dao.ChallengeDao">
+
+	<!--챌린지 목록-->
+	<select id="challengeList" resultType="challenge">
+		select * from challenge
+	</select>
+	
+	<!--챌린지 상세보기-->
+	<select id="selectOneChallenge" resultType="challenge">
+		 select 
+  			challenge_no,
+  			challenge_title,
+  			challenge_content,
+  			challenge_kind,
+  			challenge_amount,
+  			to_char(challenge_start,'yyyy-mm-dd') as challenge_start,
+  			to_char(challenge_end,'yyyy-mm-dd') as challenge_end
+  		 from challenge 
+  		 join member on (member_no2 = member_no)
+  		 where challenge_no = #{challengeNo}
+	</select>
+</mapper>

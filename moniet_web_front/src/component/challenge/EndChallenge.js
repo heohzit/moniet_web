@@ -1,43 +1,48 @@
+import axios from "axios";
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const EndChallenge = () => {
-  const [targetDate, setTargetDate] = useState(new Date("2023-12-31")); // 원하는 날짜로 설정
-
-  const calculateDday = () => {
-    const currentDate = new Date();
-    const timeDifference = targetDate - currentDate;
-
-    // D-day 계산
-    const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
-    const hours = Math.floor(
-      (timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-    );
-    const minutes = Math.floor(
-      (timeDifference % (1000 * 60 * 60)) / (1000 * 60)
-    );
-    const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
-
-    return { days, hours, minutes, seconds };
-  };
-
-  const [dday, setDday] = useState(calculateDday());
-
+  const [challengeList, setChallengeList] = useState([]);
   useEffect(() => {
-    const interval = setInterval(() => {
-      const ddayData = calculateDday();
-      setDday(ddayData);
-    }, 1000);
-
-    return () => {
-      clearInterval(interval);
-    };
+    axios
+      .get("/challenge/challengeList")
+      .then((res) => {
+        console.log(res.data);
+        setChallengeList(res.data.challengeList);
+      })
+      .catch((res) => {
+        console.log(res.response.status);
+      });
   }, []);
+
   return (
     <div className="challenge-content">
-      <h1>디데이 카운트다운</h1>
-      <p>
-        {dday.days}일 {dday.hours}시간 {dday.minutes}분 {dday.seconds}초 남음
-      </p>
+      <div className="challenge-detail">진행중인 머니챌린지 리스트</div>
+      <div className="challenge-list-wrap">
+        {challengeList.map((challenge, index) => {
+          return (
+            <ChallengeItem key={"challenge" + index} challenge={challenge} />
+          );
+        })}
+      </div>
+    </div>
+  );
+};
+const ChallengeItem = (props) => {
+  const challenge = props.challenge;
+  const navigate = useNavigate();
+  const challengeView = () => {
+    navigate("/challenge/view", {
+      state: { challengeNo: challenge.challengeNo },
+    });
+  };
+  return (
+    <div className="challenge-item" onClick={challengeView}>
+      <div className="challenge-item-info">
+        <div>{challenge.challengeTitle}</div>
+        <div>{challenge.challengeAmount}</div>
+      </div>
     </div>
   );
 };

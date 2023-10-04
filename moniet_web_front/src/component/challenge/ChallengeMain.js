@@ -5,6 +5,7 @@ import ChallengeMenu from "./ChallengeMenu";
 import EndChallenge from "./EndChallenge";
 import IngChallenge from "./IngChallenge";
 import { Button3 } from "../util/Buttons";
+import ChallengeView from "./ChallengeView";
 
 const ChallengeMain = () => {
   const navigate = useNavigate();
@@ -21,6 +22,7 @@ const ChallengeMain = () => {
         </div>
       </div>
       <Routes>
+        <Route path="view" element={<ChallengeView></ChallengeView>}></Route>
         <Route path="write" element={<ChallengeWrite></ChallengeWrite>}></Route>
         <Route path="end" element={<EndChallenge></EndChallenge>}></Route>
         <Route path="*" element={<IngChallenge></IngChallenge>}></Route>

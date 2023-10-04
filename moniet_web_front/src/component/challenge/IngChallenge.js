@@ -1,36 +1,80 @@
-//import { CircularProgressBar } from "@tomickigrzegorz/react-circular-progress-bar";
+import axios from "axios";
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const IngChallenge = () => {
-  // 목표 금액 설정 (예: 10만원)
-  const goalAmount = 100000;
-
-  // 현재 금액 설정 (예: 5만원)
-  const currentAmount = 50000;
-
-  // 진행률 계산
-  const progress = (currentAmount / goalAmount) * 100;
+  const [challengeList, setChallengeList] = useState([]);
+  useEffect(() => {
+    axios
+      .get("/challenge/challengeList")
+      .then((res) => {
+        console.log(res.data);
+        setChallengeList(res.data.challengeList);
+      })
+      .catch((res) => {
+        console.log(res.response.status);
+      });
+  }, []);
 
   return (
     <div className="challenge-content">
       <div className="challenge-detail">진행중인 머니챌린지 리스트</div>
-      <div>목표 금액: {goalAmount.toLocaleString()}원</div>
-      <div>현재 금액: {currentAmount.toLocaleString()}원</div>
-      {/*
-      <CircularProgressBar
-        colorCircle="#ededed"
-        colorSlice="#e54e21"
-        percent={progress}
-        fontColor="#e54e21"
-        round={true}
-        fontSize="15px"
-        textPosition="1.5rem"
-      >
-        <div>{`진행률: ${progress.toFixed(2)}%`}</div>
-      </CircularProgressBar>
-        */}
+      <div className="challenge-list-wrap">
+        {challengeList.map((challenge, index) => {
+          return (
+            <ChallengeItem key={"challenge" + index} challenge={challenge} />
+          );
+        })}
+      </div>
     </div>
   );
 };
 
+const ChallengeItem = (props) => {
+  const challenge = props.challenge;
+  const navigate = useNavigate();
+  const challengeView = () => {
+    navigate("/challenge/view", {
+      state: { challengeNo: challenge.challengeNo },
+    });
+  };
+  return (
+    <div className="challenge-item" onClick={challengeView}>
+      <div className="challenge-item-info">
+        <div>{challenge.challengeTitle}</div>
+        <div>{challenge.challengeAmount}</div>
+        <Dayday></Dayday>
+      </div>
+    </div>
+  );
+};
+
+const Dayday = () => {
+  const [targetDate, setTargetDate] = useState(new Date("2023-12-31")); // 원하는 날짜로 설정
+  const calculateDday = () => {
+    const currentDate = new Date();
+    const timeDifference = targetDate - currentDate;
+    // D-day 계산
+    const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+    return { days };
+  };
+
+  const [dday, setDday] = useState(calculateDday());
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const ddayData = calculateDday();
+      setDday(ddayData);
+    }, 1000);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
+  return (
+    <div className="challenge-content">
+      <p>{dday.days}일남음</p>
+    </div>
+  );
+};
 export default IngChallenge;
