@@ -48,4 +48,15 @@ const Button4 = (props) => {
   );
 };
 
-export { Button1, Button2, Button3, Button4 };
+const Button5 = (props) => {
+  const clickEvent = props.clickEvent;
+  const text = props.text;
+  return (
+    <>
+      <button className="btn st5" type="button" onClick={clickEvent}>
+        {text}
+      </button>
+    </>
+  );
+};
+export { Button1, Button2, Button3, Button4, Button5 };

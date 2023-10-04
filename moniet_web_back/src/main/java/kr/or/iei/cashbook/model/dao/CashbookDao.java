@@ -9,4 +9,16 @@ public interface CashbookDao {
 
 	List cashbookList();
 
+	int totalSum();
+
+	int sumOfIncome();
+
+	int sumOfSpending();
+
+	int totalCount();
+
+	int countOfIncome();
+
+	int countOfSpending();
+
 }
