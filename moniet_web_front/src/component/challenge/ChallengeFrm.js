@@ -1,5 +1,6 @@
 import "./challenge.css";
 import { Button3 } from "../util/Buttons";
+import Input from "../util/InputFrm";
 
 const ChallengeFrm = (props) => {
   const challengeTitle = props.challengeTitle;
@@ -15,8 +16,9 @@ const ChallengeFrm = (props) => {
   const challengeEnd = props.challengeEnd;
   const setChallengeEnd = props.setChallengeEnd;
   const buttonEvent = props.buttonEvent;
+  const type = props.type;
   return (
-    <div className="challenge-frm wrap">
+    <div>
       <div className="challenge-frm-top">
         <div className="challenge-info">
           <table className="challenge-info-tbl">
@@ -37,7 +39,12 @@ const ChallengeFrm = (props) => {
                   <label htmlFor="challengeTitle">제목</label>
                 </td>
                 <td>
-                  <input type="text"></input>
+                  <Input
+                    type="text"
+                    data={challengeTitle}
+                    setData={setChallengeTitle}
+                    content="challengeTitle"
+                  ></Input>
                 </td>
               </tr>
               <tr>
@@ -45,7 +52,12 @@ const ChallengeFrm = (props) => {
                   <label htmlFor="challengeContent">내용</label>
                 </td>
                 <td>
-                  <input type="text"></input>
+                  <Input
+                    type="text"
+                    data={challengeContent}
+                    setData={setChallengeContent}
+                    content="challengeContent"
+                  ></Input>
                 </td>
               </tr>
               <tr>
@@ -53,7 +65,12 @@ const ChallengeFrm = (props) => {
                   <label htmlFor="challengeStart">시작일자</label>
                 </td>
                 <td>
-                  <input type="date"></input>
+                  <Input
+                    type="date"
+                    data={challengeStart}
+                    setData={setChallengeStart}
+                    content="challengeStart"
+                  ></Input>
                 </td>
               </tr>
               <tr>
@@ -61,7 +78,12 @@ const ChallengeFrm = (props) => {
                   <label htmlFor="challengeEnd">종료일자</label>
                 </td>
                 <td>
-                  <input type="date"></input>
+                  <Input
+                    type="date"
+                    data={challengeEnd}
+                    setData={setChallengeEnd}
+                    content="challengeEnd"
+                  ></Input>
                 </td>
               </tr>
               <tr>
@@ -69,7 +91,12 @@ const ChallengeFrm = (props) => {
                   <label htmlFor="challengeAmount">목표 금액</label>
                 </td>
                 <td>
-                  <input type="text"></input>
+                  <Input
+                    type="text"
+                    data={challengeAmount}
+                    setData={setChallengeAmount}
+                    content="challengeAmount"
+                  ></Input>
                   <span>원</span>
                 </td>
               </tr>
@@ -80,7 +107,7 @@ const ChallengeFrm = (props) => {
       <div className="board-content-box"></div>
       <div className="board-btn-box">
         <Button3 text="취소하기"></Button3>
-        <Button3 text="등록하기"></Button3>
+        <Button3 text="등록하기" clickEvent={buttonEvent}></Button3>
       </div>
     </div>
   );

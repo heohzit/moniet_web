@@ -1,6 +1,6 @@
 import "./challenge.css";
 import { Route, Routes, useNavigate } from "react-router-dom";
-import ChallengeFrm from "./ChallengeFrm";
+import ChallengeWrite from "./ChallengeWrite";
 import ChallengeMenu from "./ChallengeMenu";
 import EndChallenge from "./EndChallenge";
 import IngChallenge from "./IngChallenge";
@@ -21,7 +21,7 @@ const ChallengeMain = () => {
         </div>
       </div>
       <Routes>
-        <Route path="write" element={<ChallengeFrm></ChallengeFrm>}></Route>
+        <Route path="write" element={<ChallengeWrite></ChallengeWrite>}></Route>
         <Route path="end" element={<EndChallenge></EndChallenge>}></Route>
         <Route path="*" element={<IngChallenge></IngChallenge>}></Route>
       </Routes>
