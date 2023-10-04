@@ -1,5 +1,49 @@
+.community-all-wrap {
+  width: 1200px;
+}
+
+.community-top-wrap {
+  display: flex;
+  justify-content: space-between;
+}
+
+.community-search-box {
+  width: 500px;
+  height: 40px;
+  display: flex;
+  margin: 0 auto;
+}
+
+.community-search-box > select {
+  border: 1px solid #ccc;
+  width: 20%;
+}
+
+.community-search-box > .list-input-wrap {
+  width: 60%;
+}
+
+.list-input-wrap > div > .input > #searchBox {
+  height: 40px;
+}
+
+.community-search-box > button {
+  width: 20%;
+}
+
 .community-write-btn {
   width: 100px;
+}
+
+.community-write-btn > button {
+  height: 40px;
+}
+
+.community-list-wrap {
+  margin-top: 50px;
+}
+
+.community-item-wrap {
 }
 
 .community-item {
@@ -8,4 +52,14 @@
 
 .community-item-info {
   padding: 20px 15px;
+}
+
+.community-more {
+  height: 80px;
+}
+
+.community-more > button {
+  height: 100%;
+  font-size: 20px;
+  letter-spacing: 0.2ch;
 }
