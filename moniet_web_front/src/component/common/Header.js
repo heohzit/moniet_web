@@ -43,6 +43,7 @@ const HeaderLink = (props)=> {
 
   const logout = ()=>{
     setIsLogin(false);
+    window.localStorage.removeItem("token");
   };
   return (
     <div className="header-link">

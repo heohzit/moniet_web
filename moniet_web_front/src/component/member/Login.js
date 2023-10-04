@@ -18,8 +18,9 @@ const Login = (props) => {
         if(res.data === "실패") {
           alert("아이디 또는 비밀번호를 확인하세요");
         }else {
-          navigate("/");
+          window.localStorage.getItem("token",res.data);
           setIsLogin(true);
+          navigate("/");
         }
       })
       .catch((res)=>{

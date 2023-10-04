@@ -44,6 +44,12 @@ public class MemberController {
 		return result;
 	}
 	
+	@GetMapping(value="/mypage")
+	public Member mypage(@RequestAttribute String memberId) {
+		System.out.println(memberId);
+		return memberService.selectOneMember(memberId);
+	}
+	
 	
 	
 	
