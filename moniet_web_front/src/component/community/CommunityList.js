@@ -6,10 +6,11 @@ import axios from "axios";
 const CommuintyList = (props) => {
   const isLogin = props.isLogin;
   const [communityList, setCommunityList] = useState([]);
+  const [reqPage, setReqPage] = useState(1);
 
   useEffect(() => {
     axios
-      .get("/community/list")
+      .get("/community/list/" + reqPage)
       .then((res) => {
         console.log(res.data);
         setCommunityList(res.data.communityList);
