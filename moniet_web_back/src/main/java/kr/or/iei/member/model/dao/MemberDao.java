@@ -10,8 +10,6 @@ public interface MemberDao {
 
 	Member selectOneMember(String memberId);
 	
-	/*
 	int insertMember(Member member);
-	*/
 
 }

@@ -22,18 +22,15 @@ public class MemberService {
 	private String secretKey;
 	private long expiredMs;
 
-	/*
 	public MemberService() {
 		super();
 		expiredMs = 1000*60*60l;
 	}
-	*/
 
 	public Member selectOneMember(String memberId) {
 		return memberDao.selectOneMember(memberId);
 	}
 	
-	/*
 	@Transactional
 	public int insertMember(Member member) {
 		return memberDao.insertMember(member) ;
@@ -48,7 +45,7 @@ public class MemberService {
 		}
 		
 	}
-	 */
+
 
 	
 }

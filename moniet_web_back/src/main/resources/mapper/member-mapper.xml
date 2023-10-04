@@ -4,4 +4,8 @@
 	<select id="selectOneMember" resultType="member">
 		select * from member_tbl where member_id=#{memberId}
 	</select>
+	
+	<insert id="insertMember">
+		insert into member_tbl values(member_sequence.nextval,#{memberId},#{memberPw},#{memberName},#{memberPhone},1)
+	</insert>
 </mapper>

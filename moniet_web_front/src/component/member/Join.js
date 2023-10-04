@@ -20,9 +20,14 @@ const Join = () => {
       setCheckIdMsg("아이디는 영어 대/소문자/숫자로 4~8글자를 입력해주세요.");
     } else {
       axios
-        .get("/member/checkId/", { params: { memberId: memberId } }) // /member/checkId/input value
+        .get("/member/checkId/", { params: { memberId: memberId } })
         .then((res) => {
-          setCheckIdMsg("이미 사용중인 아이디 입니다.");
+          console.log(res.data);
+          if (res.data == 0) {
+            setCheckIdMsg("");
+          } else {
+            setCheckIdMsg("이미 사용중인 아이디 입니다.");
+          }
         })
         .catch((res) => {
           console.log(res);
@@ -41,7 +46,7 @@ const Join = () => {
     if (checkIdMsg === "" && checkPwMsg === "") {
       const member = { memberId, memberPw, memberName, memberPhone };
       axios
-        .post("/member/join/", member)
+        .post("/member/join", member)
         .then((res) => {
           if (res.data === 1) {
             navigate("/login");
