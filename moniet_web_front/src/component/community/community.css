@@ -1,0 +1,11 @@
+.community-write-btn {
+  width: 100px;
+}
+
+.community-item {
+  display: flex;
+}
+
+.community-item-info {
+  padding: 20px 15px;
+}
