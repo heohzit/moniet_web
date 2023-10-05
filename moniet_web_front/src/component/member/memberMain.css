@@ -1,0 +1,25 @@
+.mypage-wrap {
+  margin: 0 auto;
+  width: 1200px;
+}
+.mypage-title {
+  text-align: center;
+  font-size: 24px;
+  font-family: ns-m;
+  padding: 20px 0;
+}
+.mypage-side {
+  width: 200px;
+}
+.mypage-side > ul {
+  list-style-type: none;
+  box-sizing: border-box;
+}
+.mypage-side > ul > li {
+  height: 40px;
+  line-height: 40px;
+}
+.mypage-side > ul > li > a {
+  display: block;
+  width: 100%;
+}
