@@ -7,6 +7,7 @@ import ChallengeList from "./ChallengeList";
 //챌린지메인
 const ChallengeMain = (props) => {
   const isLogin = props.isLogin;
+  const setIsLogin = props.setIsLogin;
   return (
     <div className="challenge-main-wrap">
       <div className="challenge-title">MONEY CHALLENGE</div>

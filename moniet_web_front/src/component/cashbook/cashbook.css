@@ -1,5 +1,26 @@
+.cashbook-all-wrap {
+  padding: 50px;
+  padding-top: 0;
+  position: relative;
+}
+.cashbook-content {
+  position: absolute;
+  width: 90%;
+  top: 200px;
+}
 .date-range-icon {
-  width: 30px;
+  position: relative;
+  z-index: 500;
+  background-color: #fff;
+}
+.range-chg {
+  position: absolute;
+  top: 320px;
+  right: 310px;
+}
+.range-chg > button {
+  margin-top: 10px;
+  margin-right: 10px;
 }
 .cashbook-btn-zone {
   display: flex;
@@ -19,6 +40,43 @@
   text-align: right;
   color: #e66eb2;
 }
+.rdrInputRanges {
+  /*계속 사용안할부분이라 넌처리*/
+  display: none;
+}
+.cashbook-date-range {
+  display: flex;
+}
+.rdrDefinedRangesWrapper {
+  margin-top: 55px;
+  /*display: none; 여기*/
+}
+.rdrCalendarWrapper {
+  margin: 20px;
+  margin-top: 0;
+}
+.rdrDateRangePickerWrapper {
+  flex-direction: row-reverse;
+}
+.rdrMonthAndYearPickers {
+  flex-direction: row-reverse;
+}
+.date-range-input {
+  width: 360px;
+}
+/*
+.rdrCalendarWrapper > div:nth-child(1) {
+  display: none;
+}
+.rdrCalendarWrapper > div:nth-child(3) {
+  display: none;
+}
+*/
 .cashbook-detail {
+  height: 500px;
+  overflow-y: scroll;
   text-align: center;
+}
+.cashbook-detail > table {
+  width: 100%;
 }

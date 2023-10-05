@@ -24,6 +24,11 @@ public class Cashbook {
 	private String cashbookContent;
 	private String cashbookMemo;
 	
-	private int memberId;//화면 노출용
+	//화면 노출용
+	private String memberId;
 	private String categoryTitle;
+	
+	//조회용
+	private String startDate;
+	private String endDate;
 }

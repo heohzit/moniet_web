@@ -26,5 +26,8 @@ public interface ChallengeDao {
 	
 	//챌린지 포기
 	int changeChallenge(Challenge c);
-
+	
+	//챌린지 기간 종료
+	void challengeFinish();
+	
 }
