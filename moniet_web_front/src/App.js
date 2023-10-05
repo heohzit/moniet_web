@@ -35,9 +35,9 @@ function App() {
             isLogin={isLogin}
             setIsLogin={setIsLogin}
           />
-          <Route path="/join" element={<Join/>}/>
-          <Route path="/login" element={<Login setIsLogin={setIsLogin}/>}/>
-          <Route path="/member/*" element={<MemberMain/>} />
+          <Route path="/join" element={<Join />} />
+          <Route path="/login" element={<Login setIsLogin={setIsLogin} />} />
+          <Route path="/member/*" element={<MemberMain />} />
         </Routes>
       </div>
       <Footer></Footer>
