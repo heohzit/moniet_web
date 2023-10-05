@@ -25,7 +25,7 @@ public class Cashbook {
 	private String cashbookMemo;
 	
 	//화면 노출용
-	private int memberId;
+	private String memberId;
 	private String categoryTitle;
 	
 	//조회용

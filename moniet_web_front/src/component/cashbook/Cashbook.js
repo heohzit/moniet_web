@@ -10,8 +10,6 @@ import { addDays } from "date-fns";
 import ko from "date-fns/locale/ko";
 import { Button5 } from "../util/Buttons";
 import AddComma from "./AddComma";
-import Input from "../util/InputFrm";
-import moment from "moment/moment";
 
 const Cashbook = (props) => {
   const isLogin = props.isLogin;
@@ -25,33 +23,46 @@ const Cashbook = (props) => {
       key: "selection",
     },
   ]);
+  const [select, setSelect] = useState(false);
 
   const obj = {
-    startDate: dateRange[0].startDate,
-    endDate: dateRange[0].endDate,
+    startDate: dateString(dateRange[0].startDate),
+    endDate: dateString(dateRange[0].endDate),
   };
+  function dateString(date) {
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+    return `${year}-${month}-${day}`;
+  }
+
   useEffect(() => {
-    if (isLogin) {
-      const token = window.localStorage.getItem("token");
-      axios
-        .post("/cashbook/list/", obj, {
-          headers: {
-            Authorization: "Bearer " + token,
-          },
-        })
-        .then((res) => {
-          setCashbookList(res.data.cashbookList);
-        })
-        .catch((res) => {
-          console.log(res.response.status);
-        });
-    }
-  }, [obj]);
+    const token = window.localStorage.getItem("token");
+    axios
+      .post("/cashbook/list", obj, {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      })
+      .then((res) => {
+        setCashbookList(res.data.cashbookList);
+      })
+      .catch((res) => {
+        console.log(res.response.status);
+      });
+  }, [dateRange]);
   useEffect(() => {
-    axios.get("/cashbook/total").then((res) => {
-      setCashbookSum(res.data);
-    });
-  }, []);
+    const token = window.localStorage.getItem("token");
+    axios
+      .post("/cashbook/total", obj, {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      })
+      .then((res) => {
+        setCashbookSum(res.data);
+      });
+  }, [dateRange]);
 
   const addComma = (num) => {
     if (num >= 1000) {
@@ -61,16 +72,12 @@ const Cashbook = (props) => {
     return num;
   };
 
-  const changeDate = (e) => {
-    setDateRange([e.selection]);
-  };
-
   return (
     <div className="cashbook-all-wrap">
       <div className="cashbook-title">내역</div>
       <div className="cashbook-content">
         <DateRangePicker
-          onChange={changeDate}
+          onChange={(item) => setDateRange([item.selection])}
           months={1}
           editableDateInputs={true}
           minDate={addDays(new Date(), -300)}

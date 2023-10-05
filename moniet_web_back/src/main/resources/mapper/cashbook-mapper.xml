@@ -10,46 +10,46 @@
   		(select category_title from category_tbl where category_no = cashbook.cashbook_category) as CATEGORY_TITLE,
   		cashbook_money, cashbook_content, cashbook_memo
   	from cashbook
-  	where cashbook_date >= TRUNC(SYSDATE, 'MONTH') and cashbook_date <=LAST_DAY(SYSDATE)
+  	where cashbook_date >= #{startDate} and cashbook_date <= #{endDate} and member_no=(select member_no from member where member_id=#{memberId})
   	order by 1 desc
   	]]>
   </select>
   
   	<select id="totalSum" resultType="int">
   		<![CDATA[
-		select sum(CASHBOOK_MONEY) from cashbook
-		where cashbook_date >= TRUNC(SYSDATE, 'MONTH') and cashbook_date <=LAST_DAY(SYSDATE)
+		select nvl(sum(CASHBOOK_MONEY),0) from cashbook
+		where cashbook_date >= #{startDate} and cashbook_date <= #{endDate} and member_no=(select member_no from member where member_id=#{memberId})
 		]]>
 	</select>
 	<select id="sumOfIncome" resultType="int">
 		<![CDATA[
-		select sum(CASHBOOK_MONEY) from cashbook
-		where CASHBOOK_FINANCE=1 and cashbook_date >= TRUNC(SYSDATE, 'MONTH') and cashbook_date <=LAST_DAY(SYSDATE)
+		select nvl(sum(CASHBOOK_MONEY),0) from cashbook
+		where CASHBOOK_FINANCE=1 and cashbook_date >= #{startDate} and cashbook_date <= #{endDate} and member_no=(select member_no from member where member_id=#{memberId})
 		]]>
 	</select>
 	<select id="sumOfSpending" resultType="int">
 		<![CDATA[
-		select sum(CASHBOOK_MONEY) from cashbook
-		where CASHBOOK_FINANCE=2 and cashbook_date >= TRUNC(SYSDATE, 'MONTH') and cashbook_date <=LAST_DAY(SYSDATE)
+		select nvl(sum(CASHBOOK_MONEY),0) from cashbook
+		where CASHBOOK_FINANCE=2 and cashbook_date >= #{startDate} and cashbook_date <= #{endDate} and member_no=(select member_no from member where member_id=#{memberId})
 		]]>
 	</select>
 	
 	<select id="totalCount" resultType="int">
 		<![CDATA[
-		select count(CASHBOOK_MONEY) from cashbook
-		where cashbook_date >= TRUNC(SYSDATE, 'MONTH') and cashbook_date <=LAST_DAY(SYSDATE)
+		select nvl(count(CASHBOOK_MONEY),0) from cashbook
+		where cashbook_date >= #{startDate} and cashbook_date <= #{endDate} and member_no=(select member_no from member where member_id=#{memberId})
 		]]>
 	</select>
 	<select id="countOfIncome" resultType="int">
 		<![CDATA[
-		select count(CASHBOOK_MONEY) from cashbook
-		where CASHBOOK_FINANCE=1 and cashbook_date >= TRUNC(SYSDATE, 'MONTH') and cashbook_date <=LAST_DAY(SYSDATE)
+		select nvl(count(CASHBOOK_MONEY),0) from cashbook
+		where CASHBOOK_FINANCE=1 and cashbook_date >= #{startDate} and cashbook_date <= #{endDate} and member_no=(select member_no from member where member_id=#{memberId})
 		]]>
 	</select>
 	<select id="countOfSpending" resultType="int">
 		<![CDATA[
-		select count(CASHBOOK_MONEY) from cashbook
-		where CASHBOOK_FINANCE=2 and cashbook_date >= TRUNC(SYSDATE, 'MONTH') and cashbook_date <=LAST_DAY(SYSDATE)
+		select nvl(count(CASHBOOK_MONEY),0) from cashbook
+		where CASHBOOK_FINANCE=2 and cashbook_date >= #{startDate} and cashbook_date <= #{endDate} and member_no=(select member_no from member where member_id=#{memberId})
 		]]>
 	</select>
 </mapper>
