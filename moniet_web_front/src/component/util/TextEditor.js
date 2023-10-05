@@ -7,6 +7,7 @@ import axios from "axios";
 const TextEditor1 = (props) => {
   const data = props.data;
   const setData = props.setData;
+  const url = props.url;
 
   const quillRef = useRef();
 
@@ -94,6 +95,7 @@ const TextEditor2 = (props) => {
             editor.setSelection(range.index + 1);
           })
           .catch((res) => {
+            console.log("실패");
             console.log(res.response.status);
           });
       }

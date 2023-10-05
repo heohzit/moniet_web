@@ -30,7 +30,21 @@ const CommunityFrm = (props) => {
   const buttonEvent = () => {
     const checkbox = document.querySelectorAll("[name=types]:checked");
   };
-  const thumbnailChange = (e) => {};
+  const thumbnailChange = (e) => {
+    const files = e.currentTarget.files;
+    if (files.length !== 0 && files[0] != 0) {
+      setThumbnail(files[0]);
+
+      const reader = new FileReader();
+      reader.readAsDataURL(files[0]);
+      reader.onloadend = () => {
+        setCommunityImg(reader.result);
+      };
+    } else {
+      setThumbnail({});
+      setCommunityImg(null);
+    }
+  };
 
   return (
     <div className="community-frm-wrap">
@@ -74,11 +88,11 @@ const CommunityFrm = (props) => {
                 </td>
               </tr>
 
-              <tr>
+              <tr className="thumbnail-tr">
                 <td>
                   <label htmlFor="thumbnail">대표이미지</label>
                 </td>
-                <td>
+                <td className="thumbnail-input-td">
                   <input
                     type="file"
                     id="thumbnail"
