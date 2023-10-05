@@ -1,26 +1,43 @@
 import React, { useEffect, useState } from "react";
+import "react-date-range/dist/styles.css";
+import "react-date-range/dist/theme/default.css";
 import "./cashbook.css";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import axios from "axios";
-import { DateRange, DateRangePicker } from "react-date-range";
+import { DateRange, DateRangePicker, DefinedRange } from "react-date-range";
 import { addDays } from "date-fns";
+import ko from "date-fns/locale/ko";
 import { Button5 } from "../util/Buttons";
 import AddComma from "./AddComma";
+import Input from "../util/InputFrm";
+import moment from "moment/moment";
 
 const Cashbook = () => {
   const [cashbookList, setCashbookList] = useState([]);
   const [cashbookSum, setCashbookSum] = useState([]);
+  const [dateRange, setDateRange] = useState([
+    {
+      startDate: new Date(new Date().getFullYear(), new Date().getMonth(), 1),
+      endDate: new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0),
+      key: "selection",
+    },
+  ]);
+
+  const obj = {
+    startDate: dateRange[0].startDate,
+    endDate: dateRange[0].endDate,
+  };
   useEffect(() => {
     axios
-      .get("/cashbook/list")
+      .post("/cashbook/list/", obj)
       .then((res) => {
         setCashbookList(res.data.cashbookList);
       })
       .catch((res) => {
         console.log(res.response.status);
       });
-  }, []);
+  }, [obj]);
   useEffect(() => {
     axios.get("/cashbook/total").then((res) => {
       setCashbookSum(res.data);
@@ -35,30 +52,28 @@ const Cashbook = () => {
     return num;
   };
 
-  const [dateRange, setDateRange] = useState([
-    {
-      startDate: new Date(),
-      endDate: addDays(new Date(), 1),
-      key: "selection",
-    },
-  ]);
+  const changeDate = (e) => {
+    setDateRange([e.selection]);
+  };
 
   return (
     <div className="cashbook-all-wrap">
       <div className="cashbook-title">내역</div>
       <div className="cashbook-content">
-        <div className="cashbook-date-range">
-          <img className="date-range-icon" src="/icon/left-btn.png" />
-          <DateRange
-            editableDateInputs={true}
-            onChange={(item) => setDateRange([item.selection])}
-            moveRangeOnFirstSelection={false}
-            ranges={dateRange}
-            months={2}
-            direction="horizontal"
-          />
-          <img className="date-range-icon" src="/icon/right-btn.png" />
-        </div>
+        <DateRangePicker
+          onChange={changeDate}
+          months={1}
+          editableDateInputs={true}
+          minDate={addDays(new Date(), -300)}
+          maxDate={addDays(new Date(), 900)}
+          direction="vertical"
+          scroll={{ enabled: true }}
+          ranges={dateRange}
+          locale={ko}
+          dateDisplayFormat="yyyy년 MMM d일"
+          rangeColors={["#6a6da6", "#3ecf8e", "#fed14c"]}
+          monthDisplayFormat="yyyy년 MMM"
+        />
         <div className="cashbook-btn-zone">
           <Button5
             text={
@@ -134,6 +149,7 @@ const CashbookItem = (props) => {
         return "이체";
       case 5:
         return "기타";
+      //no default
     }
   };
 

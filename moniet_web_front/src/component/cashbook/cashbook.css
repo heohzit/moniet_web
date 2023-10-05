@@ -22,3 +22,34 @@
 .cashbook-detail {
   text-align: center;
 }
+.rdrInputRanges {
+  display: none;
+}
+.cashbook-date-range {
+  display: flex;
+}
+.rdrDefinedRangesWrapper {
+  margin-top: 55px;
+  /*display: none; 여기*/
+}
+.rdrCalendarWrapper {
+  margin: 20px;
+  margin-top: 0;
+}
+.rdrDateRangePickerWrapper {
+  flex-direction: row-reverse;
+}
+.rdrMonthAndYearPickers {
+  flex-direction: row-reverse;
+}
+.date-range-input {
+  width: 360px;
+}
+/*
+.rdrCalendarWrapper > div:nth-child(1) {
+  display: none;
+}
+.rdrCalendarWrapper > div:nth-child(3) {
+  display: none;
+}
+*/
