@@ -2,6 +2,7 @@ import Input from "../util/InputFrm";
 import "./community.css";
 import { TextEditor1, TextEditor2 } from "../util/TextEditor";
 import { Button1, Button2, Button3, Button4 } from "../util/Buttons";
+import Type from "./Type";
 
 const CommunityFrm = (props) => {
   const communityTitle = props.communityTitle;
@@ -14,10 +15,21 @@ const CommunityFrm = (props) => {
   const setCommunityContent = props.setCommunityContent;
   const communityImg = props.communityImg;
   const setCommunityImg = props.setCommunityImg;
-  const buttonEvent = props.buttonEvent;
+  const communityType = props.communityType;
+  const setCommunityType = props.setCommunityType;
+  //const buttonEvent = props.buttonEvent;
 
   const type = props.type;
 
+  const typeList = [
+    { name: "저축하기 🐷", value: 1 },
+    { name: "지출줄이기 💰", value: 2 },
+    { name: "투자하기 📈", value: 4 },
+    { name: "기타 💸", value: 8 },
+  ];
+  const buttonEvent = () => {
+    const checkbox = document.querySelectorAll("[name=types]:checked");
+  };
   const thumbnailChange = (e) => {};
 
   return (
@@ -75,6 +87,27 @@ const CommunityFrm = (props) => {
                   />
                 </td>
               </tr>
+
+              <tr>
+                <td>
+                  <label>커뮤니티 분류</label>
+                </td>
+                <td className="community-type">
+                  {typeList.map((item) => {
+                    return (
+                      <label className="checkboxLabel" key={item.name}>
+                        <input
+                          type="checkbox"
+                          id={item.name}
+                          className="types"
+                          defaultValue={item.value}
+                        />
+                        <span>{item.name}</span>
+                      </label>
+                    );
+                  })}
+                </td>
+              </tr>
             </tbody>
           </table>
         </div>
@@ -98,5 +131,7 @@ const CommunityFrm = (props) => {
     </div>
   );
 };
+
+const onCheckedItem = (e) => {};
 
 export default CommunityFrm;
