@@ -49,4 +49,17 @@ public class ChallengeController {
 		return result;
 	}
 	
+	//챌린지 삭제
+	@GetMapping(value="/delete/{challengeNo}")
+	public int deleteChallenge (@PathVariable int challengeNo) {
+		int result = challengeService.deleteChallenge(challengeNo);
+		return result;
+	}
+	
+	//챌린지 포기
+	@PostMapping (value="/changeChallenge")
+	public int changeChallenge (@RequestBody Challenge c) {
+		return challengeService.changeChallenge(c);
+	}
+	
 }

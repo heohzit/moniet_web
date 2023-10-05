@@ -51,7 +51,6 @@ const ChallengeItem = (props) => {
   );
 };
 const Dayday = (props) => {
-  const challenge = props.challenge;
   const [targetDate, setTargetDate] = useState(new Date("2023-12-31"));
   const calculateDday = () => {
     const currentDate = new Date();

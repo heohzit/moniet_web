@@ -61,11 +61,14 @@ const ChallengeView = (props) => {
       cancelButtonText: "취소",
     }).then((res) => {
       if (res.isConfirmed) {
+        const obj = { challengeNo: challenge.challengeNo, challengeResult: 2 };
         axios
-          .get("/challenge/changeChallenge/" + challenge.challengeNo)
+          .post("/challenge/changeChallenge", obj)
           .then((res) => {
             if (res.data === 1) {
               navigate("/challenge");
+            } else {
+              Swal.fire("변경중 문제가 발생했습니다.");
             }
           })
           .catch((res) => {
@@ -96,7 +99,7 @@ const ChallengeView = (props) => {
         <div>{challenge.challengeEnd}</div>
       </div>
       <div className="board-btn-box">
-        <Button3 text="포기하기"></Button3>
+        <Button3 clickEvent={changeChallenge} text="포기하기"></Button3>
         <Button3 clickEvent={deleteChallenge} text="삭제하기"></Button3>
       </div>
     </div>
