@@ -5,49 +5,50 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const Login = (props) => {
-    const setIsLogin = props.setIsLogin;
-    const [memberId,setMemberId] = useState("");
-    const [memberPw, setMemberPw] = useState("");
-    const navigate = useNavigate();
+  const setIsLogin = props.setIsLogin;
+  const [memberId, setMemberId] = useState("");
+  const [memberPw, setMemberPw] = useState("");
+  const navigate = useNavigate();
 
-    const login = ()=>{
-      const member = { memberId, memberPw };
-      axios
-      .post("/member/login",member)
-      .then((res)=>{
-        if(res.data === "실패") {
+  const login = () => {
+    const member = { memberId, memberPw };
+    axios
+      .post("/member/login", member)
+      .then((res) => {
+        console.log(res);
+        if (res.data === "실패") {
           alert("아이디 또는 비밀번호를 확인하세요");
-        }else {
-          window.localStorage.getItem("token",res.data);
+        } else {
+          window.localStorage.setItem("token", res.data);
           setIsLogin(true);
           navigate("/");
         }
       })
-      .catch((res)=>{
+      .catch((res) => {
         console.log(res.data);
       });
-    }
+  };
 
   return (
     <div className="login-wrap">
       <div className="login-title">LOGIN</div>
       <div className="input-wrap">
         <label htmlFor="memberId">아이디</label>
-        <Input 
-          type="text" 
-          data={memberId} 
-          setData={setMemberId} 
+        <Input
+          type="text"
+          data={memberId}
+          setData={setMemberId}
           content="memberId"
-          />
+        />
       </div>
       <div className="input-wrap">
         <label htmlFor="memberPw">비밀번호</label>
-        <Input 
-          type="password" 
-          data={memberPw} 
-          setData={setMemberPw} 
+        <Input
+          type="password"
+          data={memberPw}
+          setData={setMemberPw}
           content="memberPw"
-          />
+        />
       </div>
       <div className="search-wrap">
         <Link to="#">아이디찾기</Link>
