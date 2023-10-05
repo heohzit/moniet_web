@@ -37,34 +37,33 @@ const NaviSide = () => {
     </div>
   );
 };
-const HeaderLink = (props)=> {
+const HeaderLink = (props) => {
   const isLogin = props.isLogin;
   const setIsLogin = props.setIsLogin;
-
-  const logout = ()=>{
+  const logout = () => {
     setIsLogin(false);
     window.localStorage.removeItem("token");
   };
   return (
     <div className="header-link">
-      {isLogin? (
+      {isLogin ? (
         <>
-      <Link to="/member/mypage">
-        <span className="material-icons icon">face</span>
-      </Link>
-      <Link to="#" onClick={logout}>
-      <span className="material-icons">logout</span>
-      </Link>
+          <Link to="/member/mypage">
+            <span className="material-icons icon">face</span>
+          </Link>
+          <Link to="#" onClick={logout}>
+            <span className="material-icons">logout</span>
+          </Link>
         </>
-      ):(
-      <>
-      <Link to="/login">
-        <span className="material-icons icon">login</span>
-      </Link>
-      <Link to="/join">
-      <span className="material-icons">person_add_alt</span>
-      </Link>
-      </>
+      ) : (
+        <>
+          <Link to="/login">
+            <span className="material-icons icon">login</span>
+          </Link>
+          <Link to="/join">
+            <span className="material-icons">person_add_alt</span>
+          </Link>
+        </>
       )}
     </div>
   );
