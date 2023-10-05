@@ -1,10 +1,11 @@
 import ChallengeFrm from "./ChallengeFrm";
 import { useState } from "react";
 import axios from "axios";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
+//챌린지 작성
 const ChallengeWrite = () => {
-  const [challengeKind, setChallengeKind] = useState("");
+  const [challengeKind, setChallengeKind] = useState(1);
   const [challengeTitle, setChallengeTitle] = useState("");
   const [challengeContent, setChallengeContent] = useState("");
   const [challengeAmount, setChallengeAmount] = useState("");

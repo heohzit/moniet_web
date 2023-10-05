@@ -5,13 +5,13 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { Button3 } from "../util/Buttons";
 import Swal from "sweetalert2";
 
+//챌린지 상세보기
 const ChallengeView = (props) => {
   const location = useLocation();
   const challengeNo = location.state.challengeNo;
   const [challenge, setChallenge] = useState([]);
   const [member, setMember] = useState(null);
   const navigate = useNavigate();
-
   useEffect(() => {
     axios
       .get("/challenge/view/" + challengeNo)
@@ -23,13 +23,11 @@ const ChallengeView = (props) => {
         console.log(res.data);
       });
   }, []);
+  const goalAmount = [[challenge.challengeAmount]]; // 목표 금액
+  const currentAmount = 50000; // 현재 금액
+  const progress = (currentAmount / goalAmount) * 100; // 진행률 계산
 
-  // 목표 금액 설정
-  const goalAmount = [[challenge.challengeAmount]];
-  // 현재 금액 설정
-  const currentAmount = 50000;
-  // 진행률 계산
-  const progress = (currentAmount / goalAmount) * 100;
+  //챌린지 삭제
   const deleteChallenge = () => {
     Swal.fire({
       icon: "warning",
@@ -52,6 +50,8 @@ const ChallengeView = (props) => {
       }
     });
   };
+
+  //챌린지 포기
   const changeChallenge = () => {
     Swal.fire({
       icon: "warning",
@@ -77,6 +77,11 @@ const ChallengeView = (props) => {
       }
     });
   };
+
+  //달력 날짜 지정
+  const today = new Date();
+  const dateString = today.toISOString().substring(0, 10);
+
   return (
     <div className="challenge-content">
       <div className="challenge-detail">머니챌린지 상세보기</div>
@@ -99,8 +104,16 @@ const ChallengeView = (props) => {
         <div>{challenge.challengeEnd}</div>
       </div>
       <div className="board-btn-box">
-        <Button3 clickEvent={changeChallenge} text="포기하기"></Button3>
-        <Button3 clickEvent={deleteChallenge} text="삭제하기"></Button3>
+        {challenge.challengeState === 2 ||
+        challenge.challengeResult === 2 ||
+        dateString > challenge.challengeEnd ? (
+          ""
+        ) : (
+          <>
+            <Button3 clickEvent={changeChallenge} text="포기하기"></Button3>
+            <Button3 clickEvent={deleteChallenge} text="삭제하기"></Button3>
+          </>
+        )}
       </div>
     </div>
   );
