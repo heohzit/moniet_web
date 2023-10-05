@@ -23,7 +23,7 @@ const CommunityWrite = () => {
       <CommunityFrm
         communityTitle={communityTitle}
         setCommunityTitle={setCommunityTitle}
-        communitySubTitle={setCommunitySubTitle}
+        communitySubTitle={communitySubTitle}
         setCommunitySubTitle={setCommunitySubTitle}
         thumbnail={thumbnail}
         setThumbnail={setThumbnail}

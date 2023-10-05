@@ -7,6 +7,7 @@ import axios from "axios";
 const TextEditor1 = (props) => {
   const data = props.data;
   const setData = props.setData;
+  const url = props.url;
 
   const quillRef = useRef();
 
