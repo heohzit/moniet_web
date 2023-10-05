@@ -1,5 +1,7 @@
 package kr.or.iei.community.model.vo;
 
+import java.util.List;
+
 import org.apache.ibatis.type.Alias;
 
 import lombok.AllArgsConstructor;
@@ -16,11 +18,13 @@ public class Community {
 	private int memberNo;
 	private String communityTitle;
 	private String communitySubTitle;
+	private String communityWriter;
 	private String communityContent;
 	private String communityDate;
 	private String communityThumb;
 	private int communityStatus;
 	private int communityParti;
-	private int communityType;
 	
+	private String memberId;
+	private List typeList;
 }

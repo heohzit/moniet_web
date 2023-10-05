@@ -91,6 +91,9 @@ const CommunityItem = (props) => {
           </div>
           <div className="community-item-date">{community.communityDate}</div>
           <div className="community-item-parti">{community.communityParti}</div>
+          <div className="community-item-writer">
+            {community.communityWriter}
+          </div>
         </div>
       </div>
     </div>

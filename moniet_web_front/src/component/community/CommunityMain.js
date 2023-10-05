@@ -9,6 +9,7 @@ const CommunityMain = (props) => {
 
   return (
     <div className="community-all-wrap">
+      <div className="community-main-top">COMMUNITY</div>
       <Routes>
         <Route path="write" element={<CommunityWrite />} />
         <Route path="view" element={<CommunityView />} />

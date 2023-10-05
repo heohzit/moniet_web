@@ -16,11 +16,18 @@
   justify-content: space-between;
 }
 
+.community-main-top {
+  font-size: 20px;
+  font-family: ns-r;
+  margin-bottom: 20px;
+}
+
 .community-search-box {
-  width: 500px;
+  width: 600px;
   height: 40px;
   display: flex;
   margin: 0 auto;
+  padding-left: 100px;
 }
 
 .community-search-box > select {
@@ -104,6 +111,7 @@
 }
 
 .community-info-tbl tr > td:first-child {
+  text-align: center;
   width: 150px;
   padding: 10px 20px;
   background-color: rgb(21, 20, 38, 0.1);
@@ -114,11 +122,12 @@
   padding: 10px 20px;
   border: 1px solid #ccc;
   text-align: center;
-  font-size: 18px;
+  font-size: 16px;
+  letter-spacing: 0.03cm;
 }
 
 #thumbnail {
-  font-size: 18px;
+  font-size: 16px;
 }
 
 .community-info-tbl tr > td > input[type="text"] {
@@ -146,11 +155,16 @@
 }
 
 .community-content-box {
-  margin: 10px 0px;
+  margin: 20px 0px;
 }
 
 .community-btn-box {
   margin-top: 20px;
+}
+
+.community-btn-box > button {
+  height: 70px;
+  font-size: 18px;
 }
 
 .community-content-box > textarea {
