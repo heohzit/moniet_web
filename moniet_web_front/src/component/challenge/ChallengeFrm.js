@@ -2,6 +2,7 @@ import "./challenge.css";
 import { Button3 } from "../util/Buttons";
 import Input from "../util/InputFrm";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const ChallengeFrm = (props) => {
   const challengeKind = props.challengeKind;
@@ -27,6 +28,10 @@ const ChallengeFrm = (props) => {
     { key: 1, value: "저축 챌린지" },
     { key: 2, value: "지출 챌린지" },
   ];
+  //const writeReturn = () => {
+  //const navigate = useNavigate();
+  //navigate("/challenge");
+  //};
   return (
     <div>
       <div className="challenge-frm-top">
@@ -117,7 +122,6 @@ const ChallengeFrm = (props) => {
           </table>
         </div>
       </div>
-      <div className="board-content-box"></div>
       <div className="board-btn-box">
         <Button3 text="취소하기"></Button3>
         <Button3 text="등록하기" clickEvent={buttonEvent}></Button3>

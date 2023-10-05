@@ -23,7 +23,7 @@ public class ChallengeService {
 		return map;
 	}
 	
-	//챌린지 목록
+	//챌린지 목록(종료)
 	public Map challengeList2() {
 		List challengeList = challengeDao.challengeList2();
 		HashMap<String, Object> map = new HashMap<String, Object>();

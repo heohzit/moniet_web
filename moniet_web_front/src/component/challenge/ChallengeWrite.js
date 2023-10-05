@@ -1,7 +1,7 @@
 import ChallengeFrm from "./ChallengeFrm";
 import { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const ChallengeWrite = () => {
   const [challengeKind, setChallengeKind] = useState("");

@@ -2,6 +2,8 @@ import { CircularProgressBar } from "@tomickigrzegorz/react-circular-progress-ba
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { Button3 } from "../util/Buttons";
+import Swal from "sweetalert2";
 
 const ChallengeView = (props) => {
   const location = useLocation();
@@ -28,7 +30,50 @@ const ChallengeView = (props) => {
   const currentAmount = 50000;
   // 진행률 계산
   const progress = (currentAmount / goalAmount) * 100;
-
+  const deleteChallenge = () => {
+    Swal.fire({
+      icon: "warning",
+      text: "챌린지를 삭제하시겠습니까?",
+      showCancelButton: true,
+      confirmButtonText: "삭제",
+      cancelButtonText: "취소",
+    }).then((res) => {
+      if (res.isConfirmed) {
+        axios
+          .get("/challenge/delete/" + challenge.challengeNo)
+          .then((res) => {
+            if (res.data === 1) {
+              navigate("/challenge");
+            }
+          })
+          .catch((res) => {
+            console.log(res.response.status);
+          });
+      }
+    });
+  };
+  const changeChallenge = () => {
+    Swal.fire({
+      icon: "warning",
+      text: "챌린지를 중도포기하시겠습니까? 포기를 누르시면 종료된 챌린지로 이동합니다.",
+      showCancelButton: true,
+      confirmButtonText: "포기",
+      cancelButtonText: "취소",
+    }).then((res) => {
+      if (res.isConfirmed) {
+        axios
+          .get("/challenge/changeChallenge/" + challenge.challengeNo)
+          .then((res) => {
+            if (res.data === 1) {
+              navigate("/challenge");
+            }
+          })
+          .catch((res) => {
+            console.log(res.response.status);
+          });
+      }
+    });
+  };
   return (
     <div className="challenge-content">
       <div className="challenge-detail">머니챌린지 상세보기</div>
@@ -49,6 +94,10 @@ const ChallengeView = (props) => {
       <div className="challenge-view-info">
         <div>{challenge.challengeStart}</div>
         <div>{challenge.challengeEnd}</div>
+      </div>
+      <div className="board-btn-box">
+        <Button3 text="포기하기"></Button3>
+        <Button3 clickEvent={deleteChallenge} text="삭제하기"></Button3>
       </div>
     </div>
   );

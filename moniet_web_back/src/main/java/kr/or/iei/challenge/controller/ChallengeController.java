@@ -29,7 +29,7 @@ public class ChallengeController {
 		return map;
 	}
 	
-	//챌린지 목록
+	//챌린지 목록(종료)
 	@GetMapping(value="/challengeList2")
 	public Map challengeList2 () {
 		Map map =challengeService.challengeList2();

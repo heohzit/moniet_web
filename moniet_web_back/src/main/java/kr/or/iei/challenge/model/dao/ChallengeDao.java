@@ -12,7 +12,7 @@ public interface ChallengeDao {
 	//챌린지 목록
 	List challengeList1();
 	
-	//챌린지 목록
+	//챌린지 목록(종료)
 	List challengeList2();
 		
 	
