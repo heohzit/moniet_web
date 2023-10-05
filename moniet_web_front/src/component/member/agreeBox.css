@@ -1,0 +1,26 @@
+.agree-box-wrap {
+  width: 500px;
+  margin: 0 auto;
+}
+.agree-box-title {
+  font-size: 24px;
+  font-family: ns-b;
+  padding: 30px 0px;
+  color: #323673;
+}
+.next-button {
+  width: 100%;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  color: #ccc;
+  background-color: #f0f1f2;
+  font-size: 14px;
+  margin: 30px 0px;
+}
+.next-button:disabled {
+  background-color: #323673;
+  color: #fff;
+}

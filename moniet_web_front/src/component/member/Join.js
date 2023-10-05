@@ -4,6 +4,7 @@ import "./join.css";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import AgreeBox from "./AgreeBox";
 
 const Join = () => {
   const [memberId, setMemberId] = useState("");
@@ -157,6 +158,7 @@ const Join = () => {
         checkMsg={checkEmailMsg}
         blurEvent={emailCheck}
       />
+      <AgreeBox />
       <div className="join-button">
         <button type="button" onClick={join}>
           회원가입
