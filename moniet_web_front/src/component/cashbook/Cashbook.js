@@ -13,7 +13,9 @@ import AddComma from "./AddComma";
 import Input from "../util/InputFrm";
 import moment from "moment/moment";
 
-const Cashbook = () => {
+const Cashbook = (props) => {
+  const isLogin = props.isLogin;
+
   const [cashbookList, setCashbookList] = useState([]);
   const [cashbookSum, setCashbookSum] = useState([]);
   const [dateRange, setDateRange] = useState([
@@ -29,14 +31,21 @@ const Cashbook = () => {
     endDate: dateRange[0].endDate,
   };
   useEffect(() => {
-    axios
-      .post("/cashbook/list/", obj)
-      .then((res) => {
-        setCashbookList(res.data.cashbookList);
-      })
-      .catch((res) => {
-        console.log(res.response.status);
-      });
+    if (isLogin) {
+      const token = window.localStorage.getItem("token");
+      axios
+        .post("/cashbook/list/", obj, {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        })
+        .then((res) => {
+          setCashbookList(res.data.cashbookList);
+        })
+        .catch((res) => {
+          console.log(res.response.status);
+        });
+    }
   }, [obj]);
   useEffect(() => {
     axios.get("/cashbook/total").then((res) => {

@@ -37,7 +37,12 @@ function App() {
             isLogin={isLogin}
             setIsLogin={setIsLogin}
           />
-          <Route path="/cashbook/*" element={<Cashbook />} />
+          <Route
+            path="/cashbook/*"
+            element={<Cashbook />}
+            isLogin={isLogin}
+            setIsLogin={setIsLogin}
+          />
           <Route
             path="/community/*"
             element={<CommunityMain />}
