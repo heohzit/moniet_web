@@ -95,15 +95,13 @@ const ChallengeView = (props) => {
         round={true}
         fontSize="15px"
         textPosition="1.5rem"
-      >
-        <div>{`진행률: ${progress.toFixed(2)}%`}</div>
-      </CircularProgressBar>
+      ></CircularProgressBar>
       <div className="challenge-view-title">{challenge.challengeTitle}</div>
       <div className="challenge-view-info">
         <div>{challenge.challengeStart}</div>
         <div>{challenge.challengeEnd}</div>
       </div>
-      <div className="board-btn-box">
+      <div className="challenge-btn-box">
         {challenge.challengeState === 2 ||
         challenge.challengeResult === 2 ||
         dateString > challenge.challengeEnd ? (

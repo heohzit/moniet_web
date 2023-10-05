@@ -126,7 +126,7 @@ const ChallengeFrm = (props) => {
           </table>
         </div>
       </div>
-      <div className="board-btn-box">
+      <div className="challenge-btn-box">
         <Button3 text="취소하기"></Button3>
         <Button3 text="등록하기" clickEvent={buttonEvent}></Button3>
       </div>

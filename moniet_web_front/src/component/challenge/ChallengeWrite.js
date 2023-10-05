@@ -42,7 +42,6 @@ const ChallengeWrite = () => {
   };
   return (
     <div>
-      <div className="challenge-frm-title">챌린지 작성</div>
       <ChallengeFrm
         challengeKind={challengeKind}
         setChallengeKind={setChallengeKind}

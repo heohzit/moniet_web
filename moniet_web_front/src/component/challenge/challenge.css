@@ -1,11 +1,13 @@
+/*챌린지 제목*/
+.challenge-title {
+  font-size: 20px;
+  border-bottom: 2px solid #ccc;
+}
+/*챌린지 리스트*/
 .challenge-item-info {
   border: 1px solid black;
   width: 300px;
   height: 100px;
-}
-.challenge-title {
-  font-size: 20px;
-  border-bottom: 2px solid #ccc;
 }
 /*메뉴css*/
 .challengeMenu-tab > ul {
@@ -23,6 +25,7 @@
   color: #ccc;
   cursor: pointer;
 }
+
 /*Frm css*/
 .challenge-frm-top {
   width: 700px;
@@ -31,4 +34,18 @@
   border: 1px solid #ccc;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   border-radius: 30px;
+}
+/*챌린지 타입 css*/
+.challenge-kind div {
+  border: 1px solid black;
+  width: 35px;
+  border-radius: 30px;
+}
+/*챌린지 글쓰기 버튼*/
+.board-write-btn {
+  width: 150px;
+}
+/*챌린지 버튼*/
+.challenge-btn-box {
+  width: 150px;
 }

@@ -13,10 +13,9 @@ const ChallengeList = () => {
   };
   return (
     <div>
-      챌린지 리스트
       <ChallengeMenu></ChallengeMenu>
       <div className="board-write-btn">
-        <Button3 text="글쓰기" clickEvent={write}></Button3>
+        <Button3 text="머니챌린지 만들기" clickEvent={write}></Button3>
       </div>
       <Routes>
         <Route path="*" element={<IngChallenge></IngChallenge>}></Route>
@@ -25,6 +24,7 @@ const ChallengeList = () => {
     </div>
   );
 };
+
 const ChallengeMenu = () => {
   return (
     <div className="challengeMenu-tab">
@@ -39,4 +39,5 @@ const ChallengeMenu = () => {
     </div>
   );
 };
+
 export default ChallengeList;
