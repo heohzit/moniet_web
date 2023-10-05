@@ -1,104 +1,76 @@
 import axios from "axios";
 import "./memberMain.css";
-import { Route, useNavigate, Routes, Link } from "react-router-dom";
-import { useState, useEffect } from "react";
-import Myinfo from "./Myinfo";
-import MemberChangePw from "./MemberChangePw";
-const MemberMain = (props) => {
+import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Button1 } from "../util/Buttons";
+
+const MemberMain=(props)=>{
   const isLogin = props.isLogin;
   const setIsLogin = props.setIsLogin;
   const token = window.localStorage.getItem("token");
-  const [member, setMember] = useState({});
+  const [member,setMember] = useState({});
   const navigate = useNavigate();
-  useEffect(() => {
+
+  useEffect(()=>{
     axios
-      .post("/member/getMember", null, {
-        headers: {
-          Authorization: "Bearer " + token,
+    .post("/member/getMember", null, {
+      headers : {
+        Authorization:"Bearer "+token,
+    },
+    }).then((res)=>{
+      console.log(res.data);
+      setMember(res.data);
+    }).catch((res)=>{
+      //로그인이 풀린상태
+      if(res.response.status === 403){
+        alert("로그인 후 이용해주세요.");
+        navigate("/");
+      }
+    });
+  },[]);
+  //로그아웃 상태일때
+  if(!isLogin){
+    navigate("/");
+  }
+  
+  const deleteMember = ()=>{
+    if(window.confirm("회원 탈퇴를 진행하시겠습니까?")) {
+      axios.post("/member/delete",null,{
+        headers : {
+          Authorization: "Bearer "+token,
         },
       })
-      .then((res) => {
-        console.log(res.data);
+      .then((res)=>{
+        if(res.data === 1) {
+          alert("회원탈퇴가 완료되었습니다.");
+          //로그아웃
+          window.localStorage.removeItem("token")
+          setIsLogin(false);
+        }
       })
-      .catch((res) => {
-        //403 : 로그인 x
-        if (res.response.status === 403) {
-          alert("로그인 후 이용해주세요.");
-          navigate("/login");
+      .catch((res)=>{
+        if(res.response.status === 403){
+          console.log("로그아웃된 상태");
+          setIsLogin(false);
         }
       });
-  }, []);
+    }else{
 
-  const [menus, setMenus] = useState([
-    { url: "myInfo", text: "내 정보", active: false },
-    { url: "change-password", text: "비밀번호 변경", active: false },
-  ]);
-  return (
-    <div className="mypage-wrap">
-      <div className="mypage-title">MY PAGE</div>
+    }
+  }
+  
+  return(
+    <div>
+      <div className="my-title">MY PAGE</div>
       <div className="my-content">
-        <MysideMenu menus={menus} setMenus={setMenus} />
-        <div className="current-content">
-          <Routes>
-            <Route
-              path="info"
-              element={
-                <Myinfo
-                  member={member}
-                  setMember={setMember}
-                  setIsLogin={setIsLogin}
-                />
-              }
-            />
-            <Route path="changePw" element={<MemberChangePw />} />
-          </Routes>
+        <div>{member.memberNo}</div>
+        <div>{member.memberId}</div>
+        <div className="del-btn-wrap">
+        <button onClick={deleteMember}>회원탈퇴</button>
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-const MysideMenu = (props) => {
-  const menus = props.menus;
-  const setMenus = props.setMenus;
-  const activeTab = (index) => {
-    menus.forEach((item) => {
-      item.active = false;
-    });
-    menus[index].active = true;
-    setMenus([...menus]);
-  };
-  return (
-    <div className="mypage-side">
-      <ul>
-        {menus.map((menu, index) => {
-          return (
-            <li key={"menu" + index}>
-              {menu.active ? (
-                <Link
-                  to={menu.url}
-                  className="active-side"
-                  onClick={() => {
-                    activeTab(index);
-                  }}
-                >
-                  {menu.text}
-                </Link>
-              ) : (
-                <Link
-                  to={menu.url}
-                  onClick={() => {
-                    activeTab(index);
-                  }}
-                >
-                  {menu.text}
-                </Link>
-              )}
-            </li>
-          );
-        })}
-      </ul>
-    </div>
-  );
-};
-export { MemberMain, MysideMenu };
+export default MemberMain;

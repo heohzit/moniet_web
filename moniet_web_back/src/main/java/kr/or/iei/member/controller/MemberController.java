@@ -46,8 +46,10 @@ public class MemberController {
 	
 	@PostMapping(value="/getMember")
 	public Member mypage(@RequestAttribute String memberId) {
-		return memberService.selectOneMember(memberId);
+		return memberService.selectOneMember(memberId);	
 	}
+	
+	
 	
 	
 	
@@ -58,7 +60,7 @@ public class MemberController {
 	//회원탈퇴 
 	@PostMapping(value="delete")
 	public int delete(@RequestAttribute String memberId) {
-		int result = memberService.deleteMember(memberId);
+		int result =  memberService.deleteMember(memberId);
 		return result;
 		
 	}

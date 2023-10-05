@@ -10,6 +10,6 @@
 	</insert>
 	
 	<delete id="deleteMember">
-		delete from member where memberId=#{memberId}
+		delete from member where member_id=#{memberId}
 	</delete>
 </mapper>
