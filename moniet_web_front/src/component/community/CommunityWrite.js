@@ -10,6 +10,7 @@ const CommunityWrite = () => {
   const [thumbnail, setThumbnail] = useState({});
   const [communityContent, setCommunityContent] = useState("");
   const [communityImg, setCommunityImg] = useState(null);
+  const [communityType, setCommunityType] = useState("");
 
   const navigate = useNavigate();
 
@@ -30,6 +31,8 @@ const CommunityWrite = () => {
         setCommunityContent={setCommunityContent}
         communityImg={communityImg}
         setCommunityImg={setCommunityImg}
+        communityType={communityType}
+        setCommunityType={setCommunityType}
         buttonEvent={write}
         type="write"
       />

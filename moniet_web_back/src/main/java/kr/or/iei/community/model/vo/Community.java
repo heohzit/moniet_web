@@ -21,5 +21,6 @@ public class Community {
 	private String communityThumb;
 	private int communityStatus;
 	private int communityParti;
+	private int communityType;
 	
 }
