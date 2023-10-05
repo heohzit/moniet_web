@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { Button3 } from "../util/Buttons";
 
 //종료된 챌린지
 const EndChallenge = () => {
@@ -26,6 +27,9 @@ const EndChallenge = () => {
           );
         })}
       </div>
+      <div className="challenge-more">
+        <Button3 text="더보기" />
+      </div>
     </div>
   );
 };
@@ -42,6 +46,9 @@ const ChallengeItem = (props) => {
   return (
     <div className="challenge-item" onClick={challengeView}>
       <div className="challenge-item-info">
+        <div className="challenge-kind">
+          {challenge.challengeKind === 1 ? <div>저축</div> : <div>지출</div>}
+        </div>
         <div>{challenge.challengeTitle}</div>
         <div>{challenge.challengeAmount.toLocaleString()}원</div>
       </div>

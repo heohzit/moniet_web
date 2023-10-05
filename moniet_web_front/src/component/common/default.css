@@ -45,7 +45,7 @@ a {
   background-color: #f0f1f2;
   list-style-type: none;
   box-sizing: border-box;
-  padding-top: 30px;
+  padding: 0;
   margin: 0;
   position: fixed;
 }

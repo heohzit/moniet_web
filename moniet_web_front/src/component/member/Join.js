@@ -16,6 +16,7 @@ const Join = () => {
   const [checkPwMsg, setCheckPwMsg] = useState("");
   const [checkNameMsg, setCheckNameMsg] = useState("");
   const [checkPhoneMsg, setCheckPhoneMsg] = useState("");
+  const [checkEmailMsg, setCheckEmailMsg] = useState("");
   const navigate = useNavigate();
 
   const idCheck = () => {
@@ -38,6 +39,13 @@ const Join = () => {
         });
     }
   };
+  const pwCheck = () => {
+    if (memberPw !== memberPwRe) {
+      setCheckPwMsg("비밀번호가 일치하지 않습니다.");
+    } else {
+      setCheckPwMsg("");
+    }
+  };
   const nameCheck = () => {
     const nameReg = /^[가-힣]{2,4}$/;
     if (!nameReg.test(memberName)) {
@@ -54,11 +62,12 @@ const Join = () => {
       setCheckPhoneMsg("");
     }
   };
-  const pwCheck = () => {
-    if (memberPw !== memberPwRe) {
-      setCheckPwMsg("비밀번호가 일치하지 않습니다.");
+  const emailCheck = () => {
+    const emailReg = /^[A-Za-z0-9_\\.\\-]+@[A-Za-z0-9\\-]+\.[A-za-z0-9\\-]+/;
+    if (!emailReg.test(memberEmail)) {
+      setCheckEmailMsg("'@'를 포함하여 올바른 형식으로 입력해주세요.");
     } else {
-      setCheckPwMsg("");
+      setCheckEmailMsg("");
     }
   };
   //회원가입
@@ -67,7 +76,8 @@ const Join = () => {
       checkIdMsg === "" &&
       checkPwMsg === "" &&
       checkNameMsg === "" &&
-      checkPhoneMsg === ""
+      checkPhoneMsg === "" &&
+      checkEmailMsg === ""
     ) {
       const member = {
         memberId,
@@ -144,6 +154,8 @@ const Join = () => {
         type="type"
         content="memberEmail"
         label="이메일"
+        checkMsg={checkEmailMsg}
+        blurEvent={emailCheck}
       />
       <div className="join-button">
         <button type="button" onClick={join}>
