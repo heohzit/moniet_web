@@ -95,6 +95,7 @@ const TextEditor2 = (props) => {
             editor.setSelection(range.index + 1);
           })
           .catch((res) => {
+            console.log("실패");
             console.log(res.response.status);
           });
       }

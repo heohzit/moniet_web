@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import kr.or.iei.FileUtil;
 import kr.or.iei.community.model.service.CommunityService;
 
 @RestController
@@ -20,6 +21,9 @@ public class CommunityController {
 	
 	@Autowired
 	private CommunityService communityService;
+	
+	@Autowired
+	private FileUtil fileUtil;
 	
 	@Value("${file.root}")
 	private String root;
@@ -34,8 +38,8 @@ public class CommunityController {
 	public String contentImg(@ModelAttribute MultipartFile image) {
 		String savepath = root+"community/editor/";
 		String filename = image.getOriginalFilename();
-		
-		return "";
+		String filepath = fileUtil.getFilepath(savepath, filename, image);
+		return "/community/editor"+filepath;
 	}
 
 }

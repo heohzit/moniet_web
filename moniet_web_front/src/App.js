@@ -14,6 +14,15 @@ import MemberMain from "./component/member/MemberMain";
 function App() {
   const [isLogin, setIsLogin] = useState(false);
 
+  useEffect(() => {
+    const token = window.localStorage.getItem("token");
+    if (token === null) {
+      setIsLogin(false);
+    } else {
+      setIsLogin(true);
+    }
+  }, []);
+
   return (
     <div className="App">
       <Header isLogin={isLogin} setIsLogin={setIsLogin}></Header>
