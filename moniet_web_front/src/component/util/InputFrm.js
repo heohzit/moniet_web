@@ -4,6 +4,8 @@ const Input = (props) => {
   const data = props.data;
   const setData = props.setData;
   const type = props.type;
+  const min = props.min;
+  const max = props.max;
   const content = props.content;
   const blurEvent = props.blurEvent;
   const changevalue = (e) => {
@@ -19,6 +21,8 @@ const Input = (props) => {
         value={data || ""}
         onChange={changevalue}
         onBlur={blurEvent}
+        min={min}
+        max={max}
       ></input>
     </>
   );

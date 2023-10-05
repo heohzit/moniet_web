@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.iei.challenge.model.dao.ChallengeDao;
 import kr.or.iei.challenge.model.vo.Challenge;
@@ -23,7 +24,7 @@ public class ChallengeService {
 		return map;
 	}
 	
-	//챌린지 목록
+	//챌린지 목록(종료)
 	public Map challengeList2() {
 		List challengeList = challengeDao.challengeList2();
 		HashMap<String, Object> map = new HashMap<String, Object>();
@@ -38,8 +39,23 @@ public class ChallengeService {
 	}
 	
 	//챌린지 만들기
+	@Transactional
 	public int insertChallenge(Challenge c) {
 		int result = challengeDao.insertChallenge(c);
 		return result;
+	}
+	
+	//챌린지 삭제
+	@Transactional
+	public int deleteChallenge(int challengeNo) {
+		int result = challengeDao.deleteChallenge(challengeNo);
+		return result;
+	}
+	
+	//챌린지 포기
+	@Transactional
+	public int changeChallenge(Challenge c) {
+		// TODO Auto-generated method stub
+		return challengeDao.changeChallenge(c);
 	}
 }
