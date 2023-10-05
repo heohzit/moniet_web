@@ -39,7 +39,7 @@ public class CommunityController {
 		String savepath = root+"community/editor/";
 		String filename = image.getOriginalFilename();
 		String filepath = fileUtil.getFilepath(savepath, filename, image);
-		return "/community/editor"+filepath;
+		return "/community/editor/"+filepath;
 	}
 
 }
