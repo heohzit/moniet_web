@@ -58,4 +58,10 @@ public class ChallengeService {
 		// TODO Auto-generated method stub
 		return challengeDao.changeChallenge(c);
 	}
+	
+	//챌린지 기간 종료
+	public void challengeFinish() {
+		// TODO Auto-generated method stub
+		challengeDao.challengeFinish();
+	}
 }

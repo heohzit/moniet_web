@@ -16,7 +16,7 @@
   			to_char(challenge_start,'yyyy-mm-dd') as challenge_start,
   			to_char(challenge_end,'yyyy-mm-dd') as challenge_end
 		 from challenge
-		 where challenge_end > to_char(sysdate,'yyyy-mm-dd') and challenge_result = 0 and challenge_state =1
+		 where to_char(challenge_end,'yyyy-mm-dd') > to_char(sysdate,'yyyy-mm-dd') and challenge_result = 0 and challenge_state =1
 	</select>
 	
 	<!--챌린지 목록(종료)-->
@@ -33,7 +33,7 @@
   			to_char(challenge_start,'yyyy-mm-dd') as challenge_start,
   			to_char(challenge_end,'yyyy-mm-dd') as challenge_end
 		 from challenge
-		  where to_char(sysdate,'yyyy-mm-dd') > challenge_end or challenge_result = 2 or challenge_state =2
+		  where to_char(sysdate,'yyyy-mm-dd') > to_char(challenge_end,'yyyy-mm-dd')or challenge_result = 2 or challenge_state =2
 	</select>
 	
 	<!--챌린지 상세보기-->
@@ -67,5 +67,17 @@
   	<!--챌린지 포기-->
   	<update id="changeChallenge">
   		update challenge set challenge_result = #{challengeResult} where challenge_no = #{challengeNo}
+  	</update>
+  	
+  	<!--챌린지 기간 종료-->
+  	<update id="challengeFinish">
+  	<![CDATA[
+  		update challenge set challenge_result = 2
+		where challenge_no in 
+		(select challenge_no from challenge 
+		where challenge_result =0 
+		and 
+		to_char(challenge_end,'yyyy-mm-dd') < to_char(sysdate,'yyyy-mm-dd'));
+	]]>
   	</update>
 </mapper>
