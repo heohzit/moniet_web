@@ -1,3 +1,24 @@
 .date-range-icon {
   width: 30px;
 }
+.cashbook-btn-zone {
+  display: flex;
+  height: 60px;
+}
+.cashbook-btn-zone > button:nth-child(2) {
+  color: #6a6da6;
+}
+.cashbook-btn-zone > button:nth-child(3) {
+  color: #e66eb2;
+}
+.money-color {
+  text-align: right;
+  color: #6a6da6;
+}
+.money-color-spending {
+  text-align: right;
+  color: #e66eb2;
+}
+.cashbook-detail {
+  text-align: center;
+}

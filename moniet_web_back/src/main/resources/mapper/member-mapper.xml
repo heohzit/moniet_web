@@ -8,4 +8,8 @@
 	<insert id="insertMember">
 		insert into member values(member_seq.nextval,#{memberId},#{memberPw},#{memberName},#{memberPhone},#{memberEmail},1,0)
 	</insert>
+	
+	<delete id="deleteMember">
+		delete from member where memberId=#{memberId}
+	</delete>
 </mapper>

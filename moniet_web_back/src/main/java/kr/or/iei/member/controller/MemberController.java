@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -41,5 +42,25 @@ public class MemberController {
 	public String login(@RequestBody Member member) {
 		String result = memberService.login(member);
 		return result;
+	}
+	
+	@GetMapping(value="/mypage")
+	public Member mypage(@RequestAttribute String memberId) {
+		System.out.println(memberId);
+		return memberService.selectOneMember(memberId);
+	}
+	
+	
+	
+	
+	
+	
+	
+	//회원탈퇴 
+	@PostMapping(value="delete")
+	public int delete(@RequestAttribute String memberId) {
+		int result = memberService.deleteMember(memberId);
+		return result;
+		
 	}
 }

@@ -4,9 +4,9 @@ import Input from "./InputFrm";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
-
-const Login = () => {
-    const [memberId, setMemberId] = useState("");
+const Login = (props) => {
+    const setIsLogin = props.setIsLogin;
+    const [memberId,setMemberId] = useState("");
     const [memberPw, setMemberPw] = useState("");
     const navigate = useNavigate();
 
@@ -18,11 +18,13 @@ const Login = () => {
         if(res.data === "실패") {
           alert("아이디 또는 비밀번호를 확인하세요");
         }else {
+          window.localStorage.getItem("token",res.data);
+          setIsLogin(true);
           navigate("/");
         }
       })
       .catch((res)=>{
-        console.lot(res.data);
+        console.log(res.data);
       });
     }
 

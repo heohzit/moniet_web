@@ -1,3 +1,12 @@
+/*
+    메인 색상 (진한 순서대로)
+    #151426 rgb(21, 20, 38)
+    #010440 rgb(1, 4, 64)
+    #323673 rgb(50, 54, 115)
+    #6A6DA6 rgb(106, 109, 166)
+    #F0F1F2 rgb(240, 241, 242)
+*/
+
 .community-all-wrap {
   width: 1200px;
 }
@@ -62,4 +71,68 @@
   height: 100%;
   font-size: 20px;
   letter-spacing: 0.2ch;
+}
+
+/* communityWrite/Frm */
+
+.community-frm-top {
+  display: flex;
+  justify-content: space-between;
+}
+
+.community-thumbnail {
+  width: 280px;
+  height: 280px;
+  box-sizing: border-box;
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+
+.community-thumbnail > img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.community-info {
+  width: 900px;
+}
+
+.community-info-tbl {
+  width: 100%;
+  border-spacing: 0;
+}
+
+.community-info-tbl tr > td:first-child {
+  width: 150px;
+  padding: 10px 20px;
+  background-color: rgb(21, 20, 38, 0.1);
+  border: 1px solid rgb(21, 20, 38, 0.1);
+}
+
+.community-info-tbl tr > td:last-child {
+  padding: 10px 20px;
+  border: 1px solid #ccc;
+}
+
+.community-info-tbl tr > td > input[type="text"] {
+  border: none;
+  padding: 0;
+}
+
+.community-content-box {
+  margin: 10px 0px;
+}
+
+.community-btn-box {
+  margin-top: 20px;
+}
+
+.community-content-box > textarea {
+  width: 100%;
+  height: 300px;
+}
+
+.community-content-box .ql-container {
+  height: 400px;
 }

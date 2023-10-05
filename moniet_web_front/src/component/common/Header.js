@@ -1,12 +1,15 @@
 import { Link } from "react-router-dom";
 import "./default.css";
-const Header = () => {
+
+const Header = (props) => {
+  const isLogin = props.isLogin;
+  const setIsLogin = props.setIsLogin;
   return (
     <header className="header-wrap">
       <div className="header-title">
         <Link to="/">머니어터</Link>
       </div>
-      <HeaderLink />
+      <HeaderLink isLogin={isLogin} setIsLogin={setIsLogin} />
       <NaviSide></NaviSide>
     </header>
   );
@@ -34,12 +37,35 @@ const NaviSide = () => {
     </div>
   );
 };
+const HeaderLink = (props)=> {
+  const isLogin = props.isLogin;
+  const setIsLogin = props.setIsLogin;
 
-const HeaderLink = () => {
+  const logout = ()=>{
+    setIsLogin(false);
+    window.localStorage.removeItem("token");
+  };
   return (
     <div className="header-link">
-      <Link to="/join">회원가입(임시)</Link>
-      <Link to="/login">로그인</Link>
+      {isLogin? (
+        <>
+      <Link to="/member/mypage">
+        <span className="material-icons icon">face</span>
+      </Link>
+      <Link to="#" onClick={logout}>
+      <span className="material-icons">logout</span>
+      </Link>
+        </>
+      ):(
+      <>
+      <Link to="/login">
+        <span className="material-icons icon">login</span>
+      </Link>
+      <Link to="/join">
+      <span className="material-icons">person_add_alt</span>
+      </Link>
+      </>
+      )}
     </div>
   );
 };

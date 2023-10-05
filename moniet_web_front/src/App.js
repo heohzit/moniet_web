@@ -9,13 +9,14 @@ import CommunityMain from "./component/community/CommunityMain";
 import Join from "./component/member/Join";
 import Login from "./component/member/Login";
 import { useState, useEffect } from "react";
+import MemberMain from "./component/member/MemberMain";
 
 function App() {
-  const [isLogin, setIsLogin] = useState(true);
+  const [isLogin, setIsLogin] = useState(false);
 
   return (
     <div className="App">
-      <Header></Header>
+      <Header isLogin={isLogin} setIsLogin={setIsLogin}></Header>
 
       <div className="App-content">
         <Routes>
@@ -34,8 +35,9 @@ function App() {
             isLogin={isLogin}
             setIsLogin={setIsLogin}
           />
-          <Route path="/join" element={<Join />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/join" element={<Join/>}/>
+          <Route path="/login" element={<Login setIsLogin={setIsLogin}/>}/>
+          <Route path="/member/*" element={<MemberMain/>} />
         </Routes>
       </div>
       <Footer></Footer>
