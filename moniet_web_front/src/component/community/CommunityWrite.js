@@ -10,6 +10,7 @@ const CommunityWrite = () => {
   const [thumbnail, setThumbnail] = useState({});
   const [communityContent, setCommunityContent] = useState("");
   const [communityImg, setCommunityImg] = useState(null);
+  const [communityType, setCommunityType] = useState("");
 
   const navigate = useNavigate();
 
@@ -22,7 +23,7 @@ const CommunityWrite = () => {
       <CommunityFrm
         communityTitle={communityTitle}
         setCommunityTitle={setCommunityTitle}
-        communitySubTitle={setCommunitySubTitle}
+        communitySubTitle={communitySubTitle}
         setCommunitySubTitle={setCommunitySubTitle}
         thumbnail={thumbnail}
         setThumbnail={setThumbnail}
@@ -30,6 +31,8 @@ const CommunityWrite = () => {
         setCommunityContent={setCommunityContent}
         communityImg={communityImg}
         setCommunityImg={setCommunityImg}
+        communityType={communityType}
+        setCommunityType={setCommunityType}
         buttonEvent={write}
         type="write"
       />

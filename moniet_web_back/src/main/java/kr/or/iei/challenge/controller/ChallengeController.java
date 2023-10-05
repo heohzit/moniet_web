@@ -29,7 +29,7 @@ public class ChallengeController {
 		return map;
 	}
 	
-	//챌린지 목록
+	//챌린지 목록(종료)
 	@GetMapping(value="/challengeList2")
 	public Map challengeList2 () {
 		Map map =challengeService.challengeList2();
@@ -47,6 +47,19 @@ public class ChallengeController {
 	public int insertChallenge (@RequestBody Challenge c) {
 		int result = challengeService.insertChallenge(c);
 		return result;
+	}
+	
+	//챌린지 삭제
+	@GetMapping(value="/delete/{challengeNo}")
+	public int deleteChallenge (@PathVariable int challengeNo) {
+		int result = challengeService.deleteChallenge(challengeNo);
+		return result;
+	}
+	
+	//챌린지 포기
+	@PostMapping (value="/changeChallenge")
+	public int changeChallenge (@RequestBody Challenge c) {
+		return challengeService.changeChallenge(c);
 	}
 	
 }

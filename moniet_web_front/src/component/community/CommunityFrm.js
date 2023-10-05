@@ -2,6 +2,7 @@ import Input from "../util/InputFrm";
 import "./community.css";
 import { TextEditor1, TextEditor2 } from "../util/TextEditor";
 import { Button1, Button2, Button3, Button4 } from "../util/Buttons";
+import Type from "./Type";
 
 const CommunityFrm = (props) => {
   const communityTitle = props.communityTitle;
@@ -14,11 +15,36 @@ const CommunityFrm = (props) => {
   const setCommunityContent = props.setCommunityContent;
   const communityImg = props.communityImg;
   const setCommunityImg = props.setCommunityImg;
-  const buttonEvent = props.buttonEvent;
+  const communityType = props.communityType;
+  const setCommunityType = props.setCommunityType;
+  //const buttonEvent = props.buttonEvent;
 
   const type = props.type;
 
-  const thumbnailChange = (e) => {};
+  const typeList = [
+    { name: "저축하기 🐷", value: 1 },
+    { name: "지출줄이기 💰", value: 2 },
+    { name: "투자하기 📈", value: 4 },
+    { name: "기타 💸", value: 8 },
+  ];
+  const buttonEvent = () => {
+    const checkbox = document.querySelectorAll("[name=types]:checked");
+  };
+  const thumbnailChange = (e) => {
+    const files = e.currentTarget.files;
+    if (files.length !== 0 && files[0] != 0) {
+      setThumbnail(files[0]);
+
+      const reader = new FileReader();
+      reader.readAsDataURL(files[0]);
+      reader.onloadend = () => {
+        setCommunityImg(reader.result);
+      };
+    } else {
+      setThumbnail({});
+      setCommunityImg(null);
+    }
+  };
 
   return (
     <div className="community-frm-wrap">
@@ -62,17 +88,38 @@ const CommunityFrm = (props) => {
                 </td>
               </tr>
 
-              <tr>
+              <tr className="thumbnail-tr">
                 <td>
                   <label htmlFor="thumbnail">대표이미지</label>
                 </td>
-                <td>
+                <td className="thumbnail-input-td">
                   <input
                     type="file"
                     id="thumbnail"
                     accept="image/*"
                     onChange={thumbnailChange}
                   />
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <label>커뮤니티 분류</label>
+                </td>
+                <td className="community-type">
+                  {typeList.map((item) => {
+                    return (
+                      <label className="checkboxLabel" key={item.name}>
+                        <input
+                          type="checkbox"
+                          id={item.name}
+                          className="types"
+                          defaultValue={item.value}
+                        />
+                        <span>{item.name}</span>
+                      </label>
+                    );
+                  })}
                 </td>
               </tr>
             </tbody>
@@ -98,5 +145,7 @@ const CommunityFrm = (props) => {
     </div>
   );
 };
+
+const onCheckedItem = (e) => {};
 
 export default CommunityFrm;

@@ -3,6 +3,7 @@ import { Button3 } from "../util/Buttons";
 import Input from "../util/InputFrm";
 import { useState } from "react";
 
+//챌린지 작성 폼
 const ChallengeFrm = (props) => {
   const challengeKind = props.challengeKind;
   const setChallengeKind = props.setChallengeKind;
@@ -19,14 +20,19 @@ const ChallengeFrm = (props) => {
   const buttonEvent = props.buttonEvent;
   const type = props.type;
 
+  //챌린지 옵션
   const onChangeHanlder = (e) => {
     setChallengeKind(e.currentTarget.value);
   };
   const Options = [
-    { value: "선택" },
     { key: 1, value: "저축 챌린지" },
     { key: 2, value: "지출 챌린지" },
   ];
+
+  //달력 날짜 지정
+  const today = new Date();
+  const dateString = today.toISOString().substring(0, 10);
+
   return (
     <div>
       <div className="challenge-frm-top">
@@ -40,7 +46,7 @@ const ChallengeFrm = (props) => {
                 <td>
                   <select onChange={onChangeHanlder} value={challengeKind}>
                     {Options.map((item, index) => (
-                      <option key={item.key} value={item.key}>
+                      <option key={item.key} value={item.key} selected>
                         {item.value}
                       </option>
                     ))}
@@ -83,6 +89,8 @@ const ChallengeFrm = (props) => {
                     data={challengeStart}
                     setData={setChallengeStart}
                     content="challengeStart"
+                    min={dateString}
+                    max={dateString}
                   ></Input>
                 </td>
               </tr>
@@ -96,6 +104,7 @@ const ChallengeFrm = (props) => {
                     data={challengeEnd}
                     setData={setChallengeEnd}
                     content="challengeEnd"
+                    min={dateString}
                   ></Input>
                 </td>
               </tr>
@@ -117,7 +126,6 @@ const ChallengeFrm = (props) => {
           </table>
         </div>
       </div>
-      <div className="board-content-box"></div>
       <div className="board-btn-box">
         <Button3 text="취소하기"></Button3>
         <Button3 text="등록하기" clickEvent={buttonEvent}></Button3>
@@ -125,4 +133,5 @@ const ChallengeFrm = (props) => {
     </div>
   );
 };
+
 export default ChallengeFrm;

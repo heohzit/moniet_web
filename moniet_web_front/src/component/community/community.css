@@ -113,11 +113,36 @@
 .community-info-tbl tr > td:last-child {
   padding: 10px 20px;
   border: 1px solid #ccc;
+  text-align: center;
+  font-size: 18px;
+}
+
+#thumbnail {
+  font-size: 18px;
 }
 
 .community-info-tbl tr > td > input[type="text"] {
   border: none;
   padding: 0;
+}
+
+.community-info-tbl > tbody > tr {
+  height: 70px;
+}
+
+/* 커뮤니티 분류 */
+.community-type {
+  display: flex;
+  height: 48px;
+  justify-content: space-around;
+}
+
+.community-type span {
+  padding-left: 5px;
+}
+
+.checkboxLabel {
+  padding: 10px;
 }
 
 .community-content-box {

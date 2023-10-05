@@ -3,9 +3,8 @@ import { Route, Routes } from "react-router-dom";
 import ChallengeWrite from "./ChallengeWrite";
 import ChallengeView from "./ChallengeView";
 import ChallengeList from "./ChallengeList";
-import IngChallenge from "./IngChallenge";
-import EndChallenge from "./EndChallenge";
 
+//챌린지메인
 const ChallengeMain = (props) => {
   const isLogin = props.isLogin;
   return (

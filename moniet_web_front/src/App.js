@@ -14,6 +14,15 @@ import MemberMain from "./component/member/MemberMain";
 function App() {
   const [isLogin, setIsLogin] = useState(false);
 
+  useEffect(() => {
+    const token = window.localStorage.getItem("token");
+    if (token === null) {
+      setIsLogin(false);
+    } else {
+      setIsLogin(true);
+    }
+  }, []);
+
   return (
     <div className="App">
       <Header isLogin={isLogin} setIsLogin={setIsLogin}></Header>
@@ -35,9 +44,9 @@ function App() {
             isLogin={isLogin}
             setIsLogin={setIsLogin}
           />
-          <Route path="/join" element={<Join/>}/>
-          <Route path="/login" element={<Login setIsLogin={setIsLogin}/>}/>
-          <Route path="/member/*" element={<MemberMain/>} />
+          <Route path="/join" element={<Join />} />
+          <Route path="/login" element={<Login setIsLogin={setIsLogin} />} />
+          <Route path="/member/*" element={<MemberMain />} />
         </Routes>
       </div>
       <Footer></Footer>

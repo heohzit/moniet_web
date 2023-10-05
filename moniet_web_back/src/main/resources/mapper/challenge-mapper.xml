@@ -10,13 +10,16 @@
   			challenge_content,
   			challenge_kind,
   			challenge_amount,
+  			challenge_result,
+  			challenge_state,
+  			member_no2,
   			to_char(challenge_start,'yyyy-mm-dd') as challenge_start,
   			to_char(challenge_end,'yyyy-mm-dd') as challenge_end
 		 from challenge
-		 where challenge_result = 1
+		 where challenge_end > to_char(sysdate,'yyyy-mm-dd') and challenge_result = 0 and challenge_state =1
 	</select>
 	
-		<!--챌린지 목록-->
+	<!--챌린지 목록(종료)-->
 	<select id="challengeList2" resultType="challenge">
 		select 
 			challenge_no,
@@ -24,10 +27,13 @@
   			challenge_content,
   			challenge_kind,
   			challenge_amount,
+  			challenge_result,
+  			challenge_state,
+  			member_no2,
   			to_char(challenge_start,'yyyy-mm-dd') as challenge_start,
   			to_char(challenge_end,'yyyy-mm-dd') as challenge_end
 		 from challenge
-		  where challenge_result = 2
+		  where to_char(sysdate,'yyyy-mm-dd') > challenge_end or challenge_result = 2 or challenge_state =2
 	</select>
 	
 	<!--챌린지 상세보기-->
@@ -38,6 +44,9 @@
   			challenge_content,
   			challenge_kind,
   			challenge_amount,
+  			challenge_result,
+  			challenge_state,
+  			member_no2,
   			to_char(challenge_start,'yyyy-mm-dd') as challenge_start,
   			to_char(challenge_end,'yyyy-mm-dd') as challenge_end
   		 from challenge 
@@ -47,6 +56,16 @@
 	
 	<!--챌린지 만들기-->
   	<insert id="insertChallenge">
-  		insert into challenge values(challenge_seq.nextval,7777,#{challengeTitle},#{challengeContent},#{challengeKind},#{challengeAmount},#{challengeStart},#{challengeEnd},1,1)
+  		insert into challenge values(challenge_seq.nextval,7777,#{challengeTitle},#{challengeContent},#{challengeKind},#{challengeAmount},#{challengeStart},#{challengeEnd},1,0)
   	</insert>
+  	
+  	<!--챌린지 삭제-->
+  	<delete id="deleteChallenge">
+  		delete from challenge where challenge_no = #{challengeNo}
+  	</delete>
+  	
+  	<!--챌린지 포기-->
+  	<update id="changeChallenge">
+  		update challenge set challenge_result = #{challengeResult} where challenge_no = #{challengeNo}
+  	</update>
 </mapper>

@@ -37,18 +37,37 @@ a {
   justify-content: space-between;
   align-items: center;
 }
+/*메뉴바 css*/
 .nav-side {
-  width: 200px;
+  width: 300px;
 }
 .nav-side > ul {
+  background-color: #f0f1f2;
   list-style-type: none;
   box-sizing: border-box;
   padding-top: 30px;
   margin: 0;
+  position: fixed;
 }
 .nav-side > ul > li > a {
   display: block;
   padding: 10px;
   font-family: ns-b;
   position: relative;
+}
+/*푸터 css*/
+footer {
+  padding: 50px;
+  background-color: #f0f1f2;
+}
+/*메인 css*/
+.App {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.App-content {
+  flex: 1;
+  width: 1000px;
+  margin: 0px auto;
 }
