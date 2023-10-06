@@ -49,14 +49,13 @@ public class MemberController {
 		return memberService.selectOneMember(memberId);	
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
+	//회원정보수정
+	@PostMapping(value="/updateMember")
+		public int update(@RequestBody Member member) {
+		System.out.println(member);
+			return memberService.updateMemberInfo(member);
+		}
+
 	//회원탈퇴 
 	@PostMapping(value="delete")
 	public int delete(@RequestAttribute String memberId) {

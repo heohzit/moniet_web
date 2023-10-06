@@ -23,3 +23,24 @@
   display: block;
   width: 100%;
 }
+.my-title {
+  font-size: 28px;
+  font-family: ns-b;
+  text-align: center;
+}
+.my-sub-title {
+  font-size: 18px;
+  padding: 20px 0px;
+  font-family: ns-m;
+  border-bottom: 3px solid #010440;
+}
+.my-info-tbl {
+  margin: 20px 0px;
+  width: 100%;
+}
+.btn-wrap {
+  text-align: center;
+}
+.btn-wrap > button {
+  margin-right: 10px;
+}
