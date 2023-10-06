@@ -24,3 +24,6 @@
   background-color: #323673;
   color: #fff;
 }
+input[type="checkbox"] {
+  margin-right: 8px;
+}
