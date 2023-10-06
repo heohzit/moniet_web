@@ -9,8 +9,10 @@ const MemberMain = (props) => {
   const setIsLogin = props.setIsLogin;
   const token = window.localStorage.getItem("token");
   const [member, setMember] = useState({});
-
+  const [checkPhoneMsg, setCheckPhoneMsg] = useState("");
+  const [checkEmailMsg, setCheckEmailMsg] = useState("");
   const navigate = useNavigate();
+  //회원정보 update
   const setMemberPhone = (data) => {
     member.memberPhone = data;
     setMember({ ...member });
@@ -68,55 +70,81 @@ const MemberMain = (props) => {
     } else {
     }
   };
+
   const updateMember = () => {
     const token = window.localStorage.getItem("token");
-    axios
-      .post("/member/updateMember", member, {
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      })
-      .then((res) => {
-        alert("회원정보 수정이 완료되었습니다.");
-      })
-      .catch((res) => {
-        console.log(res);
-        console.log(member);
-      });
+    if (checkPhoneMsg === "" && checkEmailMsg === "") {
+      axios
+        .post("/member/updateMember", member, {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        })
+        .then((res) => {
+          alert("회원정보 수정이 완료되었습니다.");
+        })
+        .catch((res) => {
+          console.log(res);
+        });
+    } else {
+      alert("입력양식을 확인해주세요.");
+    }
+  };
+
+  const phoneCheck = () => {
+    const phoneReg = /^[0-9]{3}-[0-9]{3,4}-[0-9]{4}$/;
+    if (!phoneReg.test(member.memberPhone)) {
+      setCheckPhoneMsg("'-'을 포함하여 올바른 형식으로 입력해주세요.");
+    } else {
+      setCheckPhoneMsg("");
+    }
+  };
+  const emailCheck = () => {
+    const emailReg = /^[A-Za-z0-9_\\.\\-]+@[A-Za-z0-9\\-]+\.[A-za-z0-9\\-]+/;
+    if (!emailReg.test(member.memberEmail)) {
+      setCheckEmailMsg("'@'를 포함하여 올바른 형식으로 입력해주세요.");
+    } else {
+      setCheckEmailMsg("");
+    }
   };
 
   return (
     <div>
       <div className="my-title">MY PAGE</div>
-      <div className="my-sub-title">회원정보수정</div>
       <div className="my-content">
         <table className="my-info-tbl">
           <tbody>
             <tr>
-              <td>아이디</td>
+              <th>아이디</th>
               <td>{member.memberId}</td>
             </tr>
             <tr>
-              <td>이름</td>
+              <th>이름</th>
               <td>{member.memberName}</td>
             </tr>
             <tr>
-              <td>전화번호</td>
-              <Input
-                type="text"
+              <th>전화번호</th>
+              <UpdateInputWrap
                 data={member.memberPhone}
                 setData={setMemberPhone}
+                type="text"
                 content="memberPhone"
+                checkMsg={checkPhoneMsg}
+                blurEvent={phoneCheck}
               />
             </tr>
             <tr>
-              <td>이메일</td>
-              <Input
-                type="text"
-                data={member.memberEmail}
-                setData={setMemberEmail}
-                content="memberEmail"
-              />
+              <th>이메일</th>
+              <td>
+                <UpdateInputWrap
+                  data={member.memberEmail}
+                  setData={setMemberEmail}
+                  type="text"
+                  content="memberEmail"
+                  checkMsg={checkEmailMsg}
+                  blurEvent={emailCheck}
+                />
+              </td>
             </tr>
           </tbody>
         </table>
@@ -125,6 +153,31 @@ const MemberMain = (props) => {
           <button onClick={deleteMember}>회원탈퇴</button>
         </div>
       </div>
+    </div>
+  );
+};
+const UpdateInputWrap = (props) => {
+  const data = props.data;
+  const setData = props.setData;
+  const type = props.type;
+  const content = props.content;
+  const blurEvent = props.blurEvent;
+  const checkMsg = props.checkMsg;
+
+  return (
+    <div className="join-input-wrap">
+      <div>
+        <div className="input">
+          <Input
+            type={type}
+            data={data}
+            setData={setData}
+            content={content}
+            blurEvent={blurEvent}
+          />
+        </div>
+      </div>
+      <div className="check-msg">{checkMsg}</div>
     </div>
   );
 };
