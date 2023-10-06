@@ -75,6 +75,7 @@ footer {
   flex: 1;
   width: 1000px;
   margin: 0px auto;
+  padding-left: 100px;
 }
 
 /*member sub 메뉴 css*/
