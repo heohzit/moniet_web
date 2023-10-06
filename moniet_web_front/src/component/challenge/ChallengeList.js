@@ -5,17 +5,22 @@ import IngChallenge from "./IngChallenge";
 import EndChallenge from "./EndChallenge";
 import { Link } from "react-router-dom";
 import { Route, Routes } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 const ChallengeList = () => {
   const navigate = useNavigate();
   const write = () => {
     navigate("write");
   };
+  const [menus, setMenus] = useState([
+    { url: "ing", text: "진행중인 머니챌린지", active: true },
+    { url: "end", text: "종료된 머니챌린지", active: false },
+  ]);
   return (
     <div>
-      <ChallengeMenu></ChallengeMenu>
+      <ChallengeMenu menus={menus} setMenus={setMenus}></ChallengeMenu>
       <div className="board-write-btn">
-        <Button3 text="머니챌린지 만들기" clickEvent={write}></Button3>
+        <Button3 text="머니챌린지 도전" clickEvent={write}></Button3>
       </div>
       <Routes>
         <Route path="*" element={<IngChallenge></IngChallenge>}></Route>
@@ -25,16 +30,45 @@ const ChallengeList = () => {
   );
 };
 
-const ChallengeMenu = () => {
+const ChallengeMenu = (props) => {
+  const menus = props.menus;
+  const setMenus = props.setMenus;
+  const activeTab = (index) => {
+    menus.forEach((item) => {
+      item.active = false;
+    });
+    menus[index].active = true;
+    setMenus([...menus]);
+  };
   return (
     <div className="challengeMenu-tab">
       <ul>
-        <Link to="ing">
-          <li>진행중인 머니챌린지</li>
-        </Link>
-        <Link to="end">
-          <li>종료된 머니챌린지</li>
-        </Link>
+        {menus.map((menu, index) => {
+          return (
+            <li key={"menu" + index}>
+              {menu.active ? (
+                <Link
+                  to={menu.url}
+                  className="active-side"
+                  onClick={() => {
+                    activeTab(index);
+                  }}
+                >
+                  {menu.text}
+                </Link>
+              ) : (
+                <Link
+                  to={menu.url}
+                  onClick={() => {
+                    activeTab(index);
+                  }}
+                >
+                  {menu.text}
+                </Link>
+              )}
+            </li>
+          );
+        })}
       </ul>
     </div>
   );

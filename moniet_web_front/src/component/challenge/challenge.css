@@ -14,7 +14,7 @@
   list-style-type: none;
   overflow: hidden;
 }
-.challengeMenu-tab > ul > a {
+.challengeMenu-tab > ul > li > a {
   float: left;
   width: calc(100% / 2);
   height: 100px;
@@ -25,7 +25,12 @@
   color: #ccc;
   cursor: pointer;
 }
-
+.challengeMenu-tab > ul > li > a.active-side {
+  border-top: 3px solid #323673;
+  color: #323673;
+  font-weight: 900;
+  border-bottom: none;
+}
 /*Frm css*/
 .challenge-frm-top {
   width: 700px;
@@ -48,4 +53,20 @@
 /*챌린지 버튼*/
 .challenge-btn-box {
   width: 150px;
+}
+/*챌린지 리스트*/
+.challenge-content {
+  text-align: center;
+}
+.challenge-list-wrap1 {
+  float: left;
+  height: 100px;
+  margin: 80px;
+}
+
+.challenge-list-wrap2 {
+  display: inline-block;
+  height: 100px;
+  margin-left: 10px;
+  margin: 80px;
 }
