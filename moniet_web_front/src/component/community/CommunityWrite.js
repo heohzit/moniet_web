@@ -10,13 +10,16 @@ const CommunityWrite = () => {
   const [thumbnail, setThumbnail] = useState({});
   const [communityContent, setCommunityContent] = useState("");
   const [communityImg, setCommunityImg] = useState(null);
-  const [communityType, setCommunityType] = useState("");
+  const [communityType, setCommunityType] = useState([]);
+
+  const [typeList, setTypeList] = useState([
+    { name: "types", text: "저축하기 🐷", value: 1 },
+    { name: "types", text: "지출줄이기 💰", value: 2 },
+    { name: "types", text: "투자하기 📈", value: 4 },
+    { name: "types", text: "기타 💸", value: 8 },
+  ]);
 
   const navigate = useNavigate();
-
-  const write = () => {
-    Swal.fire("하이");
-  };
 
   return (
     <div>
@@ -33,7 +36,8 @@ const CommunityWrite = () => {
         setCommunityImg={setCommunityImg}
         communityType={communityType}
         setCommunityType={setCommunityType}
-        buttonEvent={write}
+        typeList={typeList}
+        setTypeList={setTypeList}
         type="write"
       />
     </div>

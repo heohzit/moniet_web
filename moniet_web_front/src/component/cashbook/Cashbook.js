@@ -8,7 +8,7 @@ import axios from "axios";
 import { DateRange, DateRangePicker, DefinedRange } from "react-date-range";
 import { addDays } from "date-fns";
 import ko from "date-fns/locale/ko";
-import { Button5 } from "../util/Buttons";
+import { Button4, Button5 } from "../util/Buttons";
 import AddComma from "./AddComma";
 
 const Cashbook = (props) => {
@@ -24,7 +24,6 @@ const Cashbook = (props) => {
     },
   ]);
   const [select, setSelect] = useState(false);
-
   const obj = {
     startDate: dateString(dateRange[0].startDate),
     endDate: dateString(dateRange[0].endDate),
@@ -35,7 +34,6 @@ const Cashbook = (props) => {
     const day = date.getDate();
     return `${year}-${month}-${day}`;
   }
-
   useEffect(() => {
     const token = window.localStorage.getItem("token");
     axios
@@ -50,7 +48,7 @@ const Cashbook = (props) => {
       .catch((res) => {
         console.log(res.response.status);
       });
-  }, [dateRange]);
+  }, [select]);
   useEffect(() => {
     const token = window.localStorage.getItem("token");
     axios
@@ -62,8 +60,7 @@ const Cashbook = (props) => {
       .then((res) => {
         setCashbookSum(res.data);
       });
-  }, [dateRange]);
-
+  }, [select]);
   const addComma = (num) => {
     if (num >= 1000) {
       const numAddComma = num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -72,10 +69,20 @@ const Cashbook = (props) => {
     return num;
   };
 
+  const applyDate = () => {
+    setSelect(!select);
+  };
+  const resetDate = () => {
+    const thisMonth = document.querySelector(".rdrStaticRange:nth-of-type(5)");
+    thisMonth.click();
+    setSelect(!select);
+  };
+
   return (
     <div className="cashbook-all-wrap">
       <div className="cashbook-title">내역</div>
-      <div className="cashbook-content">
+
+      <div className="date-range-icon">
         <DateRangePicker
           onChange={(item) => setDateRange([item.selection])}
           months={1}
@@ -90,6 +97,12 @@ const Cashbook = (props) => {
           rangeColors={["#6a6da6", "#3ecf8e", "#fed14c"]}
           monthDisplayFormat="yyyy년 MMM"
         />
+        <div className="range-chg rdrDateRangePickerWrapper">
+          <Button4 text={"apply"} clickEvent={applyDate} />
+          <Button5 text={"reset"} clickEvent={resetDate} />
+        </div>
+      </div>
+      <div className="cashbook-content">
         <div className="cashbook-btn-zone">
           <Button5
             text={

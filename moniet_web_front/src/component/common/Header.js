@@ -10,11 +10,12 @@ const Header = (props) => {
         <Link to="/">머니어터</Link>
       </div>
       <HeaderLink isLogin={isLogin} setIsLogin={setIsLogin} />
-      <NaviSide></NaviSide>
+      <NaviSide isLogin={isLogin}></NaviSide>
     </header>
   );
 };
-const NaviSide = () => {
+const NaviSide = (props) => {
+  const isLogin = props.isLogin;
   return (
     <div className="nav-side">
       <ul>
@@ -33,6 +34,14 @@ const NaviSide = () => {
         <li>
           <Link to="/community">커뮤니티</Link>
         </li>
+        {isLogin ? (
+          <li>
+            <Link to="/member/mypage">마이페이지</Link>
+          </li>
+        ) : (
+          <>
+          </>
+        )}
       </ul>
     </div>
   );

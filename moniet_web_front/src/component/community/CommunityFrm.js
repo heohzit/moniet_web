@@ -3,6 +3,8 @@ import "./community.css";
 import { TextEditor1, TextEditor2 } from "../util/TextEditor";
 import { Button1, Button2, Button3, Button4 } from "../util/Buttons";
 import Type from "./Type";
+import { useState } from "react";
+import axios from "axios";
 
 const CommunityFrm = (props) => {
   const communityTitle = props.communityTitle;
@@ -17,18 +19,66 @@ const CommunityFrm = (props) => {
   const setCommunityImg = props.setCommunityImg;
   const communityType = props.communityType;
   const setCommunityType = props.setCommunityType;
+
+  const typeList = props.typeList;
+  const setTypeList = props.setTypeList;
   //const buttonEvent = props.buttonEvent;
 
   const type = props.type;
 
-  const typeList = [
-    { name: "저축하기 🐷", value: 1 },
-    { name: "지출줄이기 💰", value: 2 },
-    { name: "투자하기 📈", value: 4 },
-    { name: "기타 💸", value: 8 },
-  ];
+  // const typeList = [
+  //   { name: "저축하기 🐷", value: 1 },
+  //   { name: "지출줄이기 💰", value: 2 },
+  //   { name: "투자하기 📈", value: 4 },
+  //   { name: "기타 💸", value: 8 },
+  // ];
   const buttonEvent = () => {
     const checkbox = document.querySelectorAll("[name=types]:checked");
+
+    const checkboxValue = checkbox[0].value;
+    // 1/4/10
+    const arr = new Array();
+    for (let i = 0; i < checkbox.length; i++) {
+      arr.push(checkbox[i].value);
+    }
+    setCommunityType(arr.join("/")); // 컨트롤러에서 split으로 사용하기
+
+    console.log(communityTitle);
+    console.log(communitySubTitle);
+    console.log(thumbnail);
+    console.log(communityContent);
+    console.log(checkbox); // 덩어리가 크니까 value값만 넘겨주기
+    console.log(communityType);
+
+    if (
+      communityTitle !== "" &&
+      communitySubTitle !== "" &&
+      communityContent !== ""
+    ) {
+      const form = new FormData();
+      form.append("communityTitle", communityTitle);
+      form.append("communitySubTitle", communitySubTitle);
+      form.append("thumbnail", thumbnail);
+      form.append("communityContent", communityContent);
+
+      form.append("communityType", communityType);
+
+      const token = window.localStorage.getItem("token");
+      axios
+        .post("/community/insert", form, {
+          headers: {
+            contentType: "multipart/form-data",
+            processdData: false,
+            Authorization: "Bearer " + token,
+          },
+        })
+        .then((res) => {
+          console.log(res.data);
+        })
+        .catch((res) => {
+          console.log(res.response.status);
+        });
+    }
   };
   const thumbnailChange = (e) => {
     const files = e.currentTarget.files;
@@ -112,11 +162,11 @@ const CommunityFrm = (props) => {
                       <label className="checkboxLabel" key={item.name}>
                         <input
                           type="checkbox"
-                          id={item.name}
-                          className="types"
+                          id={item.text}
+                          name="types"
                           defaultValue={item.value}
                         />
-                        <span>{item.name}</span>
+                        <span>{item.text}</span>
                       </label>
                     );
                   })}
