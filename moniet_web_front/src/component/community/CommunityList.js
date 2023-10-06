@@ -79,9 +79,9 @@ const CommunityItem = (props) => {
       <div className="community-item">
         <div className="community-item-img">
           {community.communityThumb === null ? (
-            <img src="/image/default.png" />
+            <img src="/image/default.png" className="default-img" />
           ) : (
-            <img src={"/community" + community.communityThumb} />
+            <img src={"/community/" + community.communityThumb} />
           )}
         </div>
         <div className="community-item-info">

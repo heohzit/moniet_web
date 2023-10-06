@@ -3,7 +3,38 @@
 <mapper namespace="kr.or.iei.community.model.dao.CommunityDao">
 
 	<select id="communityList" resultType="community">
-		select * from community
+		
+	SELECT * FROM
+	    (SELECT ROWNUM AS RNUM, C.* FROM
+	    (SELECT
+	        COMMUNITY_NO,
+	        COMMUNITY_TITLE,
+	        COMMUNITY_SUBTITLE,
+	        COMMUNITY_WRITER,
+	        MEMBER_ID,
+	        COMMUNITY_CONTENT,
+	        TO_CHAR(COMMUNITY_DATE, 'YYYY-MM-DD HH:MI') AS COMMUNITY_DATE,
+	        COMMUNITY_THUMB,
+	        COMMUNITY_STATUS,
+	        COMMUNITY_PARTI
+	    FROM COMMUNITY
+	    JOIN MEMBER ON (COMMUNITY_WRITER = MEMBER_NO)
+	    WHERE COMMUNITY_STATUS = 1
+	    ORDER BY 1 DESC)C)
+	WHERE RNUM BETWEEN 1 AND 5
+
 	</select>
+
+	<insert id="insertCommunity">
+		insert into community values(community_seq.nextval, #{communityTitle}, #{communitySubTitle}, (select member_no from member where member_id=#{memberId}), #{communityContent}, sysdate, #{communityThumb}, 1, 0)
+		<!-- 위 방법이 있고, checkId로해서 select로 번호 받아와서 다시하는 방법도 있음 -->
+		<selectKey resultType="int" keyProperty="communityNo" order="AFTER">
+			select max(community_no) from community
+		</selectKey>
+	</insert>
+	
+	<insert id="insertCommunityType">
+		insert into community_type values(COMMUNITY_TYPE_SEQ.NEXTVAL, #{communityNo}, #{communityTypeDiv})
+	</insert>
 
 </mapper>

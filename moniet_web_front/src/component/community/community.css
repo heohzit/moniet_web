@@ -175,3 +175,25 @@
 .community-content-box .ql-container {
   height: 400px;
 }
+
+.community-item {
+  border-top: 1px solid #ccc;
+}
+
+.community-item-img {
+  width: 240px;
+  height: 240px;
+  text-align: center;
+}
+
+.community-item-img > img {
+  object-fit: contain;
+  width: 100%;
+  height: 100%;
+}
+
+.community-item-img .default-img {
+  padding-top: 20px;
+  width: 200px;
+  height: 200px;
+}
