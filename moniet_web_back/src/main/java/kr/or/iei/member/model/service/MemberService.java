@@ -51,6 +51,11 @@ public class MemberService {
 		return memberDao.deleteMember(memberId);
 	}
 
+	@Transactional
+	public int updateMemberInfo(Member member) {
+		return memberDao.updateMemberInfo(member);
+	}
+
 
 	
 }

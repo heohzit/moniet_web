@@ -18,7 +18,7 @@ const NaviSide = (props) => {
   const isLogin = props.isLogin;
   return (
     <div className="nav-side">
-      <ul>
+      <ul className="menu">
         <li>
           <Link to="/dashboard">대시보드</Link>
         </li>
@@ -37,10 +37,17 @@ const NaviSide = (props) => {
         {isLogin ? (
           <li>
             <Link to="/member/mypage">마이페이지</Link>
+            <ul className="submenu">
+              <li>
+                <Link to="/member/updatePw">비밀번호변경</Link>
+              </li>
+              <li>
+                <Link to="member/like">찜 목록</Link>
+              </li>
+            </ul>
           </li>
         ) : (
-          <>
-          </>
+          <></>
         )}
       </ul>
     </div>

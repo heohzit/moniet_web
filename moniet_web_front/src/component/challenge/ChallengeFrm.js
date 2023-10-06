@@ -32,6 +32,9 @@ const ChallengeFrm = (props) => {
   //달력 날짜 지정
   const today = new Date();
   const dateString = today.toISOString().substring(0, 10);
+  const dateObj = new Date(dateString);
+  dateObj.setDate(dateObj.getDate() + 1);
+  const tomorrowString = dateObj.toISOString().substring(0, 10);
 
   return (
     <div>
@@ -104,7 +107,7 @@ const ChallengeFrm = (props) => {
                     data={challengeEnd}
                     setData={setChallengeEnd}
                     content="challengeEnd"
-                    min={dateString}
+                    min={tomorrowString}
                   ></Input>
                 </td>
               </tr>
