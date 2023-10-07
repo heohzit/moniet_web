@@ -3,7 +3,8 @@ import "./memberMain.css";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Input from "../util/InputFrm";
-import { Button1 } from "../util/Buttons";
+import "./myinfo.css";
+
 
 const Myinfo = (props) => {
   const isLogin = props.isLogin;
@@ -128,12 +129,14 @@ const Myinfo = (props) => {
             <tr>
               <td>비밀번호</td>
               <td id="member-phone">
-                <div>
+                <div className="pw-wrap">
                 <UpdateInputWrap
-                  data={member.memberPw}
+                  data="********"
                   type="password"
                   content="memberPw"
+                  disabled="true"
                 />
+                <button className="pw-btn">변경하기</button>
                 </div>
               </td>
             </tr>
@@ -184,6 +187,8 @@ const UpdateInputWrap = (props) => {
   const content = props.content;
   const blurEvent = props.blurEvent;
   const checkMsg = props.checkMsg;
+  const disabled = props.disabled
+  
 
   return (
     <div className="update-input-wrap">
@@ -195,6 +200,7 @@ const UpdateInputWrap = (props) => {
             setData={setData}
             content={content}
             blurEvent={blurEvent}
+            disabled={disabled}
           />
         </div>
       </div>
