@@ -3,6 +3,7 @@ import "./memberMain.css";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Input from "../util/InputFrm";
+import { Button1 } from "../util/Buttons";
 
 const MemberMain = (props) => {
   const isLogin = props.isLogin;
@@ -11,7 +12,12 @@ const MemberMain = (props) => {
   const [member, setMember] = useState({});
   const [checkPhoneMsg, setCheckPhoneMsg] = useState("");
   const [checkEmailMsg, setCheckEmailMsg] = useState("");
+  const [currPw,setCurrPw]=useState("");
   const navigate = useNavigate();
+
+  //비밀번호 확인
+  const pwCheck=()=>{
+  }
   //회원정보 update
   const setMemberPhone = (data) => {
     member.memberPhone = data;
@@ -59,6 +65,7 @@ const MemberMain = (props) => {
             //로그아웃
             window.localStorage.removeItem("token");
             setIsLogin(false);
+            navigate("/");
           }
         })
         .catch((res) => {
@@ -112,30 +119,62 @@ const MemberMain = (props) => {
     <div>
       <div className="my-title">MY PAGE</div>
       <div className="my-content">
+        <div className="pw-check-zone">
+          <div className="pw-check-zone-title">비밀번호 확인</div>
+          <div className="pw-check-zone-content">
+            회원님의 안전한 개인정보 보호를 위해 비밀번호를 다시 한번 확인 합니다.
+            <div>
+            <Input
+              data={currPw}
+              setData={setCurrPw}
+              type="password"
+              content="currPw"
+            />
+            <Button1 text="확인" clickEvent={pwCheck}></Button1>
+            </div>
+          </div>
+        </div>
         <table className="my-info-tbl">
           <tbody>
             <tr>
-              <th>아이디</th>
+              <td>아이디</td>
               <td>{member.memberId}</td>
             </tr>
             <tr>
-              <th>이름</th>
+              <td>이름</td>
               <td>{member.memberName}</td>
             </tr>
             <tr>
-              <th>전화번호</th>
-              <UpdateInputWrap
-                data={member.memberPhone}
-                setData={setMemberPhone}
-                type="text"
-                content="memberPhone"
-                checkMsg={checkPhoneMsg}
-                blurEvent={phoneCheck}
-              />
+              <td>비밀번호</td>
+              <td id="member-phone">
+                <div>
+                <UpdateInputWrap
+                  data={member.memberPw}
+                  type="password"
+                  content="memberPw"
+                />
+                </div>
+              </td>
             </tr>
             <tr>
-              <th>이메일</th>
-              <td>
+              <td>전화번호</td>
+              <td id="member-phone">
+                <div>
+                <UpdateInputWrap
+                  data={member.memberPhone}
+                  setData={setMemberPhone}
+                  type="text"
+                  content="memberPhone"
+                  checkMsg={checkPhoneMsg}
+                  blurEvent={phoneCheck}
+                />
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>이메일</td>
+              <td id="member-email">
+                <div>
                 <UpdateInputWrap
                   data={member.memberEmail}
                   setData={setMemberEmail}
@@ -144,13 +183,14 @@ const MemberMain = (props) => {
                   checkMsg={checkEmailMsg}
                   blurEvent={emailCheck}
                 />
+                </div>
               </td>
             </tr>
           </tbody>
         </table>
-        <div className="btn-wrap">
+        <div className="my-info-btn-wrap">
           <button onClick={updateMember}>정보수정</button>
-          <button onClick={deleteMember}>회원탈퇴</button>
+          <button onClick={deleteMember} id="deleteBtn">회원탈퇴</button>
         </div>
       </div>
     </div>
@@ -165,9 +205,9 @@ const UpdateInputWrap = (props) => {
   const checkMsg = props.checkMsg;
 
   return (
-    <div className="join-input-wrap">
+    <div className="update-input-wrap">
       <div>
-        <div className="input">
+        <div className="update-input">
           <Input
             type={type}
             data={data}

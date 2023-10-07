@@ -8,9 +8,6 @@
   font-family: ns-m;
   padding: 20px 0;
 }
-.mypage-side {
-  width: 200px;
-}
 .mypage-side > ul {
   list-style-type: none;
   box-sizing: border-box;
@@ -28,17 +25,43 @@
   font-family: ns-b;
   text-align: center;
   padding-bottom: 30px;
-  border-bottom: 3px solid #010440;
 }
+/* 테이블 디자인*/
 .my-info-tbl {
-  margin: 10px 0px;
   width: 100%;
+  border-spacing: 0;
+  border-top: 2px solid #010440;
+  border-bottom: 2px solid #010440;
+  padding: 10px;
 }
-.btn-wrap {
+.my-info-tbl>tbody>tr>td:first-child{
+  width: 30%;
+  font-family: ns-b;
+}
+.my-info-tbl > tbody > tr > td {
+  padding: 15px;
+}
+.update-input {
+  width: 80%;
+}
+.my-info-btn-wrap {
+  margin: 30px 0px;
   text-align: center;
 }
-.btn-wrap > button {
+.my-info-btn-wrap > button {
   margin-right: 10px;
+  border: none;
+  border-radius: 5px;
+  width: 200px;
+  height: 50px;
+  line-height: 50px;
+  font-size: 15px;
+  font-family: ns-eb;
+  cursor: pointer;
+}
+#deleteBtn{
+  background-color: #010440;
+  color: #fff;
 }
 /*테이블*/
 .my-info-tbl th {
@@ -49,3 +72,29 @@
   padding-left: 40px;
   margin: 10px 0px;
 }
+
+.pw-check-zone-title {
+  font-size: 18px;
+  font-family: ns-r;
+  padding: 20px 0px;
+}
+.pw-check-zone-content{
+  border: 3px solid #f8f8f8;
+  padding: 50px;
+}
+.pw-check-zone-content >div {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 10px 0;
+  
+}
+.pw-check-zone-content>div>input{
+  width: 50%;
+  margin-right: 3px;
+}
+.pw-check-zone-content>div>button{
+  width: 10%;
+  height: 42px;
+}
+
