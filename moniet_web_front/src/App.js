@@ -10,6 +10,7 @@ import Join from "./component/member/Join";
 import Login from "./component/member/Login";
 import { useState, useEffect } from "react";
 import MemberMain from "./component/member/MemberMain";
+import Myinfo from "./component/member/Myinfo";
 
 function App() {
   const [isLogin, setIsLogin] = useState(null);
@@ -51,6 +52,9 @@ function App() {
           />
           <Route path="/join" element={<Join />} />
           <Route path="/login" element={<Login setIsLogin={setIsLogin} />} />
+          <Route
+          path="/member/myinfo" element={<Myinfo isLogin={isLogin} setIsLogin={setIsLogin}/>}
+          />
           <Route
             path="/member/*"
             element={<MemberMain setIsLogin={setIsLogin} isLogin={isLogin} />}
