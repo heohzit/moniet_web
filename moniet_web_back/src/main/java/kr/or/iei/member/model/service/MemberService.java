@@ -56,6 +56,14 @@ public class MemberService {
 		return memberDao.updateMemberInfo(member);
 	}
 
+	public int pwCheck(Member member) {
+		Member m = memberDao.selectOneMember(member.getMemberId());
+		if(m!=null && bCryptPasswordEncoder.matches(member.getMemberPw(), m.getMemberPw())) {
+			return 1;
+	}
+		return 0;
+	}
+
 
 	
 }

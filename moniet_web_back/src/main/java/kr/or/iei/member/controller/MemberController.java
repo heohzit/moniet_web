@@ -63,4 +63,10 @@ public class MemberController {
 		return result;
 		
 	}
+	//비밀번호 확인
+	@PostMapping(value="pwCheck")
+	public int pwCheck(@RequestBody Member member, @RequestAttribute String memberId) {
+		member.setMemberId(memberId);
+		return memberService.pwCheck(member);
+	}
 }

@@ -13,11 +13,36 @@ const MemberMain = (props) => {
   const [checkPhoneMsg, setCheckPhoneMsg] = useState("");
   const [checkEmailMsg, setCheckEmailMsg] = useState("");
   const [currPw,setCurrPw]=useState("");
+  const [isPwauth,setIsPwauth]=useState("");
   const navigate = useNavigate();
 
   //비밀번호 확인
   const pwCheck=()=>{
-  }
+    axios
+    .post(
+      "/member/pwCheck",
+      {memberPw : currPw},
+      {
+        headers : {
+        Authorization: "Bearer " + token,
+      },
+    }
+  )
+  .then((res)=>{
+    if(res.data==1){
+      setIsPwauth(true);
+    } else {
+      alert("비밀번호가 일치 하지 않습니다.")
+    }
+    console.log(res.data);
+  })
+  .catch((res) => {
+    if (res.response.status === 403) {
+      window.localStorage.removeItem("token");
+      setIsLogin(false);
+    }
+  });
+  };
   //회원정보 update
   const setMemberPhone = (data) => {
     member.memberPhone = data;
