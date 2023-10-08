@@ -60,7 +60,13 @@ const AgreeBox = () => {
 
   return (
     <div className="agree-box-wrap">
-      <div className="agree-box-title">이용약관 확인 및 동의</div>
+      <div className="agree-box-title">
+        환영합니다!
+        <br />
+        머니어트에 가입하시려면
+        <br />
+        약관에 동의해 주세요.
+        </div>
       <div className="agree-box-content">
         <form method="post" action="">
           <div>

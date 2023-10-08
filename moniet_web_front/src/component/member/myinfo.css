@@ -1,7 +1,7 @@
 .pw-wrap{
     overflow: hidden;
 }
-#memberPw{
+.pw-wrap input{
     float: left;
     width: 60%;
     margin-right: 10px;

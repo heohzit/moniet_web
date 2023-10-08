@@ -6,7 +6,8 @@
   font-size: 24px;
   font-family: ns-b;
   padding: 30px 0px;
-  color: #323673;
+  color: #151426;
+  border-bottom: 1px solid #ccc;
 }
 .next-button {
   width: 100%;
