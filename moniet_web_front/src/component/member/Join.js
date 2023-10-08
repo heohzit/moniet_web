@@ -159,7 +159,6 @@ const Join = () => {
         checkMsg={checkEmailMsg}
         blurEvent={emailCheck}
       />
-      <AgreeBox />
       <div className="join-button">
         <button type="button" onClick={join}>
           회원가입

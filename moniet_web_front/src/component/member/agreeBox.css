@@ -1,5 +1,8 @@
+*{
+  font-size: 18px;
+}
 .agree-box-wrap {
-  width: 500px;
+  width: 550px;
   margin: 0 auto;
 }
 .agree-box-title {
@@ -8,6 +11,7 @@
   padding: 30px 0px;
   color: #151426;
   border-bottom: 1px solid #ccc;
+  margin-bottom: 40px;
 }
 .next-button {
   width: 100%;
@@ -17,14 +21,37 @@
   border: none;
   outline: none;
   color: #ccc;
-  background-color: #f0f1f2;
-  font-size: 14px;
-  margin: 30px 0px;
+  background-color: #151426;
+  font-size: 16px;
+  margin: 45px 0px;
+  height: 50px;
+  font-family: ns-b;
 }
 .next-button:disabled {
-  background-color: #323673;
+  background-color:#f0f1f2;
   color: #fff;
+  font-family: ns-b;
+  font-size: 16px;
 }
 input[type="checkbox"] {
   margin-right: 8px;
+  accent-color: #151426;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+}
+.check{
+  padding: 10px 0px;
+}
+.popUpBtn{
+  color: #6e6e6e;
+  text-decoration: underline;
+  cursor: pointer;
+  border: none;
+  background-color: #fff; 
+  position: absolute;
+  right: 0;
+}
+.check{
+  position: relative;
 }
