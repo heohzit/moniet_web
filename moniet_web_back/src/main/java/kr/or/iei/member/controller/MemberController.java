@@ -1,5 +1,7 @@
 package kr.or.iei.member.controller;
 
+import java.io.File;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+
 
 import kr.or.iei.FileUtil;
 import kr.or.iei.member.model.service.MemberService;
@@ -52,10 +55,11 @@ public class MemberController {
 			String filepath = fileUtil.getFilepath(savepath, filename, thumbnail);
 			m.setImgFile(filepath);
 		}
-		
 		System.out.println(m);
 		System.out.println(thumbnail.getOriginalFilename());
-		return 0;
+		
+		int result = memberService.insertMember(m);
+		return result;
 	}
 	
 	//login

@@ -10,10 +10,8 @@ import kr.or.iei.member.model.vo.Member;
 public interface MemberDao {
 
 	Member selectOneMember(String memberId);
-	
-	/*
-	int insertMember(Member member);
-	*/
+
+	int insertMember(Member m);
 
 	int deleteMember(String memberId);
 

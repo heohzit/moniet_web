@@ -103,6 +103,7 @@ const Join = () => {
       const form = new FormData();
       form.append("thumbnail",thumbnail);
       form.append("memberId",memberId);
+      form.append("memberPw",memberPw);
       form.append("memberName",memberName);
       form.append("memberPhone",memberPhone);
       form.append("memberEmail",memberEmail);
