@@ -25,7 +25,9 @@ const ChallengeView = (props) => {
   }, []);
   const goalAmount = [[challenge.challengeAmount]]; // 목표 금액
   const currentAmount = 50000; // 현재 금액
-  const progress = (currentAmount / goalAmount) * 100; // 진행률 계산
+  const progress = Math.floor((currentAmount / goalAmount) * 100); // 진행률 계산
+
+  console.log(progress);
 
   //챌린지 삭제
   const deleteChallenge = () => {

@@ -60,13 +60,18 @@
 }
 .challenge-list-wrap1 {
   float: left;
-  height: 100px;
+  height: auto;
   margin: 80px;
+  position: relative;
 }
 
 .challenge-list-wrap2 {
   display: inline-block;
-  height: 100px;
+  height: auto;
   margin-left: 10px;
   margin: 80px;
+  position: relative;
+}
+.challenge-more {
+  position: relative;
 }
