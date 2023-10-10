@@ -17,18 +17,27 @@ const Join = () => {
   const [checkNameMsg, setCheckNameMsg] = useState("");
   const [checkPhoneMsg, setCheckPhoneMsg] = useState("");
   const [checkEmailMsg, setCheckEmailMsg] = useState("");
-  const [imgFile, setImgFile] = useState("");
-  const imgRef = useRef();
+  const [thumbnail, setThumbnail] = useState("");
+  const [memberImg, setMemberImg] = useState(null);
   const navigate = useNavigate();
 
+
+
   //이미지 업로드 input onChange
-  const saveImgFile = () => {
-    const file = imgRef.current.files[0];
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onloadend = () => {
-      setImgFile(reader.result);
-    };
+  const thumbnailChange = (e) => {
+    const files = e.currentTarget.files;
+    if (files.length !== 0 && files[0] != 0) {
+      setThumbnail(files[0]);
+
+      const reader = new FileReader();
+      reader.readAsDataURL(files[0]);
+      reader.onloadend = () => {
+        setMemberImg(reader.result);
+      };
+    } else {
+      setThumbnail({});
+      setMemberImg(null);
+    }
   };
 
   const idCheck = () => {
@@ -91,15 +100,19 @@ const Join = () => {
       checkPhoneMsg === "" &&
       checkEmailMsg === ""
     ) {
-      const member = {
-        memberId,
-        memberPw,
-        memberName,
-        memberPhone,
-        memberEmail,
-      };
+      const form = new FormData();
+      form.append("thumbnail",thumbnail);
+      form.append("memberId",memberId);
+      form.append("memberName",memberName);
+      form.append("memberPhone",memberPhone);
+      form.append("memberEmail",memberEmail);
       axios
-        .post("/member/join", member)
+        .post("/member/join",form, {
+          headers : {
+            contentType: "multipart/form-data",
+            processdData: false, //문자열 말고 file type도 있는걸 알려줌
+          }
+        })
         .then((res) => {
           if (res.data === 1) {
             Swal.fire(
@@ -123,7 +136,7 @@ const Join = () => {
     <div className="join-wrap">
       <div className="join-title">MEMBERSHIP</div>
       <div className="join-img-wrap">
-        <img src={imgFile ? imgFile : "/image/piggy.jpg"} />
+      {memberImg === null ? <img src="/image/piggy.jpg"/> : <img src={memberImg} />}
       </div>
       <div className="join-profile-wrap">
         <label htmlFor="profileImg" className="signup-profileImg-label">
@@ -134,8 +147,7 @@ const Join = () => {
           type="file"
           accept="image/jpg,impge/png,image/jpeg"
           id="profileImg"
-          onChange={saveImgFile}
-          ref={imgRef}
+          onChange={thumbnailChange}
         />
       </div>
       <JoinInputWrap

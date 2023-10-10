@@ -1,14 +1,18 @@
 package kr.or.iei.member.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
+import kr.or.iei.FileUtil;
 import kr.or.iei.member.model.service.MemberService;
 import kr.or.iei.member.model.vo.Member;
 
@@ -17,6 +21,13 @@ import kr.or.iei.member.model.vo.Member;
 public class MemberController {
 	@Autowired
 	private MemberService memberService;
+	
+	@Autowired
+	private FileUtil fileUtil;
+	
+	@Value("${file.root}")
+	private String root;
+	
 	
 	//id 중복체크
 	@GetMapping(value="/checkId")
@@ -31,10 +42,20 @@ public class MemberController {
 
 	//회원가입
 	//service 호출 시 메소드 이름이 Member로 끝나면서 매개변수가 Member 타입이면 비밀번호 암호화 수행
+	//파일 타입을 받을땐  @ModelAttribute
 	@PostMapping(value="/join")
-	public int join(@RequestBody Member member) {
-		int result = memberService.insertMember(member);
-		return result;
+	public int join(@ModelAttribute Member m, @ModelAttribute MultipartFile thumbnail) {
+		String savepath = root+"member/";
+		
+		if(thumbnail != null) {
+			String filename = thumbnail.getOriginalFilename();
+			String filepath = fileUtil.getFilepath(savepath, filename, thumbnail);
+			m.setImgFile(filepath);
+		}
+		
+		System.out.println(m);
+		System.out.println(thumbnail.getOriginalFilename());
+		return 0;
 	}
 	
 	//login

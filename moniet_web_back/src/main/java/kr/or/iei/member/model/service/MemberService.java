@@ -31,10 +31,12 @@ public class MemberService {
 		return memberDao.selectOneMember(memberId);
 	}
 	
+	/*
 	@Transactional
 	public int insertMember(Member member) {
 		return memberDao.insertMember(member) ;
 	}
+	*/
 
 	public String login(Member member) {
 		Member m = memberDao.selectOneMember(member.getMemberId());
