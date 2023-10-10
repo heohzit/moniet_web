@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Button3 } from "../util/Buttons";
 
 //진행중인 챌린지
-const loadCount = 4;
+const loadCount = 2;
 const IngChallenge = () => {
   const [challengeList, setChallengeList] = useState([]);
 
@@ -12,8 +12,13 @@ const IngChallenge = () => {
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
+    const token = window.localStorage.getItem("token");
     axios
-      .get("/challenge/challengeList1")
+      .post("/challenge/challengeList1", null, {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      })
       .then((res) => {
         console.log(res.data);
         setChallengeList(res.data.challengeList);

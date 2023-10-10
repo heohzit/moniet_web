@@ -17,16 +17,16 @@ public class ChallengeService {
 	private ChallengeDao challengeDao;
 	
 	//챌린지 목록
-	public Map challengeList1() {
-		List challengeList = challengeDao.challengeList1();
+	public Map challengeList1(String memberId) {
+		List challengeList = challengeDao.challengeList1(memberId);
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("challengeList", challengeList);
 		return map;
 	}
 	
 	//챌린지 목록(종료)
-	public Map challengeList2() {
-		List challengeList = challengeDao.challengeList2();
+	public Map challengeList2(String memberId) {
+		List challengeList = challengeDao.challengeList2(memberId);
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("challengeList", challengeList);
 		return map;
