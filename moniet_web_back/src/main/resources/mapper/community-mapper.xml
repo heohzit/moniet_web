@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="kr.or.iei.community.model.dao.CommunityDao">
 
+	<!-- 
 	<select id="communityList" resultType="community">
 		
 	SELECT * FROM
@@ -24,6 +25,50 @@
 	WHERE RNUM BETWEEN 1 AND 100
 
 	</select>
+	 -->
+	 
+	<select id="communityList" resultMap="getCommunityList">
+		SELECT * FROM
+		    (SELECT ROWNUM AS RNUM, C.* FROM
+		    (SELECT
+		        COMMUNITY_NO,
+		        COMMUNITY_TITLE,
+		        COMMUNITY_SUBTITLE,
+		        COMMUNITY_WRITER,
+		        MEMBER_ID,
+		        MEMBER_EMAIL,
+		        COMMUNITY_CONTENT,
+		        TO_CHAR(COMMUNITY_DATE, 'YYYY-MM-DD') AS COMMUNITY_DATE,
+		        COMMUNITY_THUMB,
+		        COMMUNITY_STATUS,
+		        COMMUNITY_PARTI
+		    FROM COMMUNITY
+		    JOIN MEMBER ON (COMMUNITY_WRITER = MEMBER_NO)
+		    WHERE COMMUNITY_STATUS = 1
+		    ORDER BY 1 DESC)C)
+		WHERE RNUM BETWEEN 1 AND 100
+	</select>
+	
+	<resultMap type="community" id="getCommunityList">
+		<result column="community_no" property="communityNo" />
+		<result column="community_title" property="communityTitle" />
+		<result column="community_subtitle" property="communitySubTitle" />
+		<result column="community_writer" property="communityWriter" />
+		<result column="member_id" property="memberId" />
+		<result column="member_email" property="memberEmail" />
+		<result column="community_content" property="communityContent" />
+		<result column="community_date" property="communityDate" />
+		<result column="community_thumb" property="communityThumb" />
+		<result column="community_status" property="communityStatus" />
+		<result column="community_parti" property="communityParti" />
+		<collection 
+			property="typeList"
+			select="selectOneCommunityType"
+			column="community_no"
+			javaType="java.util.List"
+			ofType="communityType"
+		/>
+	</resultMap>
 
 	<insert id="insertCommunity">
 		insert into community values(community_seq.nextval, #{communityTitle}, #{communitySubTitle}, (select member_no from member where member_id=#{memberId}), #{communityContent}, sysdate, #{communityThumb}, 1, 0)
@@ -44,6 +89,7 @@
 		    COMMUNITY_SUBTITLE,
 		    COMMUNITY_WRITER,
 		    MEMBER_ID,
+		    MEMBER_EMAIL,
 		    COMMUNITY_CONTENT,
 		    TO_CHAR(COMMUNITY_DATE, 'YYYY-MM-DD HH:MI') AS COMMUNITY_DATE,
 		    COMMUNITY_THUMB,
@@ -67,6 +113,7 @@
 		<result column="community_subtitle" property="communitySubTitle" />
 		<result column="community_writer" property="communityWriter" />
 		<result column="member_id" property="memberId" />
+		<result column="member_email" property="memberEmail" />
 		<result column="community_content" property="communityContent" />
 		<result column="community_date" property="communityDate" />
 		<result column="community_thumb" property="communityThumb" />
