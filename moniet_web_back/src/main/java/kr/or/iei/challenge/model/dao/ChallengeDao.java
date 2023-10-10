@@ -16,7 +16,7 @@ public interface ChallengeDao {
 	List challengeList2(String memberId);		
 	
 	//챌린지 상세보기
-	Challenge selectOneChallenge(int challengeNo);
+	Challenge selectOneChallenge(int challengeNo,String memberId);
 
 	//챌린지 만들기
 	int insertChallenge(Challenge c);
@@ -29,5 +29,8 @@ public interface ChallengeDao {
 	
 	//챌린지 기간 종료
 	void challengeFinish();
+
+	//챌린지 레벨 조회
+	Challenge challengeLevel(String memberId);
 	
 }

@@ -98,7 +98,6 @@ const ChallengeItem = (props) => {
           {challenge.challengeKind === 1 ? <div>저축</div> : <div>지출</div>}
         </div>
         <div>{challenge.challengeTitle}</div>
-        <div>{challenge.challengeAmount.toLocaleString()}원</div>
       </div>
     </div>
   );

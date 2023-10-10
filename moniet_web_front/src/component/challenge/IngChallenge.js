@@ -51,6 +51,8 @@ const IngChallenge = () => {
   };
   return (
     <div className="challenge-content">
+      <p>현재 나의 챌린지 레벨은</p>
+      <ChallengeLevel></ChallengeLevel>
       <div className="challenge-list-wrap1">
         {showChallenge.map((challenge, index) => {
           if (challenge.challengeKind === 1) {
@@ -98,7 +100,6 @@ const ChallengeItem = (props) => {
           {challenge.challengeKind === 1 ? <div>저축</div> : <div>지출</div>}
         </div>
         <div>{challenge.challengeTitle}</div>
-        <div>{challenge.challengeAmount.toLocaleString()}원</div>
         <Dayday challenge={challenge}></Dayday>
       </div>
     </div>
@@ -128,9 +129,25 @@ const Dayday = (props) => {
   }, []);
   return (
     <div className="challenge-content">
-      <p>{dday.days}일 남았다</p>
+      <p>종료일까지 {dday.days}일 남았습니다.</p>
     </div>
   );
 };
 
+//챌린지 레벨 조회
+const ChallengeLevel = () => {
+  const token = window.localStorage.getItem("token");
+  axios
+    .post("/challenge/challengeLevel", null, {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    })
+    .then((res) => {
+      console.log(res.data);
+    })
+    .catch((res) => {
+      console.log(res.response.status);
+    });
+};
 export default IngChallenge;
