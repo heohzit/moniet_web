@@ -6,7 +6,7 @@
   text-align: center;
   font-size: 24px;
   font-family: ns-m;
-  padding: 20px 0;
+  padding: 30px 0;
 }
 .mypage-side > ul {
   list-style-type: none;
@@ -33,14 +33,17 @@
   border-top: 2px solid #010440;
   border-bottom: 2px solid #010440;
   padding: 10px;
+  margin: 20px 0px;
 }
 .my-info-tbl > tbody > tr > td:first-child {
+  padding-right: 10px;
   width: 30%;
   font-family: ns-b;
 }
 .my-info-tbl > tbody > tr > td {
   padding: 18px;
 }
+
 .update-input {
   width: 80%;
 }
@@ -64,15 +67,6 @@
   color: #fff;
 }
 /*테이블*/
-.my-info-tbl th {
-  height: 40px;
-  font-family: ns-l;
-  width: 40%;
-  text-align: left;
-  padding-left: 40px;
-  margin: 10px 0px;
-}
-
 .pw-check-zone-title {
   font-size: 18px;
   font-family: ns-r;
@@ -116,4 +110,13 @@
   line-height: 42px;
   width: 95px;
   font-size: 15px;
+  cursor: pointer;
+}
+.new-pw-del-btn {
+  background-color: #151426;
+  color: #fff;
+}
+
+.display {
+  display: none;
 }
