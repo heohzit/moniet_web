@@ -34,7 +34,7 @@
   border-bottom: 2px solid #010440;
   padding: 10px;
 }
-.my-info-tbl>tbody>tr>td:first-child{
+.my-info-tbl > tbody > tr > td:first-child {
   width: 30%;
   font-family: ns-b;
 }
@@ -59,7 +59,7 @@
   font-family: ns-r;
   cursor: pointer;
 }
-#deleteBtn{
+#deleteBtn {
   background-color: #151426;
   color: #fff;
 }
@@ -78,23 +78,42 @@
   font-family: ns-r;
   padding: 20px 0px;
 }
-.pw-check-zone-content{
+.pw-check-zone-content {
   border: 3px solid #f8f8f8;
   padding: 50px;
 }
-.pw-check-zone-content >div {
+.pw-check-zone-content > div {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
   padding: 10px 0;
-  
 }
-.pw-check-zone-content>div>input{
+.pw-check-zone-content > div > input {
   width: 50%;
   margin-right: 3px;
 }
-.pw-check-zone-content>div>button{
+.pw-check-zone-content > div > button {
   width: 10%;
-  height: 42px;
+  height: 43px;
+  line-height: 43px;
+  padding: 0px;
+  font-size: 16px;
 }
 
+.new-pw-check-wrap > * {
+  float: left;
+  overflow: hidden;
+}
+.new-pw-check-wrap > input {
+  width: 48%;
+  margin-right: 10px;
+}
+.new-pw-check-wrap > button {
+  margin-right: 10px;
+  border: none;
+  border-radius: 5px;
+  height: 42px;
+  line-height: 42px;
+  width: 95px;
+  font-size: 15px;
+}
