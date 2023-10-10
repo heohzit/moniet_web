@@ -4,41 +4,46 @@ import { useNavigate } from "react-router-dom";
 import { Button3 } from "../util/Buttons";
 
 //종료된 챌린지
-const loadCount = 3;
+const loadCount = 2;
 const EndChallenge = () => {
   const [challengeList, setChallengeList] = useState([]);
 
-  const [showChallenges, setShowChallenges] = useState([]);
+  const [showChallenge, setShowChallenge] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
+    const token = window.localStorage.getItem("token");
     axios
-      .get("/challenge/challengeList2")
+      .post("/challenge/challengeList2", null, {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      })
       .then((res) => {
         console.log(res.data);
         setChallengeList(res.data.challengeList);
 
         const allChallenge = res.data.challengeList;
         const oneChallenge = allChallenge.slice(0, loadCount);
-        setShowChallenges(oneChallenge);
+        setShowChallenge(oneChallenge);
       })
       .catch((res) => {
         console.log(res.response.status);
       });
   }, []);
   //더보기 버튼
-  const handleLoadMore = () => {
+  const moreChallengeBtn = () => {
     const nextPage = currentPage + 1;
     const endIndex = nextPage * loadCount;
-    const nextChallenges = challengeList.slice(0, endIndex);
-    setShowChallenges(nextChallenges);
+    const nextChallenge = challengeList.slice(0, endIndex);
+    setShowChallenge(nextChallenge);
     setCurrentPage(nextPage);
   };
   return (
     <div className="challenge-content">
       <div className="challenge-detail">종료된 머니챌린지 리스트</div>
       <div className="challenge-list-wrap1">
-        {showChallenges.map((challenge, index) => {
+        {showChallenge.map((challenge, index) => {
           if (challenge.challengeKind === 1) {
             return (
               <ChallengeItem key={"challenge" + index} challenge={challenge} />
@@ -47,7 +52,7 @@ const EndChallenge = () => {
         })}
       </div>
       <div className="challenge-list-wrap2">
-        {showChallenges.map((challenge, index) => {
+        {showChallenge.map((challenge, index) => {
           if (challenge.challengeKind === 2) {
             return (
               <ChallengeItem key={"challenge" + index} challenge={challenge} />
@@ -56,7 +61,7 @@ const EndChallenge = () => {
         })}
       </div>
       <div className="challenge-more">
-        <Button3 text="더보기" clickEvent={handleLoadMore} />
+        <Button3 text="더보기" clickEvent={moreChallengeBtn} />
       </div>
     </div>
   );

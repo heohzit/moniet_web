@@ -21,4 +21,6 @@ public class Challenge {
 	private String challengeEnd;
 	private int challengeState;
 	private int challengeResult;
+	
+	private String memberId;
 }

@@ -15,7 +15,15 @@ const ChallengeMain = (props) => {
       <Routes>
         <Route path="view" element={<ChallengeView></ChallengeView>}></Route>
         <Route path="write" element={<ChallengeWrite></ChallengeWrite>}></Route>
-        <Route path="*" element={<ChallengeList></ChallengeList>}></Route>
+        <Route
+          path="*"
+          element={
+            <ChallengeList
+              isLogin={isLogin}
+              setIsLogin={setIsLogin}
+            ></ChallengeList>
+          }
+        ></Route>
       </Routes>
     </div>
   );
