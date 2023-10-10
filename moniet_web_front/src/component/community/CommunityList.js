@@ -91,16 +91,16 @@ const CommunityItem = (props) => {
           )}
         </div>
         <div className="community-item-info">
+          <div className="community-item-title">{community.communityTitle}</div>
+          <div className="community-item-subtitle">
+            {community.communitySubTitle}
+          </div>
           <div className="community-item-types">
             {community.typeList
               ? community.typeList.map((types, index) => {
                   return <TypesItem key={"types" + index} types={types} />;
                 })
               : ""}
-          </div>
-          <div className="community-item-title">{community.communityTitle}</div>
-          <div className="community-item-subtitle">
-            {community.communitySubTitle}
           </div>
           <div className="community-item-writer">
             <span>작성자 </span>
