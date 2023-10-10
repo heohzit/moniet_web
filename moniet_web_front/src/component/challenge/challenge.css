@@ -75,3 +75,11 @@
 .challenge-more {
   position: relative;
 }
+.challenge-view-content {
+  width: 700px;
+  height: 500px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  border-radius: 30px;
+}

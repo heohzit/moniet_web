@@ -2,7 +2,7 @@ import Header from "./component/common/Header";
 import Footer from "./component/common/Footer";
 import { Link, Route, Routes } from "react-router-dom";
 import Main from "./component/common/Main";
-import Dashboard from "./component/dashboard/Dashboard";
+import DashboardMain from "./component/dashboard/DashboardMain";
 import ChallengeMain from "./component/challenge/ChallengeMain";
 import Cashbook from "./component/cashbook/Cashbook";
 import CommunityMain from "./component/community/CommunityMain";
@@ -32,7 +32,10 @@ function App() {
       <div className="App-content">
         <Routes>
           <Route path="/" element={<Main></Main>}></Route>
-          <Route path="/dashboard" element={<Dashboard></Dashboard>}></Route>
+          <Route
+            path="/dashboard/*"
+            element={<DashboardMain></DashboardMain>}
+          ></Route>
           <Route
             path="/challenge/*"
             element={<ChallengeMain />}
@@ -55,7 +58,8 @@ function App() {
           <Route path="/joinfrm" element={<Join />} />
           <Route path="/login" element={<Login setIsLogin={setIsLogin} />} />
           <Route
-          path="/member/myinfo" element={<Myinfo isLogin={isLogin} setIsLogin={setIsLogin}/>}
+            path="/member/myinfo"
+            element={<Myinfo isLogin={isLogin} setIsLogin={setIsLogin} />}
           />
           <Route
             path="/member/*"
