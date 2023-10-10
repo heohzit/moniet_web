@@ -10,11 +10,15 @@ const ChallengeView = (props) => {
   const location = useLocation();
   const challengeNo = location.state.challengeNo;
   const [challenge, setChallenge] = useState([]);
-  const [member, setMember] = useState(null);
   const navigate = useNavigate();
   useEffect(() => {
+    const token = window.localStorage.getItem("token");
     axios
-      .get("/challenge/view/" + challengeNo)
+      .post("/challenge/view/" + challengeNo, null, {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      })
       .then((res) => {
         console.log(res.data);
         setChallenge(res.data);
@@ -24,10 +28,8 @@ const ChallengeView = (props) => {
       });
   }, []);
   const goalAmount = [[challenge.challengeAmount]]; // 목표 금액
-  const currentAmount = 50000; // 현재 금액
-  const progress = Math.floor((currentAmount / goalAmount) * 100); // 진행률 계산
-
-  console.log(progress);
+  const currentAmount = [[challenge.total]]; // 현재 금액// 진행률 계산
+  const progress = Math.floor((currentAmount / goalAmount) * 100);
 
   //챌린지 삭제
   const deleteChallenge = () => {
@@ -83,7 +85,6 @@ const ChallengeView = (props) => {
   //달력 날짜 지정
   const today = new Date();
   const dateString = today.toISOString().substring(0, 10);
-
   return (
     <div className="challenge-view-content">
       <div className="challenge-detail">
@@ -124,5 +125,4 @@ const ChallengeView = (props) => {
     </div>
   );
 };
-
 export default ChallengeView;

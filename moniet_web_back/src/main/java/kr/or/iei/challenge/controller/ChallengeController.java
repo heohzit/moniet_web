@@ -26,7 +26,6 @@ public class ChallengeController {
 	@PostMapping(value="/challengeList1")
 	public Map challengeList1 (@RequestAttribute String memberId) {
 		Map map =challengeService.challengeList1(memberId);
-		System.out.println(map);
 		return map;
 	}
 	
@@ -38,9 +37,9 @@ public class ChallengeController {
 	}
 	
 	//챌린지 상세보기
-	@GetMapping(value="/view/{challengeNo}")
-	public Challenge view(@PathVariable int challengeNo) {
-		return challengeService.selectOneChallenge(challengeNo);
+	@PostMapping(value="/view/{challengeNo}")
+	public Challenge view(@PathVariable int challengeNo,@RequestAttribute String memberId) {
+		return challengeService.selectOneChallenge(challengeNo,memberId);
 	}
 	
 	//챌린지 만들기
@@ -62,6 +61,12 @@ public class ChallengeController {
 	@PostMapping (value="/changeChallenge")
 	public int changeChallenge (@RequestBody Challenge c) {
 		return challengeService.changeChallenge(c);
+	}
+	
+	//챌린지 레벨 조회
+	@PostMapping (value="/challengeLevel")
+	public Challenge challengeLevel(@RequestAttribute String memberId) {
+		return challengeService.challengeLevel(memberId);
 	}
 	
 }

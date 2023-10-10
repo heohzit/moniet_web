@@ -33,8 +33,8 @@ public class ChallengeService {
 	}
 	
 	//챌린지 상세보기
-	public Challenge selectOneChallenge(int challengeNo) {
-		Challenge c = challengeDao.selectOneChallenge(challengeNo);
+	public Challenge selectOneChallenge(int challengeNo,String memberId) {
+		Challenge c = challengeDao.selectOneChallenge(challengeNo,memberId);
 		return c;
 	}
 	
@@ -63,5 +63,12 @@ public class ChallengeService {
 	public void challengeFinish() {
 		// TODO Auto-generated method stub
 		challengeDao.challengeFinish();
+	}
+	
+	//챌린지 레벨 조회
+	public Challenge challengeLevel(String memberId) {
+		Challenge c = challengeDao.challengeLevel(memberId);
+		System.out.println(c);
+		return c;
 	}
 }
