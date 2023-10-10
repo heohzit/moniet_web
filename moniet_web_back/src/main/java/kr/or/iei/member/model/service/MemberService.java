@@ -64,6 +64,12 @@ public class MemberService {
 		return 0;
 	}
 
+	@Transactional
+	public int updatePw(Member member) {
+		return memberDao.updatePw(member);
+	}
+
+	
 
 	
 }

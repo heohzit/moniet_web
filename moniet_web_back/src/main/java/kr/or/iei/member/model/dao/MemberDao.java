@@ -2,6 +2,7 @@ package kr.or.iei.member.model.dao;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import kr.or.iei.member.model.service.MemberService;
 import kr.or.iei.member.model.vo.Member;
 
 
@@ -15,5 +16,9 @@ public interface MemberDao {
 	int deleteMember(String memberId);
 
 	int updateMemberInfo(Member member);
+
+	int updatePw(Member member);
+
+	
 
 }
