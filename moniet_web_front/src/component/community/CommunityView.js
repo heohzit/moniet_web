@@ -90,6 +90,20 @@ const CommunityView = (props) => {
         className="community-view-content ql-editor"
         dangerouslySetInnerHTML={{ __html: community.communityContent }}
       ></div>
+
+      <div className="community-view-bottom-btns">
+        <div className="community-view-update">
+          <span className="community-view-update-btn">수정</span>
+        </div>
+
+        <div className="community-view-delete">
+          <span className="community-view-delete-btn">삭제</span>
+        </div>
+      </div>
+
+      <div className="community-view-board-zone">
+        <div className="community-view-board">게시글</div>
+      </div>
     </div>
   );
 };

@@ -62,7 +62,7 @@ const CommunityFrm = (props) => {
       communityTitle !== "" &&
       communitySubTitle !== "" &&
       communityContent !== "" &&
-      communityType !== ""
+      communityType.length !== 0
     ) {
       const form = new FormData();
       form.append("communityTitle", communityTitle);
@@ -83,14 +83,14 @@ const CommunityFrm = (props) => {
         })
         .then((res) => {
           // console.log(res.data);
-          Swal.fire("작성이 완료되었습니다.");
+          Swal.fire("작성 완료", "커뮤니티 작성이 완료되었습니다.", "success");
           navigate("community");
         })
         .catch((res) => {
           console.log(res.response.status);
         });
     } else {
-      Swal.fire("입력값을 확인해주세요.");
+      Swal.fire("작성 실패", "입력값을 확인해주세요.", "warning");
     }
   };
 

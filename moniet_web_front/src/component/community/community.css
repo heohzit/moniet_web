@@ -215,6 +215,10 @@
   padding: 10px;
 }
 
+.checkboxLabel > span {
+  padding: 7px;
+}
+
 .community-content-box {
   margin: 20px 0px;
 }
@@ -247,7 +251,7 @@
 }
 
 .community-item-img > img {
-  object-fit: cover;
+  object-fit: contain;
   width: 100%;
   height: 100%;
 }
@@ -270,7 +274,7 @@
 .community-item-subtitle {
   font-size: 18px;
   font-family: ns-b;
-  color: #404259;
+  color: #323673;
   margin-bottom: 30px;
 }
 
@@ -482,4 +486,31 @@
 
 .community-view-wrap .ql-editor {
   padding: 0;
+}
+
+.community-view-bottom-btns {
+  margin-top: 50px;
+  float: left;
+  width: 75px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.community-view-bottom-btns span {
+  font-family: ns-b;
+  color: #323673;
+}
+
+.community-view-update,
+.community-view-delete {
+  float: left;
+  cursor: pointer;
+}
+
+.community-view-board-zone {
+  width: 100%;
+  float: left;
+  margin-top: 10px;
+  padding: 20px 0;
+  border-top: 1px solid #ccc;
 }
