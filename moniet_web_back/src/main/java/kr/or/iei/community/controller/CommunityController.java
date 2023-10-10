@@ -89,4 +89,9 @@ public class CommunityController {
 //		int result = communityService.insertCommunity(c,typeArr);
 	}
 
+	@GetMapping(value="/view/{communityNo}")
+	public Community view(@PathVariable int communityNo) {
+		return communityService.selectOneCommunity(communityNo);
+	}
+	
 }

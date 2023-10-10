@@ -51,4 +51,9 @@ public class CommunityService {
 		}
 	}
 
+	public Community selectOneCommunity(int communityNo) {
+		Community c = communityDao.selectOneCommunity(communityNo);
+		return c;
+	}
+
 }

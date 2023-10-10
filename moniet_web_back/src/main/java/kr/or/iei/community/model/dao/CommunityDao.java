@@ -16,4 +16,8 @@ public interface CommunityDao {
 
 	int insertCommunityType(CommunityType type);
 
+	Community selectOneCommunity(int communityNo);
+	
+	List selectOneCommunityType(int communityNo);
+
 }

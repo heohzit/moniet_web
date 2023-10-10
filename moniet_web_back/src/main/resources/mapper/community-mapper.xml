@@ -36,5 +36,49 @@
 	<insert id="insertCommunityType">
 		insert into community_type values(COMMUNITY_TYPE_SEQ.NEXTVAL, #{communityNo}, #{communityTypeDiv})
 	</insert>
+	
+	<select id="selectOneCommunity" resultMap="getCommunity">
+		SELECT
+		    COMMUNITY_NO,
+		    COMMUNITY_TITLE,
+		    COMMUNITY_SUBTITLE,
+		    COMMUNITY_WRITER,
+		    MEMBER_ID,
+		    COMMUNITY_CONTENT,
+		    TO_CHAR(COMMUNITY_DATE, 'YYYY-MM-DD HH:MI') AS COMMUNITY_DATE,
+		    COMMUNITY_THUMB,
+		    COMMUNITY_STATUS,
+		    COMMUNITY_PARTI
+		FROM
+		    COMMUNITY
+		JOIN
+		    MEMBER ON (COMMUNITY_WRITER = MEMBER_NO)
+		WHERE
+		    COMMUNITY_NO = #{communityNo}
+	</select>
+	
+	<select id="selectOneCommunityType" resultType="communityType">
+		SELECT * FROM COMMUNITY_TYPE WHERE COMMUNITY_NO = #{communityNo}
+	</select>
+	
+	<resultMap type="community" id="getCommunity">
+		<result column="community_no" property="communityNo" />
+		<result column="community_title" property="communityTitle" />
+		<result column="community_subtitle" property="communitySubTitle" />
+		<result column="community_writer" property="communityWriter" />
+		<result column="member_id" property="memberId" />
+		<result column="community_content" property="communityContent" />
+		<result column="community_date" property="communityDate" />
+		<result column="community_thumb" property="communityThumb" />
+		<result column="community_status" property="communityStatus" />
+		<result column="community_parti" property="communityParti" />
+		<collection 
+			property="typeList"
+			select="selectOneCommunityType"
+			column="community_no"
+			javaType="java.util.List"
+			ofType="communityType"	
+		/>
+	</resultMap>
 
 </mapper>

@@ -55,7 +55,8 @@ function App() {
           <Route path="/joinfrm" element={<Join />} />
           <Route path="/login" element={<Login setIsLogin={setIsLogin} />} />
           <Route
-          path="/member/myinfo" element={<Myinfo isLogin={isLogin} setIsLogin={setIsLogin}/>}
+            path="/member/myinfo"
+            element={<Myinfo isLogin={isLogin} setIsLogin={setIsLogin} />}
           />
           <Route
             path="/member/*"

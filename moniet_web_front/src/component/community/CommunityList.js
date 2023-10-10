@@ -18,7 +18,7 @@ const CommuintyList = (props) => {
     axios
       .get("/community/list/" + reqPage)
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setCommunityList(res.data);
         // setCommunityList(res.data.communityList);
       })
@@ -72,12 +72,17 @@ const CommuintyList = (props) => {
 const CommunityItem = (props) => {
   const community = props.community;
   const navigate = useNavigate();
-  const communityView = () => {};
+  const communityView = () => {
+    navigate("/community/view", {
+      state: { communityNo: community.communityNo },
+    });
+  };
 
   return (
     <div className="community-item-wrap">
-      <div className="community-item">
+      <div className="community-item" onClick={communityView}>
         <span class="material-icons ab-btn1">favorite_border</span>
+        <span class="material-icons sh-btn1">share</span>
         <div className="community-item-img">
           {community.communityThumb === null ? (
             <img src="/image/default.png" className="default-img" />

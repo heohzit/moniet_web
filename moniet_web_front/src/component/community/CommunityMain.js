@@ -11,6 +11,7 @@ const CommunityMain = (props) => {
     <div className="community-all-wrap">
       <div className="community-main-top">COMMUNITY</div>
       <Routes>
+        <Route path="view" element={<CommunityView isLogin={isLogin} />} />
         <Route path="write" element={<CommunityWrite />} />
         <Route path="view" element={<CommunityView />} />
         <Route path="*" element={<CommunityList isLogin={isLogin} />} />
