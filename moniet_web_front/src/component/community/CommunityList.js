@@ -44,7 +44,7 @@ const CommuintyList = (props) => {
             type="type"
             content="searchBox"
           />
-          <Button1 text="검색" clickEvent={""} />
+          <span class="material-icons search-btn">search</span>
         </div>
         <div className="community-write-btn">
           <Button2 text="글쓰기" clickEvent={write} />
@@ -77,22 +77,31 @@ const CommunityItem = (props) => {
   return (
     <div className="community-item-wrap">
       <div className="community-item">
+        <span class="material-icons ab-btn1">favorite_border</span>
         <div className="community-item-img">
           {community.communityThumb === null ? (
-            <img src="/image/default.png" />
+            <img src="/image/default.png" className="default-img" />
           ) : (
-            <img src={"/community" + community.communityThumb} />
+            <img src={"/community/" + community.communityThumb} />
           )}
         </div>
         <div className="community-item-info">
+          <div className="community-item-type">체크박스존</div>
           <div className="community-item-title">{community.communityTitle}</div>
           <div className="community-item-subtitle">
             {community.communitySubTitle}
           </div>
-          <div className="community-item-date">{community.communityDate}</div>
-          <div className="community-item-parti">{community.communityParti}</div>
+          <div className="community-item-date">
+            <span>작성일 </span>
+            {community.communityDate}
+          </div>
           <div className="community-item-writer">
+            <span>작성자 </span>
             {community.communityWriter}
+          </div>
+          <div className="community-item-parti">
+            <span>참여인원 </span>
+            {community.communityParti}
           </div>
         </div>
       </div>

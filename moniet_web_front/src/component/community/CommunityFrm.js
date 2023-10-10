@@ -5,6 +5,8 @@ import { Button1, Button2, Button3, Button4 } from "../util/Buttons";
 import Type from "./Type";
 import { useState } from "react";
 import axios from "axios";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const CommunityFrm = (props) => {
   const communityTitle = props.communityTitle;
@@ -32,23 +34,29 @@ const CommunityFrm = (props) => {
   //   { name: "투자하기 📈", value: 4 },
   //   { name: "기타 💸", value: 8 },
   // ];
-  const buttonEvent = () => {
+
+  const check = () => {
     const checkbox = document.querySelectorAll("[name=types]:checked");
 
-    const checkboxValue = checkbox[0].value;
-    // 1/4/10
+    // const checkbox = e.currentTarget.value;
+
     const arr = new Array();
     for (let i = 0; i < checkbox.length; i++) {
       arr.push(checkbox[i].value);
     }
     setCommunityType(arr.join("/")); // 컨트롤러에서 split으로 사용하기
+  };
+
+  const navigate = useNavigate();
+  const buttonEvent = () => {
+    const checkbox = document.querySelectorAll("[name=types]:checked");
 
     console.log(communityTitle);
     console.log(communitySubTitle);
     console.log(thumbnail);
     console.log(communityContent);
     console.log(checkbox); // 덩어리가 크니까 value값만 넘겨주기
-    console.log(communityType);
+    console.log("type : " + communityType);
 
     if (
       communityTitle !== "" &&
@@ -73,13 +81,16 @@ const CommunityFrm = (props) => {
           },
         })
         .then((res) => {
-          console.log(res.data);
+          // console.log(res.data);
+          Swal.fire("작성이 완료되었습니다.");
+          navigate("community");
         })
         .catch((res) => {
           console.log(res.response.status);
         });
     }
   };
+
   const thumbnailChange = (e) => {
     const files = e.currentTarget.files;
     if (files.length !== 0 && files[0] != 0) {
@@ -165,6 +176,7 @@ const CommunityFrm = (props) => {
                           id={item.text}
                           name="types"
                           defaultValue={item.value}
+                          onChange={check}
                         />
                         <span>{item.text}</span>
                       </label>

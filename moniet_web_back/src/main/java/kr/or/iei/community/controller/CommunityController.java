@@ -48,6 +48,8 @@ public class CommunityController {
 	
 	@PostMapping(value="/insert")
 	public int insertCommunity(@ModelAttribute Community c, @ModelAttribute MultipartFile thumbnail, String communityType, @RequestAttribute String memberId) {
+		System.out.println("최초 넘어온 커뮤니티타입 : "+communityType);
+		
 		c.setMemberId(memberId);
 		
 		String savepath = root+"community/";
@@ -58,14 +60,33 @@ public class CommunityController {
 			c.setCommunityThumb(filepath);
 		}
 		
-		ArrayList<CommunityType> typeList = new ArrayList<CommunityType>();
+		int result = communityService.insertCommunity(c, communityType);
 		
-		System.out.println(c);
-		System.out.println(thumbnail);
-		System.out.println(communityType);
-		System.out.println(memberId);
+		return result;
+//		ArrayList<CommunityType> typeList = new ArrayList<CommunityType>();
 		
-		return 1;
+//		System.out.println(c);
+//		System.out.println(thumbnail);
+//		System.out.println(communityType);
+//		System.out.println(memberId);
+		
+//		String[] arr = communityType.split("/");
+//		
+//		int[] typeArr = new int[arr.length];
+//		for (int i = 0; i < arr.length; i++) {
+//			System.out.println("스플릿 이후 : "+arr[i]);
+//			System.out.println("자료형 : "+arr.getClass().getName());
+//			typeArr[i] = Integer.parseInt(arr[i]);
+//			System.out.println("자료형 변환 이후 : "+typeArr[i]);
+//			System.out.println("자료형 : "+typeArr.getClass().getName());
+//			System.out.println(typeArr[0].getClass()); 자료형 getClass 확인하는 함수
+//		}
+//		
+//		for (int i = 0; i < typeArr.length; i++) {
+//			System.out.println(typeArr[i]);
+//		}
+		
+//		int result = communityService.insertCommunity(c,typeArr);
 	}
 
 }

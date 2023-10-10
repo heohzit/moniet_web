@@ -12,4 +12,8 @@
 	<delete id="deleteMember">
 		delete from member where member_id=#{memberId}
 	</delete>
+	
+	<update id="updateMemberInfo">
+		update member set member_phone=#{memberPhone}, member_email=#{memberEmail} where member_id=#{memberId}
+	</update>
 </mapper>

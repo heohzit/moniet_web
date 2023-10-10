@@ -10,6 +10,8 @@ import Join from "./component/member/Join";
 import Login from "./component/member/Login";
 import { useState, useEffect } from "react";
 import MemberMain from "./component/member/MemberMain";
+import Myinfo from "./component/member/Myinfo";
+import AgreeBox from "./component/member/AgreeBox";
 
 function App() {
   const [isLogin, setIsLogin] = useState(null);
@@ -49,8 +51,12 @@ function App() {
             isLogin={isLogin}
             setIsLogin={setIsLogin}
           />
-          <Route path="/join" element={<Join />} />
+          <Route path="/join" element={<AgreeBox />} />
+          <Route path="/joinfrm" element={<Join />} />
           <Route path="/login" element={<Login setIsLogin={setIsLogin} />} />
+          <Route
+          path="/member/myinfo" element={<Myinfo isLogin={isLogin} setIsLogin={setIsLogin}/>}
+          />
           <Route
             path="/member/*"
             element={<MemberMain setIsLogin={setIsLogin} isLogin={isLogin} />}

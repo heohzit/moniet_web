@@ -91,6 +91,7 @@ const Join = () => {
         .post("/member/join", member)
         .then((res) => {
           if (res.data === 1) {
+            Swal.fire("회원가입이 완료되었습니다!","로그인 페이지로 이동합니다.","success");
             navigate("/login");
           } else {
             Swal.fire("회원가입 실패");
@@ -158,7 +159,6 @@ const Join = () => {
         checkMsg={checkEmailMsg}
         blurEvent={emailCheck}
       />
-      <AgreeBox />
       <div className="join-button">
         <button type="button" onClick={join}>
           회원가입

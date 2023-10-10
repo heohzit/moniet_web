@@ -30,6 +30,10 @@
 a {
   text-decoration: none;
 }
+li {
+  list-style: none;
+}
+
 /*헤더 css*/
 .header-wrap {
   width: 1200px;
@@ -41,6 +45,7 @@ a {
 .nav-side {
   width: 300px;
 }
+
 .nav-side > ul {
   background-color: #f0f1f2;
   list-style-type: none;
@@ -70,4 +75,26 @@ footer {
   flex: 1;
   width: 1000px;
   margin: 0px auto;
+  padding-left: 100px;
+}
+
+/*member sub 메뉴 css*/
+
+.submenu {
+  height: 0;
+  overflow: hidden;
+}
+.submenu > li {
+  height: 45px;
+  box-sizing: border-box;
+}
+.submenu > li > a {
+  display: block;
+  padding: 10px;
+  font-family: ns-b;
+}
+
+.menu > li:hover .submenu {
+  height: 90px; /* li * 2 */
+  transition-duration: 1s;
 }
