@@ -61,7 +61,8 @@ const CommunityFrm = (props) => {
     if (
       communityTitle !== "" &&
       communitySubTitle !== "" &&
-      communityContent !== ""
+      communityContent !== "" &&
+      communityType !== ""
     ) {
       const form = new FormData();
       form.append("communityTitle", communityTitle);
@@ -88,6 +89,8 @@ const CommunityFrm = (props) => {
         .catch((res) => {
           console.log(res.response.status);
         });
+    } else {
+      Swal.fire("입력값을 확인해주세요.");
     }
   };
 
