@@ -65,6 +65,9 @@ const CommunityView = (props) => {
         <div className="community-view-writer">
           작성자 ｜ {community.memberId}
         </div>
+        <div className="community-view-email">
+          이메일 ｜ {community.memberEmail}
+        </div>
         <div className="community-view-date">
           작성일 ｜ {community.communityDate}
         </div>

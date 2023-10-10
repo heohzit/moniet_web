@@ -26,5 +26,6 @@ public class Community {
 	private int communityParti;
 	
 	private String memberId;
+	private String memberEmail;
 	private List typeList;
 }
