@@ -4,7 +4,7 @@ import { Button1, Button5 } from "../util/Buttons";
 import Input from "../util/InputFrm";
 import { Calendar } from "react-date-range";
 import ko from "date-fns/locale/ko";
-import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
+import Select from "../util/Select";
 
 const AddCashbook = (props) => {
   const isOpen = props.isOpen;
@@ -49,6 +49,9 @@ const AddCashbook = (props) => {
     toggle();
   };
   const [cashbookDate, setCashbookDate] = useState(new Date());
+  const changeLoop = (e) => {
+    setCashbookLoop(e.currentTarget.value);
+  };
   return (
     <div
       className="modal"
@@ -91,6 +94,10 @@ const AddCashbook = (props) => {
               />
             </div>
             <label htmlFor="add-loop">반복/할부</label>
+            <Select value={cashbookLoop} onChange={changeLoop}>
+              <option value={0}>없음</option>
+              <option value={1}></option>
+            </Select>
             <Input
               data={cashbookLoop}
               setData={setCashbookLoop}
