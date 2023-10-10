@@ -17,7 +17,7 @@ public interface MemberDao {
 
 	int updateMemberInfo(Member member);
 
-	int updatePw(Member member);
+	int updatePwMember(Member member);
 
 	
 

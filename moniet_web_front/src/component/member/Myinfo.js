@@ -10,22 +10,42 @@ const Myinfo = (props) => {
   const setIsLogin = props.setIsLogin;
   const token = window.localStorage.getItem("token");
   const [member, setMember] = useState({});
-  const [newMemberPw, setNewMemberPw] = useState();
+  const [memberPw, setMemberPw] = useState();
   const [newMemberPwRe, setNewMemberPwRe] = useState();
   const [checkPhoneMsg, setCheckPhoneMsg] = useState("");
   const [checkEmailMsg, setCheckEmailMsg] = useState("");
   const navigate = useNavigate();
 
-  const pwUpdate = () => {};
+  const pwUpdate = () => {
+    const pwTr2 = document.querySelector(".pw-tr2");
+    pwTr2.classList.remove("display");
+
+    const pwTr3 = document.querySelector(".pw-tr3");
+    pwTr3.classList.remove("display");
+
+    const curr = document.querySelector(".curr-pw-zone");
+    curr.classList.add("display");
+  };
+
+  const backPw = () => {
+    const pwTr2 = document.querySelector(".pw-tr2");
+    pwTr2.classList.add("display");
+
+    const pwTr3 = document.querySelector(".pw-tr3");
+    pwTr3.classList.add("display");
+
+    const curr = document.querySelector(".curr-pw-zone");
+    curr.classList.remove("display");
+  };
 
   //비밀번호 update
   const newPwUpdate = () => {
     const token = window.localStorage.getItem("token");
-    if (newMemberPw !== "" && newMemberPw == newMemberPwRe) {
+    if (memberPw !== "" && memberPw == newMemberPwRe) {
       axios
         .post(
           "/member/updatePw",
-          { memberPw: newMemberPw },
+          { memberPw },
           {
             headers: {
               Authorization: "Bearer " + token,
@@ -34,8 +54,6 @@ const Myinfo = (props) => {
         )
         .then((res) => {
           if (res.data == 1) {
-            setNewMemberPw("");
-            setNewMemberPwRe("");
             alert("비밀번호가 변경되었습니다.");
           } else {
             alert("비밀번호 변경 중 오류가 발생했습니다.");
@@ -163,9 +181,9 @@ const Myinfo = (props) => {
               <td>이름</td>
               <td>{member.memberName}</td>
             </tr>
-            <tr>
+            <tr className="curr-pw-zone">
               <td>비밀번호</td>
-              <td id="member-phone">
+              <td id="member-Pw">
                 <div className="pw-wrap">
                   <UpdateInputWrap
                     data="********"
@@ -179,20 +197,20 @@ const Myinfo = (props) => {
                 </div>
               </td>
             </tr>
-            <tr>
+            <tr className="pw-tr2 display">
               <td>새 비밀번호</td>
               <td>
                 <div className="new-pw-check-wrap">
                   <Input
                     type="password"
-                    data={newMemberPw}
-                    setData={setNewMemberPw}
+                    data={memberPw}
+                    setData={setMemberPw}
                     content="newMemberPw"
                   />
                 </div>
               </td>
             </tr>
-            <tr>
+            <tr className="pw-tr3 display">
               <td>새 비밀번호 확인</td>
               <td>
                 <div className="new-pw-check-wrap">
@@ -205,7 +223,9 @@ const Myinfo = (props) => {
                   <button className="new-pw-update-btn" onClick={newPwUpdate}>
                     변경
                   </button>
-                  <button className="new-pw-del-btn">취소</button>
+                  <button className="new-pw-del-btn" onClick={backPw}>
+                    취소
+                  </button>
                 </div>
               </td>
             </tr>
