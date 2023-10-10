@@ -6,12 +6,35 @@
 .cashbook-content {
   position: absolute;
   width: 90%;
-  top: 200px;
+  top: 100px;
 }
-.date-range-icon {
+.date-range-area {
   position: relative;
   z-index: 500;
   background-color: #fff;
+  margin-left: 14px;
+}
+.date-range-area.toggle-off {
+  display: none;
+}
+.date-range-icon {
+  display: flex;
+  align-items: center;
+  margin-bottom: 50px;
+}
+.date-range-icon img {
+  width: 30px;
+  height: 30px;
+}
+.date-range-icon input {
+  width: 368.97px;
+  box-sizing: border-box;
+  margin-left: 5px;
+  margin-right: 5px;
+  text-align: center;
+}
+.date-range-icon input:hover {
+  cursor: pointer;
 }
 .range-chg {
   position: absolute;
@@ -44,11 +67,10 @@
   /*계속 사용안할부분이라 넌처리*/
   display: none;
 }
-.cashbook-date-range {
-  display: flex;
-}
+
 .rdrDefinedRangesWrapper {
   margin-top: 55px;
+
   /*display: none; 여기*/
 }
 .rdrCalendarWrapper {
@@ -57,6 +79,9 @@
 }
 .rdrDateRangePickerWrapper {
   flex-direction: row-reverse;
+}
+.rdrDateRangePickerWrapper * {
+  font-size: 12px;
 }
 .rdrMonthAndYearPickers {
   flex-direction: row-reverse;
@@ -79,4 +104,17 @@
 }
 .cashbook-detail > table {
   width: 100%;
+}
+.add-btn > img {
+  width: 50px;
+  cursor: pointer;
+  margin-left: 20px;
+  margin-bottom: 20px;
+}
+.add-btn {
+  display: flex;
+  justify-content: flex-end;
+}
+.cashbook-checkbox {
+  width: 16px !important;
 }
