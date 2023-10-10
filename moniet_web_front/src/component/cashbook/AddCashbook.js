@@ -24,9 +24,9 @@ const AddCashbook = (props) => {
   const setCashbookCategory = props.setCashbookCategory;
   const cashbookMoney = props.cashbookMoney;
   const setCashbookMoney = props.setCashbookMoney;
-  const cashbookContent = props.setCashbookContent;
+  const cashbookContent = props.cashbookContent;
   const setCashbookContent = props.setCashbookContent;
-  const cashbookMemo = props.setCashbookMemo;
+  const cashbookMemo = props.cashbookMemo;
   const setCashbookMemo = props.setCashbookMemo;
   const clickEvent = props.clickEvent;
   const [toggleOn, setToggleOn] = useState(false);
@@ -51,6 +51,7 @@ const AddCashbook = (props) => {
   const [cashbookDate, setCashbookDate] = useState(new Date());
   const changeLoop = (e) => {
     setCashbookLoop(e.currentTarget.value);
+    const loop = document.querySelectorAll(".loop-div");
   };
   return (
     <div
@@ -93,16 +94,24 @@ const AddCashbook = (props) => {
                 color="#010440"
               />
             </div>
-            <label htmlFor="add-loop">반복/할부</label>
-            <Select value={cashbookLoop} onChange={changeLoop}>
-              <option value={0}>없음</option>
-              <option value={1}></option>
-            </Select>
-            <Input
-              data={cashbookLoop}
-              setData={setCashbookLoop}
-              content={"add-loop"}
-            />
+            <div className="modal-detail-content loop-div">
+              <label htmlFor="add-loop">반복/할부</label>
+              <select
+                name="cashbookLoop"
+                value={cashbookLoop}
+                onChange={changeLoop}
+              >
+                <option value="0">없음</option>
+                <option value="1">반복</option>
+                <option value="2">할부</option>
+              </select>
+
+              <Input
+                data={cashbookLoop}
+                setData={setCashbookLoop}
+                content={"add-loop"}
+              />
+            </div>
             <label htmlFor="add-asset">자산</label>
             <Input
               data={cashbookAsset}
