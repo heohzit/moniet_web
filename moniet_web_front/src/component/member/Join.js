@@ -1,10 +1,9 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Input from "./InputFrm";
 import "./join.css";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
-import AgreeBox from "./AgreeBox";
 
 const Join = () => {
   const [memberId, setMemberId] = useState("");
@@ -18,7 +17,19 @@ const Join = () => {
   const [checkNameMsg, setCheckNameMsg] = useState("");
   const [checkPhoneMsg, setCheckPhoneMsg] = useState("");
   const [checkEmailMsg, setCheckEmailMsg] = useState("");
+  const [imgFile, setImgFile] = useState("");
+  const imgRef = useRef();
   const navigate = useNavigate();
+
+  //이미지 업로드 input onChange
+  const saveImgFile = () => {
+    const file = imgRef.current.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      setImgFile(reader.result);
+    };
+  };
 
   const idCheck = () => {
     const idReg = /^[a-zA-Z0-9]{4,8}$/;
@@ -91,7 +102,11 @@ const Join = () => {
         .post("/member/join", member)
         .then((res) => {
           if (res.data === 1) {
-            Swal.fire("회원가입이 완료되었습니다!","로그인 페이지로 이동합니다.","success");
+            Swal.fire(
+              "회원가입이 완료되었습니다!",
+              "로그인 페이지로 이동합니다.",
+              "success"
+            );
             navigate("/login");
           } else {
             Swal.fire("회원가입 실패");
@@ -107,6 +122,22 @@ const Join = () => {
   return (
     <div className="join-wrap">
       <div className="join-title">MEMBERSHIP</div>
+      <div className="join-img-wrap">
+        <img src={imgFile ? imgFile : "/image/piggy.jpg"} />
+      </div>
+      <div className="join-profile-wrap">
+        <label htmlFor="profileImg" className="signup-profileImg-label">
+          프로필 이미지 업로드
+        </label>
+        <input
+          className="sign-up-profile-img-input"
+          type="file"
+          accept="image/jpg,impge/png,image/jpeg"
+          id="profileImg"
+          onChange={saveImgFile}
+          ref={imgRef}
+        />
+      </div>
       <JoinInputWrap
         data={memberId}
         setData={setMemberId}

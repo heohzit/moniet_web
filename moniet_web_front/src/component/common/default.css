@@ -95,6 +95,6 @@ footer {
 }
 
 .menu > li:hover .submenu {
-  height: 90px; /* li * 2 */
+  height: 45px;
   transition-duration: 1s;
 }
