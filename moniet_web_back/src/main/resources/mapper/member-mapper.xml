@@ -16,4 +16,8 @@
 	<update id="updateMemberInfo">
 		update member set member_phone=#{memberPhone}, member_email=#{memberEmail} where member_id=#{memberId}
 	</update>
+	
+	<update id="updatePw">
+		update member set member_pw=#{memberPw} where member_id=#{memberId}
+	</update>
 </mapper>

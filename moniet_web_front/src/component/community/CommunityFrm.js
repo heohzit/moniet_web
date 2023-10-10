@@ -111,11 +111,7 @@ const CommunityFrm = (props) => {
     <div className="community-frm-wrap">
       <div className="community-frm-top">
         <div className="community-thumbnail">
-          {communityImg === null ? (
-            <img src="/image/default.png" />
-          ) : (
-            <img src={communityImg} />
-          )}
+          {communityImg === null ? "" : <img src={communityImg} />}
         </div>
 
         <div className="community-info">
@@ -163,7 +159,7 @@ const CommunityFrm = (props) => {
                 </td>
               </tr>
 
-              <tr>
+              <tr className="community-type-tr">
                 <td>
                   <label>커뮤니티 분류</label>
                 </td>

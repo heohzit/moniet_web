@@ -10,6 +10,7 @@ import { addDays } from "date-fns";
 import ko from "date-fns/locale/ko";
 import { Button4, Button5 } from "../util/Buttons";
 import AddComma from "./AddComma";
+import Input from "../util/InputFrm";
 
 const Cashbook = (props) => {
   const isLogin = props.isLogin;
@@ -71,18 +72,38 @@ const Cashbook = (props) => {
 
   const applyDate = () => {
     setSelect(!select);
+    setToggleOn(!toggleOn);
   };
   const resetDate = () => {
     const thisMonth = document.querySelector(".rdrStaticRange:nth-of-type(5)");
     thisMonth.click();
     setSelect(!select);
   };
-
+  const [toggleOn, setToggleOn] = useState(false);
+  const toggle = () => {
+    setToggleOn(!toggleOn);
+  };
   return (
     <div className="cashbook-all-wrap">
       <div className="cashbook-title">내역</div>
-
       <div className="date-range-icon">
+        <img src="icon/left-btn.png" alt="prev" />
+        <div onClick={() => toggle()}>
+          <Input
+            data={
+              dateString(dateRange[0].startDate) +
+              " ~ " +
+              dateString(dateRange[0].endDate)
+            }
+          />
+        </div>
+        <img src="icon/right-btn.png" alt="next" />
+      </div>
+      <div
+        className={
+          toggleOn ? "date-range-area toggle-on" : "date-range-area toggle-off"
+        }
+      >
         <DateRangePicker
           onChange={(item) => setDateRange([item.selection])}
           months={1}
@@ -90,7 +111,7 @@ const Cashbook = (props) => {
           minDate={addDays(new Date(), -300)}
           maxDate={addDays(new Date(), 900)}
           direction="vertical"
-          scroll={{ enabled: true }}
+          //scroll={{ enabled: true }}
           ranges={dateRange}
           locale={ko}
           dateDisplayFormat="yyyy년 MMM d일"
@@ -102,7 +123,11 @@ const Cashbook = (props) => {
           <Button5 text={"reset"} clickEvent={resetDate} />
         </div>
       </div>
+
       <div className="cashbook-content">
+        <div className="add-btn">
+          <img src="icon/add-btn.png" alt="add" />
+        </div>
         <div className="cashbook-btn-zone">
           <Button5
             text={
@@ -137,7 +162,7 @@ const Cashbook = (props) => {
             <thead>
               <tr>
                 <td width={"5%"}>
-                  <input type="checkbox" />
+                  <input type="checkbox" className="cashbook-checkbox" />
                 </td>
                 <td width={"20%"}>날짜</td>
                 <td width={"20%"}>자산</td>
@@ -185,7 +210,7 @@ const CashbookItem = (props) => {
   return (
     <tr>
       <td>
-        <input type="checkbox" />
+        <input type="checkbox" className="cashbook-checkbox" />
       </td>
       <td>{cashbook.cashbookDate}</td>
       <td>{assetToString(cashbook.cashbookAsset)}</td>
