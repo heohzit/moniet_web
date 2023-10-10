@@ -62,9 +62,47 @@ const CommunityView = (props) => {
               })
             : ""}
         </div>
-        <div>{community.memberId}</div>
-        <div>{community.communityDate}</div>
-        <div>참여인원 {community.communityParti}</div>
+        <div className="community-view-writer">
+          작성자 ｜ {community.memberId}
+        </div>
+        <div className="community-view-date">
+          작성일 ｜ {community.communityDate}
+        </div>
+
+        <div className="community-view-parti">
+          참여인원 {community.communityParti}
+        </div>
+
+        <div className="community-view-btns">
+          <div className="community-view-join-btn">
+            <Button1 text="참여하기" />
+          </div>
+          <div className="community-view-like-btn">
+            <span class="material-icons ab-btn1">favorite_border</span>
+          </div>
+          <div className="community-view-share-btn">
+            <span class="material-icons sh-btn1">share</span>
+          </div>
+        </div>
+      </div>
+      <div className="community-view-content-top">INFO</div>
+      <div
+        className="community-view-content ql-editor"
+        dangerouslySetInnerHTML={{ __html: community.communityContent }}
+      ></div>
+
+      <div className="community-view-bottom-btns">
+        <div className="community-view-update">
+          <span className="community-view-update-btn">수정</span>
+        </div>
+
+        <div className="community-view-delete">
+          <span className="community-view-delete-btn">삭제</span>
+        </div>
+      </div>
+
+      <div className="community-view-board-zone">
+        <div className="community-view-board">게시글</div>
       </div>
     </div>
   );

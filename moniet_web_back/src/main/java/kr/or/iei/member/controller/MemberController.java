@@ -73,6 +73,6 @@ public class MemberController {
 	@PostMapping(value="/updatePw") 
 	public int updatePw(@RequestBody Member member, @RequestAttribute String memberId) {
 		member.setMemberId(memberId);
-		return memberService.updatePw(member);
+		return memberService.updatePwMember(member);
 	}
 }

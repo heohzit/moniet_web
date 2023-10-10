@@ -11,6 +11,7 @@ import ko from "date-fns/locale/ko";
 import { Button4, Button5 } from "../util/Buttons";
 import AddComma from "./AddComma";
 import Input from "../util/InputFrm";
+import AddCashbook from "./AddCashbook";
 
 const Cashbook = (props) => {
   const isLogin = props.isLogin;
@@ -70,6 +71,18 @@ const Cashbook = (props) => {
     return num;
   };
 
+  const [cashbookFinance, setCashbookFinance] = useState(0);
+  const [cashbookLoop, setCashbookLoop] = useState(0);
+  const [loopMonth, setLoopMonth] = useState(0);
+  const [cashbookAsset, setCashbookAsset] = useState("");
+  const [cashbookCategory, setCashbookCategory] = useState([]);
+  const [cashbookMoney, setCashbookMoney] = useState(0);
+  const [cashbookContent, setCashbookContent] = useState("");
+  const [cashbookMemo, setCashbookMemo] = useState("");
+  const clickEvent = () => {
+    console.log(cashbookFinance);
+  };
+
   const applyDate = () => {
     setSelect(!select);
     setToggleOn(!toggleOn);
@@ -78,11 +91,23 @@ const Cashbook = (props) => {
     const thisMonth = document.querySelector(".rdrStaticRange:nth-of-type(5)");
     thisMonth.click();
     setSelect(!select);
+    setToggleOn(!toggleOn);
   };
+  //날짜 범위 토글용
   const [toggleOn, setToggleOn] = useState(false);
   const toggle = () => {
     setToggleOn(!toggleOn);
   };
+
+  //addFrm
+  const [addFrmOpen, setAddFrmOpen] = useState(false);
+  const isOpen = () => {
+    setAddFrmOpen(true);
+  };
+  const closeFrm = () => {
+    setAddFrmOpen(false);
+  };
+
   return (
     <div className="cashbook-all-wrap">
       <div className="cashbook-title">내역</div>
@@ -126,7 +151,29 @@ const Cashbook = (props) => {
 
       <div className="cashbook-content">
         <div className="add-btn">
-          <img src="icon/add-btn.png" alt="add" />
+          <img src="icon/add-btn.png" alt="add" onClick={isOpen} />
+          <AddCashbook
+            isOpen={addFrmOpen}
+            closeFrm={closeFrm}
+            dateString={dateString}
+            cashbookFinance={cashbookFinance}
+            setCashbookFinance={setCashbookFinance}
+            cashbookLoop={cashbookLoop}
+            setCashbookLoop={setCashbookLoop}
+            loopMonth={loopMonth}
+            setLoopMonth={setLoopMonth}
+            cashbookAsset={cashbookAsset}
+            setCashbookAsset={setCashbookAsset}
+            cashbookCategory={cashbookCategory}
+            setCashbookCategory={setCashbookCategory}
+            cashbookMoney={cashbookMoney}
+            setCashbookMoney={setCashbookMoney}
+            cashbookContent={cashbookContent}
+            setCashbookContent={setCashbookContent}
+            cashbookMemo={cashbookMemo}
+            setCashbookMemo={setCashbookMemo}
+            clickEvent={clickEvent}
+          />
         </div>
         <div className="cashbook-btn-zone">
           <Button5
