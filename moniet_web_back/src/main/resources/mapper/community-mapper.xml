@@ -35,6 +35,7 @@
 		        COMMUNITY_TITLE,
 		        COMMUNITY_SUBTITLE,
 		        COMMUNITY_WRITER,
+		        MEMBER_NO,
 		        MEMBER_ID,
 		        MEMBER_EMAIL,
 		        COMMUNITY_CONTENT,
@@ -54,6 +55,7 @@
 		<result column="community_title" property="communityTitle" />
 		<result column="community_subtitle" property="communitySubTitle" />
 		<result column="community_writer" property="communityWriter" />
+		<result column="member_no" property="memberNo" />
 		<result column="member_id" property="memberId" />
 		<result column="member_email" property="memberEmail" />
 		<result column="community_content" property="communityContent" />
@@ -88,6 +90,7 @@
 		    COMMUNITY_TITLE,
 		    COMMUNITY_SUBTITLE,
 		    COMMUNITY_WRITER,
+		    MEMBER_NO,
 		    MEMBER_ID,
 		    MEMBER_EMAIL,
 		    COMMUNITY_CONTENT,
@@ -112,6 +115,7 @@
 		<result column="community_title" property="communityTitle" />
 		<result column="community_subtitle" property="communitySubTitle" />
 		<result column="community_writer" property="communityWriter" />
+		<result column="member_no" property="memberNo" />
 		<result column="member_id" property="memberId" />
 		<result column="member_email" property="memberEmail" />
 		<result column="community_content" property="communityContent" />

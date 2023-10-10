@@ -33,14 +33,14 @@ const CommunityView = (props) => {
         })
         .then((res) => {
           console.log(res.data);
-          // setMember(res.data);
+          setMember(res.data);
         })
         .catch((res) => {
           console.log(res.response.status);
         });
     }
   }, []);
-
+  console.log(member);
   return (
     <div className="community-view-wrap">
       <div className="community-view-thumbnail">
@@ -95,13 +95,23 @@ const CommunityView = (props) => {
       ></div>
 
       <div className="community-view-bottom-btns">
-        <div className="community-view-update">
-          <span className="community-view-update-btn">수정</span>
-        </div>
+        {isLogin ? (
+          member && member.memberNo == community.communityWriter ? (
+            <>
+              <div className="community-view-update">
+                <span className="community-view-update-btn">수정</span>
+              </div>
 
-        <div className="community-view-delete">
-          <span className="community-view-delete-btn">삭제</span>
-        </div>
+              <div className="community-view-delete">
+                <span className="community-view-delete-btn">삭제</span>
+              </div>
+            </>
+          ) : (
+            ""
+          )
+        ) : (
+          ""
+        )}
       </div>
 
       <div className="community-view-board-zone">

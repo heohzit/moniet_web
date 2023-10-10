@@ -13,7 +13,6 @@ const CommunityMain = (props) => {
       <Routes>
         <Route path="view" element={<CommunityView isLogin={isLogin} />} />
         <Route path="write" element={<CommunityWrite />} />
-        <Route path="view" element={<CommunityView />} />
         <Route path="*" element={<CommunityList isLogin={isLogin} />} />
       </Routes>
     </div>
