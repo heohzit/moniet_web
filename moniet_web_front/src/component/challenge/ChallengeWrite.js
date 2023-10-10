@@ -28,8 +28,13 @@ const ChallengeWrite = () => {
       challengeStart,
       challengeEnd,
     };
+    const token = window.localStorage.getItem("token");
     axios
-      .post("/challenge/insert", challenge)
+      .post("/challenge/insert", challenge, {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      })
       .then((res) => {
         console.log(res.data);
         if (res.data > 0) {

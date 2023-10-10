@@ -6,8 +6,11 @@ import EndChallenge from "./EndChallenge";
 import { Link } from "react-router-dom";
 import { Route, Routes } from "react-router-dom";
 import { useEffect, useState } from "react";
+import Swal from "sweetalert2";
 
-const ChallengeList = () => {
+const ChallengeList = (props) => {
+  const isLogin = props.isLogin;
+  const setIsLogin = props.setIsLogin;
   const navigate = useNavigate();
   const write = () => {
     navigate("write");
@@ -23,7 +26,10 @@ const ChallengeList = () => {
         <Button3 text="머니챌린지 도전" clickEvent={write}></Button3>
       </div>
       <Routes>
-        <Route path="*" element={<IngChallenge></IngChallenge>}></Route>
+        <Route
+          path="*"
+          element={<IngChallenge setIsLogin={setIsLogin}></IngChallenge>}
+        ></Route>
         <Route path="end" element={<EndChallenge></EndChallenge>}></Route>
       </Routes>
     </div>

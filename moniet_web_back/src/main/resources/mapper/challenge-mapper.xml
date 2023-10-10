@@ -16,7 +16,8 @@
   			to_char(challenge_start,'yyyy-mm-dd') as challenge_start,
   			to_char(challenge_end,'yyyy-mm-dd') as challenge_end
 		 from challenge
-		 where to_char(challenge_end,'yyyy-mm-dd') >= to_char(sysdate,'yyyy-mm-dd') and challenge_result = 0 and challenge_state =1
+		 where  member_no2=(select member_no from member where member_id=#{memberId}) and
+		 to_char(challenge_end,'yyyy-mm-dd') >= to_char(sysdate,'yyyy-mm-dd') and challenge_result = 0 and challenge_state =1
 	</select>
 	
 	<!--챌린지 목록(종료)-->
@@ -33,7 +34,8 @@
   			to_char(challenge_start,'yyyy-mm-dd') as challenge_start,
   			to_char(challenge_end,'yyyy-mm-dd') as challenge_end
 		 from challenge
-		  where to_char(sysdate,'yyyy-mm-dd') > to_char(challenge_end,'yyyy-mm-dd')or challenge_result = 2 or challenge_state =2
+		  where  member_no2=(select member_no from member where member_id=#{memberId}) and
+		  (to_char(sysdate,'yyyy-mm-dd') > to_char(challenge_end,'yyyy-mm-dd')or challenge_result = 2 or challenge_state =2)
 	</select>
 	
 	<!--챌린지 상세보기-->
@@ -56,7 +58,7 @@
 	
 	<!--챌린지 만들기-->
   	<insert id="insertChallenge">
-  		insert into challenge values(challenge_seq.nextval,7777,#{challengeTitle},#{challengeContent},#{challengeKind},#{challengeAmount},#{challengeStart},#{challengeEnd},1,0)
+  		insert into challenge values(challenge_seq.nextval,(select member_no from member where member_id=#{memberId}),#{challengeTitle},#{challengeContent},#{challengeKind},#{challengeAmount},#{challengeStart},#{challengeEnd},1,0)
   	</insert>
   	
   	<!--챌린지 삭제-->

@@ -23,16 +23,17 @@ public class ChallengeController {
 	private ChallengeService challengeService;
 	
 	//챌린지 목록
-	@GetMapping(value="/challengeList1")
-	public Map challengeList1 () {
-		Map map =challengeService.challengeList1();
+	@PostMapping(value="/challengeList1")
+	public Map challengeList1 (@RequestAttribute String memberId) {
+		Map map =challengeService.challengeList1(memberId);
+		System.out.println(map);
 		return map;
 	}
 	
 	//챌린지 목록(종료)
-	@GetMapping(value="/challengeList2")
-	public Map challengeList2 () {
-		Map map =challengeService.challengeList2();
+	@PostMapping(value="/challengeList2")
+	public Map challengeList2 (@RequestAttribute String memberId) {
+		Map map =challengeService.challengeList2(memberId);
 		return map;
 	}
 	
@@ -44,7 +45,8 @@ public class ChallengeController {
 	
 	//챌린지 만들기
 	@PostMapping(value="/insert")
-	public int insertChallenge (@RequestBody Challenge c) {
+	public int insertChallenge (@RequestBody Challenge c,@RequestAttribute String memberId) {
+		c.setMemberId(memberId);
 		int result = challengeService.insertChallenge(c);
 		return result;
 	}
