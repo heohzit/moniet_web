@@ -5,15 +5,52 @@ import { useEffect, useState } from "react";
 import Input from "../util/InputFrm";
 import "./myinfo.css";
 
-
 const Myinfo = (props) => {
   const isLogin = props.isLogin;
   const setIsLogin = props.setIsLogin;
   const token = window.localStorage.getItem("token");
   const [member, setMember] = useState({});
+  const [newMemberPw, setNewMemberPw] = useState();
+  const [newMemberPwRe, setNewMemberPwRe] = useState();
   const [checkPhoneMsg, setCheckPhoneMsg] = useState("");
   const [checkEmailMsg, setCheckEmailMsg] = useState("");
   const navigate = useNavigate();
+
+  const pwUpdate = () => {};
+
+  //비밀번호 update
+  const newPwUpdate = () => {
+    const token = window.localStorage.getItem("token");
+    if (newMemberPw !== "" && newMemberPw == newMemberPwRe) {
+      axios
+        .post(
+          "/member/updatePw",
+          { memberPw: newMemberPw },
+          {
+            headers: {
+              Authorization: "Bearer " + token,
+            },
+          }
+        )
+        .then((res) => {
+          if (res.data == 1) {
+            setNewMemberPw("");
+            setNewMemberPwRe("");
+            alert("비밀번호가 변경되었습니다.");
+          } else {
+            alert("비밀번호 변경 중 오류가 발생했습니다.");
+          }
+        })
+        .catch((res) => {
+          if (res.response.status === 403) {
+            window.localStorage.removeItem("token");
+            setIsLogin(false);
+          }
+        });
+    } else {
+      alert("비밀번호가 일치 하지 않습니다.");
+    }
+  };
 
   //회원정보 update
   const setMemberPhone = (data) => {
@@ -130,13 +167,45 @@ const Myinfo = (props) => {
               <td>비밀번호</td>
               <td id="member-phone">
                 <div className="pw-wrap">
-                <UpdateInputWrap
-                  data="********"
-                  type="password"
-                  content="memberPw"
-                  disabled="true"
-                />
-                <button className="pw-btn">변경하기</button>
+                  <UpdateInputWrap
+                    data="********"
+                    type="password"
+                    content="memberPw"
+                    disabled="true"
+                  />
+                  <button className="pw-btn" onClick={pwUpdate}>
+                    변경하기
+                  </button>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>새 비밀번호</td>
+              <td>
+                <div className="new-pw-check-wrap">
+                  <Input
+                    type="password"
+                    data={newMemberPw}
+                    setData={setNewMemberPw}
+                    content="newMemberPw"
+                  />
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>새 비밀번호 확인</td>
+              <td>
+                <div className="new-pw-check-wrap">
+                  <Input
+                    type="password"
+                    data={newMemberPwRe}
+                    setData={setNewMemberPwRe}
+                    content="newMemberPwRe"
+                  />
+                  <button className="new-pw-update-btn" onClick={newPwUpdate}>
+                    변경
+                  </button>
+                  <button className="new-pw-del-btn">취소</button>
                 </div>
               </td>
             </tr>
@@ -144,14 +213,14 @@ const Myinfo = (props) => {
               <td>전화번호</td>
               <td id="member-phone">
                 <div>
-                <UpdateInputWrap
-                  data={member.memberPhone}
-                  setData={setMemberPhone}
-                  type="text"
-                  content="memberPhone"
-                  checkMsg={checkPhoneMsg}
-                  blurEvent={phoneCheck}
-                />
+                  <UpdateInputWrap
+                    data={member.memberPhone}
+                    setData={setMemberPhone}
+                    type="text"
+                    content="memberPhone"
+                    checkMsg={checkPhoneMsg}
+                    blurEvent={phoneCheck}
+                  />
                 </div>
               </td>
             </tr>
@@ -159,14 +228,14 @@ const Myinfo = (props) => {
               <td>이메일</td>
               <td id="member-email">
                 <div>
-                <UpdateInputWrap
-                  data={member.memberEmail}
-                  setData={setMemberEmail}
-                  type="text"
-                  content="memberEmail"
-                  checkMsg={checkEmailMsg}
-                  blurEvent={emailCheck}
-                />
+                  <UpdateInputWrap
+                    data={member.memberEmail}
+                    setData={setMemberEmail}
+                    type="text"
+                    content="memberEmail"
+                    checkMsg={checkEmailMsg}
+                    blurEvent={emailCheck}
+                  />
                 </div>
               </td>
             </tr>
@@ -174,7 +243,9 @@ const Myinfo = (props) => {
         </table>
         <div className="my-info-btn-wrap">
           <button onClick={updateMember}>정보수정</button>
-          <button onClick={deleteMember} id="deleteBtn">회원탈퇴</button>
+          <button onClick={deleteMember} id="deleteBtn">
+            회원탈퇴
+          </button>
         </div>
       </div>
     </div>
@@ -187,8 +258,7 @@ const UpdateInputWrap = (props) => {
   const content = props.content;
   const blurEvent = props.blurEvent;
   const checkMsg = props.checkMsg;
-  const disabled = props.disabled
-  
+  const disabled = props.disabled;
 
   return (
     <div className="update-input-wrap">

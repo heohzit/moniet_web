@@ -85,8 +85,14 @@ const ChallengeView = (props) => {
   const dateString = today.toISOString().substring(0, 10);
 
   return (
-    <div className="challenge-content">
-      <div className="challenge-detail">머니챌린지 상세보기</div>
+    <div className="challenge-view-content">
+      <div className="challenge-detail">
+        {challenge.challengeKind === 1 ? (
+          <div>저축챌린지</div>
+        ) : (
+          <div>지출챌린지</div>
+        )}
+      </div>
       <div>목표 금액: {goalAmount.toLocaleString()}원</div>
       <div>현재 금액: {currentAmount.toLocaleString()}원</div>
       <CircularProgressBar

@@ -69,4 +69,10 @@ public class MemberController {
 		member.setMemberId(memberId);
 		return memberService.pwCheck(member);
 	}
+	//비밀번호 변경
+	@PostMapping(value="/updatePw") 
+	public int updatePw(@RequestBody Member member, @RequestAttribute String memberId) {
+		member.setMemberId(memberId);
+		return memberService.updatePw(member);
+	}
 }

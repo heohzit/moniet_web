@@ -13,3 +13,6 @@ npm install @tomickigrzegorz/react-circular-progress-bar  23.10.04
 npm install react-quill
 npm install quill-image-resize-module-react     23.10.04
 
+//dashboard 
+npm install chart.js                            23.10.10
+npm install --save chart.js react-chartjs-2     23.10.10

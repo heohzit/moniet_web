@@ -10,6 +10,7 @@ const EndChallenge = () => {
 
   const [showChallenge, setShowChallenge] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [backPage, setBackPage] = useState(false);
 
   useEffect(() => {
     const token = window.localStorage.getItem("token");
@@ -38,10 +39,18 @@ const EndChallenge = () => {
     const nextChallenge = challengeList.slice(0, endIndex);
     setShowChallenge(nextChallenge);
     setCurrentPage(nextPage);
+    if (nextPage * loadCount >= challengeList.length) {
+      setBackPage(true);
+    }
+  };
+  const GoBackBtn = () => {
+    const firstChallenge = challengeList.slice(0, loadCount);
+    setShowChallenge(firstChallenge);
+    setCurrentPage(1);
+    setBackPage(false);
   };
   return (
     <div className="challenge-content">
-      <div className="challenge-detail">종료된 머니챌린지 리스트</div>
       <div className="challenge-list-wrap1">
         {showChallenge.map((challenge, index) => {
           if (challenge.challengeKind === 1) {
@@ -60,9 +69,15 @@ const EndChallenge = () => {
           }
         })}
       </div>
-      <div className="challenge-more">
-        <Button3 text="더보기" clickEvent={moreChallengeBtn} />
-      </div>
+      {backPage ? (
+        <div className="challenge-more">
+          <Button3 text="돌아가기" clickEvent={GoBackBtn} />
+        </div>
+      ) : (
+        <div className="challenge-more">
+          <Button3 text="더보기" clickEvent={moreChallengeBtn} />
+        </div>
+      )}
     </div>
   );
 };

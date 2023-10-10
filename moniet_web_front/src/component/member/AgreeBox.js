@@ -10,7 +10,6 @@ const AgreeBox = () => {
   const [marketingCheck, setMarketingCheck] = useState(false);
   const navigate = useNavigate();
 
-
   const allBtnEvent = () => {
     if (allCheck === false) {
       setAllCheck(true);
@@ -63,17 +62,17 @@ const AgreeBox = () => {
     }
   }, [ageCheck, useCheck, marketingCheck]);
 
-  const popUpForTerms = ()=>{
+  const popUpForTerms = () => {
     console.log("클릭");
   };
 
-  const joinfrm = ()=>{
+  const joinfrm = () => {
     const nextBtn = document.querySelector(".next-button");
-    if(nextBtn.disabled){
+    if (nextBtn.disabled) {
       alert("이용약관 동의 후 회원가입 페이지로 이동합니다.");
-    }else{
+    } else {
       navigate("/joinFrm");
-    } 
+    }
   };
 
   return (
@@ -84,7 +83,7 @@ const AgreeBox = () => {
         머니어트에 가입하시려면
         <br />
         약관에 동의해 주세요.
-        </div>
+      </div>
       <div className="agree-box-content">
         <form method="post" action="">
           <div>
@@ -119,7 +118,13 @@ const AgreeBox = () => {
                 <label htmlFor="check2">
                   이용약관 <span>(필수)</span>
                 </label>
-                <button onClick={popUpForTerms} type="button" className="popUpBtn">자세히</button>
+                <button
+                  onClick={popUpForTerms}
+                  type="button"
+                  className="popUpBtn"
+                >
+                  자세히
+                </button>
               </div>
               <div className="check">
                 <input
@@ -131,7 +136,13 @@ const AgreeBox = () => {
                 <label htmlFor="check3">
                   마케팅 동의 <span>(선택)</span>
                 </label>
-                <button onClick={popUpForTerms} type="button" className="popUpBtn">자세히</button>
+                <button
+                  onClick={popUpForTerms}
+                  type="button"
+                  className="popUpBtn"
+                >
+                  자세히
+                </button>
               </div>
             </div>
           </div>
@@ -143,7 +154,5 @@ const AgreeBox = () => {
     </div>
   );
 };
-
-
 
 export default AgreeBox;
