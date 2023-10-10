@@ -91,18 +91,24 @@ const CommunityItem = (props) => {
           )}
         </div>
         <div className="community-item-info">
-          <div className="community-item-type">체크박스존</div>
+          <div className="community-item-types">
+            {community.typeList
+              ? community.typeList.map((types, index) => {
+                  return <TypesItem key={"types" + index} types={types} />;
+                })
+              : ""}
+          </div>
           <div className="community-item-title">{community.communityTitle}</div>
           <div className="community-item-subtitle">
             {community.communitySubTitle}
           </div>
+          <div className="community-item-writer">
+            <span>작성자 </span>
+            {community.memberId}
+          </div>
           <div className="community-item-date">
             <span>작성일 </span>
             {community.communityDate}
-          </div>
-          <div className="community-item-writer">
-            <span>작성자 </span>
-            {community.communityWriter}
           </div>
           <div className="community-item-parti">
             <span>참여인원 </span>
@@ -126,6 +132,26 @@ const ListInputWrap = (props) => {
         <div className="input">
           <Input data={data} setData={setData} type={type} content={content} />
         </div>
+      </div>
+    </div>
+  );
+};
+
+const TypesItem = (props) => {
+  const types = props.types;
+
+  return (
+    <div className="community-types">
+      <div className="type-name">
+        {types.communityTypeDiv === 1 ? (
+          <span className="keyword key1">저축하기</span>
+        ) : types.communityTypeDiv === 2 ? (
+          <span className="keyword key2">지출줄이기</span>
+        ) : types.communityTypeDiv === 4 ? (
+          <span className="keyword key4">투자하기</span>
+        ) : (
+          <span className="keyword key8">기타</span>
+        )}
       </div>
     </div>
   );

@@ -50,7 +50,7 @@
   font-size: 24px;
   font-family: ns-eb;
   color: #010440;
-  margin-bottom: 50px;
+  margin-bottom: 40px;
 }
 
 .community-search-box {
@@ -124,11 +124,11 @@
 .community-item:hover > .community-item-info > .community-item-title {
   text-decoration: underline;
 }
-
+/* 
 .community-item:hover {
   border-top: 1px solid rgb(106, 109, 166, 0.5);
   border-bottom: 1px solid rgb(106, 109, 166, 0.5);
-}
+} */
 
 .community-item-info {
   padding: 10px 15px;
@@ -371,7 +371,7 @@
 
 .community-view-type {
   overflow: hidden;
-  margin-bottom: 38px;
+  margin-bottom: 2px;
 }
 
 .community-view-type > div {
@@ -416,18 +416,16 @@
 
 .community-view-writer,
 .community-view-date,
-.community-view-parti {
-  font-family: ns-b;
+.community-view-email {
+  font-family: ns-r;
   padding-bottom: 10px;
-}
-
-.community-view-date {
 }
 
 .community-view-parti {
   color: #6a6da6;
   padding-bottom: 20px;
   border-bottom: 1px solid #ccc;
+  font-family: ns-b;
 }
 
 .community-view-btns {
@@ -440,6 +438,10 @@
 
 .community-view-join-btn {
   overflow: hidden;
+}
+
+.community-view-join-btn > button {
+  background-color: #323673;
 }
 
 .community-view-btns .community-view-join-btn {
@@ -481,7 +483,7 @@
   font-size: 24px;
   font-family: ns-eb;
   color: #010440;
-  margin: 50px 0;
+  margin: 40px 0;
 }
 
 .community-view-wrap .ql-editor {
@@ -513,4 +515,33 @@
   margin-top: 10px;
   padding: 20px 0;
   border-top: 1px solid #ccc;
+}
+
+.community-item-types {
+  overflow: hidden;
+  padding-bottom: 5px;
+}
+
+.community-types {
+  float: left;
+  overflow: hidden;
+}
+
+.community-types > div {
+  float: left;
+}
+
+.community-types > .type-name > span {
+}
+
+.community-types input[type="checkbox"] {
+  height: 15px;
+}
+
+.community-types > .type-name {
+  padding-right: 5px;
+}
+
+.community-types > .type-name span {
+  padding: 2px 15px;
 }
