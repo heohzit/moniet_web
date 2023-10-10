@@ -8,7 +8,8 @@ const Input = (props) => {
   const max = props.max;
   const content = props.content;
   const blurEvent = props.blurEvent;
-  const disabled =props.disabled;
+  const disabled = props.disabled;
+  const placeholder = props.placeholder;
   const changevalue = (e) => {
     const inputValue = e.currentTarget.value;
     setData(inputValue);
@@ -25,6 +26,7 @@ const Input = (props) => {
         min={min}
         max={max}
         disabled={disabled}
+        placeholder={placeholder}
       ></input>
     </>
   );
