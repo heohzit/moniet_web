@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./addCashbook.css";
 import { Button1, Button5 } from "../util/Buttons";
 import Input from "../util/InputFrm";
 import { Calendar } from "react-date-range";
 import ko from "date-fns/locale/ko";
 import Select from "../util/Select";
+import Swal from "sweetalert2";
 
 const AddCashbook = (props) => {
   const isOpen = props.isOpen;
@@ -14,12 +15,29 @@ const AddCashbook = (props) => {
   const cashbookFinance = props.cashbookFinance;
   const setCashbookFinance = props.setCashbookFinance;
 
+  useEffect(() => {
+    const spendingBtn = document.querySelector(
+      ".select-finance:last-child>button"
+    );
+    spendingBtn.click();
+  }, []);
   const cashbookLoop = props.cashbookLoop;
   const setCashbookLoop = props.setCashbookLoop;
-  const loopMonth = props.setLoopMonth;
+  const cashbookLoopList = ["없음", "반복", "할부"];
+  const loopMonth = props.loopMonth;
   const setLoopMonth = props.setLoopMonth;
+  const loopMonthMap = [
+    { i: 0, cycle: "매 주" },
+    { i: 1, cycle: "1개월" },
+    { i: 2, cycle: "2개월" },
+    { i: 3, cycle: "3개월" },
+    { i: 4, cycle: "4개월" },
+    { i: 6, cycle: "6개월" },
+    { i: 12, cycle: "1년" },
+  ];
   const cashbookAsset = props.cashbookAsset;
   const setCashbookAsset = props.setCashbookAsset;
+  const assetList = ["현금", "신용카드", "체크카드", "이체", "기타"];
   const cashbookCategory = props.cashbookCategory;
   const setCashbookCategory = props.setCashbookCategory;
   const cashbookMoney = props.cashbookMoney;
@@ -40,7 +58,7 @@ const AddCashbook = (props) => {
     e.currentTarget.innerText === "수입"
       ? setCashbookFinance(1)
       : setCashbookFinance(2);
-    console.log(e);
+
     e.currentTarget.classList.add("finance-checked");
   };
 
@@ -49,9 +67,12 @@ const AddCashbook = (props) => {
     toggle();
   };
   const [cashbookDate, setCashbookDate] = useState(new Date());
+
   const changeLoop = (e) => {
     setCashbookLoop(e.currentTarget.value);
-    const loop = document.querySelectorAll(".loop-div");
+  };
+  const changeLoopMonth = (e) => {
+    setLoopMonth(e.currentTarget.value);
   };
   return (
     <div
@@ -94,30 +115,64 @@ const AddCashbook = (props) => {
                 color="#010440"
               />
             </div>
-            <div className="modal-detail-content loop-div">
+            <div className="modal-detail-content select-div">
               <label htmlFor="add-loop">반복/할부</label>
-              <select
-                name="cashbookLoop"
-                value={cashbookLoop}
-                onChange={changeLoop}
-              >
-                <option value="0">없음</option>
-                <option value="1">반복</option>
-                <option value="2">할부</option>
-              </select>
-
-              <Input
-                data={cashbookLoop}
-                setData={setCashbookLoop}
-                content={"add-loop"}
-              />
+              <div>
+                <select
+                  name="cashbookLoop"
+                  value={cashbookLoop}
+                  onChange={changeLoop}
+                >
+                  {cashbookLoopList.map((item, index) => (
+                    <option value={index} key={index}>
+                      {item}
+                    </option>
+                  ))}
+                </select>
+                {cashbookLoop === "1" ? (
+                  <select
+                    name="loopMonth"
+                    defaultValue={loopMonth}
+                    onChange={changeLoopMonth}
+                    className="cashbook-select"
+                  >
+                    <option value="">주기 선택</option>
+                    {loopMonthMap.map((item, index) => (
+                      <option value={item.i} key={index}>
+                        {item.cycle + "마다"}
+                      </option>
+                    ))}
+                  </select>
+                ) : null}
+                {cashbookLoop === "2" ? (
+                  <Input
+                    data={loopMonth}
+                    setData={setLoopMonth}
+                    placeholder={"개월 수"}
+                    type={"number"}
+                    min={0}
+                    max={99}
+                  />
+                ) : null}
+              </div>
             </div>
-            <label htmlFor="add-asset">자산</label>
-            <Input
-              data={cashbookAsset}
-              setData={setCashbookAsset}
-              content={"add-asset"}
-            />
+            <div className="modal-detail-content select-div">
+              <label htmlFor="add-asset">자산</label>
+              <div>
+                <select
+                  name="cashbookAsset"
+                  id="add-asset"
+                  value={cashbookAsset}
+                  onChange={(e) => setCashbookAsset(e.currentTarget.value)}
+                >
+                  {assetList.map((item, index) => (
+                    <option value={index + 1} key={index + 1}>
+                      {item}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
             <label htmlFor="add-category">분류</label>
             <Input
               data={cashbookCategory}
@@ -129,6 +184,8 @@ const AddCashbook = (props) => {
               data={cashbookMoney}
               setData={setCashbookMoney}
               content={"add-money"}
+              type={"number"}
+              min={0}
             />
             <label htmlFor="add-content">내용</label>
             <Input
