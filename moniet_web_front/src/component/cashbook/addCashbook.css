@@ -103,3 +103,10 @@
   width: 30%;
   display: inline-block;
 }
+#numChkMsg {
+  font-size: 12px;
+  flood-color: #002a54;
+}
+input:invalid {
+  border: 1px solid red;
+}

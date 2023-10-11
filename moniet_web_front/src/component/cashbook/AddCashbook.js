@@ -4,10 +4,9 @@ import { Button1, Button5 } from "../util/Buttons";
 import Input from "../util/InputFrm";
 import { Calendar } from "react-date-range";
 import ko from "date-fns/locale/ko";
-import Select from "../util/Select";
-import Swal from "sweetalert2";
 
 const AddCashbook = (props) => {
+  const title = props.title;
   const isOpen = props.isOpen;
   const closeFrm = props.closeFrm;
   const dateString = props.dateString;
@@ -46,7 +45,10 @@ const AddCashbook = (props) => {
   const setCashbookContent = props.setCashbookContent;
   const cashbookMemo = props.cashbookMemo;
   const setCashbookMemo = props.setCashbookMemo;
+  const incomeCate = props.incomeCate;
+  const spendingCate = props.spendingCate;
   const clickEvent = props.clickEvent;
+
   const [toggleOn, setToggleOn] = useState(false);
   const toggle = () => {
     setToggleOn(!toggleOn);
@@ -58,7 +60,6 @@ const AddCashbook = (props) => {
     e.currentTarget.innerText === "수입"
       ? setCashbookFinance(1)
       : setCashbookFinance(2);
-
     e.currentTarget.classList.add("finance-checked");
   };
 
@@ -74,6 +75,14 @@ const AddCashbook = (props) => {
   const changeLoopMonth = (e) => {
     setLoopMonth(e.currentTarget.value);
   };
+  const dataOnlyNum = (e) => {
+    const regNumber = /^[0-9]+$/;
+    let value = e.currentTarget.value;
+    if (!regNumber.test(value)) {
+      document.querySelector("#add-money").value = "";
+      setCashbookMoney("");
+    }
+  };
   return (
     <div
       className="modal"
@@ -81,7 +90,7 @@ const AddCashbook = (props) => {
       style={{ display: isOpen ? "flex" : "none" }}
     >
       <div className="modal-content">
-        <div className="modal-title">입력</div>
+        <div className="modal-title">{title}</div>
         <div className="modalBtn-area finance-zone">
           <div className="select-finance">
             <Button5 text={"수입"} clickEvent={selectFinance} />
@@ -117,6 +126,7 @@ const AddCashbook = (props) => {
             </div>
             <div className="modal-detail-content select-div">
               <label htmlFor="add-loop">반복/할부</label>
+              <span id="numChkMsg"></span>
               <div>
                 <select
                   name="cashbookLoop"
@@ -149,6 +159,7 @@ const AddCashbook = (props) => {
                     data={loopMonth}
                     setData={setLoopMonth}
                     placeholder={"개월 수"}
+                    content={"installment"}
                     type={"number"}
                     min={0}
                     max={99}
@@ -173,19 +184,40 @@ const AddCashbook = (props) => {
                 </select>
               </div>
             </div>
-            <label htmlFor="add-category">분류</label>
-            <Input
-              data={cashbookCategory}
-              setData={setCashbookCategory}
-              content={"add-category"}
-            />
+            <div className="modal-detail-content select-div">
+              <label htmlFor="add-category">분류</label>
+              <div>
+                <select
+                  name="cashbookCategory"
+                  id="add-category"
+                  onChange={(e) => setCashbookCategory(e.currentTarget.value)}
+                  value={cashbookCategory}
+                >
+                  {cashbookFinance === 1
+                    ? incomeCate.map((item, index) => (
+                        <option value={item.categoryNo} key={"income" + index}>
+                          {item.categoryTitle}
+                        </option>
+                      ))
+                    : spendingCate.map((item, index) => (
+                        <option
+                          value={item.categoryNo}
+                          key={"spending" + index}
+                        >
+                          {item.categoryTitle}
+                        </option>
+                      ))}
+                </select>
+              </div>
+            </div>
             <label htmlFor="add-money">금액(원)</label>
             <Input
               data={cashbookMoney}
               setData={setCashbookMoney}
               content={"add-money"}
-              type={"number"}
-              min={0}
+              type={"text"}
+              placeholder={"숫자만 입력하세요."}
+              keyUpEvent={dataOnlyNum}
             />
             <label htmlFor="add-content">내용</label>
             <Input

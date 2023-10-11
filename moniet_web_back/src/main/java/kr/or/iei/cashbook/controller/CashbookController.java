@@ -1,5 +1,6 @@
 package kr.or.iei.cashbook.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import kr.or.iei.cashbook.model.service.CashbookService;
 import kr.or.iei.cashbook.model.vo.Cashbook;
+import kr.or.iei.cashbook.model.vo.Category;
 
 @RestController
 @RequestMapping(value="/cashbook")
@@ -37,5 +39,27 @@ public class CashbookController {
 		cashbook.setMemberId(memberId);
 		Map map = cashbookService.sumOfCashbook(cashbook);
 		return map;
+	}
+	
+	@PostMapping(value="/categoryList")
+	public Map categoryList(@RequestAttribute String memberId) {
+		System.out.println("카테고리:"+memberId);
+		List<Category> categoryList = cashbookService.categoryList(memberId);
+		System.out.println(categoryList);
+		List incomeCategory = new ArrayList<Category>();
+		List spendingCategory = new ArrayList<Category>();
+		//ref 1:수입, 2:지출
+		for(Category c : categoryList) {
+			if(c.getCategoryRef() == 1) {
+				incomeCategory.add(c);
+			} else if(c.getCategoryRef()==2) {
+				spendingCategory.add(c);
+			}
+		}
+		Map map = new HashMap<String, Object>();
+		map.put("incomeCategory", incomeCategory);
+		map.put("spendingCategory", spendingCategory);
+		return map;
+		
 	}
 }

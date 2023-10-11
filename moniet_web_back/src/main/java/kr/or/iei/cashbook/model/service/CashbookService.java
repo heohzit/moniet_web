@@ -43,4 +43,9 @@ public class CashbookService {
 		List sum = cashbookDao.pieDash(memberId);
 		return sum;
 	}
+
+	public List categoryList(String memberId) {
+		List list = cashbookDao.category(memberId);
+		return list;
+	}
 }

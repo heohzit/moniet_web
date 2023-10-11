@@ -10,6 +10,8 @@ const Input = (props) => {
   const blurEvent = props.blurEvent;
   const disabled = props.disabled;
   const placeholder = props.placeholder;
+  const pattern = props.pattern;
+  const keyUpEvent = props.keyUpEvent;
   const changevalue = (e) => {
     const inputValue = e.currentTarget.value;
     setData(inputValue);
@@ -27,6 +29,8 @@ const Input = (props) => {
         max={max}
         disabled={disabled}
         placeholder={placeholder}
+        pattern={pattern}
+        onKeyUp={keyUpEvent}
       ></input>
     </>
   );

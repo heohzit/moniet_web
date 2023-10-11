@@ -60,4 +60,10 @@
 		member_no=(select member_no from member where member_id=#{memberId}) 
 		group by cashbook_finance
 	</select>
+	
+	<select id="category" resultType="category">
+		select category_no, category_title, category_ref from category_tbl
+		where category_default=1 and (member_no is null or member_no=(select member_no from member where member_id=#{memberId}))
+		order by category_no
+	</select>
 </mapper>
