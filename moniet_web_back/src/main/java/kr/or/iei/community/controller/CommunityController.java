@@ -102,8 +102,6 @@ public class CommunityController {
 	@GetMapping(value="/communityBoardList/{reqPage}/{communityNo}")
 	public List communityBoardList(@PathVariable int reqPage, @PathVariable int communityNo) {
 		List list = communityService.communityBoardList(reqPage, communityNo);
-		System.out.println(communityNo);
-		System.out.println(list);
 		return list;
 	}
 	

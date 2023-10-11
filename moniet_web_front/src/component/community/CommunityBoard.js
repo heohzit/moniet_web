@@ -38,7 +38,13 @@ const CommunityBoardItem = (props) => {
     <>
       <div className="board-item">
         <div className="board-item-info">
-          <div className="board-item-type">게시물 구분</div>
+          <div className="board-item-type">
+            {board.communityBoardTypeList
+              ? board.communityBoardTypeList.map((types, index) => {
+                  return <BoardTypesItem key={"types" + index} types={types} />;
+                })
+              : ""}
+          </div>
 
           <div className="board-item-profile">
             <div className="board-item-account">
@@ -59,6 +65,26 @@ const CommunityBoardItem = (props) => {
         </div>
       </div>
     </>
+  );
+};
+
+const BoardTypesItem = (props) => {
+  const types = props.types;
+
+  return (
+    <div className="board-types">
+      <div className="board-type-name">
+        {types.communityBoardTypeDiv === 1 ? (
+          <span className="keyword2 key-1">가입인사</span>
+        ) : types.communityBoardTypeDiv === 2 ? (
+          <span className="keyword2 key-2">질문</span>
+        ) : types.communityBoardTypeDiv === 3 ? (
+          <span className="keyword2 key-3">꿀팁</span>
+        ) : (
+          <span className="keyword2 key-4">잡담</span>
+        )}
+      </div>
+    </div>
   );
 };
 
