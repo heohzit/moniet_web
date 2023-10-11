@@ -49,13 +49,31 @@ const IngChallenge = () => {
     setCurrentPage(1);
     setBackPage(false);
   };
+  //챌린지 레벨 조회
+  const ChallengeLevel = () => {
+    const token = window.localStorage.getItem("token");
+    const [level, setLevel] = useState("");
+    useEffect(() => {
+      axios
+        .post("/challenge/challengeLevel", null, {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        })
+        .then((res) => {
+          console.log(res.data);
+        })
+        .catch((res) => {
+          console.log(res.response.status);
+          setLevel(res.data);
+        });
+    }, []);
+    return [];
+  };
   return (
     <div className="challenge-content-wrap">
       <div className="challenge-content">
-        <p>
-          현재 나의 챌린지 레벨은
-          <ChallengeLevel></ChallengeLevel>입니다.
-        </p>
+        <p>현재 나의 챌린지 레벨은 입니다.</p>
         <div className="challenge-list-wrap1">
           {showChallenge.map((challenge, index) => {
             if (challenge.challengeKind === 1) {
@@ -107,24 +125,24 @@ const ChallengeItem = (props) => {
   const ImgDiv = (num) => {
     switch (num) {
       case 0:
-        return <img src="./image/success.PNG"></img>;
+        return "";
       case 1:
-        return <img src="./image/success.PNG"></img>;
+        return <img src="../image/success.PNG"></img>;
       case 2:
-        return <img src="./image/fail.jpg"></img>;
+        return <img src="../image/fail.jpg"></img>;
     }
   };
   return (
     <div className="challenge-item" onClick={challengeView}>
       <div className="challenge-item-info">
-        <div className="challenge-result">
-          {ImgDiv(challenge.challengeResult)}
-        </div>
         <div className="challenge-kind">
           {challenge.challengeKind === 1 ? <div>저축</div> : <div>지출</div>}
         </div>
         <div>{challenge.challengeTitle}</div>
         <Dayday challenge={challenge}></Dayday>
+        <div className="challenge-result">
+          {ImgDiv(challenge.challengeResult)}
+        </div>
       </div>
     </div>
   );
@@ -158,23 +176,4 @@ const Dayday = (props) => {
   );
 };
 
-//챌린지 레벨 조회
-const ChallengeLevel = () => {
-  const token = window.localStorage.getItem("token");
-  const [level, setLevel] = useState(null);
-  useEffect(() => {
-    axios
-      .post("/challenge/challengeLevel", null, {
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      })
-      .then((res) => {
-        console.log(res.data);
-      })
-      .catch((res) => {
-        console.log(res.response.status);
-      });
-  }, []);
-};
 export default IngChallenge;

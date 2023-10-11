@@ -16,7 +16,7 @@ const ChallengeList = (props) => {
     navigate("write");
   };
   const [menus, setMenus] = useState([
-    { url: "ing", text: "진행중인 머니챌린지", active: true },
+    { url: "", text: "진행중인 머니챌린지", active: true },
     { url: "end", text: "종료된 머니챌린지", active: false },
   ]);
   return (
