@@ -51,13 +51,12 @@ public class MemberController {
 		String savepath = root+"member/";
 		
 		if(thumbnail != null) {
+			
 			String filename = thumbnail.getOriginalFilename();
 			String filepath = fileUtil.getFilepath(savepath, filename, thumbnail);
 			m.setImgFile(filepath);
 		}
-		System.out.println(m);
-		System.out.println(thumbnail.getOriginalFilename());
-		
+		System.out.println(m);		
 		int result = memberService.insertMember(m);
 		return result;
 	}

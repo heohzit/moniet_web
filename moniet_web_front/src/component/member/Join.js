@@ -21,8 +21,6 @@ const Join = () => {
   const [memberImg, setMemberImg] = useState(null);
   const navigate = useNavigate();
 
-
-
   //이미지 업로드 input onChange
   const thumbnailChange = (e) => {
     const files = e.currentTarget.files;
@@ -101,18 +99,18 @@ const Join = () => {
       checkEmailMsg === ""
     ) {
       const form = new FormData();
-      form.append("thumbnail",thumbnail);
-      form.append("memberId",memberId);
-      form.append("memberPw",memberPw);
-      form.append("memberName",memberName);
-      form.append("memberPhone",memberPhone);
-      form.append("memberEmail",memberEmail);
+      form.append("thumbnail", thumbnail);
+      form.append("memberId", memberId);
+      form.append("memberPw", memberPw);
+      form.append("memberName", memberName);
+      form.append("memberPhone", memberPhone);
+      form.append("memberEmail", memberEmail);
       axios
-        .post("/member/join",form, {
-          headers : {
+        .post("/member/join", form, {
+          headers: {
             contentType: "multipart/form-data",
             processdData: false, //문자열 말고 file type도 있는걸 알려줌
-          }
+          },
         })
         .then((res) => {
           if (res.data === 1) {
@@ -137,7 +135,11 @@ const Join = () => {
     <div className="join-wrap">
       <div className="join-title">MEMBERSHIP</div>
       <div className="join-img-wrap">
-      {memberImg === null ? <img src="/image/piggy.jpg"/> : <img src={memberImg} />}
+        {memberImg === null ? (
+          <img src="/image/piggy.jpg" />
+        ) : (
+          <img src={memberImg} />
+        )}
       </div>
       <div className="join-profile-wrap">
         <label htmlFor="profileImg" className="signup-profileImg-label">
