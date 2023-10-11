@@ -27,9 +27,6 @@ public class MemberService {
 		expiredMs = 1000*60*60l;
 	}
 
-	public Member selectOneMember(String memberId) {
-		return memberDao.selectOneMember(memberId);
-	}
 	
 	
 	@Transactional
@@ -70,6 +67,22 @@ public class MemberService {
 	public int updatePwMember(Member member) {
 		// TODO Auto-generated method stub
 		return memberDao.updatePwMember(member);
+	}
+
+
+
+	public Member selectOneMember(String memberId) {
+		return memberDao.selectOneMember(memberId);
+	}
+
+
+
+	public Member selectOneMemberPw(String memberId, String memberName, String memberEmail) {
+		//System.out.println(memberId);
+		//System.out.println(memberName);
+		//System.out.println(memberEmail);
+		return memberDao.selectOneMemberPw(memberId,memberName,memberEmail);
+		
 	}
 
 	
