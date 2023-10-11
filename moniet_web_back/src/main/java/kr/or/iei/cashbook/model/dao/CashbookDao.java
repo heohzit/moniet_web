@@ -21,6 +21,8 @@ public interface CashbookDao {
 	//파이대시보드
 	List pieDash(String memberId);
 
+	List category(String memberId);
+
 
 
 }

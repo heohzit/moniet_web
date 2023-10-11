@@ -4,7 +4,7 @@ import { Link, Route, Routes } from "react-router-dom";
 import Main from "./component/common/Main";
 import DashboardMain from "./component/dashboard/DashboardMain";
 import ChallengeMain from "./component/challenge/ChallengeMain";
-import Cashbook from "./component/cashbook/Cashbook";
+import CashbookMain from "./component/cashbook/CashbookMain";
 import CommunityMain from "./component/community/CommunityMain";
 import Join from "./component/member/Join";
 import Login from "./component/member/Login";
@@ -46,7 +46,7 @@ function App() {
           />
           <Route
             path="/cashbook/*"
-            element={<Cashbook />}
+            element={<CashbookMain />}
             isLogin={isLogin}
             setIsLogin={setIsLogin}
           />

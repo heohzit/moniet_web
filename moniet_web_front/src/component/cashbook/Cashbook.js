@@ -5,13 +5,14 @@ import "./cashbook.css";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import axios from "axios";
-import { DateRange, DateRangePicker, DefinedRange } from "react-date-range";
+import { DateRangePicker } from "react-date-range";
 import { addDays } from "date-fns";
 import ko from "date-fns/locale/ko";
 import { Button4, Button5 } from "../util/Buttons";
 import AddComma from "./AddComma";
 import Input from "../util/InputFrm";
 import AddCashbook from "./AddCashbook";
+import { NextMonth, PrevMonth } from "./MoveMonth";
 
 const Cashbook = (props) => {
   const isLogin = props.isLogin;
@@ -64,6 +65,28 @@ const Cashbook = (props) => {
         setCashbookSum(res.data);
       });
   }, [select]);
+
+  //카테고리셋팅
+  const [incomeCate, setIncomCate] = useState([]);
+  const [spendingCate, setSpendingCate] = useState([]);
+  useEffect(() => {
+    const token = window.localStorage.getItem("token");
+    axios
+      .post("/cashbook/categoryList", null, {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      })
+      .then((res) => {
+        console.log(res.data.incomeCategory);
+        setIncomCate(res.data.incomeCategory);
+        setSpendingCate(res.data.spendingCategory);
+      })
+      .catch((res) => {
+        console.log(res.response.status);
+      });
+  }, []);
+
   const addComma = (num) => {
     if (num >= 1000) {
       const numAddComma = num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -76,7 +99,7 @@ const Cashbook = (props) => {
   const [cashbookLoop, setCashbookLoop] = useState(0);
   const [loopMonth, setLoopMonth] = useState(0);
   const [cashbookAsset, setCashbookAsset] = useState("");
-  const [cashbookCategory, setCashbookCategory] = useState([]);
+  const [cashbookCategory, setCashbookCategory] = useState(11);
   const [cashbookMoney, setCashbookMoney] = useState(0);
   const [cashbookContent, setCashbookContent] = useState("");
   const [cashbookMemo, setCashbookMemo] = useState("");
@@ -110,10 +133,15 @@ const Cashbook = (props) => {
   };
 
   return (
-    <div className="cashbook-all-wrap">
-      <div className="cashbook-title">내역</div>
+    <div>
       <div className="date-range-icon">
-        <img src="icon/left-btn.png" alt="prev" />
+        <PrevMonth
+          dateRange={dateRange}
+          setDateRange={setDateRange}
+          select={select}
+          setSelect={setSelect}
+        />
+
         <div onClick={() => toggle()}>
           <Input
             data={
@@ -123,7 +151,13 @@ const Cashbook = (props) => {
             }
           />
         </div>
-        <img src="icon/right-btn.png" alt="next" />
+
+        <NextMonth
+          dateRange={dateRange}
+          setDateRange={setDateRange}
+          select={select}
+          setSelect={setSelect}
+        />
       </div>
       <div
         className={
@@ -156,6 +190,7 @@ const Cashbook = (props) => {
           <AddCashbook
             isOpen={addFrmOpen}
             closeFrm={closeFrm}
+            title={"입력"}
             dateString={dateString}
             cashbookFinance={cashbookFinance}
             setCashbookFinance={setCashbookFinance}
@@ -173,6 +208,8 @@ const Cashbook = (props) => {
             setCashbookContent={setCashbookContent}
             cashbookMemo={cashbookMemo}
             setCashbookMemo={setCashbookMemo}
+            incomeCate={incomeCate}
+            spendingCate={spendingCate}
             clickEvent={clickEvent}
           />
         </div>
