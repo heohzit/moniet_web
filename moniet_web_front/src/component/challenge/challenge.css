@@ -1,15 +1,44 @@
-/*챌린지 제목*/
+/*챌린지Main 제목*/
 .challenge-title {
   font-size: 20px;
-  border-bottom: 2px solid #ccc;
 }
 /*챌린지 리스트*/
 .challenge-item-info {
   border: 1px solid black;
   width: 300px;
   height: 100px;
+  margin: 20px;
 }
-/*메뉴css*/
+.challenge-content {
+  text-align: center;
+  height: auto;
+}
+.challenge-list-wrap1 {
+  float: left;
+  height: auto;
+  position: relative;
+}
+.challenge-list-wrap2 {
+  display: inline-block;
+  height: auto;
+  margin-left: 10px;
+  position: relative;
+}
+.challenge-item-info {
+  position: relative;
+}
+.challenge-result {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
+}
+.challenge-result > img {
+  opacity: 0.9;
+  width: 100%;
+  height: 100%;
+}
+/*챌린지 메뉴*/
 .challengeMenu-tab > ul {
   list-style-type: none;
   overflow: hidden;
@@ -31,10 +60,15 @@
   font-weight: 900;
   border-bottom: none;
 }
-/*Frm css*/
+/*챌린지 작성 버튼*/
+.board-write-btn {
+  width: 150px;
+}
+/*챌린지 작성*/
 .challenge-frm-top {
   width: 700px;
   height: 500px;
+  margin: 0 auto;
   background-color: #fff;
   border: 1px solid #ccc;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
@@ -46,50 +80,19 @@
   width: 35px;
   border-radius: 30px;
 }
-/*챌린지 글쓰기 버튼*/
-.board-write-btn {
-  width: 150px;
-}
-/*챌린지 버튼*/
+/*챌린지상세보기 버튼*/
 .challenge-btn-box {
   width: 150px;
-}
-/*챌린지 리스트*/
-.challenge-content {
-  text-align: center;
-  height: 50vh;
-}
-.challenge-list-wrap1 {
-  float: left;
-  height: auto;
-  margin: 80px;
-  position: relative;
+  margin: 0 auto;
 }
 
-.challenge-list-wrap2 {
-  display: inline-block;
-  height: auto;
-  margin-left: 10px;
-  margin: 80px;
-  position: relative;
-}
-
+/*챌린지 상세보기*/
 .challenge-view-content {
+  margin: 0 auto;
   width: 700px;
   height: 500px;
   background-color: #fff;
   border: 1px solid #ccc;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   border-radius: 30px;
-}
-.challenge-item-info div {
-  position: relative;
-}
-
-.challenge-item-info img {
-  opacity: 0.8;
-  position: relative;
-  z-index: 2;
-  height: 100%;
-  width: 100%;
 }

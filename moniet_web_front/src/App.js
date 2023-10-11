@@ -13,6 +13,7 @@ import MemberMain from "./component/member/MemberMain";
 import Myinfo from "./component/member/Myinfo";
 import AgreeBox from "./component/member/AgreeBox";
 import FindPw from "./component/member/FindPw";
+import FindID from "./component/member/FindID";
 
 function App() {
   const [isLogin, setIsLogin] = useState(null);
@@ -58,6 +59,7 @@ function App() {
           <Route path="/join" element={<AgreeBox />} />
           <Route path="/joinfrm" element={<Join />} />
           <Route path="/login" element={<Login setIsLogin={setIsLogin} />} />
+          <Route path="/findId" element={<FindID />} />
           <Route path="/findPw" element={<FindPw />} />
           <Route
             path="/member/myinfo"

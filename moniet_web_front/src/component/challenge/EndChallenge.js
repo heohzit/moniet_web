@@ -91,6 +91,17 @@ const ChallengeItem = (props) => {
       state: { challengeNo: challenge.challengeNo },
     });
   };
+  //챌린지 성공/실패 이미지
+  const ImgDiv = (num) => {
+    switch (num) {
+      case 0:
+        return "";
+      case 1:
+        return <img src="../image/success.PNG"></img>;
+      case 2:
+        return <img src="../image/fail.jpg"></img>;
+    }
+  };
   return (
     <div className="challenge-item" onClick={challengeView}>
       <div className="challenge-item-info">
@@ -98,6 +109,9 @@ const ChallengeItem = (props) => {
           {challenge.challengeKind === 1 ? <div>저축</div> : <div>지출</div>}
         </div>
         <div>{challenge.challengeTitle}</div>
+        <div className="challenge-result">
+          {ImgDiv(challenge.challengeResult)}
+        </div>
       </div>
     </div>
   );

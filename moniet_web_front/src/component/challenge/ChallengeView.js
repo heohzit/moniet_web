@@ -31,6 +31,7 @@ const ChallengeView = (props) => {
   const currentAmount = [[challenge.total]]; // 현재 금액
   const progress = Math.floor((currentAmount / goalAmount) * 100); // 진행률 계산
 
+  //진행률 멘트
   const ProgressMent = (progress) => {
     if (challenge.challengeKind === 1) {
       if (progress >= 90) {
