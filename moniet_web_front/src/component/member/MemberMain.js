@@ -3,7 +3,7 @@ import "./memberMain.css";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Input from "../util/InputFrm";
-import { Button1 } from "../util/Buttons";
+import { Button1, Button2 } from "../util/Buttons";
 
 const MemberMain = (props) => {
   const isLogin = props.isLogin;
@@ -70,7 +70,6 @@ const MemberMain = (props) => {
       <div className="my-title">MY PAGE</div>
       <div className="my-content">
         <div className="pw-check-zone">
-          <div className="pw-check-zone-title">비밀번호 확인</div>
           <div className="pw-check-zone-content">
             회원님의 안전한 개인정보 보호를 위해 비밀번호를 다시 한번 확인
             합니다.
@@ -83,7 +82,7 @@ const MemberMain = (props) => {
                 type="password"
                 content="currPw"
               />
-              <Button1 text="확인" clickEvent={pwCheck}></Button1>
+              <Button2 text="확인" clickEvent={pwCheck}></Button2>
             </div>
           </div>
         </div>

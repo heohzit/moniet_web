@@ -57,6 +57,7 @@
 /*챌린지 리스트*/
 .challenge-content {
   text-align: center;
+  height: 50vh;
 }
 .challenge-list-wrap1 {
   float: left;
@@ -72,9 +73,7 @@
   margin: 80px;
   position: relative;
 }
-.challenge-more {
-  position: relative;
-}
+
 .challenge-view-content {
   width: 700px;
   height: 500px;
@@ -82,4 +81,15 @@
   border: 1px solid #ccc;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   border-radius: 30px;
+}
+.challenge-item-info div {
+  position: relative;
+}
+
+.challenge-item-info img {
+  opacity: 0.8;
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  width: 100%;
 }

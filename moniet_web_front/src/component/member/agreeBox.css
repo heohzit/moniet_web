@@ -9,7 +9,7 @@
   font-size: 24px;
   font-family: ns-b;
   padding: 30px 0px;
-  color: #151426;
+  color: #010440;
   border-bottom: 1px solid #ccc;
   margin-bottom: 40px;
 }
@@ -21,7 +21,7 @@
   border: none;
   outline: none;
   color: #ccc;
-  background-color: #151426;
+  background-color: #010440;
   font-size: 16px;
   margin: 45px 0px;
   height: 50px;
@@ -35,7 +35,7 @@
 }
 .check input[type="checkbox"] {
   margin-right: 8px;
-  accent-color: #151426;
+  accent-color: #010440;
   cursor: pointer;
   width: 20px;
   height: 20px;

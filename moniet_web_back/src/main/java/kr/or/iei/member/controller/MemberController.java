@@ -42,6 +42,22 @@ public class MemberController {
 			return 1;
 		}
 	}
+	
+	//회원정보조회(비밀번호  찾기)
+	@PostMapping(value="/memberCheck")
+	public int memberCheck(@RequestBody Member member) {
+		System.out.println(member);
+		Member m  = memberService.selectOneMemberPw(member.getMemberId(), member.getMemberName(), member.getMemberEmail());
+		System.out.println(member.getMemberId());
+		if(m == null) {
+			return 0;
+		}
+		else {
+			return 1;
+		}
+		
+	}
+	
 
 	//회원가입
 	//service 호출 시 메소드 이름이 Member로 끝나면서 매개변수가 Member 타입이면 비밀번호 암호화 수행

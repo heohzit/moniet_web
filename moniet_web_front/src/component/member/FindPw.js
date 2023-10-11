@@ -1,11 +1,32 @@
 import { useState } from "react";
 import "./findPw.css";
+import axios from "axios";
 const FindPw = () => {
   const [memberId, setMemberId] = useState("");
   const [memberName, setMemberName] = useState("");
   const [memberEmail, setMemberEmail] = useState("");
 
-  const memberCheck = () => {};
+  const memberCheck = () => {
+    const member = {
+      memberId,
+      memberName,
+      memberEmail,
+    };
+    console.log(member);
+    axios
+      .post("/member/memberCheck", member)
+      .then((res) => {
+        console.log(res.data);
+        if (res.data == 0) {
+          alert("입력하신 정보로 가입 된 회원은 존재하지 않습니다.");
+        } else {
+          alert("찾기성공");
+        }
+      })
+      .catch((res) => {
+        console.log(res);
+      });
+  };
 
   return (
     <div className="find-pw-wrap">

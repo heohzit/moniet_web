@@ -30,20 +30,46 @@ const ChallengeView = (props) => {
   const goalAmount = [[challenge.challengeAmount]]; // 목표 금액
   const currentAmount = [[challenge.total]]; // 현재 금액
   const progress = Math.floor((currentAmount / goalAmount) * 100); // 진행률 계산
-  const Talk = (progress) => {
-    if (progress < 15) {
-      <div>시작이좋아요</div>;
-    } else if (progress < 30) {
-      <div>시작이좋아요</div>;
-    } else if (progress < 55) {
-      <div>시작이좋아요</div>;
-    } else if (progress < 80) {
-      <div>시작이좋아요</div>;
-    } else if (progress < 95) {
-      <div>시작이좋아요</div>;
+
+  const ProgressMent = (progress) => {
+    if (challenge.challengeKind === 1) {
+      if (progress >= 90) {
+        return (
+          <span className="material-icons">
+            thumb_up_alt 성공이 눈앞에! 최고!
+          </span>
+        );
+      } else if (progress >= 50) {
+        return (
+          <span className="material-icons">
+            sentiment_very_satisfied 잘하고있어요!
+          </span>
+        );
+      } else {
+        return (
+          <span className="material-icons">
+            sentiment_satisfied_alt 시작이 좋아요!
+          </span>
+        );
+      }
+    } else {
+      if (progress >= 90) {
+        return "돈을 매우 아껴쓰고 있어요!";
+      } else if (progress >= 50) {
+        return (
+          <span className="material-icons">
+            sentiment_dissatisfied 조금만 더 아껴주세요.
+          </span>
+        );
+      } else {
+        return (
+          <span className="material-icons">
+            sentiment_very_dissatisfied 자린고비 시작이에요.
+          </span>
+        );
+      }
     }
   };
-
   //챌린지 삭제
   const deleteChallenge = () => {
     Swal.fire({
@@ -107,6 +133,7 @@ const ChallengeView = (props) => {
           <div>지출챌린지</div>
         )}
       </div>
+      <div>{ProgressMent(progress)}</div>
       <div>목표 금액: {goalAmount.toLocaleString()}원</div>
       <div>현재 금액: {currentAmount.toLocaleString()}원</div>
       <CircularProgressBar
@@ -124,8 +151,7 @@ const ChallengeView = (props) => {
         <div>{challenge.challengeEnd}</div>
       </div>
       <div className="challenge-btn-box">
-        {challenge.challengeState === 2 ||
-        challenge.challengeResult === 2 ||
+        {challenge.challengeResult === 2 ||
         dateString > challenge.challengeEnd ? (
           ""
         ) : (
