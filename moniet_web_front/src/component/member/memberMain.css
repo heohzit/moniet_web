@@ -25,6 +25,7 @@
   font-family: ns-b;
   text-align: center;
   padding-bottom: 30px;
+  color: #010440;
 }
 /* 테이블 디자인*/
 .my-info-tbl {
@@ -48,7 +49,7 @@
   width: 80%;
 }
 .my-info-btn-wrap {
-  margin: 30px 0px;
+  margin: 50px 0px;
   text-align: center;
 }
 .my-info-btn-wrap > button {
@@ -63,22 +64,20 @@
   cursor: pointer;
 }
 #deleteBtn {
-  background-color: #151426;
+  background-color: #010440;
   color: #fff;
 }
-/*테이블*/
-.pw-check-zone-title {
-  font-size: 18px;
-  font-family: ns-r;
-  padding: 20px 0px;
-}
+
 .pw-check-zone-content {
+  margin-top: 30px;
+  text-align: center;
   border: 3px solid #f8f8f8;
   padding: 50px;
 }
 .pw-check-zone-content > div {
   display: flex;
   align-items: center;
+  justify-content: center;
   flex-wrap: wrap;
   padding: 10px 0;
 }
@@ -91,7 +90,7 @@
   height: 43px;
   line-height: 43px;
   padding: 0px;
-  font-size: 16px;
+  font-size: 15px;
 }
 
 .new-pw-check-wrap > * {
@@ -113,7 +112,7 @@
   cursor: pointer;
 }
 .new-pw-del-btn {
-  background-color: #151426;
+  background-color: #010440;
   color: #fff;
 }
 
