@@ -85,6 +85,12 @@ public class MemberService {
 		
 	}
 
+
+
+	public Member selectOneMemberId(String memberName, String memberEmail) {
+		return memberDao.selectOneMemberId(memberName, memberEmail);
+	}
+
 	
 
 	
