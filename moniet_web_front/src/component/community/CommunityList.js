@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Input from "../util/InputFrm";
 import Select from "../util/Select";
+import Swal from "sweetalert2";
 
 const CommuintyList = (props) => {
   const isLogin = props.isLogin;
@@ -33,6 +34,8 @@ const CommuintyList = (props) => {
     navigate("write");
   };
 
+  const searchCommunity = () => {};
+
   return (
     <div>
       {/* {isLogin ? ( */}
@@ -45,7 +48,9 @@ const CommuintyList = (props) => {
             type="type"
             content="searchBox"
           />
-          <span class="material-icons search-btn">search</span>
+          <span class="material-icons search-btn" onClick={searchCommunity}>
+            search
+          </span>
         </div>
         <div className="community-write-btn">
           <Button2 text="글쓰기" clickEvent={write} />
