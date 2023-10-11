@@ -1,10 +1,9 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Input from "./InputFrm";
 import "./join.css";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
-import AgreeBox from "./AgreeBox";
 
 const Join = () => {
   const [memberId, setMemberId] = useState("");
@@ -18,7 +17,28 @@ const Join = () => {
   const [checkNameMsg, setCheckNameMsg] = useState("");
   const [checkPhoneMsg, setCheckPhoneMsg] = useState("");
   const [checkEmailMsg, setCheckEmailMsg] = useState("");
+  const [thumbnail, setThumbnail] = useState("");
+  const [memberImg, setMemberImg] = useState(null);
   const navigate = useNavigate();
+
+
+
+  //이미지 업로드 input onChange
+  const thumbnailChange = (e) => {
+    const files = e.currentTarget.files;
+    if (files.length !== 0 && files[0] != 0) {
+      setThumbnail(files[0]);
+
+      const reader = new FileReader();
+      reader.readAsDataURL(files[0]);
+      reader.onloadend = () => {
+        setMemberImg(reader.result);
+      };
+    } else {
+      setThumbnail({});
+      setMemberImg(null);
+    }
+  };
 
   const idCheck = () => {
     const idReg = /^[a-zA-Z0-9]{4,8}$/;
@@ -80,18 +100,27 @@ const Join = () => {
       checkPhoneMsg === "" &&
       checkEmailMsg === ""
     ) {
-      const member = {
-        memberId,
-        memberPw,
-        memberName,
-        memberPhone,
-        memberEmail,
-      };
+      const form = new FormData();
+      form.append("thumbnail",thumbnail);
+      form.append("memberId",memberId);
+      form.append("memberPw",memberPw);
+      form.append("memberName",memberName);
+      form.append("memberPhone",memberPhone);
+      form.append("memberEmail",memberEmail);
       axios
-        .post("/member/join", member)
+        .post("/member/join",form, {
+          headers : {
+            contentType: "multipart/form-data",
+            processdData: false, //문자열 말고 file type도 있는걸 알려줌
+          }
+        })
         .then((res) => {
           if (res.data === 1) {
-            Swal.fire("회원가입이 완료되었습니다!","로그인 페이지로 이동합니다.","success");
+            Swal.fire(
+              "회원가입이 완료되었습니다!",
+              "로그인 페이지로 이동합니다.",
+              "success"
+            );
             navigate("/login");
           } else {
             Swal.fire("회원가입 실패");
@@ -107,6 +136,21 @@ const Join = () => {
   return (
     <div className="join-wrap">
       <div className="join-title">MEMBERSHIP</div>
+      <div className="join-img-wrap">
+      {memberImg === null ? <img src="/image/piggy.jpg"/> : <img src={memberImg} />}
+      </div>
+      <div className="join-profile-wrap">
+        <label htmlFor="profileImg" className="signup-profileImg-label">
+          프로필 이미지 업로드
+        </label>
+        <input
+          className="sign-up-profile-img-input"
+          type="file"
+          accept="image/jpg,impge/png,image/jpeg"
+          id="profileImg"
+          onChange={thumbnailChange}
+        />
+      </div>
       <JoinInputWrap
         data={memberId}
         setData={setMemberId}

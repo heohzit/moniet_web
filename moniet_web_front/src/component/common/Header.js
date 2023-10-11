@@ -39,9 +39,6 @@ const NaviSide = (props) => {
             <Link to="/member/mypage">마이페이지</Link>
             <ul className="submenu">
               <li>
-                <Link to="/member/updatePw">비밀번호변경</Link>
-              </li>
-              <li>
                 <Link to="member/like">찜 목록</Link>
               </li>
             </ul>

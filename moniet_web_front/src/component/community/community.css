@@ -275,7 +275,6 @@
   font-size: 18px;
   font-family: ns-b;
   color: #323673;
-  margin-bottom: 30px;
 }
 
 .community-item-parti > span,
@@ -520,6 +519,7 @@
 .community-item-types {
   overflow: hidden;
   padding-bottom: 5px;
+  margin-bottom: 30px;
 }
 
 .community-types {
