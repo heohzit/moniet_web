@@ -15,6 +15,7 @@ const CommuintyList = (props) => {
   const [communityWriter, setCommunityWriter] = useState("");
 
   useEffect(() => {
+    console.log("CommunityList.js isLogin : " + isLogin);
     axios
       .get("/community/list/" + reqPage)
       .then((res) => {

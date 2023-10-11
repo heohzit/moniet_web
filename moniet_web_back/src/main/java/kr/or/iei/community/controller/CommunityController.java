@@ -94,4 +94,9 @@ public class CommunityController {
 		return communityService.selectOneCommunity(communityNo);
 	}
 	
+//	@GetMapping(value="/delete/{communityNo}")
+//	public int deleteCommunity(@PathVariable int communityNo) {
+//		List<CommunityType> typeList = communityService.delete(communityNo);
+//	}
+	
 }
