@@ -31,6 +31,6 @@ public interface ChallengeDao {
 	void challengeFinish();
 
 	//챌린지 레벨 조회
-	Challenge challengeLevel(String memberId);
+	int challengeLevel(String memberId);
 	
 }

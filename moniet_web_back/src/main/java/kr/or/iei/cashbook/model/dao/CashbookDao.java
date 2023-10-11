@@ -18,6 +18,9 @@ public interface CashbookDao {
 	int countOfIncome(Cashbook cashbook);
 	int countOfSpending(Cashbook cashbook);
 
+	//파이대시보드
+	List pieDash(String memberId);
+
 
 
 }

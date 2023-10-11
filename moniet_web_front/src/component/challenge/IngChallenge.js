@@ -51,8 +51,10 @@ const IngChallenge = () => {
   };
   return (
     <div className="challenge-content">
-      <p>현재 나의 챌린지 레벨은</p>
-      <ChallengeLevel></ChallengeLevel>
+      <p>
+        현재 나의 챌린지 레벨은 <ChallengeLevel></ChallengeLevel>입니다.
+      </p>
+
       <div className="challenge-list-wrap1">
         {showChallenge.map((challenge, index) => {
           if (challenge.challengeKind === 1) {
@@ -136,7 +138,7 @@ const Dayday = (props) => {
 
 //챌린지 레벨 조회
 const ChallengeLevel = () => {
-  const [level, setLevle] = useState();
+  const [level, setLevle] = useState(0);
   const token = window.localStorage.getItem("token");
   useEffect(() => {
     axios

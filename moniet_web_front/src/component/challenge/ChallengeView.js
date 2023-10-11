@@ -28,8 +28,21 @@ const ChallengeView = (props) => {
       });
   }, []);
   const goalAmount = [[challenge.challengeAmount]]; // 목표 금액
-  const currentAmount = [[challenge.total]]; // 현재 금액// 진행률 계산
-  const progress = Math.floor((currentAmount / goalAmount) * 100);
+  const currentAmount = [[challenge.total]]; // 현재 금액
+  const progress = Math.floor((currentAmount / goalAmount) * 100); // 진행률 계산
+  const Talk = (progress) => {
+    if (progress < 15) {
+      <div>시작이좋아요</div>;
+    } else if (progress < 30) {
+      <div>시작이좋아요</div>;
+    } else if (progress < 55) {
+      <div>시작이좋아요</div>;
+    } else if (progress < 80) {
+      <div>시작이좋아요</div>;
+    } else if (progress < 95) {
+      <div>시작이좋아요</div>;
+    }
+  };
 
   //챌린지 삭제
   const deleteChallenge = () => {

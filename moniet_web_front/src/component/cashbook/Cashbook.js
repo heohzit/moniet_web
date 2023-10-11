@@ -36,6 +36,7 @@ const Cashbook = (props) => {
     const day = date.getDate();
     return `${year}-${month}-${day}`;
   }
+
   useEffect(() => {
     const token = window.localStorage.getItem("token");
     axios
@@ -80,7 +81,7 @@ const Cashbook = (props) => {
   const [cashbookContent, setCashbookContent] = useState("");
   const [cashbookMemo, setCashbookMemo] = useState("");
   const clickEvent = () => {
-    console.log(cashbookFinance);
+    console.log(cashbookAsset);
   };
 
   const applyDate = () => {
