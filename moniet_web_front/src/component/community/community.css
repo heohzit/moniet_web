@@ -72,6 +72,10 @@
   font-size: 15px;
 }
 
+.community-search-box > select > option {
+  font-size: 15px;
+}
+
 .community-search-box > .list-input-wrap {
   width: 65%;
 }
@@ -511,8 +515,7 @@
 .community-view-board-zone {
   width: 100%;
   float: left;
-  margin-top: 10px;
-  padding: 20px 0;
+  margin-top: 30px;
   border-top: 1px solid #ccc;
 }
 
@@ -546,20 +549,32 @@
   padding: 2px 15px;
 }
 
+.community-view-board {
+  border-top: 1px solid #ccc;
+  margin-top: 50px;
+}
+
 .board-top {
   font-size: 24px;
   font-family: ns-eb;
   color: #010440;
-  margin: 20px 0;
+  margin: 30px 0;
 }
 
 .board-item {
-  margin-bottom: 100px;
+  border-radius: 20px;
+  max-height: 400px;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  background-color: #fafafa;
+}
+
+.board-item-info {
+  padding: 20px;
 }
 
 .board-item-profile {
   overflow: hidden;
-  border-bottom: 1px solid #ccc;
   padding-bottom: 20px;
 }
 
@@ -588,5 +603,70 @@
 }
 
 .board-item-content {
-  padding: 30px 0;
+  padding-left: 5px;
+  padding-bottom: 20px;
+  font-family: ns-r;
+}
+
+.board-write-wrap {
+  overflow: hidden;
+  width: 100%;
+}
+
+.board-write-textarea,
+.board-write-options {
+  float: left;
+}
+
+.board-write-wrap > .board-write-textarea {
+  width: 80%;
+  height: 200px;
+}
+
+.board-write-wrap > .board-write-textarea > textarea {
+  width: 98%;
+  height: 200px;
+  box-sizing: border-box;
+  resize: none;
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+
+.board-write-options {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 20%;
+  height: 200px;
+  box-sizing: border-box;
+}
+
+.board-write-options button {
+  height: 75px;
+}
+
+.board-write-options > select {
+  width: 100%;
+  padding-left: 5px;
+}
+
+.board-types {
+  overflow: hidden;
+  display: block;
+  padding-left: 8px;
+  padding-bottom: 10px;
+}
+
+.board-types > div {
+  float: left;
+}
+
+.keyword2 {
+  font-family: ns-r;
+  font-size: 13px;
+  border: none;
+  padding: 3px 10px;
+  color: #fff;
+  background-color: #404259;
+  border-radius: 5px;
 }

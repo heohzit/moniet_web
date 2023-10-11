@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import { Button1, Button2, Button3, Button4 } from "../util/Buttons";
 import axios from "axios";
 import CommunityBoard from "./CommunityBoard";
+import CommunityBoardWrite from "./CommunityBoardWrite";
 
 const CommunityView = (props) => {
   const isLogin = props.isLogin;
@@ -145,9 +146,11 @@ const CommunityView = (props) => {
       </div>
 
       <div className="community-view-board-zone">
-        <div className="community-view-board-write"></div>
+        <div className="board-top">게시물 등록 〉</div>
+        <div className="community-view-board-write">
+          <CommunityBoardWrite />
+        </div>
         <div className="community-view-board-list">
-          <div className="board-top">게시글 〉</div>
           <CommunityBoard communityNo={communityNo} />
         </div>
       </div>

@@ -222,6 +222,7 @@ const JoinInputWrap = (props) => {
   const label = props.label;
   const checkMsg = props.checkMsg;
   const blurEvent = props.blurEvent;
+
   return (
     <div className="join-input-wrap">
       <div>
