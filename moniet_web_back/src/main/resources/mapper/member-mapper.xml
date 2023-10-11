@@ -9,6 +9,10 @@
 		select * from member where member_id=#{memberId} and member_name=#{memberName} and member_email=#{memberEmail}
 	</select>
 	
+	<select id="selectOneMemberId" resultType="member">
+		select * from member where member_name=#{memberName} and member_email=#{memberEmail}
+	</select>
+	
 	
 	<insert id="insertMember">
 		insert into member values(member_seq.nextval,#{memberId},#{memberPw},#{memberName},#{memberPhone},#{memberEmail},1,0,#{imgFile})

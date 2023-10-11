@@ -21,6 +21,8 @@ public interface MemberDao {
 
 	Member selectOneMemberPw(String memberId, String memberName, String memberEmail);
 
+	Member selectOneMemberId(String memberName, String memberEmail);
+
 	
 
 	

@@ -16,3 +16,6 @@ npm install quill-image-resize-module-react     23.10.04
 //dashboard 
 npm install chart.js                            23.10.10
 npm install --save chart.js react-chartjs-2     23.10.10
+
+//이메일 전송용
+npm install nodemailer --save 23.10.11 
