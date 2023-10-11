@@ -545,3 +545,48 @@
 .community-types > .type-name span {
   padding: 2px 15px;
 }
+
+.board-top {
+  font-size: 24px;
+  font-family: ns-eb;
+  color: #010440;
+  margin: 20px 0;
+}
+
+.board-item {
+  margin-bottom: 100px;
+}
+
+.board-item-profile {
+  overflow: hidden;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 20px;
+}
+
+.board-item-account,
+.board-item-profileInfo {
+  float: left;
+}
+
+.board-item-account > span {
+  font-size: 60px;
+}
+
+.board-item-profileInfo {
+  padding: 0 10px;
+}
+
+.board-item-profileInfo > .board-item-writer {
+  font-size: 20px;
+  font-family: ns-b;
+}
+
+.board-item-profileInfo > .board-item-date {
+  font-size: 15px;
+  color: gray;
+  font-family: ns-r;
+}
+
+.board-item-content {
+  padding: 30px 0;
+}

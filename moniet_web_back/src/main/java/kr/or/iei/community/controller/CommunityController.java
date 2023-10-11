@@ -99,9 +99,11 @@ public class CommunityController {
 //		List<CommunityType> typeList = communityService.delete(communityNo);
 //	}
 	
-	@GetMapping(value="/communityBoardList/{reqPage}")
-	public List communityBoardList(@PathVariable int reqPage) {
-		List list = communityService.communityBoardList(reqPage);
+	@GetMapping(value="/communityBoardList/{reqPage}/{communityNo}")
+	public List communityBoardList(@PathVariable int reqPage, @PathVariable int communityNo) {
+		List list = communityService.communityBoardList(reqPage, communityNo);
+		System.out.println(communityNo);
+		System.out.println(list);
 		return list;
 	}
 	

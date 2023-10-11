@@ -56,8 +56,8 @@ public class CommunityService {
 		return c;
 	}
 
-	public List communityBoardList(int reqPage) {
-		List list = communityDao.communityBoardList();
+	public List communityBoardList(int reqPage, int communityNo) {
+		List list = communityDao.communityBoardList(communityNo);
 		return list;
 	}
 

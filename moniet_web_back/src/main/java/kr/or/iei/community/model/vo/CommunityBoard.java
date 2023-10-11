@@ -16,7 +16,6 @@ public class CommunityBoard {
 
 	private int communityBoardNo;
 	private int communityBoardWriter;
-	private int communityBoardType;
 	private String communityBoardContent;
 	private String communityBoardDate;
 	private int communityRef;

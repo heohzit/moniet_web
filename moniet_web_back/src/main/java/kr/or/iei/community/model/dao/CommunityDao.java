@@ -20,6 +20,6 @@ public interface CommunityDao {
 	
 	List selectOneCommunityType(int communityNo);
 
-	List communityBoardList();
+	List communityBoardList(int communityNo);
 
 }
