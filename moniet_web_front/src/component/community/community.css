@@ -497,7 +497,7 @@
 
 .community-view-bottom-btns {
   margin-top: 50px;
-  float: left;
+  float: right;
   width: 75px;
   display: flex;
   justify-content: space-between;
