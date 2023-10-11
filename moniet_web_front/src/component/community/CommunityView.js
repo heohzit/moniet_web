@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { Button1, Button2, Button3, Button4 } from "../util/Buttons";
 import axios from "axios";
+import CommunityBoard from "./CommunityBoard";
 
 const CommunityView = (props) => {
   const isLogin = props.isLogin;
@@ -12,6 +13,8 @@ const CommunityView = (props) => {
   const [community, setCommunity] = useState({});
   const [member, setMember] = useState(null);
   const navigate = useNavigate();
+
+  console.log("CommunitiView.js isLogin : " + isLogin);
 
   useEffect(() => {
     axios
@@ -40,7 +43,31 @@ const CommunityView = (props) => {
         });
     }
   }, []);
-  console.log(member);
+
+  // const deleteCommunity = () => {
+  //   Swal.fire({
+  //     icon: "warning",
+  //     text: "해당 커뮤니티를 삭제하시겠습니까?",
+  //     showCancelButton: true,
+  //     confirmButtonText: "삭제",
+  //     cancelButtonText: "취소",
+  //   }).then((res) => {
+  //     if (res.isConfirmed) {
+  //       axios
+  //         .get("/community/delete/" + community.communityNo)
+  //         .then((res) => {
+  //           console.log(res.data);
+  //           if (res.data === 1) {
+  //             navigate("/community");
+  //           }
+  //         })
+  //         .catch((res) => {
+  //           console.log(res.response.status);
+  //         });
+  //     }
+  //   });
+  // };
+
   return (
     <div className="community-view-wrap">
       <div className="community-view-thumbnail">
@@ -98,11 +125,14 @@ const CommunityView = (props) => {
         {isLogin ? (
           member && member.memberNo == community.communityWriter ? (
             <>
-              <div className="community-view-update">
+              <div className="community-view-update" clickEvent={""}>
                 <span className="community-view-update-btn">수정</span>
               </div>
 
-              <div className="community-view-delete">
+              <div
+                className="community-view-delete"
+                onClick={"deleteCommunity"}
+              >
                 <span className="community-view-delete-btn">삭제</span>
               </div>
             </>
@@ -114,9 +144,7 @@ const CommunityView = (props) => {
         )}
       </div>
 
-      <div className="community-view-board-zone">
-        <div className="community-view-board">게시글</div>
-      </div>
+      <CommunityBoard />
     </div>
   );
 };

@@ -6,6 +6,7 @@ import CommunityList from "./CommunityList";
 
 const CommunityMain = (props) => {
   const isLogin = props.isLogin;
+  console.log("CommunityMain.js isLogin : " + isLogin);
 
   return (
     <div className="community-all-wrap">

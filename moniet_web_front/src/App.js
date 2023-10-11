@@ -50,9 +50,9 @@ function App() {
           />
           <Route
             path="/community/*"
-            element={<CommunityMain />}
-            isLogin={isLogin}
-            setIsLogin={setIsLogin}
+            element={
+              <CommunityMain isLogin={isLogin} setIsLogin={setIsLogin} />
+            }
           />
           <Route path="/join" element={<AgreeBox />} />
           <Route path="/joinfrm" element={<Join />} />
