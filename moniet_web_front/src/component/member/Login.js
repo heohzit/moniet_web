@@ -53,7 +53,7 @@ const Login = (props) => {
       <div className="search-wrap">
         <Link to="#">아이디찾기</Link>
         <span> ㅣ </span>
-        <Link to="#">비밀번호찾기</Link>
+        <Link to="/findPw">비밀번호찾기</Link>
       </div>
       <div className="login-button-wrap">
         <button onClick={login}>로그인</button>
