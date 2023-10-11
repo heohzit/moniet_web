@@ -11,6 +11,7 @@ import {
 import { Bar } from "react-chartjs-2";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import PieDashboard from "./PieDashboard";
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -19,7 +20,7 @@ ChartJS.register(
   Tooltip,
   Legend
 );
-const options = {
+const options1 = {
   responsive: true,
   plugins: {
     legend: {
@@ -62,10 +63,61 @@ const options = {
     },
   },
 };
+const options2 = {
+  responsive: true,
+  plugins: {
+    legend: {
+      position: "top",
+    },
+    title: {
+      display: true,
+      text: "저축 카테고리별",
+    },
+  },
+  scales: {
+    y: {
+      grid: {
+        drawBorder: false,
+        color: function () {
+          return "#D3D3D3";
+        },
+      },
 
+      ticks: {
+        color: "#D3D3D3",
+        font: {
+          color: "#D3D3D3",
+        },
+      },
+    },
+    x: {
+      ticks: {
+        color: "#808080",
+        font: {
+          color: "#D3D3D3",
+        },
+      },
+      grid: {
+        drawBorder: false,
+        color: function () {
+          return "#D3D3D3";
+        },
+      },
+    },
+  },
+};
 const BarDashboard = () => {
-  const [data, setData] = useState({
+  const [data1, setData1] = useState({
     labels: ["지출1", "지출2", "지출3", "지출4", "지출5", "지출6"],
+    datasets: [
+      {
+        label: "Dataset 1",
+        data: [],
+      },
+    ],
+  });
+  const [data2, setData2] = useState({
+    labels: ["저축1", "저축2", "저축3", "저축4", "저축5", "저축6"],
     datasets: [
       {
         label: "Dataset 1",
@@ -83,12 +135,12 @@ const BarDashboard = () => {
       })
       .then((res) => {
         console.log(res.data);
-        setData({
-          labels: ["지출1", "지출2", "지출3", "지출4", "지출5", "지출6"],
+        setData1({
+          labels: [],
           datasets: [
             {
               label: "비율",
-              data: data,
+              data: data1,
               backgroundColor: [
                 "rgba(255, 99, 132, 0.5)",
                 "rgba(54, 162, 235, 0.5)",
@@ -115,8 +167,9 @@ const BarDashboard = () => {
   }, []);
   return (
     <div>
-      <Bar options={options} data={data} />
-      <Bar options={options} data={data} />
+      <Bar options={options1} data={data1} />
+      <Bar options={options2} data={data2} />
+      <PieDashboard></PieDashboard>
     </div>
   );
 };

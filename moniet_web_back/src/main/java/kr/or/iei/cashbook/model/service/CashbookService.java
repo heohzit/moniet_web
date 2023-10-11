@@ -37,4 +37,10 @@ public class CashbookService {
 		map.put("countOut", countOfSpending);
 		return map;
 	}
+	
+	//파이대시보드
+	public List pieDash(String memberId) {
+		List sum = cashbookDao.pieDash(memberId);
+		return sum;
+	}
 }

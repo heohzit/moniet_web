@@ -46,6 +46,7 @@ const PieDashboard = () => {
   });
   useEffect(() => {
     const token = window.localStorage.getItem("token");
+    const dataSet1 = [];
     axios
       .post("/dashboard/pie", null, {
         headers: {
@@ -53,13 +54,12 @@ const PieDashboard = () => {
         },
       })
       .then((res) => {
-        console.log(res.data);
         setData({
           labels: ["수입", "지출"],
           datasets: [
             {
-              label: "용도",
-              data: data,
+              label: "금액",
+              data: res.data,
               backgroundColor: [
                 "rgba(255, 99, 132, 0.5)",
                 "rgba(54, 162, 235, 0.5)",

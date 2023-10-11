@@ -65,7 +65,7 @@ public class ChallengeController {
 	
 	//챌린지 레벨 조회
 	@PostMapping (value="/challengeLevel")
-	public Challenge challengeLevel(@RequestAttribute String memberId) {
+	public int challengeLevel(@RequestAttribute String memberId) {
 		return challengeService.challengeLevel(memberId);
 	}
 	

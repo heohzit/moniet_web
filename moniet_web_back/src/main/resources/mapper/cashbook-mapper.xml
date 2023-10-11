@@ -52,4 +52,12 @@
 		where CASHBOOK_FINANCE=2 and cashbook_date >= #{startDate} and cashbook_date <= #{endDate} and member_no=(select member_no from member where member_id=#{memberId})
 		]]>
 	</select>
+	
+	<!--파이대시보드-->
+	<select id="pieDash" resultType="int">
+		select sum(cashbook_money) from cashbook 
+		where TO_CHAR(SYSDATE, 'MM') = TO_CHAR(cashbook_date,'MM') and 
+		member_no=(select member_no from member where member_id=#{memberId}) 
+		group by cashbook_finance
+	</select>
 </mapper>

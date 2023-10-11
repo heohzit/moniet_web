@@ -24,4 +24,5 @@ public class Challenge {
 	
 	private String memberId;
 	private int total;
+	private int challengeStatus;
 }
