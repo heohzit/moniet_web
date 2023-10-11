@@ -171,6 +171,14 @@ const Myinfo = (props) => {
     <div>
       <div className="my-title">MY PAGE</div>
       <div className="my-content">
+        <div className="profile-img-zone">
+          {member.imgFile}
+          {member.imgFile === "y" ? (
+            <img src="/image/piggy.jpg" />
+          ) : (
+            <img src={"/member/" + member.imgFile} />
+          )}
+        </div>
         <table className="my-info-tbl">
           <tbody>
             <tr>
