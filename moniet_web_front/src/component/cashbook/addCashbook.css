@@ -71,7 +71,7 @@
 }
 .calenadr-div {
   position: absolute;
-
+  z-index: 2000;
   /*display: none;*/
 }
 .calenadr-div * {
@@ -83,4 +83,23 @@
 }
 #add-date {
   cursor: pointer;
+}
+.select-div {
+  margin-bottom: 20px;
+}
+.select-div select {
+  font-size: 18px;
+  margin-top: 5px;
+  margin-right: 20px;
+  width: 40%;
+  padding: 0.3rem;
+  background-color: #fff;
+  outline: none;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  border-radius: 3px;
+}
+.select-div > div > input {
+  width: 30%;
+  display: inline-block;
 }

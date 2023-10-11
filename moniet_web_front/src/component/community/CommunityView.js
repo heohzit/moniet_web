@@ -144,7 +144,13 @@ const CommunityView = (props) => {
         )}
       </div>
 
-      <CommunityBoard />
+      <div className="community-view-board-zone">
+        <div className="community-view-board-write"></div>
+        <div className="community-view-board-list">
+          <div className="board-top">게시글 〉</div>
+          <CommunityBoard communityNo={communityNo} />
+        </div>
+      </div>
     </div>
   );
 };

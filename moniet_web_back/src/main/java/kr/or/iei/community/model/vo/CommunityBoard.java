@@ -15,8 +15,7 @@ import lombok.NoArgsConstructor;
 public class CommunityBoard {
 
 	private int communityBoardNo;
-	private int memberNo;
-	private int communityBoardType;
+	private int communityBoardWriter;
 	private String communityBoardContent;
 	private String communityBoardDate;
 	private int communityRef;

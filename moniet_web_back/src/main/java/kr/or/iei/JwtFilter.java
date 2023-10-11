@@ -28,11 +28,13 @@ public class JwtFilter extends OncePerRequestFilter {
 		
 		String auth = request.getHeader(HttpHeaders.AUTHORIZATION);
 		System.out.println("filter/auth : "+auth);
+		
 		if(auth == null || !auth.startsWith("Bearer ") || auth.indexOf("null") != -1) {
 			System.out.println("인증이 없거나, 잘못됨");
 			filterChain.doFilter(request, response);
 			return;
 		}
+		
 		String token = auth.split(" ")[1];
 		System.out.println("filter/token : "+token);
 		
