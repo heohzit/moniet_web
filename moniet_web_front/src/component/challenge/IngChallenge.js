@@ -136,18 +136,21 @@ const Dayday = (props) => {
 
 //챌린지 레벨 조회
 const ChallengeLevel = () => {
+  const [level, setLevle] = useState();
   const token = window.localStorage.getItem("token");
-  axios
-    .post("/challenge/challengeLevel", null, {
-      headers: {
-        Authorization: "Bearer " + token,
-      },
-    })
-    .then((res) => {
-      console.log(res.data);
-    })
-    .catch((res) => {
-      console.log(res.response.status);
-    });
+  useEffect(() => {
+    axios
+      .post("/challenge/challengeLevel", null, {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      })
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((res) => {
+        console.log(res.response.status);
+      });
+  }, []);
 };
 export default IngChallenge;
