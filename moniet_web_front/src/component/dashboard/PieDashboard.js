@@ -22,6 +22,8 @@ ChartJS.register(
   Legend
 );
 
+const today = new Date();
+const formattedDate = `${today.getMonth() + 1}월`;
 const options = {
   responsive: true,
   plugins: {
@@ -30,7 +32,7 @@ const options = {
     },
     title: {
       display: true,
-      text: "1개월 내 수입/지출",
+      text: formattedDate + " 수입 / 지출",
     },
   },
 };
@@ -46,7 +48,6 @@ const PieDashboard = () => {
   });
   useEffect(() => {
     const token = window.localStorage.getItem("token");
-    const dataSet1 = [];
     axios
       .post("/dashboard/pie", null, {
         headers: {
@@ -58,7 +59,7 @@ const PieDashboard = () => {
           labels: ["수입", "지출"],
           datasets: [
             {
-              label: "금액",
+              label: "합계",
               data: res.data,
               backgroundColor: [
                 "rgba(255, 99, 132, 0.5)",

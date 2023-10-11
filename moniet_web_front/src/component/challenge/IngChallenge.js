@@ -50,28 +50,36 @@ const IngChallenge = () => {
     setBackPage(false);
   };
   return (
-    <div className="challenge-content">
-      <p>
-        현재 나의 챌린지 레벨은 <ChallengeLevel></ChallengeLevel>입니다.
-      </p>
-
-      <div className="challenge-list-wrap1">
-        {showChallenge.map((challenge, index) => {
-          if (challenge.challengeKind === 1) {
-            return (
-              <ChallengeItem key={"challenge" + index} challenge={challenge} />
-            );
-          }
-        })}
-      </div>
-      <div className="challenge-list-wrap2">
-        {showChallenge.map((challenge, index) => {
-          if (challenge.challengeKind === 2) {
-            return (
-              <ChallengeItem key={"challenge" + index} challenge={challenge} />
-            );
-          }
-        })}
+    <div className="challenge-content-wrap">
+      <div className="challenge-content">
+        <p>
+          현재 나의 챌린지 레벨은
+          <ChallengeLevel></ChallengeLevel>입니다.
+        </p>
+        <div className="challenge-list-wrap1">
+          {showChallenge.map((challenge, index) => {
+            if (challenge.challengeKind === 1) {
+              return (
+                <ChallengeItem
+                  key={"challenge" + index}
+                  challenge={challenge}
+                />
+              );
+            }
+          })}
+        </div>
+        <div className="challenge-list-wrap2">
+          {showChallenge.map((challenge, index) => {
+            if (challenge.challengeKind === 2) {
+              return (
+                <ChallengeItem
+                  key={"challenge" + index}
+                  challenge={challenge}
+                />
+              );
+            }
+          })}
+        </div>
       </div>
       {backPage ? (
         <div className="challenge-more">
@@ -95,9 +103,23 @@ const ChallengeItem = (props) => {
       state: { challengeNo: challenge.challengeNo },
     });
   };
+  //챌린지 성공/실패 이미지
+  const ImgDiv = (num) => {
+    switch (num) {
+      case 0:
+        return <img src="./image/success.PNG"></img>;
+      case 1:
+        return <img src="./image/success.PNG"></img>;
+      case 2:
+        return <img src="./image/fail.jpg"></img>;
+    }
+  };
   return (
     <div className="challenge-item" onClick={challengeView}>
       <div className="challenge-item-info">
+        <div className="challenge-result">
+          {ImgDiv(challenge.challengeResult)}
+        </div>
         <div className="challenge-kind">
           {challenge.challengeKind === 1 ? <div>저축</div> : <div>지출</div>}
         </div>
@@ -138,8 +160,8 @@ const Dayday = (props) => {
 
 //챌린지 레벨 조회
 const ChallengeLevel = () => {
-  const [level, setLevle] = useState(0);
   const token = window.localStorage.getItem("token");
+  const [level, setLevel] = useState(null);
   useEffect(() => {
     axios
       .post("/challenge/challengeLevel", null, {
