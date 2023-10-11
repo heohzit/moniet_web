@@ -14,7 +14,12 @@ const FindID = () => {
     axios
       .post("/member/searchId", member)
       .then((res) => {
-        console.log(res.data);
+        //받는값이 null 일때
+        if (res.data === "") {
+          alert("입력하신 정보로 가입 된 회원은 존재하지 않습니다.");
+        } else {
+          console.log(res.data);
+        }
       })
       .catch((res) => {
         console.log(res);
