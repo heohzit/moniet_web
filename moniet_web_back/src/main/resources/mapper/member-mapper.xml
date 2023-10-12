@@ -15,7 +15,7 @@
 	
 	
 	<insert id="insertMember">
-		insert into member values(member_seq.nextval,#{memberId},#{memberPw},#{memberName},#{memberPhone},#{memberEmail},1,0,#{imgFile})
+		insert into member values(member_seq.nextval,#{memberId},#{memberPw},#{memberName},#{memberPhone},#{memberEmail},1,0,#{imgFile},sysdate)
 	</insert>
 
 	<delete id="deleteMember">

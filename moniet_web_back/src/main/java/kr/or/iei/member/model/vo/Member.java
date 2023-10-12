@@ -20,4 +20,5 @@ public class Member {
 	private int memberGrade;
 	private int challengeStatus;
 	private String imgFile;
+	private String memberDate;
 }
