@@ -1,3 +1,6 @@
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+
 const PrevMonth = (props) => {
   const dateRange = props.dateRange;
   const setDateRange = props.setDateRange;
@@ -19,7 +22,7 @@ const PrevMonth = (props) => {
     setSelect(!select);
   };
 
-  return <img src="icon/left-btn.png" alt="prev" onClick={prev} />;
+  return <ChevronLeftIcon onClick={prev} />;
 };
 const NextMonth = (props) => {
   const dateRange = props.dateRange;
@@ -41,7 +44,7 @@ const NextMonth = (props) => {
     setDateRange([{ startDate: startDate, endDate: endDate }]);
     setSelect(!select);
   };
-  return <img src="icon/right-btn.png" alt="next" onClick={next} />;
+  return <ChevronRightIcon onClick={next} />;
 };
 
 export { PrevMonth, NextMonth };
