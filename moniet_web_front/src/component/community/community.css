@@ -720,7 +720,7 @@
 
 .insert-image-preview-top {
   font-size: 18px;
-  font-family: ns-eb;
+  font-family: ns-b;
   color: gray;
 }
 
@@ -730,7 +730,7 @@
 
 .preview-delete {
   color: #6a6da6;
-  font-weight: 900;
+  font-weight: 500;
   position: absolute;
   top: 1.4cm;
   left: 2.3cm;
