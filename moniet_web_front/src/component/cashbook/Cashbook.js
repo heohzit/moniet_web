@@ -11,8 +11,8 @@ import ko from "date-fns/locale/ko";
 import { Button4, Button5 } from "../util/Buttons";
 import AddComma from "./AddComma";
 import Input from "../util/InputFrm";
-import AddCashbook from "./AddCashbook";
 import { NextMonth, PrevMonth } from "./MoveMonth";
+import CashbookWrite from "./CashbookWrite";
 
 const Cashbook = (props) => {
   const isLogin = props.isLogin;
@@ -78,7 +78,6 @@ const Cashbook = (props) => {
         },
       })
       .then((res) => {
-        console.log(res.data.incomeCategory);
         setIncomCate(res.data.incomeCategory);
         setSpendingCate(res.data.spendingCategory);
       })
@@ -93,18 +92,6 @@ const Cashbook = (props) => {
       return numAddComma;
     }
     return num;
-  };
-
-  const [cashbookFinance, setCashbookFinance] = useState(0);
-  const [cashbookLoop, setCashbookLoop] = useState(0);
-  const [loopMonth, setLoopMonth] = useState(0);
-  const [cashbookAsset, setCashbookAsset] = useState("");
-  const [cashbookCategory, setCashbookCategory] = useState(11);
-  const [cashbookMoney, setCashbookMoney] = useState(0);
-  const [cashbookContent, setCashbookContent] = useState("");
-  const [cashbookMemo, setCashbookMemo] = useState("");
-  const clickEvent = () => {
-    console.log(cashbookAsset);
   };
 
   const applyDate = () => {
@@ -185,38 +172,20 @@ const Cashbook = (props) => {
       </div>
 
       <div className="cashbook-content">
-        <div className="add-btn">
-          <img src="icon/add-btn.png" alt="add" onClick={isOpen} />
-          <AddCashbook
-            isOpen={addFrmOpen}
-            closeFrm={closeFrm}
-            title={"입력"}
-            dateString={dateString}
-            cashbookFinance={cashbookFinance}
-            setCashbookFinance={setCashbookFinance}
-            cashbookLoop={cashbookLoop}
-            setCashbookLoop={setCashbookLoop}
-            loopMonth={loopMonth}
-            setLoopMonth={setLoopMonth}
-            cashbookAsset={cashbookAsset}
-            setCashbookAsset={setCashbookAsset}
-            cashbookCategory={cashbookCategory}
-            setCashbookCategory={setCashbookCategory}
-            cashbookMoney={cashbookMoney}
-            setCashbookMoney={setCashbookMoney}
-            cashbookContent={cashbookContent}
-            setCashbookContent={setCashbookContent}
-            cashbookMemo={cashbookMemo}
-            setCashbookMemo={setCashbookMemo}
-            incomeCate={incomeCate}
-            spendingCate={spendingCate}
-            clickEvent={clickEvent}
-          />
-        </div>
+        <CashbookWrite
+          isOpen={isOpen}
+          addFrmOpen={addFrmOpen}
+          closeFrm={closeFrm}
+          dateString={dateString}
+          incomeCate={incomeCate}
+          spendingCate={spendingCate}
+          select={select}
+          setSelect={setSelect}
+        />
         <div className="cashbook-btn-zone">
           <Button5
             text={
-              "전체(" +
+              "합계(" +
               addComma(cashbookSum.totalCount) +
               "건) " +
               addComma(cashbookSum.total) +
@@ -250,10 +219,10 @@ const Cashbook = (props) => {
                   <input type="checkbox" className="cashbook-checkbox" />
                 </td>
                 <td width={"20%"}>날짜</td>
-                <td width={"20%"}>자산</td>
-                <td width={"20%"}>분류</td>
-                <td width={"20%"}>금액</td>
-                <td width={"20%"}>내용</td>
+                <td width={"15%"}>자산</td>
+                <td width={"15%"}>분류</td>
+                <td width={"15%"}>금액</td>
+                <td width={"30%"}>내용</td>
               </tr>
             </thead>
             <tbody>

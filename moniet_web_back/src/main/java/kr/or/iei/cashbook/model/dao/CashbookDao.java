@@ -27,6 +27,8 @@ public interface CashbookDao {
 	//바 대시보드
 	List barDash(String memberId);
 
+	int insertCashbook(Cashbook cashbook);
+
 
 
 }

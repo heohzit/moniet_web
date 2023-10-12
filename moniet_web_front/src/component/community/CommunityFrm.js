@@ -83,8 +83,23 @@ const CommunityFrm = (props) => {
         })
         .then((res) => {
           // console.log(res.data);
-          Swal.fire("작성 완료", "커뮤니티 작성이 완료되었습니다.", "success");
-          navigate("community");
+
+          Swal.fire({
+            icon: "question",
+            text: "커뮤니티를 작성하시겠습니까?",
+            showCancelButton: true,
+            confirmButtonText: "확인",
+            cancelButtonText: "취소",
+          }).then((res) => {
+            if (res.isConfirmed) {
+              Swal.fire(
+                "작성 완료",
+                "커뮤니티작성이 완료되었습니다.",
+                "success"
+              );
+              navigate("community");
+            }
+          });
         })
         .catch((res) => {
           console.log(res.response.status);

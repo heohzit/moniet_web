@@ -15,13 +15,10 @@ const CommunityView = (props) => {
   const [member, setMember] = useState(null);
   const navigate = useNavigate();
 
-  console.log("CommunitiView.js isLogin : " + isLogin);
-
   useEffect(() => {
     axios
       .get("/community/view/" + communityNo)
       .then((res) => {
-        console.log(res.data);
         setCommunity(res.data);
       })
       .catch((res) => {

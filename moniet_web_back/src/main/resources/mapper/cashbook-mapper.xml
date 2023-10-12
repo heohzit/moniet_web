@@ -11,7 +11,7 @@
   		cashbook_money, cashbook_content, cashbook_memo
   	from cashbook
   	where cashbook_date >= #{startDate} and cashbook_date <= #{endDate} and member_no=(select member_no from member where member_id=#{memberId})
-  	order by 1 desc
+  	order by cashbook_date desc
   	]]>
   </select>
   
@@ -78,4 +78,12 @@
 	and (ct.member_no is null or ct.member_no = (select member_no from member where member_id=#{memberId}))
 	group by category_title, category_ref 
 	</select>
+	<insert id="insertCashbook">
+		insert into cashbook values
+			(CASHBOOK_SEQ.nextval,
+			(select member_no from member where member_id=#{memberId}),
+			 #{cashbookFinance},#{cashbookDate}, #{cashbookLoop},
+			 #{loopMonth}, #{cashbookAsset}, #{cashbookCategory},
+			 #{cashbookMoney}, #{cashbookContent}, #{cashbookMemo})
+	</insert>
 </mapper>

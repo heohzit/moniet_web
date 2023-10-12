@@ -1,13 +1,14 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import "./agreeBox.css";
 import { useNavigate } from "react-router-dom";
-import Swal from "sweetalert2";
 
 const AgreeBox = () => {
   const [allCheck, setAllCheck] = useState(false);
   const [ageCheck, setAgeCheck] = useState(false);
   const [useCheck, setUseCheck] = useState(false);
   const [marketingCheck, setMarketingCheck] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+  const modalBackground = useRef();
   const navigate = useNavigate();
 
   const allBtnEvent = () => {
@@ -119,7 +120,7 @@ const AgreeBox = () => {
                   이용약관 <span>(필수)</span>
                 </label>
                 <button
-                  onClick={popUpForTerms}
+                  onClick={() => setModalOpen(true)}
                   type="button"
                   className="popUpBtn"
                 >
@@ -134,15 +135,40 @@ const AgreeBox = () => {
                   onChange={marketingBtnEvent}
                 />
                 <label htmlFor="check3">
-                  마케팅 동의 <span>(선택)</span>
+                  개인정보수집 및 이용안내 <span>(선택)</span>
                 </label>
                 <button
-                  onClick={popUpForTerms}
+                  onClick={() => setModalOpen(true)}
                   type="button"
                   className="popUpBtn"
                 >
                   자세히
                 </button>
+                {modalOpen && (
+                  <div
+                    className={"modal-container"}
+                    ref={modalBackground}
+                    onClick={(e) => {
+                      if (e.target === modalBackground.current) {
+                        setModalOpen(false);
+                      }
+                    }}
+                  >
+                    <div className={"modal-content"}>
+                      <div className="modal-title">
+                        개인정보 수집 및 이용안내(선택)
+                      </div>
+                      <div className="modal-close-btn-wrap">
+                        <button
+                          className={"modal-close-btn"}
+                          onClick={() => setModalOpen(false)}
+                        >
+                          <span class="material-icons">close</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           </div>
