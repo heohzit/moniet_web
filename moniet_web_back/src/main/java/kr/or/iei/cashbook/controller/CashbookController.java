@@ -60,6 +60,11 @@ public class CashbookController {
 		map.put("incomeCategory", incomeCategory);
 		map.put("spendingCategory", spendingCategory);
 		return map;
-		
+	}
+	
+	@PostMapping(value="/insert")
+	public int insertCashbook(@RequestBody Cashbook cashbook, @RequestAttribute String memberId) {
+		cashbook.setMemberId(memberId);
+		return cashbookService.insertCashbook(cashbook);
 	}
 }

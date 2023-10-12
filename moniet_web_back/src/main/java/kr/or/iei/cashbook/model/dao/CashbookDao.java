@@ -23,6 +23,8 @@ public interface CashbookDao {
 
 	List category(String memberId);
 
+	int insertCashbook(Cashbook cashbook);
+
 
 
 }
