@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.iei.cashbook.model.dao.CashbookDao;
 import kr.or.iei.cashbook.model.vo.Cashbook;
@@ -21,9 +22,10 @@ public class CashbookService {
 	}
 
 	public Map sumOfCashbook(Cashbook cashbook) {
-		int total = cashbookDao.totalSum(cashbook);
+		
 		int sumOfIncome =cashbookDao.sumOfIncome(cashbook); 
 		int sumOfSpending = cashbookDao.sumOfSpending(cashbook);
+		int total = sumOfIncome - sumOfSpending;
 		
 		int totalCount = cashbookDao.totalCount(cashbook);
 		int countOfIncome = cashbookDao.countOfIncome(cashbook);
@@ -47,5 +49,10 @@ public class CashbookService {
 	public List categoryList(String memberId) {
 		List list = cashbookDao.category(memberId);
 		return list;
+	}
+
+	@Transactional
+	public int insertCashbook(Cashbook cashbook) {
+		return cashbookDao.insertCashbook(cashbook);
 	}
 }

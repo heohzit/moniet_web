@@ -41,7 +41,7 @@ const NextMonth = (props) => {
     setDateRange([{ startDate: startDate, endDate: endDate }]);
     setSelect(!select);
   };
-  return <img src="icon/left-btn.png" alt="prev" onClick={next} />;
+  return <img src="icon/right-btn.png" alt="next" onClick={next} />;
 };
 
 export { PrevMonth, NextMonth };

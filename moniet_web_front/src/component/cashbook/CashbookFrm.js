@@ -5,7 +5,7 @@ import Input from "../util/InputFrm";
 import { Calendar } from "react-date-range";
 import ko from "date-fns/locale/ko";
 
-const AddCashbook = (props) => {
+const CashbookFrm = (props) => {
   const title = props.title;
   const isOpen = props.isOpen;
   const closeFrm = props.closeFrm;
@@ -20,6 +20,8 @@ const AddCashbook = (props) => {
     );
     spendingBtn.click();
   }, []);
+  const cashbookDate = props.cashbookDate;
+  const setCashbookDate = props.setCashbookDate;
   const cashbookLoop = props.cashbookLoop;
   const setCashbookLoop = props.setCashbookLoop;
   const cashbookLoopList = ["없음", "반복", "할부"];
@@ -47,9 +49,9 @@ const AddCashbook = (props) => {
   const setCashbookMemo = props.setCashbookMemo;
   const incomeCate = props.incomeCate;
   const spendingCate = props.spendingCate;
-  const clickEvent = props.clickEvent;
-
+  const write = props.clickEvent;
   const [toggleOn, setToggleOn] = useState(false);
+
   const toggle = () => {
     setToggleOn(!toggleOn);
   };
@@ -67,7 +69,6 @@ const AddCashbook = (props) => {
     setCashbookDate(item);
     toggle();
   };
-  const [cashbookDate, setCashbookDate] = useState(new Date());
 
   const changeLoop = (e) => {
     setCashbookLoop(e.currentTarget.value);
@@ -235,7 +236,7 @@ const AddCashbook = (props) => {
           </div>
         </div>
         <div className="modalBtn-area">
-          <Button1 text={"등록"} clickEvent={clickEvent} />
+          <Button1 text={"등록"} clickEvent={write} />
           <button className="closeModalBtn" id="closeModal" onClick={closeFrm}>
             닫기
           </button>
@@ -244,4 +245,4 @@ const AddCashbook = (props) => {
     </div>
   );
 };
-export default AddCashbook;
+export default CashbookFrm;
