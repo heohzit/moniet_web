@@ -34,10 +34,12 @@ const ChallengeView = (props) => {
   //진행률 멘트
   const ProgressMent = (progress) => {
     if (challenge.challengeKind === 1) {
-      if (progress >= 90) {
+      if (progress >= 100) {
+        return <span className="material-icons">thumb_up_alt 성공!!!!!</span>;
+      } else if (progress >= 90) {
         return (
           <span className="material-icons">
-            thumb_up_alt 성공이 눈앞에! 최고!
+            sentiment_very_satisfied 성공이 눈앞에!
           </span>
         );
       } else if (progress >= 50) {
@@ -54,7 +56,13 @@ const ChallengeView = (props) => {
         );
       }
     } else {
-      if (progress >= 90) {
+      if (progress >= 100) {
+        return (
+          <span className="material-icons">
+            sentiment_very_dissatisfied 실패.
+          </span>
+        );
+      } else if (progress >= 90) {
         return (
           <span className="material-icons">
             sentiment_very_dissatisfied 자린고비 시작이에요.
