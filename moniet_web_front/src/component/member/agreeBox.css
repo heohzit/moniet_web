@@ -55,3 +55,17 @@
 .check {
   position: relative;
 }
+
+/*모달창 css*/
+.modal-close-btn {
+  border: none;
+  background-color: #fff;
+  cursor: pointer;
+}
+.modal-content {
+  border-radius: 0;
+  background-color: #fff;
+  border: 1px solid black;
+  width: 500px;
+  height: 500px;
+}
