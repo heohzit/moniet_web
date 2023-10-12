@@ -553,7 +553,7 @@
 
 .community-view-board {
   border-top: 1px solid #ccc;
-  margin-top: 50px;
+  margin-top: 20px;
 }
 
 .board-top {
@@ -687,4 +687,52 @@
 
 .key-4 {
   background-color: orange;
+}
+
+.insert-image-btn {
+  width: 240px;
+  height: 75px;
+  text-align: center;
+  line-height: 75px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-family: ns-eb;
+  border: none;
+  outline: none;
+  color: #fff;
+  background-color: #323673;
+}
+
+.insert-image-preview {
+  width: 100%;
+  padding-top: 50px;
+  float: left;
+  overflow: hidden;
+  position: relative;
+}
+
+.insert-image-preview img {
+  width: 200px;
+  height: 100px;
+  padding: 20px;
+  object-fit: contain;
+}
+
+.insert-image-preview-top {
+  font-size: 18px;
+  font-family: ns-eb;
+  color: gray;
+}
+
+.insert-image-preview-items {
+  float: left;
+}
+
+.preview-delete {
+  color: #6a6da6;
+  font-weight: 900;
+  position: absolute;
+  top: 1.4cm;
+  left: 2.3cm;
+  cursor: pointer;
 }
