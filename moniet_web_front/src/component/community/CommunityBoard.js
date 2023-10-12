@@ -19,7 +19,6 @@ const CommunityBoard = (props) => {
         console.log(res.response.status);
       });
   }, [reqPage]);
-  console.log(communityBoardList);
 
   return (
     <div className="community-view-board">

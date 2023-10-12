@@ -12,6 +12,13 @@ const CommunityBoardWrite = () => {
 
   const changeFile = (e) => {
     const files = e.currentTarget.files;
+    if (files.length > 5) {
+      Swal.fire({
+        icon: "error",
+        text: "첨부파일 최대 갯수는 5개입니다.",
+      });
+      return;
+    }
 
     const arr = new Array();
     const previewArr = new Array();
@@ -71,15 +78,34 @@ const CommunityBoardWrite = () => {
     });
   };
 
+  const insertBoard = () => {
+    const communityBoardContent = document.querySelector(
+      ".board-write-textarea-text"
+    ).value;
+    const selectOption = document.querySelector(
+      ".board-write-options-select"
+    ).value;
+
+    console.log(communityBoardContent);
+    console.log(selectOption);
+    console.log(boardFile);
+
+    if (communityBoardContent !== "" && selectOption != 0) {
+      // ===을 3개쓰면 타입까지 비교하는데, ==을 2개쓰면 순수 데이터만 비교함
+    } else {
+      Swal.fire("작성 실패", "입력값을 확인해주세요.", "warning");
+    }
+  };
+
   return (
     <div className="board-write">
       <div className="board-write-wrap">
         <div className="board-write-textarea">
-          <textarea></textarea>
+          <textarea className="board-write-textarea-text"></textarea>
         </div>
         <div className="board-write-options">
-          <select>
-            <option>말머리를 선택하세요.</option>
+          <select className="board-write-options-select">
+            <option value={0}>말머리를 선택하세요.</option>
             <option value={1}>가입인사</option>
             <option value={2}>질문</option>
             <option value={3}>꿀팁</option>
@@ -96,7 +122,7 @@ const CommunityBoardWrite = () => {
             onChange={changeFile}
             multiple
           />
-          <Button2 text="등록하기" />
+          <Button2 text="등록하기" clickEvent={insertBoard} />
         </div>
         <div className="insert-image-preview">
           {boardImg.length !== 0 ? (
