@@ -38,14 +38,21 @@ public class CashbookService {
 		return map;
 	}
 	
-	//파이대시보드
+
+	public List categoryList(String memberId) {
+		List list = cashbookDao.category(memberId);
+		return list;
+	}
+	
+	//파이 대시보드
 	public List pieDash(String memberId) {
 		List sum = cashbookDao.pieDash(memberId);
 		return sum;
 	}
-
-	public List categoryList(String memberId) {
-		List list = cashbookDao.category(memberId);
+	
+	//바 대시보드
+	public List barDash(String memberId) {
+		List list = cashbookDao.barDash(memberId);
 		return list;
 	}
 }

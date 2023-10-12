@@ -55,7 +55,11 @@ const ChallengeView = (props) => {
       }
     } else {
       if (progress >= 90) {
-        return "돈을 매우 아껴쓰고 있어요!";
+        return (
+          <span className="material-icons">
+            sentiment_very_dissatisfied 자린고비 시작이에요.
+          </span>
+        );
       } else if (progress >= 50) {
         return (
           <span className="material-icons">
@@ -63,11 +67,7 @@ const ChallengeView = (props) => {
           </span>
         );
       } else {
-        return (
-          <span className="material-icons">
-            sentiment_very_dissatisfied 자린고비 시작이에요.
-          </span>
-        );
+        return "돈을 매우 아껴쓰고 있어요!";
       }
     }
   };
@@ -137,11 +137,12 @@ const ChallengeView = (props) => {
       <div>{ProgressMent(progress)}</div>
       <div>목표 금액: {goalAmount.toLocaleString()}원</div>
       <div>현재 금액: {currentAmount.toLocaleString()}원</div>
+
       <CircularProgressBar
         colorCircle="#ededed"
-        colorSlice="#e54e21"
-        percent={progress}
-        fontColor="#e54e21"
+        colorSlice={challenge.challengeKind === 1 ? "#e54e21" : "#6A6DA6"}
+        percent={challenge.challengeKind === 1 ? progress : 100 - progress}
+        fontColor="#6A6DA6"
         round={true}
         fontSize="15px"
         textPosition="1.5rem"
@@ -165,4 +166,12 @@ const ChallengeView = (props) => {
     </div>
   );
 };
+/*
+    메인 색상 (진한 순서대로)
+    #151426 rgb(21, 20, 38)
+    #010440 rgb(1, 4, 64)
+    #323673 rgb(50, 54, 115)
+    #6A6DA6 rgb(106, 109, 166)
+    #F0F1F2 rgb(240, 241, 242)
+*/
 export default ChallengeView;

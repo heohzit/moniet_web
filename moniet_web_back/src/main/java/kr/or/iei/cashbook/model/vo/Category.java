@@ -17,5 +17,7 @@ public class Category {
 	private int categoryRef;
 	private int categoryDefault;
 	private int memberNo;
-	private int memberId;
+	private String memberId;
+	
+	private int cashbookMoney;
 }
