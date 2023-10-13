@@ -171,12 +171,26 @@ const Myinfo = (props) => {
     <div>
       <div className="my-title">MY PAGE</div>
       <div className="my-content">
-        <div className="profile-img-zone">
+        <div className="my-profile-img-wrap">
           {member.imgFile === null ? (
             <img src="/image/piggy.jpg" />
           ) : (
             <img src={"/member/" + member.imgFile} />
           )}
+        </div>
+        <div className="my-info-profile-wrap">
+          <label
+            htmlFor="my-info-profile-label"
+            className="my-info-profile-label"
+          >
+            프로필 이미지변경
+          </label>
+          <input
+            className="my-info-profile-img-input"
+            id="my-info-profile-img"
+            type="file"
+            accept="image/*"
+          />
         </div>
         <table className="my-info-tbl">
           <tbody>

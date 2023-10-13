@@ -135,7 +135,6 @@ public class MemberController {
 			member.setMemberPw(pwCode);
 			System.out.println(pwCode);
 			System.out.println(member.getMemberPw());
-			System.out.println(member.getMemberId());
 			return memberService.updatePwMember(member);
 
 		}
