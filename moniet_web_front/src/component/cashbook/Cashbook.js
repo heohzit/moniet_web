@@ -156,6 +156,7 @@ const Cashbook = (props) => {
               " ~ " +
               dateString(dateRange[0].endDate)
             }
+            id={"showDateRange"}
           />
         </div>
 
