@@ -9,13 +9,21 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.iei.community.model.dao.CommunityDao;
 import kr.or.iei.community.model.vo.Community;
+import kr.or.iei.community.model.vo.CommunityBoard;
+import kr.or.iei.community.model.vo.CommunityBoardFile;
+import kr.or.iei.community.model.vo.CommunityBoardType;
 import kr.or.iei.community.model.vo.CommunityType;
+import kr.or.iei.member.model.dao.MemberDao;
+import kr.or.iei.member.model.vo.Member;
 
 @Service
 public class CommunityService {
 
 	@Autowired
 	private CommunityDao communityDao;
+	
+	@Autowired
+	private MemberDao memberDao;
 	
 	public List communityList(int reqPage) {
 		List list = communityDao.communityList();
@@ -59,6 +67,39 @@ public class CommunityService {
 	public List communityBoardList(int reqPage, int communityNo) {
 		List list = communityDao.communityBoardList(communityNo);
 		return list;
+	}
+
+	@Transactional
+	public int insertBoard(CommunityBoard c, ArrayList<CommunityBoardFile> fileList) {
+		System.out.println(c);
+		System.out.println(fileList);
+		
+		Member member = memberDao.selectOneMember(c.getMemberId());
+		c.setCommunityBoardWriter(member.getMemberNo());
+		
+		int result = communityDao.insertBoard(c);
+		for (CommunityBoardFile communityBoardFile : fileList) {
+			communityBoardFile.setCommunityBoardNo(c.getCommunityBoardNo());
+			result += communityDao.insertBoardFile(communityBoardFile);
+		}
+		
+		System.out.println(result);
+		
+		if(result == 1+fileList.size()) {
+			
+			String stringType = String.valueOf(c.getCommunityBoardTypeList().get(0));
+			int intType = Integer.parseInt(stringType);
+			
+//			int typeList = (Integer)c.getCommunityBoardTypeList().get(0);
+			
+			CommunityBoardType type = new CommunityBoardType();
+			type.setCommunityBoardNo(c.getCommunityBoardNo());
+			type.setCommunityBoardTypeDiv(intType);
+			result += communityDao.insertCommunityBoardType(type);
+			return result;
+		}else {
+			return 0;
+		}
 	}
 
 }

@@ -5,6 +5,9 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import kr.or.iei.community.model.vo.Community;
+import kr.or.iei.community.model.vo.CommunityBoard;
+import kr.or.iei.community.model.vo.CommunityBoardFile;
+import kr.or.iei.community.model.vo.CommunityBoardType;
 import kr.or.iei.community.model.vo.CommunityType;
 
 @Mapper
@@ -21,5 +24,11 @@ public interface CommunityDao {
 	List selectOneCommunityType(int communityNo);
 
 	List communityBoardList(int communityNo);
+
+	int insertBoard(CommunityBoard c);
+
+	int insertBoardFile(CommunityBoardFile communityBoardFile);
+
+	int insertCommunityBoardType(CommunityBoardType type);
 
 }

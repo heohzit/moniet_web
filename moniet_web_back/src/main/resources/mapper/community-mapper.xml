@@ -173,5 +173,21 @@
 			ofType="communityBoardType"
 		/>
 	</resultMap>
+	
+	<insert id="insertBoard">
+		insert into community_board values
+		(COMMUNITY_BOARD_SEQ.NEXTVAL, #{communityBoardWriter}, #{communityBoardContent}, sysdate, #{communityRef}, null)
+		<selectKey resultType="int" keyProperty="communityBoardNo" order="AFTER">
+			select max(community_board_no) from community_board
+		</selectKey>
+	</insert>
+	
+	<insert id="insertBoardFile">
+		insert into community_board_file values(COMMUNITY_BOARD_FILE_SEQ.nextval, #{communityBoardNo}, #{filename}, #{filepath})
+	</insert>
+	
+	<insert id="insertCommunityBoardType">
+		insert into community_board_type values(COMMUNITY_BOARD_TYPE_SEQ.NEXTVAL, #{communityBoardNo}, #{communityBoardTypeDiv})
+	</insert>
 
 </mapper>

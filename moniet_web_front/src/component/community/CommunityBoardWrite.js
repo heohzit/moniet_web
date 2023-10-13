@@ -1,14 +1,21 @@
 import "./community.css";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import { Button1, Button2, Button3, Button4 } from "../util/Buttons";
 import Swal from "sweetalert2";
 
-const CommunityBoardWrite = () => {
+const CommunityBoardWrite = (props) => {
+  const location = useLocation();
+  const communityNo = props.communityNo;
+
   const [boardFile, setBoardFile] = useState([]); // 전송용
   const [boardImg, setBoardImg] = useState([]); // 미리보기용
   const [newFileList, setNewFileList] = useState([]);
+
+  const navigate = useNavigate();
+
+  const [reqPage, setReqPage] = useState(1);
 
   const changeFile = (e) => {
     const files = e.currentTarget.files;
@@ -78,7 +85,7 @@ const CommunityBoardWrite = () => {
     });
   };
 
-  const insertBoard = () => {
+  const insertBoard = (props) => {
     const communityBoardContent = document.querySelector(
       ".board-write-textarea-text"
     ).value;
@@ -92,6 +99,44 @@ const CommunityBoardWrite = () => {
 
     if (communityBoardContent !== "" && selectOption != 0) {
       // ===을 3개쓰면 타입까지 비교하는데, ==을 2개쓰면 순수 데이터만 비교함
+      Swal.fire({
+        icon: "question",
+        text: "게시글을 작성하시겠습니까?",
+        showCancelButton: true,
+        confirmButtonText: "확인",
+        cancelButtonText: "취소",
+      }).then((res) => {
+        if (res.isConfirmed) {
+          const form = new FormData();
+          form.append("communityRef", communityNo);
+          form.append("communityBoardContent", communityBoardContent);
+          form.append("communityBoardTypeList", selectOption);
+          for (let i = 0; i < boardFile.length; i++) {
+            form.append("boardFile", boardFile[i]);
+          }
+          const token = window.localStorage.getItem("token");
+          axios
+            .post("/community/insertBoard", form, {
+              headers: {
+                contentType: "multipart/form-data",
+                processdData: false,
+                Authorization: "Bearer " + token,
+              },
+            })
+            .then((res) => {
+              if (res.data > 0) {
+                Swal.fire(
+                  "작성 완료",
+                  "게시글작성이 완료되었습니다.",
+                  "success"
+                );
+              }
+            })
+            .catch((res) => {
+              console.log(res.response.status);
+            });
+        }
+      });
     } else {
       Swal.fire("작성 실패", "입력값을 확인해주세요.", "warning");
     }
