@@ -23,6 +23,15 @@ public interface MemberDao {
 
 	Member selectOneMemberId(String memberName, String memberEmail);
 
+	int updateNewPwMember(Member member);
+
+	
+
+
+	
+
+	
+
 	
 
 	

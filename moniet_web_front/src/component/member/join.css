@@ -37,7 +37,7 @@
 }
 /* 프로필 사진 */
 .signup-profileImg-label {
-  margin: 5px 0 20px 0;
+  margin: 10px 0;
   font-family: ns-b;
   color: #010440;
   display: inline-block;
@@ -47,20 +47,20 @@
 .sign-up-profile-img-input {
   display: none;
 }
-.join-img-wrap {
+.my-profile-img-wrap {
   width: 200px;
   height: 200px;
   border-radius: 70%;
   overflow: hidden;
   margin: 0 auto;
 }
-.join-img-wrap > img {
+.my-profile-img-wrap > img {
   width: 100%;
   height: 100%;
   border-radius: 90%;
   object-fit: cover;
 }
-.join-profile-wrap {
-  padding: 5px 0px;
+.my-info-profile-wrap {
+  padding: 10px 0px;
   text-align: center;
 }

@@ -21,7 +21,12 @@ const ChallengeView = (props) => {
       })
       .then((res) => {
         console.log(res.data);
-        setChallenge(res.data);
+        if (
+          challenge.challengeResult !== 1 &&
+          challenge.challengeResult !== 2
+        ) {
+          setChallenge(res.data);
+        }
       })
       .catch((res) => {
         console.log(res.data);
@@ -29,7 +34,10 @@ const ChallengeView = (props) => {
   }, []);
   const goalAmount = [[challenge.challengeAmount]]; // 목표 금액
   const currentAmount = [[challenge.total]]; // 현재 금액
-  const progress = Math.floor((currentAmount / goalAmount) * 100); // 진행률 계산
+  const progress =
+    challenge.challengeKind === 1 && currentAmount >= goalAmount
+      ? 100
+      : Math.floor((currentAmount / goalAmount) * 100);
 
   //진행률 멘트
   const ProgressMent = (progress) => {
@@ -162,6 +170,7 @@ const ChallengeView = (props) => {
       </div>
       <div className="challenge-btn-box">
         {challenge.challengeResult === 2 ||
+        challenge.challengeResult === 1 ||
         dateString > challenge.challengeEnd ? (
           ""
         ) : (
@@ -174,12 +183,4 @@ const ChallengeView = (props) => {
     </div>
   );
 };
-/*
-    메인 색상 (진한 순서대로)
-    #151426 rgb(21, 20, 38)
-    #010440 rgb(1, 4, 64)
-    #323673 rgb(50, 54, 115)
-    #6A6DA6 rgb(106, 109, 166)
-    #F0F1F2 rgb(240, 241, 242)
-*/
 export default ChallengeView;

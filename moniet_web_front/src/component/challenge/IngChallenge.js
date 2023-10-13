@@ -7,21 +7,7 @@ import { Button3 } from "../util/Buttons";
 const loadCount = 2;
 const IngChallenge = () => {
   const [challengeList, setChallengeList] = useState([]);
-
-  const [showChallenge1, setShowChallenge1] = useState([]);
-  const [showChallenge2, setShowChallenge2] = useState([]);
-
-  const updateChallengeLists = (newChallenges) => {
-    const challengesOfType1 = newChallenges.filter(
-      (challenge) => challenge.challengeKind === 1
-    );
-    const challengesOfType2 = newChallenges.filter(
-      (challenge) => challenge.challengeKind === 2
-    );
-    setShowChallenge1(challengesOfType1);
-    setShowChallenge2(challengesOfType2);
-  };
-
+  const [showChallenge, setShowChallenge] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [backPage, setBackPage] = useState(false);
 
@@ -36,11 +22,9 @@ const IngChallenge = () => {
       .then((res) => {
         console.log(res.data);
         setChallengeList(res.data.challengeList);
-
         const allChallenge = res.data.challengeList;
         const oneChallenge = allChallenge.slice(0, loadCount);
-        setShowChallenge1(oneChallenge);
-        setShowChallenge2(oneChallenge);
+        setShowChallenge(oneChallenge);
       })
       .catch((res) => {
         console.log(res.response.status);
@@ -52,8 +36,7 @@ const IngChallenge = () => {
     const endIndex = nextPage * loadCount;
     console.log(endIndex);
     const nextChallenge = challengeList.slice(0, endIndex);
-    setShowChallenge1(nextChallenge);
-    setShowChallenge2(nextChallenge);
+    setShowChallenge(nextChallenge);
     setCurrentPage(nextPage);
     if (nextPage * loadCount >= challengeList.length) {
       setBackPage(true);
@@ -61,8 +44,7 @@ const IngChallenge = () => {
   };
   const GoBackBtn = () => {
     const firstChallenge = challengeList.slice(0, loadCount);
-    setShowChallenge1(firstChallenge);
-    setShowChallenge2(firstChallenge);
+    setShowChallenge(firstChallenge);
     setCurrentPage(1);
     setBackPage(false);
   };
@@ -71,7 +53,7 @@ const IngChallenge = () => {
       <div className="challenge-content">
         <ChallengeLevel />
         <div className="challenge-list-wrap1">
-          {showChallenge1.map((challenge, index) => {
+          {showChallenge.map((challenge, index) => {
             if (challenge.challengeKind === 1) {
               return (
                 <ChallengeItem
@@ -83,7 +65,7 @@ const IngChallenge = () => {
           })}
         </div>
         <div className="challenge-list-wrap2">
-          {showChallenge2.map((challenge, index) => {
+          {showChallenge.map((challenge, index) => {
             if (challenge.challengeKind === 2) {
               return (
                 <ChallengeItem

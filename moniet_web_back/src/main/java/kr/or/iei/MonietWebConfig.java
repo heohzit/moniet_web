@@ -19,10 +19,6 @@ public class MonietWebConfig implements WebMvcConfigurer{
 		
 		registry.addResourceHandler("/member/**")
 		.addResourceLocations("file:///C:/Temp/moneiet/member/");
-		
-		registry.addResourceHandler("/member/**")
-		.addResourceLocations("file:///C:/Temp/moneiet/member/editor/");
-		
 	}
 
 	@Bean

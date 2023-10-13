@@ -45,7 +45,7 @@ public class EmailSender {
 				helper.setFrom(new InternetAddress("tnsgus1104@gmail.com", "머니어트"));
 				helper.setTo(memberEmail);
 				helper.setSubject("[머니어트] 임시 비밀번호가 생성되었습니다.");
-				helper.setText("<h1>안녕하세요 머니어트 입니다.</h1>"
+				helper.setText("<h3>안녕하세요 머니어트 입니다.</h3>"
 						+"<h3>임시비밀번호는 [<span style='color:#323673;'>"+sb.toString()+"</span>] 입니다. </h3>"
 						,true);
 				sender.send(message);
