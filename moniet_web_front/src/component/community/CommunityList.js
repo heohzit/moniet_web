@@ -86,8 +86,6 @@ const CommunityItem = (props) => {
   return (
     <div className="community-item-wrap">
       <div className="community-item" onClick={communityView}>
-        <span class="material-icons ab-btn1">favorite_border</span>
-        <span class="material-icons sh-btn1">share</span>
         <div className="community-item-img">
           {community.communityThumb === null ? (
             <img src="/image/default.png" className="default-img" />
@@ -120,6 +118,11 @@ const CommunityItem = (props) => {
             {community.communityParti}
           </div>
         </div>
+        <div className="heart-btns">
+          <span class="material-icons ab-btn1">favorite_border</span>
+          <span class="material-icons ab-btn2">favorite</span>
+        </div>
+        <span class="material-icons sh-btn1">share</span>
       </div>
     </div>
   );

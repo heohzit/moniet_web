@@ -32,6 +32,8 @@ public interface ChallengeDao {
 
 	//챌린지 레벨 조회
 	int challengeLevel(String memberId);
+
+	List challengeListsByMember(String memberId);
 	
 	//챌린지 성공/실패 결과
 	void resultChallenge(String memberId);

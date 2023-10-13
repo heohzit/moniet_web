@@ -145,7 +145,7 @@ const CommunityView = (props) => {
       <div className="community-view-board-zone">
         <div className="board-top">게시물 등록 〉</div>
         <div className="community-view-board-write">
-          <CommunityBoardWrite />
+          <CommunityBoardWrite communityNo={communityNo} />
         </div>
         <div className="community-view-board-list">
           <CommunityBoard communityNo={communityNo} />

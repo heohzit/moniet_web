@@ -23,10 +23,12 @@ public class Cashbook {
 	private int cashbookMoney;
 	private String cashbookContent;
 	private String cashbookMemo;
+	private int challengeNo;
 	
 	//화면 노출용
 	private String memberId;
 	private String categoryTitle;
+	
 	
 	//조회용
 	private String startDate;

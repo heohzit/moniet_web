@@ -35,6 +35,11 @@
   margin: 30px 0px;
   font-size: 16px;
 }
+.find-pw-button-wrap > button:hover {
+  background-color: #010440;
+  color: #fff;
+  font-family: ns-b;
+}
 
 /*아이디 css*/
 .find-id-login-button-wrap {

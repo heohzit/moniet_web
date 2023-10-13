@@ -17,6 +17,8 @@ import org.springframework.web.multipart.MultipartFile;
 import kr.or.iei.FileUtil;
 import kr.or.iei.community.model.service.CommunityService;
 import kr.or.iei.community.model.vo.Community;
+import kr.or.iei.community.model.vo.CommunityBoard;
+import kr.or.iei.community.model.vo.CommunityBoardFile;
 import kr.or.iei.community.model.vo.CommunityType;
 
 @RestController
@@ -103,6 +105,34 @@ public class CommunityController {
 	public List communityBoardList(@PathVariable int reqPage, @PathVariable int communityNo) {
 		List list = communityService.communityBoardList(reqPage, communityNo);
 		return list;
+	}
+	
+	@PostMapping(value="/insertBoard")
+	public int insertBoard(@ModelAttribute CommunityBoard c,
+							@ModelAttribute MultipartFile[] boardFile,
+							@RequestAttribute String memberId) {
+		c.setMemberId(memberId);
+		
+		String savepath = root+"community/";
+		
+		// 썸네일이 없으니 썸네일 부분 생략
+		
+		ArrayList<CommunityBoardFile> fileList = new ArrayList<CommunityBoardFile>();
+		
+		if (boardFile != null) {
+			for (MultipartFile file : boardFile) {
+				String filename = file.getOriginalFilename();
+				String filepath = fileUtil.getFilepath(savepath, filename, file);
+				CommunityBoardFile cbf = new CommunityBoardFile();
+				cbf.setFilename(filename);
+				cbf.setFilepath(filepath);
+				fileList.add(cbf);
+			}
+		}
+		
+		int result = communityService.insertBoard(c, fileList);
+		
+		return result;
 	}
 	
 }
