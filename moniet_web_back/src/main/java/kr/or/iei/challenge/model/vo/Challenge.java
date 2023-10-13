@@ -21,6 +21,7 @@ public class Challenge {
 	private String challengeEnd;
 	private int challengeState;
 	private int challengeResult;
+	private int categoryNo;
 	
 	private String memberId;
 	private int total;

@@ -13,6 +13,7 @@ import AddComma from "./AddComma";
 import Input from "../util/InputFrm";
 import { NextMonth, PrevMonth } from "./MoveMonth";
 import CashbookWrite from "./CashbookWrite";
+import CashbookTable from "./CashbookTable";
 
 const Cashbook = (props) => {
   const isLogin = props.isLogin;
@@ -26,6 +27,7 @@ const Cashbook = (props) => {
       key: "selection",
     },
   ]);
+  const assetList = ["현금", "신용카드", "체크카드", "이체", "기타"];
   const [select, setSelect] = useState(false);
   const obj = {
     startDate: dateString(dateRange[0].startDate),
@@ -69,6 +71,7 @@ const Cashbook = (props) => {
   //카테고리셋팅
   const [incomeCate, setIncomCate] = useState([]);
   const [spendingCate, setSpendingCate] = useState([]);
+  const [challengeCate, setChallengeCate] = useState([]);
   useEffect(() => {
     const token = window.localStorage.getItem("token");
     axios
@@ -78,6 +81,7 @@ const Cashbook = (props) => {
         },
       })
       .then((res) => {
+        setChallengeCate(res.data.challengeCategory);
         setIncomCate(res.data.incomeCategory);
         setSpendingCate(res.data.spendingCategory);
       })
@@ -94,6 +98,21 @@ const Cashbook = (props) => {
     return num;
   };
 
+  const assetToString = (num) => {
+    switch (num) {
+      case 1:
+        return "현금";
+      case 2:
+        return "신용카드";
+      case 3:
+        return "체크카드";
+      case 4:
+        return "이체";
+      case 5:
+        return "기타";
+      //no default
+    }
+  };
   const applyDate = () => {
     setSelect(!select);
     setToggleOn(!toggleOn);
@@ -107,6 +126,7 @@ const Cashbook = (props) => {
   //날짜 범위 토글용
   const [toggleOn, setToggleOn] = useState(false);
   const toggle = () => {
+    console.log(cashbookList);
     setToggleOn(!toggleOn);
   };
 
@@ -177,6 +197,8 @@ const Cashbook = (props) => {
           addFrmOpen={addFrmOpen}
           closeFrm={closeFrm}
           dateString={dateString}
+          assetList={assetList}
+          challengeCate={challengeCate}
           incomeCate={incomeCate}
           spendingCate={spendingCate}
           select={select}
@@ -212,6 +234,15 @@ const Cashbook = (props) => {
           />
         </div>
         <div className="cashbook-detail">
+          <CashbookTable
+            cashbookList={cashbookList}
+            setCashbookList={setCashbookList}
+            assetList={assetList}
+            incomeCate={incomeCate}
+            spendingCate={spendingCate}
+            assetToString={assetToString}
+          />
+
           <table>
             <thead>
               <tr>
@@ -232,6 +263,7 @@ const Cashbook = (props) => {
                     <CashbookItem
                       key={"cashbook" + index}
                       cashbook={cashbook}
+                      assetToString={assetToString}
                     />
                   );
                 })}
@@ -245,21 +277,7 @@ const Cashbook = (props) => {
 
 const CashbookItem = (props) => {
   const cashbook = props.cashbook;
-  const assetToString = (num) => {
-    switch (num) {
-      case 1:
-        return "현금";
-      case 2:
-        return "신용카드";
-      case 3:
-        return "체크카드";
-      case 4:
-        return "이체";
-      case 5:
-        return "기타";
-      //no default
-    }
-  };
+  const assetToString = props.assetToString;
 
   return (
     <tr>

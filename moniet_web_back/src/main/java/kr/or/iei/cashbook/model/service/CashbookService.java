@@ -11,12 +11,15 @@ import org.springframework.transaction.annotation.Transactional;
 import kr.or.iei.cashbook.model.dao.CashbookDao;
 import kr.or.iei.cashbook.model.vo.Cashbook;
 import kr.or.iei.cashbook.model.vo.Category;
+import kr.or.iei.challenge.model.dao.ChallengeDao;
 
 @Service
 public class CashbookService {
 
 	@Autowired
 	private CashbookDao cashbookDao;
+	@Autowired
+	private ChallengeDao challengeDao;
 
 	public List cashbookList(Cashbook cashbook) {
 		return cashbookDao.cashbookList(cashbook);
@@ -49,7 +52,12 @@ public class CashbookService {
 
 	@Transactional
 	public int insertCashbook(Cashbook cashbook) {
-		return cashbookDao.insertCashbook(cashbook);
+		int result=cashbookDao.insertCashbook(cashbook);
+		if(result==1) {
+			String memberId = cashbook.getMemberId();
+			challengeDao.resultChallenge(memberId);
+		}
+		return result;
 	}
 	
 	//파이 대시보드

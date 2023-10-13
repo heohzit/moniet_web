@@ -71,4 +71,9 @@ public class ChallengeService {
 		System.out.println(level);
 		return level;
 	}
+
+	//입력창 챌린지 목록 띄우는 용도
+	public List challengeListsByMember(String memberId) {
+		return challengeDao.challengeListsByMember(memberId);
+	}
 }

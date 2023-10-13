@@ -10,7 +10,7 @@ const CashbookFrm = (props) => {
   const isOpen = props.isOpen;
   const closeFrm = props.closeFrm;
   const dateString = props.dateString;
-
+  const assetList = props.assetList;
   const cashbookFinance = props.cashbookFinance;
   const setCashbookFinance = props.setCashbookFinance;
 
@@ -38,15 +38,18 @@ const CashbookFrm = (props) => {
   ];
   const cashbookAsset = props.cashbookAsset;
   const setCashbookAsset = props.setCashbookAsset;
-  const assetList = ["현금", "신용카드", "체크카드", "이체", "기타"];
+
   const cashbookCategory = props.cashbookCategory;
   const setCashbookCategory = props.setCashbookCategory;
+  const challengeNo = props.challengeNo;
+  const setChallengeNo = props.setChallengeNo;
   const cashbookMoney = props.cashbookMoney;
   const setCashbookMoney = props.setCashbookMoney;
   const cashbookContent = props.cashbookContent;
   const setCashbookContent = props.setCashbookContent;
   const cashbookMemo = props.cashbookMemo;
   const setCashbookMemo = props.setCashbookMemo;
+  const challengeCate = props.challengeCate;
   const incomeCate = props.incomeCate;
   const spendingCate = props.spendingCate;
   const write = props.clickEvent;
@@ -86,12 +89,12 @@ const CashbookFrm = (props) => {
   };
   return (
     <div
-      className="modal"
+      className="cashbook-modal"
       id="writeFrmModal"
       style={{ display: isOpen ? "flex" : "none" }}
     >
-      <div className="modal-content">
-        <div className="modal-title">{title}</div>
+      <div className="cashbook-modal-content">
+        <div className="cashbook-modal-title">{title}</div>
         <div className="modalBtn-area finance-zone">
           <div className="select-finance">
             <Button5 text={"수입"} clickEvent={selectFinance} />
@@ -100,11 +103,14 @@ const CashbookFrm = (props) => {
             <Button5 text={"지출"} clickEvent={selectFinance} />
           </div>
         </div>
-        <div className="modal-detail">
-          <div className="modal-detail-content">
+        <div className="cashbook-modal-detail">
+          <div className="cashbook-modal-detail-content">
             <label htmlFor="add-date">날짜</label>
 
-            <div className="modal-detail-content" onClick={() => toggle()}>
+            <div
+              className="cashbook-modal-detail-content"
+              onClick={() => toggle()}
+            >
               <Input
                 data={dateString(cashbookDate)}
                 setData={setCashbookDate}
@@ -125,7 +131,7 @@ const CashbookFrm = (props) => {
                 color="#010440"
               />
             </div>
-            <div className="modal-detail-content select-div">
+            <div className="cashbook-modal-detail-content select-div">
               <label htmlFor="add-loop">반복/할부</label>
               <span id="numChkMsg"></span>
               <div>
@@ -168,7 +174,7 @@ const CashbookFrm = (props) => {
                 ) : null}
               </div>
             </div>
-            <div className="modal-detail-content select-div">
+            <div className="cashbook-modal-detail-content select-div">
               <label htmlFor="add-asset">자산</label>
               <div>
                 <select
@@ -185,7 +191,7 @@ const CashbookFrm = (props) => {
                 </select>
               </div>
             </div>
-            <div className="modal-detail-content select-div">
+            <div className="cashbook-detail-content select-div">
               <label htmlFor="add-category">분류</label>
               <div>
                 <select
@@ -209,6 +215,24 @@ const CashbookFrm = (props) => {
                         </option>
                       ))}
                 </select>
+                {cashbookCategory === "21" ? (
+                  <select
+                    name="challengeNo"
+                    defaultValue={challengeNo}
+                    onChange={(e) => setChallengeNo(e.currentTarget.value)}
+                    className="cashbook-select"
+                  >
+                    <option value="">챌린지 없음</option>
+                    {challengeCate.map((item, index) => (
+                      <option
+                        defaultValue={item.challengeNo}
+                        key={"challenge" + index}
+                      >
+                        {item.challengeTitle}
+                      </option>
+                    ))}
+                  </select>
+                ) : null}
               </div>
             </div>
             <label htmlFor="add-money">금액(원)</label>

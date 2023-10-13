@@ -9,6 +9,8 @@ const CashbookWrite = (props) => {
   const addFrmOpen = props.addFrmOpen;
   const closeFrm = props.closeFrm;
   const dateString = props.dateString;
+  const assetList = props.assetList;
+  const challengeCate = props.challengeCate;
   const incomeCate = props.incomeCate;
   const spendingCate = props.spendingCate;
   const select = props.select;
@@ -22,6 +24,7 @@ const CashbookWrite = (props) => {
   const [cashbookMoney, setCashbookMoney] = useState(0);
   const [cashbookContent, setCashbookContent] = useState("");
   const [cashbookMemo, setCashbookMemo] = useState("");
+  const [challengeNo, setChallengeNo] = useState(0);
 
   const [showSnackbar, setShowSnackbar] = useState(false);
   const onOpenClickHandler = () => {
@@ -97,6 +100,7 @@ const CashbookWrite = (props) => {
         setLoopMonth={setLoopMonth}
         cashbookAsset={cashbookAsset}
         setCashbookAsset={setCashbookAsset}
+        assetList={assetList}
         cashbookCategory={cashbookCategory}
         setCashbookCategory={setCashbookCategory}
         cashbookMoney={cashbookMoney}
@@ -105,6 +109,9 @@ const CashbookWrite = (props) => {
         setCashbookContent={setCashbookContent}
         cashbookMemo={cashbookMemo}
         setCashbookMemo={setCashbookMemo}
+        challengeNo={challengeNo}
+        setChallengeNo={setChallengeNo}
+        challengeCate={challengeCate}
         incomeCate={incomeCate}
         spendingCate={spendingCate}
         clickEvent={write}

@@ -8,10 +8,12 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import kr.or.iei.cashbook.model.service.CashbookService;
+import kr.or.iei.cashbook.model.vo.Cashbook;
 import kr.or.iei.cashbook.model.vo.Category;
 
 @RestController
