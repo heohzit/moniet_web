@@ -5,6 +5,7 @@ const FindPw = () => {
   const [memberId, setMemberId] = useState("");
   const [memberName, setMemberName] = useState("");
   const [memberEmail, setMemberEmail] = useState("");
+  const [member,setMember]=useState("");
 
   const memberCheck = () => {
     const member = {
@@ -12,7 +13,6 @@ const FindPw = () => {
       memberName,
       memberEmail,
     };
-    console.log(member);
     axios
       .post("/member/memberCheck", member)
       .then((res) => {
@@ -20,13 +20,27 @@ const FindPw = () => {
         if (res.data == 0) {
           alert("입력하신 정보로 가입 된 회원은 존재하지 않습니다.");
         } else {
-          alert("찾기성공");
+          alert("입력한 메일주소로 임시비밀번호가 발급되었습니다.");
+          
         }
       })
       .catch((res) => {
         console.log(res);
       });
   };
+
+  const pwSend = ()=>{
+    console.log(memberEmail);
+    axios
+    .post("/member/sendPw",  memberEmail)
+    .then((res)=>{
+        console.log(res.data);
+      })
+      .catch((res)=>{
+        console.log(res);
+      });
+    
+    };
 
   return (
     <div className="find-pw-wrap">
@@ -57,8 +71,11 @@ const FindPw = () => {
       <div className="find-pw-button-wrap">
         <button onClick={memberCheck}>확인</button>
       </div>
+      <button onClick={pwSend}>메일전송</button>
     </div>
+
   );
 };
+
 
 export default FindPw;

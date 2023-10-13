@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.iei.cashbook.model.dao.CashbookDao;
 import kr.or.iei.cashbook.model.vo.Cashbook;
+import kr.or.iei.cashbook.model.vo.Category;
 
 @Service
 public class CashbookService {
@@ -40,11 +41,6 @@ public class CashbookService {
 		return map;
 	}
 	
-	//파이대시보드
-	public List pieDash(String memberId) {
-		List sum = cashbookDao.pieDash(memberId);
-		return sum;
-	}
 
 	public List categoryList(String memberId) {
 		List list = cashbookDao.category(memberId);
@@ -54,5 +50,23 @@ public class CashbookService {
 	@Transactional
 	public int insertCashbook(Cashbook cashbook) {
 		return cashbookDao.insertCashbook(cashbook);
+	}
+	
+	//파이 대시보드
+	public List pieDash(String memberId) {
+		List sum = cashbookDao.pieDash(memberId);
+		return sum;
+	}
+	
+	//바 대시보드
+	public List barDash(String memberId) {
+		List list = cashbookDao.barDash(memberId);
+		return list;
+	}
+	
+	//라인 대시보드
+	public List lineDash(String memberId) {
+		List list = cashbookDao.lineDash(memberId);
+		return list;
 	}
 }

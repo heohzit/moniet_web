@@ -18,12 +18,19 @@ public interface CashbookDao {
 	int countOfIncome(Cashbook cashbook);
 	int countOfSpending(Cashbook cashbook);
 
-	//파이대시보드
-	List pieDash(String memberId);
 
 	List category(String memberId);
 
 	int insertCashbook(Cashbook cashbook);
+	
+	//파이 대시보드
+	List pieDash(String memberId);
+	
+	//바 대시보드
+	List barDash(String memberId);
+	
+	//라인 대시보드
+	List lineDash(String memberId);
 
 
 

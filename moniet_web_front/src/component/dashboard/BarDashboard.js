@@ -12,6 +12,7 @@ import { Bar } from "react-chartjs-2";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import PieDashboard from "./PieDashboard";
+import LineDashboard from "./LineDashboard";
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -20,6 +21,8 @@ ChartJS.register(
   Tooltip,
   Legend
 );
+const today = new Date();
+const formattedDate = `${today.getMonth() + 1}월`;
 const options1 = {
   responsive: true,
   plugins: {
@@ -28,38 +31,7 @@ const options1 = {
     },
     title: {
       display: true,
-      text: "지출 카테고리별",
-    },
-  },
-  scales: {
-    y: {
-      grid: {
-        drawBorder: false,
-        color: function () {
-          return "#D3D3D3";
-        },
-      },
-
-      ticks: {
-        color: "#D3D3D3",
-        font: {
-          color: "#D3D3D3",
-        },
-      },
-    },
-    x: {
-      ticks: {
-        color: "#808080",
-        font: {
-          color: "#D3D3D3",
-        },
-      },
-      grid: {
-        drawBorder: false,
-        color: function () {
-          return "#D3D3D3";
-        },
-      },
+      text: formattedDate + " 의 저축",
     },
   },
 };
@@ -71,44 +43,13 @@ const options2 = {
     },
     title: {
       display: true,
-      text: "저축 카테고리별",
-    },
-  },
-  scales: {
-    y: {
-      grid: {
-        drawBorder: false,
-        color: function () {
-          return "#D3D3D3";
-        },
-      },
-
-      ticks: {
-        color: "#D3D3D3",
-        font: {
-          color: "#D3D3D3",
-        },
-      },
-    },
-    x: {
-      ticks: {
-        color: "#808080",
-        font: {
-          color: "#D3D3D3",
-        },
-      },
-      grid: {
-        drawBorder: false,
-        color: function () {
-          return "#D3D3D3";
-        },
-      },
+      text: formattedDate + " 의 지출",
     },
   },
 };
 const BarDashboard = () => {
-  const [data1, setData1] = useState({
-    labels: ["지출1", "지출2", "지출3", "지출4", "지출5", "지출6"],
+  const [spendingBar, setSpendingBar] = useState({
+    labels: [],
     datasets: [
       {
         label: "Dataset 1",
@@ -116,8 +57,8 @@ const BarDashboard = () => {
       },
     ],
   });
-  const [data2, setData2] = useState({
-    labels: ["저축1", "저축2", "저축3", "저축4", "저축5", "저축6"],
+  const [incomeBar, setIncomBar] = useState({
+    labels: [],
     datasets: [
       {
         label: "Dataset 1",
@@ -125,6 +66,7 @@ const BarDashboard = () => {
       },
     ],
   });
+
   useEffect(() => {
     const token = window.localStorage.getItem("token");
     axios
@@ -134,13 +76,12 @@ const BarDashboard = () => {
         },
       })
       .then((res) => {
-        console.log(res.data);
-        setData1({
-          labels: [],
+        setIncomBar({
+          labels: res.data.incomeBar.map((item) => item.categoryTitle),
           datasets: [
             {
-              label: "비율",
-              data: data1,
+              label: "합계",
+              data: res.data.incomeBar.map((item) => item.cashbookMoney),
               backgroundColor: [
                 "rgba(255, 99, 132, 0.5)",
                 "rgba(54, 162, 235, 0.5)",
@@ -149,13 +90,23 @@ const BarDashboard = () => {
                 "rgba(153, 102, 255, 0.5)",
                 "rgba(255, 159, 64, 0.5)",
               ],
-              borderColor: [
-                "rgb(255, 99, 132,1.5)",
-                "rgba(54, 162, 235, 1.5)",
-                "rgba(255, 206, 86, 1.5)",
-                "rgba(75, 192, 192, 1.5)",
-                "rgba(153, 102, 255, 1.5)",
-                "rgba(255, 159, 64, 1.5)",
+            },
+          ],
+        });
+        setSpendingBar({
+          labels: res.data.spendingBar.map((item) => item.categoryTitle),
+          datasets: [
+            {
+              label: "합계",
+              data: res.data.spendingBar.map((item) => item.cashbookMoney),
+              backgroundColor: [
+                "rgba(255, 99, 132, 0.5)",
+                "rgba(54, 162, 235, 0.5)",
+                "rgba(255, 206, 86, 0.5)",
+                "rgba(75, 192, 192, 0.5)",
+                "rgba(153, 102, 255, 0.5)",
+                "rgba(255, 159, 64, 0.5)",
+                "rgba(201, 203, 207,0.5)",
               ],
             },
           ],
@@ -167,9 +118,10 @@ const BarDashboard = () => {
   }, []);
   return (
     <div>
-      <Bar options={options1} data={data1} />
-      <Bar options={options2} data={data2} />
+      <Bar options={options1} data={incomeBar} />
+      <Bar options={options2} data={spendingBar} />
       <PieDashboard></PieDashboard>
+      <LineDashboard></LineDashboard>
     </div>
   );
 };

@@ -53,19 +53,13 @@
 		]]>
 	</select>
 	
-	<!--파이대시보드-->
-	<select id="pieDash" resultType="int">
-		select sum(cashbook_money) from cashbook 
-		where TO_CHAR(SYSDATE, 'MM') = TO_CHAR(cashbook_date,'MM') and 
-		member_no=(select member_no from member where member_id=#{memberId}) 
-		group by cashbook_finance
-	</select>
 	
 	<select id="category" resultType="category">
 		select category_no, category_title, category_ref from category_tbl
 		where category_default=1 and (member_no is null or member_no=(select member_no from member where member_id=#{memberId}))
 		order by category_no
 	</select>
+	
 	<insert id="insertCashbook">
 		insert into cashbook values
 			(CASHBOOK_SEQ.nextval,
@@ -74,4 +68,27 @@
 			 #{loopMonth}, #{cashbookAsset}, #{cashbookCategory},
 			 #{cashbookMoney}, #{cashbookContent}, #{cashbookMemo})
 	</insert>
+	
+		<!--파이대시보드-->
+	<select id="pieDash" resultType="int">
+		select sum(cashbook_money) from cashbook 
+		where TO_CHAR(SYSDATE, 'MM') = TO_CHAR(cashbook_date,'MM') and 
+		member_no=(select member_no from member where member_id=#{memberId}) 
+		group by cashbook_finance
+	</select>
+	
+	<!--바대시보드-->
+	<select id="barDash" resultType="category">	        
+	select sum(cashbook_money) cashbook_money,category_title, category_ref
+	from cashbook c
+	join category_tbl ct on (cashbook_category = category_no)
+	where TO_CHAR(SYSDATE, 'MM') = TO_CHAR(cashbook_date,'MM')
+	and c.member_no = (select member_no from member where member_id=#{memberId})
+	and (ct.member_no is null or ct.member_no = (select member_no from member where member_id=#{memberId}))
+	group by category_title, category_ref 
+	</select>
+	
+
+
+	
 </mapper>

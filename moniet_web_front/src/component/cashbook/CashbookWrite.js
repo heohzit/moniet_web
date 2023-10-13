@@ -1,7 +1,8 @@
 import { useState } from "react";
 import CashbookFrm from "./CashbookFrm";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Alert, Snackbar } from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
 
 const CashbookWrite = (props) => {
   const isOpen = props.isOpen;
@@ -22,20 +23,17 @@ const CashbookWrite = (props) => {
   const [cashbookContent, setCashbookContent] = useState("");
   const [cashbookMemo, setCashbookMemo] = useState("");
 
-  const write = () => {
-    {
-      /*
-    console.log(cashbookFinance);
-    console.log(dateString(cashbookDate)); //string
-    console.log(cashbookLoop);
-    console.log(loopMonth);
-    console.log(cashbookAsset);
-    console.log(cashbookCategory);
-    console.log(cashbookMoney);
-    console.log(cashbookContent);
-    console.log(cashbookMemo);
- */
+  const [showSnackbar, setShowSnackbar] = useState(false);
+  const onOpenClickHandler = () => {
+    setShowSnackbar(true);
+  };
+  const onCloseClickHandler = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
     }
+    setShowSnackbar(false);
+  };
+  const write = () => {
     const token = window.localStorage.getItem("token");
     const cashbook = {
       cashbookFinance: cashbookFinance,
@@ -48,6 +46,7 @@ const CashbookWrite = (props) => {
       cashbookContent: cashbookContent,
       cashbookMemo: cashbookMemo,
     };
+
     axios
       .post("/cashbook/insert", cashbook, {
         headers: {
@@ -56,7 +55,19 @@ const CashbookWrite = (props) => {
       })
       .then((res) => {
         if (res.data === 1) {
+          setCashbookFinance(0);
+          setCashbookDate(new Date());
+          setCashbookLoop(0);
+          setLoopMonth(0);
+          setCashbookAsset(1);
+          setCashbookCategory(11);
+          setCashbookMoney(0);
+          setCashbookContent("");
+          setCashbookMemo("");
+
+          onOpenClickHandler();
           closeFrm();
+
           setSelect(!select);
         } else {
           console.log("등록 중 에러 발생");
@@ -69,7 +80,8 @@ const CashbookWrite = (props) => {
 
   return (
     <div className="add-btn">
-      <img src="icon/add-btn.png" alt="add" onClick={isOpen} />
+      <AddIcon onClick={isOpen} />
+
       <CashbookFrm
         isOpen={addFrmOpen}
         closeFrm={closeFrm}
@@ -97,6 +109,26 @@ const CashbookWrite = (props) => {
         spendingCate={spendingCate}
         clickEvent={write}
       />
+      {showSnackbar && (
+        <Snackbar
+          anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+          open={onOpenClickHandler}
+          autoHideDuration={500}
+          onClose={onCloseClickHandler}
+        >
+          <Alert
+            variant="filled"
+            onClose={onCloseClickHandler}
+            severity="success"
+            sx={{
+              width: "100%",
+              backgroundColor: "#6a6da6",
+            }}
+          >
+            가계부 등록 성공!
+          </Alert>
+        </Snackbar>
+      )}
     </div>
   );
 };

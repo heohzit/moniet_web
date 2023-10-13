@@ -8,7 +8,20 @@ const loadCount = 2;
 const IngChallenge = () => {
   const [challengeList, setChallengeList] = useState([]);
 
-  const [showChallenge, setShowChallenge] = useState([]);
+  const [showChallenge1, setShowChallenge1] = useState([]);
+  const [showChallenge2, setShowChallenge2] = useState([]);
+
+  const updateChallengeLists = (newChallenges) => {
+    const challengesOfType1 = newChallenges.filter(
+      (challenge) => challenge.challengeKind === 1
+    );
+    const challengesOfType2 = newChallenges.filter(
+      (challenge) => challenge.challengeKind === 2
+    );
+    setShowChallenge1(challengesOfType1);
+    setShowChallenge2(challengesOfType2);
+  };
+
   const [currentPage, setCurrentPage] = useState(1);
   const [backPage, setBackPage] = useState(false);
 
@@ -26,7 +39,8 @@ const IngChallenge = () => {
 
         const allChallenge = res.data.challengeList;
         const oneChallenge = allChallenge.slice(0, loadCount);
-        setShowChallenge(oneChallenge);
+        setShowChallenge1(oneChallenge);
+        setShowChallenge2(oneChallenge);
       })
       .catch((res) => {
         console.log(res.response.status);
@@ -36,8 +50,10 @@ const IngChallenge = () => {
   const moreChallengeBtn = () => {
     const nextPage = currentPage + 1;
     const endIndex = nextPage * loadCount;
+    console.log(endIndex);
     const nextChallenge = challengeList.slice(0, endIndex);
-    setShowChallenge(nextChallenge);
+    setShowChallenge1(nextChallenge);
+    setShowChallenge2(nextChallenge);
     setCurrentPage(nextPage);
     if (nextPage * loadCount >= challengeList.length) {
       setBackPage(true);
@@ -45,37 +61,17 @@ const IngChallenge = () => {
   };
   const GoBackBtn = () => {
     const firstChallenge = challengeList.slice(0, loadCount);
-    setShowChallenge(firstChallenge);
+    setShowChallenge1(firstChallenge);
+    setShowChallenge2(firstChallenge);
     setCurrentPage(1);
     setBackPage(false);
-  };
-  //챌린지 레벨 조회
-  const ChallengeLevel = () => {
-    const token = window.localStorage.getItem("token");
-    const [level, setLevel] = useState("");
-    useEffect(() => {
-      axios
-        .post("/challenge/challengeLevel", null, {
-          headers: {
-            Authorization: "Bearer " + token,
-          },
-        })
-        .then((res) => {
-          console.log(res.data);
-        })
-        .catch((res) => {
-          console.log(res.response.status);
-          setLevel(res.data);
-        });
-    }, []);
-    return [];
   };
   return (
     <div className="challenge-content-wrap">
       <div className="challenge-content">
-        <p>현재 나의 챌린지 레벨은 입니다.</p>
+        <ChallengeLevel />
         <div className="challenge-list-wrap1">
-          {showChallenge.map((challenge, index) => {
+          {showChallenge1.map((challenge, index) => {
             if (challenge.challengeKind === 1) {
               return (
                 <ChallengeItem
@@ -87,7 +83,7 @@ const IngChallenge = () => {
           })}
         </div>
         <div className="challenge-list-wrap2">
-          {showChallenge.map((challenge, index) => {
+          {showChallenge2.map((challenge, index) => {
             if (challenge.challengeKind === 2) {
               return (
                 <ChallengeItem
@@ -175,5 +171,28 @@ const Dayday = (props) => {
     </div>
   );
 };
-
+//챌린지 레벨 조회
+const ChallengeLevel = () => {
+  const token = window.localStorage.getItem("token");
+  const [challengeLevel, setChallengeLevel] = useState("");
+  useEffect(() => {
+    axios
+      .post("/challenge/challengeLevel", null, {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      })
+      .then((res) => {
+        setChallengeLevel(res.data);
+      })
+      .catch((res) => {
+        console.log(res.response.status);
+      });
+  }, []);
+  return (
+    <div>
+      <p>나의 챌린지 레벨은 {challengeLevel}입니다.</p>
+    </div>
+  );
+};
 export default IngChallenge;

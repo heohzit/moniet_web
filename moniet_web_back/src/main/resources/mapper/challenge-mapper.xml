@@ -16,7 +16,7 @@
   			to_char(challenge_end,'yyyy-mm-dd') as challenge_end
 		 from challenge
 		 where member_no2=(select member_no from member where member_id=#{memberId}) and
-		 to_char(challenge_end,'yyyy-mm-dd') >= to_char(sysdate,'yyyy-mm-dd') and (challenge_result = 0 or challenge_result = 1 )
+		 to_char(challenge_end,'yyyy-mm-dd') >= to_char(sysdate,'yyyy-mm-dd') and challenge_result = 0 
 		 order by 1 desc
 	</select>
 	
@@ -34,7 +34,7 @@
   			to_char(challenge_end,'yyyy-mm-dd') as challenge_end
 		 from challenge
 		  where member_no2=(select member_no from member where member_id=#{memberId}) and
-		  (to_char(sysdate,'yyyy-mm-dd') > to_char(challenge_end,'yyyy-mm-dd') or challenge_result = 2)
+		  (to_char(sysdate,'yyyy-mm-dd') > to_char(challenge_end,'yyyy-mm-dd') or challenge_result = 2 or challenge_result = 1)
 		  order by 1 desc
 	</select>
 	

@@ -1,29 +1,27 @@
 import React from "react";
 import {
   Chart as ChartJS,
-  ArcElement,
-  Tooltip,
-  Legend,
   CategoryScale,
   LinearScale,
+  PointElement,
+  LineElement,
   Title,
+  Tooltip,
+  Legend,
 } from "chart.js";
-import { Pie } from "react-chartjs-2";
+import { Line } from "react-chartjs-2";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-ChartJS.register(ArcElement, Tooltip, Legend);
 ChartJS.register(
   CategoryScale,
   LinearScale,
-  ArcElement,
+  PointElement,
+  LineElement,
   Title,
   Tooltip,
   Legend
 );
-
-const today = new Date();
-const formattedDate = `${today.getMonth() + 1}월`;
 const options = {
   responsive: true,
   plugins: {
@@ -32,13 +30,13 @@ const options = {
     },
     title: {
       display: true,
-      text: formattedDate + " 수입 / 지출",
+      text: "Chart.js Line Chart",
     },
   },
 };
-const PieDashboard = () => {
+const LineDashboard = () => {
   const [data, setData] = useState({
-    labels: [],
+    labels: ["January", "February", "March", "April", "May", "June", "July"],
     datasets: [
       {
         label: "Dataset 1",
@@ -49,26 +47,26 @@ const PieDashboard = () => {
   useEffect(() => {
     const token = window.localStorage.getItem("token");
     axios
-      .post("/dashboard/pie", null, {
+      .post("/dashboard/line", null, {
         headers: {
           Authorization: "Bearer " + token,
         },
       })
       .then((res) => {
         setData({
-          labels: ["수입", "지출"],
+          labels: [],
           datasets: [
             {
-              label: "합계",
-              data: res.data,
-              backgroundColor: [
-                "rgba(255, 99, 132, 0.5)",
-                "rgba(54, 162, 235, 0.5)",
-              ],
-              borderColor: [
-                "rgba(255, 99, 132,1.5)",
-                "rgba(54, 162, 235, 1.5)",
-              ],
+              label: "Dataset 1",
+
+              borderColor: "rgb(255, 99, 132)",
+              backgroundColor: "rgba(255, 99, 132, 0.5)",
+            },
+            {
+              label: "Dataset 2",
+
+              borderColor: "rgb(53, 162, 235)",
+              backgroundColor: "rgba(53, 162, 235, 0.5)",
             },
           ],
         });
@@ -80,9 +78,9 @@ const PieDashboard = () => {
   return (
     <div>
       <div>
-        <Pie data={data} options={options} />
+        <Line data={data} options={options} />
       </div>
     </div>
   );
 };
-export default PieDashboard;
+export default LineDashboard;
