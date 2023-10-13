@@ -23,49 +23,42 @@ const CashbookTable = (props) => {
   useEffect(() => {
     setRows(cashbookList);
   }, [cashbookList]);
+  console.log(cashbookList[0]); //3번씩 찍히는 거 확인필요
+
   const [rowModesModel, setRowModesModel] = useState({});
   const handleRowEditStop = (params, event) => {
     if (params.reason === GridRowEditStopReasons.rowFocusOut) {
       event.defaultMuiPrevented = true;
     }
   };
-  const handleEditClick = (cashbookNo) => () => {
-    setRowModesModel({
-      ...rowModesModel,
-      [cashbookNo]: { mode: GridRowModes.Edit },
-    });
+
+  const handleEditClick = (id) => () => {
+    setRowModesModel({ ...rowModesModel, [id]: { mode: GridRowModes.Edit } });
   };
 
-  const handleSaveClick = (cashbookNo) => () => {
-    setRowModesModel({
-      ...rowModesModel,
-      [cashbookNo]: { mode: GridRowModes.View },
-    });
+  const handleSaveClick = (id) => () => {
+    setRowModesModel({ ...rowModesModel, [id]: { mode: GridRowModes.View } });
   };
 
-  const handleDeleteClick = (cashbookNo) => () => {
-    setRows(rows.filter((row) => row.cashbookNo !== cashbookNo));
+  const handleDeleteClick = (id) => () => {
+    setRows(rows.filter((row) => row.id !== id));
   };
 
-  const handleCancelClick = (cashbookNo) => () => {
+  const handleCancelClick = (id) => () => {
     setRowModesModel({
       ...rowModesModel,
-      [cashbookNo]: { mode: GridRowModes.View, ignoreModifications: true },
+      [id]: { mode: GridRowModes.View, ignoreModifications: true },
     });
 
-    const editedRow = rows.find((row) => row.cashbookNo === cashbookNo);
+    const editedRow = rows.find((row) => row.id === id);
     if (editedRow.isNew) {
-      setRows(rows.filter((row) => row.cashbookNo !== cashbookNo));
+      setRows(rows.filter((row) => row.id !== id));
     }
   };
 
   const processRowUpdate = (newRow) => {
     const updatedRow = { ...newRow, isNew: false };
-    setRows(
-      rows.map((row) =>
-        row.cashbookNo === newRow.cashbookNo ? updatedRow : row
-      )
-    );
+    setRows(rows.map((row) => (row.id === newRow.id ? updatedRow : row)));
     return updatedRow;
   };
 
@@ -79,6 +72,9 @@ const CashbookTable = (props) => {
       headerName: "날짜",
       width: 180,
       editable: true,
+      valueFormatter: (params) =>
+        new Date(params.value).toLocaleDateString("ko-KR"),
+      type: "date",
     },
     {
       field: "cashbookAsset",
@@ -87,6 +83,7 @@ const CashbookTable = (props) => {
       editable: true,
       type: "singleSelect",
       valueOptions: assetList,
+      valueGetter: (params) => assetToString(params.value),
     },
     {
       field: "cashbookCateogory",
@@ -99,6 +96,7 @@ const CashbookTable = (props) => {
       headerName: "금액",
       width: 130,
       editable: true,
+      valueFormatter: (params) => params.value?.toLocaleString("ko-KR"),
     },
     {
       field: "cashbookContent",
@@ -152,11 +150,6 @@ const CashbookTable = (props) => {
           />,
         ];
       },
-    },
-    {
-      field: "cashbookNo",
-      headerName: "번호",
-      width: 50,
     },
   ];
 
