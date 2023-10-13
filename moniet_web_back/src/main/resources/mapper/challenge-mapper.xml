@@ -91,7 +91,7 @@
   	<!-- 입력창에 띄울 챌린지 목록 조회용 -->
   	<select id="challengeListsByMember" resultType="challenge">
   	<![CDATA[
-  		select challenge_no, challenge_title from CHALLENGE where member_no2 = (select member_no from member where member_id=#{memberId}) and challenge_state=1 and CHALLENGE_KIND=1 and (sysdate >= challenge_start and sysdate <= challenge_end )
+  		select challenge_no, challenge_title, challenge_start, challenge_end from CHALLENGE where member_no2 = (select member_no from member where member_id=#{memberId}) and challenge_state=1 and CHALLENGE_KIND=1 and (sysdate >= challenge_start and sysdate <= challenge_end )
   	]]>
   	</select>
 </mapper>

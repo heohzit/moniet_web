@@ -199,6 +199,7 @@ const Cashbook = (props) => {
           dateString={dateString}
           assetList={assetList}
           challengeCate={challengeCate}
+          setChallengeCate={setChallengeCate}
           incomeCate={incomeCate}
           spendingCate={spendingCate}
           select={select}

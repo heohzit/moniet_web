@@ -4,6 +4,7 @@ import { Button1, Button5 } from "../util/Buttons";
 import Input from "../util/InputFrm";
 import { Calendar } from "react-date-range";
 import ko from "date-fns/locale/ko";
+import ReactDOM from "react-dom/client";
 
 const CashbookFrm = (props) => {
   const title = props.title;
@@ -13,7 +14,6 @@ const CashbookFrm = (props) => {
   const assetList = props.assetList;
   const cashbookFinance = props.cashbookFinance;
   const setCashbookFinance = props.setCashbookFinance;
-
   useEffect(() => {
     const spendingBtn = document.querySelector(
       ".select-finance:last-child>button"
@@ -36,6 +36,7 @@ const CashbookFrm = (props) => {
     { i: 6, cycle: "6개월" },
     { i: 12, cycle: "1년" },
   ];
+
   const cashbookAsset = props.cashbookAsset;
   const setCashbookAsset = props.setCashbookAsset;
 
@@ -50,6 +51,7 @@ const CashbookFrm = (props) => {
   const cashbookMemo = props.cashbookMemo;
   const setCashbookMemo = props.setCashbookMemo;
   const challengeCate = props.challengeCate;
+  const setChallengeCate = props.setChallengeCate;
   const incomeCate = props.incomeCate;
   const spendingCate = props.spendingCate;
   const write = props.clickEvent;
@@ -66,6 +68,9 @@ const CashbookFrm = (props) => {
       ? setCashbookFinance(1)
       : setCashbookFinance(2);
     e.currentTarget.classList.add("finance-checked");
+    const loop = document.querySelector("select[name='cashbookLoop']");
+    loop.value = 0;
+    setCashbookLoop(0);
   };
 
   const selectDate = (item) => {
@@ -215,6 +220,7 @@ const CashbookFrm = (props) => {
                         </option>
                       ))}
                 </select>
+
                 {cashbookCategory === "21" ? (
                   <select
                     name="challengeNo"

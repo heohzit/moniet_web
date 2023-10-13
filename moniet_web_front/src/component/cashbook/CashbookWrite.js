@@ -1,8 +1,9 @@
 import { useState } from "react";
 import CashbookFrm from "./CashbookFrm";
 import axios from "axios";
-import { Alert, Snackbar } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
 
 const CashbookWrite = (props) => {
   const isOpen = props.isOpen;
@@ -11,6 +12,7 @@ const CashbookWrite = (props) => {
   const dateString = props.dateString;
   const assetList = props.assetList;
   const challengeCate = props.challengeCate;
+  const setChallengeCate = props.setChallengeCate;
   const incomeCate = props.incomeCate;
   const spendingCate = props.spendingCate;
   const select = props.select;
@@ -67,10 +69,8 @@ const CashbookWrite = (props) => {
           setCashbookMoney(0);
           setCashbookContent("");
           setCashbookMemo("");
-
           onOpenClickHandler();
           closeFrm();
-
           setSelect(!select);
         } else {
           console.log("등록 중 에러 발생");
@@ -112,6 +112,7 @@ const CashbookWrite = (props) => {
         challengeNo={challengeNo}
         setChallengeNo={setChallengeNo}
         challengeCate={challengeCate}
+        setChallengeCate={setChallengeCate}
         incomeCate={incomeCate}
         spendingCate={spendingCate}
         clickEvent={write}
@@ -119,8 +120,8 @@ const CashbookWrite = (props) => {
       {showSnackbar && (
         <Snackbar
           anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
-          open={onOpenClickHandler}
-          autoHideDuration={500}
+          open //갑자기 에러나서 open 함수 삭제함
+          autoHideDuration={1000}
           onClose={onCloseClickHandler}
         >
           <Alert
