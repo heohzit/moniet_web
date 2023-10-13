@@ -29,4 +29,9 @@
 	<update id="updatePwMember">
 		update member set member_pw=#{memberPw} where member_id=#{memberId}
 	</update>
+	
+	<update id="updateNewPwMember">
+		update member set member_pw=#{memberPw} where member_id=#{memberId}
+	</update>
+	
 </mapper>

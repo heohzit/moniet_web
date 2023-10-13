@@ -91,6 +91,22 @@ public class MemberService {
 		return memberDao.selectOneMemberId(memberName, memberEmail);
 	}
 
+
+	@Transactional
+	//새 비밀번호 update
+	public int updateNewPwMember(Member member) {
+		return memberDao.updateNewPwMember(member);
+	}
+
+
+
+	
+
+
+	
+
+
+
 	
 
 	

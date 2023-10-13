@@ -130,10 +130,13 @@ public class MemberController {
 
 	//email전송 : 임시비밀번호
 	@PostMapping(value="/sendPw") 
-		public String sendPw(@RequestAttribute String memberEmail) {
-			System.out.println(memberEmail);
-			String pwCode = emailSender.sendPw(memberEmail);
-			return pwCode;
+		public int sendPw(@RequestBody Member member) {
+			String pwCode = emailSender.sendPw(member.getMemberEmail());
+			member.setMemberPw(pwCode);
+			System.out.println(pwCode);
+			System.out.println(member.getMemberPw());
+			System.out.println(member.getMemberId());
+			return memberService.updatePwMember(member);
 
 		}
 	}
