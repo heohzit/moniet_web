@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import Input from "./InputFrm";
 import "./join.css";
 import axios from "axios";
@@ -20,6 +20,60 @@ const Join = () => {
   const [thumbnail, setThumbnail] = useState("");
   const [memberImg, setMemberImg] = useState(null);
   const navigate = useNavigate();
+  const Emails = [
+    "@naver.com",
+    "@gmail.com",
+    "@daum.net",
+    "@hanmail.net",
+    "@yahoo.com",
+    "@outlook.com",
+    "@nate.com",
+    "@kakao.com",
+  ];
+  const [emailList, setEmailList] = useState(Emails);
+  const [selected, setSelected] = useState(-1);
+  const [isDrobBox, setIsDropbox] = useState(false);
+
+  const inputRef = useRef();
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (inputRef.current && !inputRef.current.contains(e.target)) {
+        setIsDropbox(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+  }, [inputRef]);
+  const onChangeEmail = (e) => {
+    setMemberEmail(e.target.value);
+
+    if (e.target.value.includes("@")) {
+      setIsDropbox(true);
+      setEmailList(
+        Emails.filter((el) => el.includes(e.target.value.split("@")[1]))
+      );
+    } else {
+      setIsDropbox(false);
+      setSelected(-1);
+    }
+  };
+  const handleDropDownClick = (first, second) => {
+    setMemberEmail(`${first.split("@")[0]}${second}`);
+    setIsDropbox(false);
+    setSelected(-1);
+  };
+  const handleKeyUp = (e) => {
+    if (isDrobBox) {
+      if (e.key === "ArrowDown" && emailList.length - 1 > selected) {
+        setSelected(selected + 1);
+      }
+      if (e.key === "ArrowUp" && selected >= 0) {
+        setSelected(selected - 1);
+      }
+      if (e.key === "Enter" && selected >= 0) {
+        handleDropDownClick(memberEmail, emailList[selected]);
+      }
+    }
+  };
 
   //이미지 업로드 input onChange
   const thumbnailChange = (e) => {
@@ -81,22 +135,13 @@ const Join = () => {
       setCheckPhoneMsg("");
     }
   };
-  const emailCheck = () => {
-    const emailReg = /^[A-Za-z0-9_\\.\\-]+@[A-Za-z0-9\\-]+\.[A-za-z0-9\\-]+/;
-    if (!emailReg.test(memberEmail)) {
-      setCheckEmailMsg("'@'를 포함하여 올바른 형식으로 입력해주세요.");
-    } else {
-      setCheckEmailMsg("");
-    }
-  };
   //회원가입
   const join = () => {
     if (
       checkIdMsg === "" &&
       checkPwMsg === "" &&
       checkNameMsg === "" &&
-      checkPhoneMsg === "" &&
-      checkEmailMsg === ""
+      checkPhoneMsg === ""
     ) {
       const form = new FormData();
       form.append("thumbnail", thumbnail);
@@ -196,19 +241,38 @@ const Join = () => {
         checkMsg={checkPhoneMsg}
         blurEvent={phoneCheck}
       />
-      <JoinInputWrap
-        data={memberEmail}
-        setData={setMemberEmail}
-        type="type"
-        content="memberEmail"
-        label="이메일"
-        checkMsg={checkEmailMsg}
-        blurEvent={emailCheck}
-      />
-      <div className="join-button">
-        <button type="button" onClick={join}>
-          회원가입
-        </button>
+      <div ref={inputRef} className="join-mail-wrap">
+        <label htmlFor="membeMail">이메일</label>
+        <input
+          type="text"
+          value={memberEmail}
+          name={memberEmail}
+          id="memberMail"
+          onChange={(e) => {
+            onChangeEmail(e);
+          }}
+          onKeyUp={handleKeyUp}
+        />
+        {isDrobBox && (
+          <div>
+            {emailList.map((item, idx) => (
+              <div
+                key={idx}
+                onMouseOver={() => setSelected(idx)}
+                onClick={() => handleDropDownClick(memberEmail, item)}
+                selected={selected === idx}
+              >
+                {memberEmail.split("@")[0]}
+                {item}
+              </div>
+            ))}
+          </div>
+        )}
+        <div className="join-button">
+          <button type="button" onClick={join}>
+            회원가입
+          </button>
+        </div>
       </div>
     </div>
   );
