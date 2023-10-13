@@ -69,7 +69,7 @@
 			 #{cashbookMoney}, #{cashbookContent}, #{cashbookMemo})
 	</insert>
 	
-		<!--파이대시보드-->
+	<!--파이대시보드-->
 	<select id="pieDash" resultType="int">
 		select sum(cashbook_money) from cashbook 
 		where TO_CHAR(SYSDATE, 'MM') = TO_CHAR(cashbook_date,'MM') and 

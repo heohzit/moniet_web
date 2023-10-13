@@ -31,4 +31,5 @@ public class Cashbook {
 	//조회용
 	private String startDate;
 	private String endDate;
+	
 }

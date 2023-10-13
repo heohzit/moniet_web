@@ -2,7 +2,8 @@ import "./challenge.css";
 import { Button3 } from "../util/Buttons";
 import Input from "../util/InputFrm";
 import { useNavigate } from "react-router-dom";
-import Swal from "sweetalert2";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 //챌린지 작성 폼
 const ChallengeFrm = (props) => {
@@ -19,6 +20,8 @@ const ChallengeFrm = (props) => {
   const challengeEnd = props.challengeEnd;
   const setChallengeEnd = props.setChallengeEnd;
   const buttonEvent = props.buttonEvent;
+  const challengeCategory = props.challengeCategory;
+  const setChallengeCategory = props.setChallengeCategory;
   const type = props.type;
 
   //챌린지 옵션
@@ -29,7 +32,6 @@ const ChallengeFrm = (props) => {
     { key: 1, value: "저축 챌린지" },
     { key: 2, value: "지출 챌린지" },
   ];
-
   //달력 날짜 지정
   const today = new Date();
   const dateString = today.toISOString().substring(0, 10);
@@ -41,6 +43,26 @@ const ChallengeFrm = (props) => {
   const canclePage = () => {
     navigate("/challenge/*");
   };
+
+  const [spendingCate, setSpendingCate] = useState([]);
+
+  useEffect(() => {
+    const token = window.localStorage.getItem("token");
+    axios
+      .post("/cashbook/categoryList", null, {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      })
+      .then((res) => {
+        setSpendingCate(res.data.spendingCategory);
+        console.log(res.data.spendingCategory);
+      })
+      .catch((res) => {
+        console.log(res.response.status);
+      });
+  }, []);
+
   return (
     <div>
       <div className="challenge-frm-top">
@@ -59,6 +81,30 @@ const ChallengeFrm = (props) => {
                       </option>
                     ))}
                   </select>
+                  {challengeKind === "2" ? (
+                    <select
+                      name="categoryChallenge"
+                      defaultValue={challengeCategory}
+                      onChange={(e) =>
+                        setChallengeCategory(e.currentTarget.value)
+                      }
+                    >
+                      <option value="">지출챌린지 종류 선택</option>
+                      {spendingCate.map((item, index) =>
+                        item.categoryTitle !== "저축" ? (
+                          <option
+                            key={"spending" + index}
+                            value={item.categoryNo}
+                            selected
+                          >
+                            {item.categoryTitle}
+                          </option>
+                        ) : (
+                          ""
+                        )
+                      )}
+                    </select>
+                  ) : null}
                 </td>
               </tr>
               <tr>
