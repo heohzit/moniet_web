@@ -34,7 +34,6 @@ const IngChallenge = () => {
   const moreChallengeBtn = () => {
     const nextPage = currentPage + 1;
     const endIndex = nextPage * loadCount;
-    console.log(endIndex);
     const nextChallenge = challengeList.slice(0, endIndex);
     setShowChallenge(nextChallenge);
     setCurrentPage(nextPage);
@@ -115,6 +114,7 @@ const ChallengeItem = (props) => {
       <div className="challenge-item-info">
         <div className="challenge-kind">
           {challenge.challengeKind === 1 ? <div>저축</div> : <div>지출</div>}
+          {challenge.categoryNo === 0 ? "" : <div>{challenge.categoryNo}</div>}
         </div>
         <div>{challenge.challengeTitle}</div>
         <Dayday challenge={challenge}></Dayday>

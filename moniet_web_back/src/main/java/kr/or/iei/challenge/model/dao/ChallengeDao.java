@@ -35,4 +35,7 @@ public interface ChallengeDao {
 
 	List challengeListsByMember(String memberId);
 	
+	//챌린지 성공/실패 결과
+	void resultChallenge(String memberId);
+
 }

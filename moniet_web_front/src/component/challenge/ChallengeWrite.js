@@ -2,6 +2,7 @@ import ChallengeFrm from "./ChallengeFrm";
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 //챌린지 작성
 const ChallengeWrite = () => {
@@ -11,39 +12,48 @@ const ChallengeWrite = () => {
   const [challengeAmount, setChallengeAmount] = useState("");
   const [challengeStart, setChallengeStart] = useState("");
   const [challengeEnd, setChallengeEnd] = useState("");
+  const [challengeCategory, setChallengeCategory] = useState("");
   const navigate = useNavigate();
 
   const write = () => {
-    console.log(challengeTitle);
-    console.log(challengeContent);
-    console.log(challengeAmount);
-    console.log(challengeStart);
-    console.log(challengeEnd);
-    console.log(challengeKind);
-    const challenge = {
-      challengeKind,
-      challengeTitle,
-      challengeContent,
-      challengeAmount,
-      challengeStart,
-      challengeEnd,
-    };
-    const token = window.localStorage.getItem("token");
-    axios
-      .post("/challenge/insert", challenge, {
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      })
-      .then((res) => {
-        console.log(res.data);
-        if (res.data > 0) {
-          navigate("/challenge");
-        }
-      })
-      .catch((res) => {
-        console.log(res.response.status);
-      });
+    console.log(challengeCategory);
+    if (
+      challengeTitle !== "" &&
+      challengeContent !== "" &&
+      challengeStart !== "" &&
+      challengeEnd !== "" &&
+      challengeAmount !== ""
+    ) {
+      const challenge = {
+        challengeKind,
+        challengeTitle,
+        challengeContent,
+        challengeAmount,
+        challengeStart,
+        challengeEnd,
+        challengeCategory,
+      };
+
+      const token = window.localStorage.getItem("token");
+      axios
+        .post("/challenge/insert", challenge, {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        })
+        .then((res) => {
+          if (res.data === 1) {
+            navigate("/challenge");
+          } else {
+            Swal.fire("챌린지 생성이 실패하였습니다. 다시 시도해주세요.");
+          }
+        })
+        .catch((res) => {
+          console.log(res.response.status);
+        });
+    } else {
+      Swal.fire("입력값을 확인해주세요.");
+    }
   };
   return (
     <div>
@@ -60,6 +70,8 @@ const ChallengeWrite = () => {
         setChallengeStart={setChallengeStart}
         challengeEnd={challengeEnd}
         setChallengeEnd={setChallengeEnd}
+        challengeCategory={challengeCategory}
+        setChallengeCategory={setChallengeCategory}
         buttonEvent={write}
         type="write"
       ></ChallengeFrm>

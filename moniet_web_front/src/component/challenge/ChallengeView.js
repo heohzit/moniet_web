@@ -32,12 +32,13 @@ const ChallengeView = (props) => {
         console.log(res.data);
       });
   }, []);
-  const goalAmount = [[challenge.challengeAmount]]; // 목표 금액
-  const currentAmount = [[challenge.total]]; // 현재 금액
+  const goalAmount = [[challenge.challengeAmount]];
+  const currentAmount = [[challenge.total]];
+  const rawProgress = Math.floor((currentAmount / goalAmount) * 100);
   const progress =
-    challenge.challengeKind === 1 && currentAmount >= goalAmount
-      ? 100
-      : Math.floor((currentAmount / goalAmount) * 100);
+    challenge.challengeKind === 1
+      ? Math.min(100, rawProgress)
+      : Math.max(0, Math.min(100, rawProgress));
 
   //진행률 멘트
   const ProgressMent = (progress) => {
@@ -149,16 +150,16 @@ const ChallengeView = (props) => {
         ) : (
           <div>지출챌린지</div>
         )}
+        <div>{challenge.categoryNo}</div>
       </div>
       <div>{ProgressMent(progress)}</div>
       <div>목표 금액: {goalAmount.toLocaleString()}원</div>
       <div>현재 금액: {currentAmount.toLocaleString()}원</div>
-
       <CircularProgressBar
         colorCircle="#ededed"
-        colorSlice={challenge.challengeKind === 1 ? "#e54e21" : "#6A6DA6"}
+        colorSlice="#e54e21"
         percent={challenge.challengeKind === 1 ? progress : 100 - progress}
-        fontColor="#6A6DA6"
+        fontColor="#e54e21"
         round={true}
         fontSize="15px"
         textPosition="1.5rem"

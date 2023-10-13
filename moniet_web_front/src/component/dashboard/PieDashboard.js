@@ -36,6 +36,7 @@ const options = {
     },
   },
 };
+
 const PieDashboard = () => {
   const [data, setData] = useState({
     labels: [],
@@ -46,6 +47,17 @@ const PieDashboard = () => {
       },
     ],
   });
+  const [selectMonth, setSelectMonth] = useState("");
+  const onChangeHanlder = (e) => {
+    setSelectMonth(e.currentTarget.value);
+  };
+  const Options = [
+    { key: 10, value: "10월" },
+    { key: 11, value: "11월" },
+  ];
+  const obj = {
+    selectDate: 1,
+  };
   useEffect(() => {
     const token = window.localStorage.getItem("token");
     axios
@@ -64,10 +76,6 @@ const PieDashboard = () => {
               backgroundColor: [
                 "rgba(255, 99, 132, 0.5)",
                 "rgba(54, 162, 235, 0.5)",
-              ],
-              borderColor: [
-                "rgba(255, 99, 132,1.5)",
-                "rgba(54, 162, 235, 1.5)",
               ],
             },
           ],
