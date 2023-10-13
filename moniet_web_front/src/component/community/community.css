@@ -501,7 +501,7 @@
   margin: 40px 0;
 }
 
-.community-view-wrap .ql-editor {
+.community-view-wrap > .ql-editor {
   padding: 0;
 }
 
@@ -575,10 +575,10 @@
 
 .board-item {
   border-radius: 20px;
-  max-height: 400px;
+  /* max-height: 800px; */
   margin-top: 40px;
   margin-bottom: 40px;
-  background-color: #fafafa;
+  background-color: #fcfcfc;
 }
 
 .board-item-info {
@@ -615,8 +615,8 @@
 }
 
 .board-item-content {
+  padding: 25px;
   padding-left: 5px;
-  padding-bottom: 20px;
   font-family: ns-r;
 }
 
@@ -745,4 +745,99 @@
   top: 1.4cm;
   left: 2.3cm;
   cursor: pointer;
+}
+
+.board-item-img-wrap {
+}
+
+.board-item-img-list {
+  padding: 20px 0px;
+  overflow: hidden;
+}
+
+.board-item-img-list > .board-item-img {
+  float: left;
+  padding: 10px;
+  padding-left: 0;
+}
+
+.board-item-img-list > .board-item-img img {
+  cursor: pointer;
+  object-fit: cover;
+  border-radius: 10px;
+  width: 150px;
+  height: 150px;
+}
+
+.board-item-like {
+  overflow: hidden;
+  width: 100%;
+}
+
+.board-item-like div {
+  float: left;
+}
+
+.board-item-like > .board-item-like-text {
+  color: #010440;
+  font-size: 18px;
+  font-family: ns-b;
+  padding: 5px;
+  padding-right: 10px;
+  float: left;
+}
+
+.board-item-like > .board-item-like-icon {
+  position: relative;
+  float: right;
+  width: 80%;
+  height: 36px;
+}
+
+.board-item-like > .board-item-like-icon > .thumb_up,
+.chat,
+.chat-count {
+  position: absolute;
+  font-size: 28px;
+  margin-top: 3px;
+
+  width: 21px;
+  height: 22px;
+  padding: 5px;
+  padding-bottom: 4px;
+  color: #010440;
+}
+
+.board-item-like > .board-item-like-icon > .thumb_up {
+  cursor: pointer;
+  right: 2cm;
+}
+
+.board-item-like > .board-item-like-icon > .chat {
+  cursor: pointer;
+  right: 1cm;
+}
+
+.board-item-like > .board-item-like-icon > .chat-count {
+  line-height: 21px;
+  right: 0;
+}
+
+.board-item-like > .board-item-like-icon > .thumb_up:hover {
+  color: #6a6da6;
+  transition: all 0.2s linear;
+}
+
+.board-item-like > .board-item-like-icon > .chat:hover {
+  color: #6a6da6;
+  transition: all 0.2s linear;
+}
+
+.board-item-info > .board-item-content {
+  padding-left: 5px;
+  line-height: 27px;
+  letter-spacing: 0.5px;
+  color: #010440;
+  font-family: ns-r;
+  max-height: 500px;
 }

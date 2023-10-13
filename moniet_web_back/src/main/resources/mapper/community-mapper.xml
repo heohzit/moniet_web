@@ -150,6 +150,10 @@
 	WHERE RNUM BETWEEN 1 AND 100
 	</select>
 	
+	<select id="communityFileList" resultType="communityBoardFile">
+		select * from community_board_file where community_board_no = #{communityBoardNo}
+	</select>
+	
 	<select id="selectOneCommunityBoardType" resultType="communityBoardType">
 		<!-- 
 		SELECT * FROM COMMUNITY_TYPE WHERE COMMUNITY_NO = #{communityNo}
@@ -165,6 +169,7 @@
 		<result column="community_board_date" property="communityBoardDate" />
 		<result column="community_ref" property="communityRef" />
 		<result column="community_board_ref" property="communityBoardRef" />
+		
 		<collection 
 			property="communityBoardTypeList"
 			select="selectOneCommunityBoardType"
@@ -172,6 +177,15 @@
 			javaType="java.util.List"
 			ofType="communityBoardType"
 		/>
+		
+		<collection 
+			property="fileList"
+			select="communityFileList"
+			column="community_board_no"
+			javaType="java.util.List"
+			ofType="communityBoardFile"
+		/>
+		
 	</resultMap>
 	
 	<insert id="insertBoard">

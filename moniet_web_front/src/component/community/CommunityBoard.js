@@ -3,6 +3,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Button1, Button2, Button3, Button4 } from "../util/Buttons";
+import CommunityBoardComment from "./CommunityBoardComment";
 
 const CommunityBoard = (props) => {
   const communityNo = props.communityNo;
@@ -44,7 +45,6 @@ const CommunityBoardItem = (props) => {
                 })
               : ""}
           </div>
-
           <div className="board-item-profile">
             <div className="board-item-account">
               <span class="material-icons">account_circle</span>
@@ -54,13 +54,30 @@ const CommunityBoardItem = (props) => {
               <div className="board-item-date">{board.communityBoardDate}</div>
             </div>
           </div>
-
-          <div className="board-item-content">
-            {board.communityBoardContent}
+          <div
+            className="board-item-content ql-editor"
+            dangerouslySetInnerHTML={{ __html: board.communityBoardContent }}
+          ></div>
+          <div className="board-item-img-wrap">
+            <div className="board-item-img-list">
+              {board.fileList
+                ? board.fileList.map((file, index) => {
+                    return <FileItem key={"file" + index} file={file} />;
+                  })
+                : ""}
+            </div>
           </div>
-          <div className="board-item-img">게시물 이미지</div>
-          <div className="board-item-like">게시물 공감수</div>
-          <div className="board-item-comment"></div>
+          <div className="board-item-like">
+            <div className="board-item-like-text">2명이 공감했어요.</div>
+            <div className="board-item-like-icon">
+              <span className="material-icons thumb_up">thumb_up</span>
+              <span className="material-icons chat">chat</span>
+              <span className="chat-count">5</span>
+            </div>
+          </div>
+          <div className="board-item-comment">
+            <CommunityBoardComment />
+          </div>
         </div>
       </div>
     </>
@@ -83,6 +100,16 @@ const BoardTypesItem = (props) => {
           <span className="keyword2 key-4">잡담</span>
         )}
       </div>
+    </div>
+  );
+};
+
+const FileItem = (props) => {
+  const file = props.file;
+
+  return (
+    <div className="board-item-img">
+      <img src={"/community/" + file.filepath} />
     </div>
   );
 };
