@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import kr.or.iei.cashbook.model.service.CashbookService;
 import kr.or.iei.cashbook.model.vo.Cashbook;
 import kr.or.iei.cashbook.model.vo.Category;
+import kr.or.iei.challenge.model.service.ChallengeService;
 
 @RestController
 @RequestMapping(value="/cashbook")
@@ -24,6 +25,8 @@ public class CashbookController {
 
 	@Autowired
 	private CashbookService cashbookService;
+	@Autowired
+	private ChallengeService challengeService;
 	
 	@PostMapping(value="/list")
 	public Map cashbookList(@RequestBody Cashbook cashbook, @RequestAttribute String memberId) {
@@ -48,6 +51,9 @@ public class CashbookController {
 		System.out.println(categoryList);
 		List incomeCategory = new ArrayList<Category>();
 		List spendingCategory = new ArrayList<Category>();
+		List challengeCategory = challengeService.challengeListsByMember(memberId);
+		System.out.println(challengeCategory);
+		
 		//ref 1:수입, 2:지출
 		for(Category c : categoryList) {
 			if(c.getCategoryRef() == 1) {
@@ -59,6 +65,7 @@ public class CashbookController {
 		Map map = new HashMap<String, Object>();
 		map.put("incomeCategory", incomeCategory);
 		map.put("spendingCategory", spendingCategory);
+		map.put("challengeCategory", challengeCategory);
 		return map;
 	}
 	

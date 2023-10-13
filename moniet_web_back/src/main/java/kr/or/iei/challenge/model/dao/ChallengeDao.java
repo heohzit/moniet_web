@@ -32,5 +32,7 @@ public interface ChallengeDao {
 
 	//챌린지 레벨 조회
 	int challengeLevel(String memberId);
+
+	List challengeListsByMember(String memberId);
 	
 }
