@@ -1,7 +1,8 @@
 import "./challenge.css";
 import { Button3 } from "../util/Buttons";
 import Input from "../util/InputFrm";
-import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 //챌린지 작성 폼
 const ChallengeFrm = (props) => {
@@ -36,6 +37,10 @@ const ChallengeFrm = (props) => {
   dateObj.setDate(dateObj.getDate() + 1);
   const tomorrowString = dateObj.toISOString().substring(0, 10);
 
+  const navigate = useNavigate();
+  const canclePage = () => {
+    navigate("/challenge/*");
+  };
   return (
     <div>
       <div className="challenge-frm-top">
@@ -130,7 +135,7 @@ const ChallengeFrm = (props) => {
         </div>
       </div>
       <div className="challenge-btn-box">
-        <Button3 text="취소하기"></Button3>
+        <Button3 text="취소하기" clickEvent={canclePage}></Button3>
         <Button3 text="등록하기" clickEvent={buttonEvent}></Button3>
       </div>
     </div>
