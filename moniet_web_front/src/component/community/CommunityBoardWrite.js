@@ -86,9 +86,9 @@ const CommunityBoardWrite = () => {
       ".board-write-options-select"
     ).value;
 
-    console.log(communityBoardContent);
-    console.log(selectOption);
-    console.log(boardFile);
+    // console.log(communityBoardContent);
+    // console.log(selectOption);
+    // console.log(boardFile);
 
     if (communityBoardContent !== "" && selectOption != 0) {
       // ===을 3개쓰면 타입까지 비교하는데, ==을 2개쓰면 순수 데이터만 비교함

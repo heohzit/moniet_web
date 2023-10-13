@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-
+import kr.or.iei.EmailSender;
 import kr.or.iei.FileUtil;
 import kr.or.iei.member.model.service.MemberService;
 import kr.or.iei.member.model.vo.Member;
@@ -28,8 +28,13 @@ public class MemberController {
 	@Autowired
 	private FileUtil fileUtil;
 	
+	@Autowired
+	private EmailSender emailSender;
+	
 	@Value("${file.root}")
 	private String root;
+	
+	
 	
 	
 	//id 중복체크
@@ -45,15 +50,13 @@ public class MemberController {
 	
 	//회원정보조회(비밀번호  찾기)
 	@PostMapping(value="/memberCheck")
-	public int memberCheck(@RequestBody Member member) {
-		System.out.println(member);
+	public Member memberCheck(@RequestBody Member member) {
 		Member m  = memberService.selectOneMemberPw(member.getMemberId(), member.getMemberName(), member.getMemberEmail());
-		System.out.println(member.getMemberId());
-		if(m == null) {
-			return 0;
+		if(m != null) {
+			return m;
 		}
 		else {
-			return 1;
+			return null;
 		}
 	}
 	//회원정보조회(아이디 찾기)
@@ -61,7 +64,6 @@ public class MemberController {
     public Member searchId(@RequestBody Member member) {
 		Member m = memberService.selectOneMemberId(member.getMemberName(),member.getMemberEmail());
 		if(m != null) {
-			System.out.println(m);
 			return m;
 		}else {
 			return null;
@@ -125,4 +127,13 @@ public class MemberController {
 		member.setMemberId(memberId);
 		return memberService.updatePwMember(member);
 	}
-}
+
+	//email전송 : 임시비밀번호
+	@PostMapping(value="/sendPw") 
+		public String sendPw(@RequestAttribute String memberEmail) {
+			System.out.println(memberEmail);
+			String pwCode = emailSender.sendPw(memberEmail);
+			return pwCode;
+
+		}
+	}

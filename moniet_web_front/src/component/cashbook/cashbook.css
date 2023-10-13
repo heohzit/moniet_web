@@ -22,10 +22,18 @@
   align-items: center;
   margin-bottom: 30px;
 }
-.date-range-icon img {
-  width: 30px;
-  height: 30px;
+.date-range-icon svg {
+  width: 35px;
+  height: 35px;
   cursor: pointer;
+  color: #fff;
+  background-color: #6a6da6;
+  border-radius: 50%;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 5px -1px,
+    rgba(0, 0, 0, 0.14) 0px 6px 10px 0px, rgba(0, 0, 0, 0.12) 0px 1px 18px 0px;
+}
+.date-range-icon svg:hover {
+  background-color: #323673;
 }
 .date-range-icon input {
   width: 368.97px;
@@ -106,11 +114,20 @@
 .cashbook-detail > table {
   width: 100%;
 }
-.add-btn > img {
-  width: 50px;
-  cursor: pointer;
+.add-btn > svg {
+  width: 60px;
+  height: 60px;
+  color: #fff;
+  background-color: #6a6da6;
+  border-radius: 50%;
   margin-left: 20px;
   margin-bottom: 20px;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 5px -1px,
+    rgba(0, 0, 0, 0.14) 0px 6px 10px 0px, rgba(0, 0, 0, 0.12) 0px 1px 18px 0px;
+}
+.add-btn > svg:hover {
+  cursor: pointer;
+  background-color: #323673;
 }
 .add-btn {
   display: flex;
@@ -118,4 +135,7 @@
 }
 .cashbook-checkbox {
   width: 16px !important;
+}
+.css-1ytlwq5-MuiAlert-icon {
+  align-items: center;
 }
