@@ -60,8 +60,25 @@
   display: none;
 }
 .id-result-cotent {
-  margin: 30px 0px;
+  margin: 50px 0px;
 }
-.id-result-content span {
+.id-find-pw{
+  margin-top: 60px;
+}
+.id-find-pw>div>a{
   color: #010440;
 }
+.member-info {
+  width: 100%;
+  border-collapse: collapse;
+  
+}
+.member-info td{
+  padding: 10px 10px;
+  border: 1px solid #eee;
+}
+
+
+
+
+
