@@ -12,7 +12,7 @@ import { Button4, Button5 } from "../util/Buttons";
 import Input from "../util/InputFrm";
 import { NextMonth, PrevMonth } from "./MoveMonth";
 import CashbookWrite from "./CashbookWrite";
-import CashbookTable from "./CashbookTable";
+
 import CashbookDel from "./CashbookDel";
 import { useNavigate } from "react-router-dom";
 
