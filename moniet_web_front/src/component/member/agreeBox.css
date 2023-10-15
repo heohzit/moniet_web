@@ -104,7 +104,8 @@
   width: 100%;
   border-top:3px solid black;
 }
-.option-table th,td{
+.option-table th,
+.option-table td{
   padding: 10px;
   text-align: center;
   border-bottom: 1px solid black;
