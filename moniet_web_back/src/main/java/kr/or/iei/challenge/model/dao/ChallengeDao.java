@@ -18,6 +18,9 @@ public interface ChallengeDao {
 	//챌린지 상세보기
 	Challenge selectOneChallenge(int challengeNo,String memberId);
 
+	//챌린지 상세보기(저축)
+	Challenge selectOneChallenge2(int challengeNo, String memberId);
+
 	//챌린지 만들기
 	int insertChallenge(Challenge c);
 	
@@ -36,6 +39,10 @@ public interface ChallengeDao {
 	List challengeListsByMember(String memberId);
 	
 	//챌린지 성공/실패 결과
-	void resultChallenge(String memberId);
+	int resultChallenge(String memberId);
+	
+	//챌린지 성공/실패 결과
+	int resultChallenge2(String memberId);
+
 
 }

@@ -24,6 +24,13 @@ public interface MemberDao {
 	Member selectOneMemberId(String memberName, String memberEmail);
 
 	int updateNewPwMember(Member member);
+	
+	
+	//챌린지 성공했을때 레벨업
+	void upgradeLevel(String memberId);
+	
+	//챌린지 성공했을때 레벨다운
+	void downLevel(String memberId);
 
 	
 

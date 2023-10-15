@@ -2,68 +2,70 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace= "kr.or.iei.challenge.model.dao.ChallengeDao">
 
+	<!--challenge_result = 0:진행중 1:성공 2:실패-->
+
 	<!--챌린지 목록-->
 	<select id="challengeList1" resultType="challenge">
 		select 
-			challenge_no,
-  			challenge_title,
-  			challenge_content,
-  			challenge_kind,
-  			challenge_amount,
-  			challenge_result,
-  			member_no2,
-  			category_no,
-  			to_char(challenge_start,'yyyy-mm-dd') as challenge_start,
-  			to_char(challenge_end,'yyyy-mm-dd') as challenge_end
-		 from challenge
+			challenge_no,challenge_title,challenge_kind,challenge_amount,challenge_result,
+  			member_no2,c.category_no,
+  			to_char(challenge_start,'yyyy-mm-dd') as challenge_start,to_char(challenge_end,'yyyy-mm-dd') as challenge_end,
+  			ct.category_title
+		 from challenge c
+		 left join category_tbl ct ON c.category_no = ct.category_no
 		 where member_no2=(select member_no from member where member_id=#{memberId}) and
-		 to_char(challenge_end,'yyyy-mm-dd') >= to_char(sysdate,'yyyy-mm-dd') and challenge_result = 0 
+		 	to_char(challenge_end,'yyyy-mm-dd') >= to_char(sysdate,'yyyy-mm-dd') and challenge_result = 0 
 		 order by 1 desc
 	</select>
 	
 	<!--챌린지 목록(종료)-->
 	<select id="challengeList2" resultType="challenge">
 		select 
-			challenge_no,
-  			challenge_title,
-  			challenge_content,
-  			challenge_kind,
-  			challenge_amount,
-  			challenge_result,
-  			member_no2,
-  			category_no,
-  			to_char(challenge_start,'yyyy-mm-dd') as challenge_start,
-  			to_char(challenge_end,'yyyy-mm-dd') as challenge_end
-		 from challenge
-		  where member_no2=(select member_no from member where member_id=#{memberId}) and
+			challenge_no,challenge_title,challenge_kind,challenge_amount,challenge_result,
+  			member_no2,c.category_no,
+  			to_char(challenge_start,'yyyy-mm-dd') as challenge_start,to_char(challenge_end,'yyyy-mm-dd') as challenge_end,
+  			ct.category_title
+		from challenge c
+		left join category_tbl ct on c.category_no = ct.category_no
+		where member_no2=(select member_no from member where member_id=#{memberId}) and
 		  (to_char(sysdate,'yyyy-mm-dd') > to_char(challenge_end,'yyyy-mm-dd') or challenge_result = 2 or challenge_result = 1)
-		  order by 1 desc
+		order by 1 desc
 	</select>
 	
-	<!--챌린지 상세보기-->
+	<!--챌린지 상세보기(지출)-->
 	<select id="selectOneChallenge" resultType="challenge">
-		 select 
-  			challenge_no,
-  			challenge_title,
-  			challenge_content,
-  			challenge_kind,
-  			challenge_amount,
-  			challenge_result,
-  			member_no2,
-  			member_id,
-  			<!-- (select category_title from category_tbl where category_no=#{categoryNo}) title,-->
-  			category_no,
-  			to_char(challenge_start,'yyyy-mm-dd') as challenge_start,
-  			to_char(challenge_end,'yyyy-mm-dd') as challenge_end,
-  			(select sum(cashbook_money) from cashbook where member_no=(select member_no from member where member_id=#{memberId}) and cashbook_finance = challenge_kind and cashbook_date between challenge_start and challenge_end) total
-  		 from challenge 
-  		 join member on (member_no2 = member_no)
-  		 where challenge_no = #{challengeNo}
+		 select
+		    challenge_no,challenge_title,challenge_kind,challenge_amount,challenge_result,
+		    member_no2,member_id,c.category_no,
+		    to_char(challenge_start, 'yyyy-mm-dd') as challenge_start,to_char(challenge_end, 'yyyy-mm-dd') as challenge_end,
+		    (select sum(cb.cashbook_money) from cashbook cb where cb.member_no = (select m.member_no from member m where m.member_id = #{memberId})
+		     and cb.cashbook_finance = c.challenge_kind and c.category_no = cb.cashbook_category
+		     and cb.cashbook_date between challenge_start and challenge_end) as total, ct.category_title  
+		from challenge c
+		join member m on (member_no2 = m.member_no)
+		left join category_tbl ct on (c.category_no = ct.category_no) 
+		where c.challenge_no = #{challengeNo}
+	</select>
+	
+	<!--챌린지 상세보기(저축)-->
+	<select id="selectOneChallenge2" resultType="challenge">
+		 select
+		    challenge_no,challenge_title,challenge_kind,challenge_amount,challenge_result,
+		    member_no2,member_id,c.category_no,
+		    to_char(challenge_start, 'yyyy-mm-dd') as challenge_start,to_char(challenge_end, 'yyyy-mm-dd') as challenge_end,
+		    (select sum(cb.cashbook_money) from cashbook cb where cb.member_no = (select m.member_no from member m where m.member_id = #{memberId})
+		     and cb.cashbook_finance = c.challenge_kind and cb.cashbook_date between challenge_start and challenge_end
+       		and cb.challenge_no = c.challenge_no) as total, ct.category_title
+		from challenge c
+		join member m on (member_no2 = m.member_no)
+		left join category_tbl ct on (c.category_no = ct.category_no) 
+		where c.challenge_no = #{challengeNo}
 	</select>
 	
 	<!--챌린지 만들기-->
   	<insert id="insertChallenge">
-  		insert into challenge values(challenge_seq.nextval,(select member_no from member where member_id=#{memberId}),#{challengeTitle},#{challengeContent},#{challengeKind},#{challengeAmount},#{challengeStart},#{challengeEnd},1,0,#{challengeCategory})
+  		insert into challenge values(challenge_seq.nextval,(select member_no from member where member_id=#{memberId}),
+  		#{challengeTitle},#{challengeKind},#{challengeAmount},#{challengeStart},#{challengeEnd},1,0,#{challengeCategory})
   	</insert>
   	
   	<!--챌린지 삭제-->
@@ -81,10 +83,8 @@
   	<![CDATA[
   		update challenge set challenge_result = 2
 		where challenge_no in 
-		(select challenge_no from challenge 
-		where challenge_result =0 
-		and 
-		to_char(challenge_end,'yyyy-mm-dd') < to_char(sysdate,'yyyy-mm-dd'))
+		(select challenge_no from challenge where challenge_result =0 
+		and to_char(challenge_end,'yyyy-mm-dd') < to_char(sysdate,'yyyy-mm-dd'))
 	]]>
   	</update>
   	 	
@@ -103,6 +103,19 @@
   		where challenge_amount <= (select sum(cashbook_money) 
   		from cashbook where member_no=(select member_no from member where member_id=#{memberId}) and cashbook_finance = challenge_kind  
   		and cashbook_date between challenge_start and challenge_end)
+  	]]>
+  	</update>
+  	
+  	 <!--챌린지 성공/실패 결과-->
+  	<update id="resultChallenge2">
+  	<![CDATA[
+  		update challenge c set challenge_result = 2
+		where challenge_amount <= (select sum(cb.cashbook_money)
+		from cashbook cb
+		where cb.member_no = (select m.member_no from member m where m.member_id = #{memberId})
+		and cb.cashbook_finance = c.challenge_kind
+		and c.category_no = cb.cashbook_category
+		and cb.cashbook_date between to_char(c.challenge_start, 'yyyy-mm-dd') and to_char(c.challenge_end, 'yyyy-mm-dd'))
   	]]>
   	</update>
 

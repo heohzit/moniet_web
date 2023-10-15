@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Button3 } from "../util/Buttons";
 
 //종료된 챌린지
-const loadCount = 2;
+const loadCount = 4;
 const EndChallenge = () => {
   const [challengeList, setChallengeList] = useState([]);
 
@@ -53,20 +53,9 @@ const EndChallenge = () => {
     <div className="challenge-content">
       <div className="challenge-list-wrap1">
         {showChallenge.map((challenge, index) => {
-          if (challenge.challengeKind === 1) {
-            return (
-              <ChallengeItem key={"challenge" + index} challenge={challenge} />
-            );
-          }
-        })}
-      </div>
-      <div className="challenge-list-wrap2">
-        {showChallenge.map((challenge, index) => {
-          if (challenge.challengeKind === 2) {
-            return (
-              <ChallengeItem key={"challenge" + index} challenge={challenge} />
-            );
-          }
+          return (
+            <ChallengeItem key={"challenge" + index} challenge={challenge} />
+          );
         })}
       </div>
       {backPage ? (

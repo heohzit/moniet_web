@@ -11,8 +11,6 @@ const ChallengeFrm = (props) => {
   const setChallengeKind = props.setChallengeKind;
   const challengeTitle = props.challengeTitle;
   const setChallengeTitle = props.setChallengeTitle;
-  const challengeContent = props.challengeContent;
-  const setChallengeContent = props.setChallengeContent;
   const challengeAmount = props.challengeAmount;
   const setChallengeAmount = props.setChallengeAmount;
   const challengeStart = props.challengeStart;
@@ -109,7 +107,7 @@ const ChallengeFrm = (props) => {
               </tr>
               <tr>
                 <td>
-                  <label htmlFor="challengeTitle">제목</label>
+                  <label htmlFor="challengeTitle">머니챌린지 다짐한마디!</label>
                 </td>
                 <td>
                   <Input
@@ -117,19 +115,7 @@ const ChallengeFrm = (props) => {
                     data={challengeTitle}
                     setData={setChallengeTitle}
                     content="challengeTitle"
-                  ></Input>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <label htmlFor="challengeContent">내용</label>
-                </td>
-                <td>
-                  <Input
-                    type="text"
-                    data={challengeContent}
-                    setData={setChallengeContent}
-                    content="challengeContent"
+                    placeholder={"ex) 한달동안 식비 줄여보자 :("}
                   ></Input>
                 </td>
               </tr>

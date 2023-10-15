@@ -12,7 +12,7 @@ import { Bar } from "react-chartjs-2";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import PieDashboard from "./PieDashboard";
-import LineDashboard from "./LineDashboard";
+
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -121,7 +121,6 @@ const BarDashboard = () => {
       <Bar options={options1} data={incomeBar} />
       <Bar options={options2} data={spendingBar} />
       <PieDashboard></PieDashboard>
-      <LineDashboard></LineDashboard>
     </div>
   );
 };

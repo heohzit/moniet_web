@@ -6,31 +6,55 @@ import { Button3 } from "../util/Buttons";
 import Swal from "sweetalert2";
 
 //챌린지 상세보기
-const ChallengeView = (props) => {
+const ChallengeView = () => {
   const location = useLocation();
   const challengeNo = location.state.challengeNo;
+  const challengeKind = location.state.challengeKind;
   const [challenge, setChallenge] = useState([]);
   const navigate = useNavigate();
+
   useEffect(() => {
     const token = window.localStorage.getItem("token");
-    axios
-      .post("/challenge/view/" + challengeNo, null, {
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      })
-      .then((res) => {
-        console.log(res.data);
-        if (
-          challenge.challengeResult !== 1 &&
-          challenge.challengeResult !== 2
-        ) {
-          setChallenge(res.data);
-        }
-      })
-      .catch((res) => {
-        console.log(res.data);
-      });
+    if (challengeKind === 1) {
+      axios
+        .post("/challenge/view2/" + challengeNo, null, {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        })
+        .then((res) => {
+          if (
+            challenge.challengeResult !== 1 &&
+            challenge.challengeResult !== 2
+          ) {
+            console.log(res.data);
+            setChallenge(res.data);
+          }
+        })
+        .catch((res) => {
+          console.log(res.data);
+        });
+    } else {
+      axios
+        .post("/challenge/view/" + challengeNo, null, {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        })
+        .then((res) => {
+          console.log(res.data);
+          if (
+            challenge.challengeResult !== 1 &&
+            challenge.challengeResult !== 2
+          ) {
+            console.log(res);
+            setChallenge(res.data);
+          }
+        })
+        .catch((res) => {
+          console.log(res.data);
+        });
+    }
   }, []);
   const goalAmount = [[challenge.challengeAmount]];
   const currentAmount = [[challenge.total]];
@@ -150,7 +174,7 @@ const ChallengeView = (props) => {
         ) : (
           <div>지출챌린지</div>
         )}
-        <div>{challenge.categoryNo}</div>
+        <div>{challenge.categoryTitle}</div>
       </div>
       <div>{ProgressMent(progress)}</div>
       <div>목표 금액: {goalAmount.toLocaleString()}원</div>

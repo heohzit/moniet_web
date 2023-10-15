@@ -8,7 +8,6 @@ import Swal from "sweetalert2";
 const ChallengeWrite = () => {
   const [challengeKind, setChallengeKind] = useState(1);
   const [challengeTitle, setChallengeTitle] = useState("");
-  const [challengeContent, setChallengeContent] = useState("");
   const [challengeAmount, setChallengeAmount] = useState("");
   const [challengeStart, setChallengeStart] = useState("");
   const [challengeEnd, setChallengeEnd] = useState("");
@@ -19,7 +18,6 @@ const ChallengeWrite = () => {
     console.log(challengeCategory);
     if (
       challengeTitle !== "" &&
-      challengeContent !== "" &&
       challengeStart !== "" &&
       challengeEnd !== "" &&
       challengeAmount !== ""
@@ -27,7 +25,6 @@ const ChallengeWrite = () => {
       const challenge = {
         challengeKind,
         challengeTitle,
-        challengeContent,
         challengeAmount,
         challengeStart,
         challengeEnd,
@@ -62,8 +59,6 @@ const ChallengeWrite = () => {
         setChallengeKind={setChallengeKind}
         challengeTitle={challengeTitle}
         setChallengeTitle={setChallengeTitle}
-        challengeContent={challengeContent}
-        setChallengeContent={setChallengeContent}
         challengeAmount={challengeAmount}
         setChallengeAmount={setChallengeAmount}
         challengeStart={challengeStart}

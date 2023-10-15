@@ -13,10 +13,6 @@ const DashboardMain = () => {
       <Routes>
         <Route path="*" element={<BarDashboard></BarDashboard>}></Route>
         <Route path="pie" element={<PieDashboard></PieDashboard>}></Route>
-        <Route
-          path="line"
-          element={<LineBarDashboard></LineBarDashboard>}
-        ></Route>
       </Routes>
     </div>
   );

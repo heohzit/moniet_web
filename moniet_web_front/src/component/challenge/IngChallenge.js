@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Button3 } from "../util/Buttons";
 
 //진행중인 챌린지
-const loadCount = 2;
+const loadCount = 4;
 const IngChallenge = () => {
   const [challengeList, setChallengeList] = useState([]);
   const [showChallenge, setShowChallenge] = useState([]);
@@ -53,26 +53,9 @@ const IngChallenge = () => {
         <ChallengeLevel />
         <div className="challenge-list-wrap1">
           {showChallenge.map((challenge, index) => {
-            if (challenge.challengeKind === 1) {
-              return (
-                <ChallengeItem
-                  key={"challenge" + index}
-                  challenge={challenge}
-                />
-              );
-            }
-          })}
-        </div>
-        <div className="challenge-list-wrap2">
-          {showChallenge.map((challenge, index) => {
-            if (challenge.challengeKind === 2) {
-              return (
-                <ChallengeItem
-                  key={"challenge" + index}
-                  challenge={challenge}
-                />
-              );
-            }
+            return (
+              <ChallengeItem key={"challenge" + index} challenge={challenge} />
+            );
           })}
         </div>
       </div>
@@ -95,7 +78,10 @@ const ChallengeItem = (props) => {
   const navigate = useNavigate();
   const challengeView = () => {
     navigate("/challenge/view", {
-      state: { challengeNo: challenge.challengeNo },
+      state: {
+        challengeNo: challenge.challengeNo,
+        challengeKind: challenge.challengeKind,
+      },
     });
   };
   //챌린지 성공/실패 이미지
@@ -114,6 +100,7 @@ const ChallengeItem = (props) => {
       <div className="challenge-item-info">
         <div className="challenge-kind">
           {challenge.challengeKind === 1 ? <div>저축</div> : <div>지출</div>}
+          {challenge.categoryTitle}
           {challenge.categoryNo === 0 ? "" : <div>{challenge.categoryNo}</div>}
         </div>
         <div>{challenge.challengeTitle}</div>

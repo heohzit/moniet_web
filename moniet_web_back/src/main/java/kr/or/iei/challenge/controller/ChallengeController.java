@@ -42,6 +42,12 @@ public class ChallengeController {
 		return challengeService.selectOneChallenge(challengeNo,memberId);
 	}
 	
+	//챌린지 상세보기(저축)
+	@PostMapping(value="/view2/{challengeNo}")
+	public Challenge view2(@PathVariable int challengeNo,@RequestAttribute String memberId) {
+		return challengeService.selectOneChallenge2(challengeNo,memberId);
+	}
+	
 	//챌린지 만들기
 	@PostMapping(value="/insert")
 	public int insertChallenge (@RequestBody Challenge c,@RequestAttribute String memberId) {

@@ -12,6 +12,7 @@ import kr.or.iei.cashbook.model.dao.CashbookDao;
 import kr.or.iei.cashbook.model.vo.Cashbook;
 import kr.or.iei.cashbook.model.vo.Category;
 import kr.or.iei.challenge.model.dao.ChallengeDao;
+import kr.or.iei.member.model.dao.MemberDao;
 
 @Service
 public class CashbookService {
@@ -20,6 +21,8 @@ public class CashbookService {
 	private CashbookDao cashbookDao;
 	@Autowired
 	private ChallengeDao challengeDao;
+	@Autowired
+	private MemberDao memberDao;
 
 	public List cashbookList(Cashbook cashbook) {
 		return cashbookDao.cashbookList(cashbook);
@@ -55,7 +58,17 @@ public class CashbookService {
 		int result=cashbookDao.insertCashbook(cashbook);
 		if(result==1) {
 			String memberId = cashbook.getMemberId();
-			challengeDao.resultChallenge(memberId);
+			if(cashbook.getCashbookFinance()==1) {				
+			int result1 = challengeDao.resultChallenge(memberId);
+				if(result1==1) {
+					memberDao.upgradeLevel(memberId);
+				}
+			}else {
+				int result2 = challengeDao.resultChallenge2(memberId);
+				if(result2==1) {
+					memberDao.downLevel(memberId);
+				}
+			}
 		}
 		return result;
 	}

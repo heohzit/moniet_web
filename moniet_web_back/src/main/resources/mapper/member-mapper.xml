@@ -34,4 +34,32 @@
 		update member set member_pw=#{memberPw} where member_id=#{memberId}
 	</update>
 	
+	<!--성공시 레벨업-->
+	<update id="upgradeLevel">
+	<![CDATA[
+		update member set challenge_status =case
+			when challenge_status+1 >100 then 100
+			when challenge_status+1 <100 then 0
+			else challenge_status+1 
+		end
+		where member_id = #{memberId}
+	]]>
+	</update>
+	
+	<!--실패시 레벨다운-->
+	<update id="downLevel">
+	<![CDATA[
+		update member set challenge_status =case
+			when challenge_status-1 >100 then 100
+			when challenge_status-1 <100 then 0
+			else challenge_status-1 
+		end
+		where member_id = #{memberId}
+	]]>
+	</update>
+	
+
+	
+	
+	
 </mapper>

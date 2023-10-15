@@ -38,6 +38,12 @@ public class ChallengeService {
 		return c;
 	}
 	
+	//챌린지 상세보기(저축)
+	public Challenge selectOneChallenge2(int challengeNo,String memberId) {
+		Challenge c = challengeDao.selectOneChallenge2(challengeNo,memberId);
+		return c;
+	}
+	
 	//챌린지 만들기
 	@Transactional
 	public int insertChallenge(Challenge c) {
