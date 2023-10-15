@@ -18,7 +18,7 @@
 .check-msg {
   color: red;
   padding-left: 5px;
-  font-size: 13px;
+  font-size: 14px;
 }
 .join-button {
   padding: 30px 0px;
@@ -64,3 +64,31 @@
   padding: 10px 0px;
   text-align: center;
 }
+.join-mail-wrap>input{
+  width: 100%;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+  box-sizing: border-box;
+  padding: 0.4rem;;
+
+}
+.join-mail-wrap>label{
+  font-size: 15px;
+}
+.email-list{
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  border-top: none;
+  padding: 0.4rem;
+}
+.email-list>li{
+  font-size: 17px;
+  padding: 5px;
+}
+.email-list>li:hover{
+  color: #010440;
+  font-family: ns-b;
+}
+
+

@@ -66,10 +66,18 @@ const FindID = () => {
       <div className="find-pw-wrap-next display">
         <div className="id-result-title">아이디찾기 결과</div>
         <div className="id-result-cotent">
-          <div>
-            아이디 : <span>{member.memberId}</span>
-          </div>
-          <div className="date-zone">가입일자:{member.memberDate}</div>
+            <table className="member-info">
+              <tbody>
+                <tr>
+                  <td>아이디</td>
+                  <td>{member.memberId}</td>
+                </tr>
+                <tr>
+                  <td>가입일자</td>
+                  <td>{member.memberDate}</td>
+                </tr>
+              </tbody>
+            </table>
           <div className="id-find-pw">
             <div>
               비밀번호가 기억나지 않으세요?{" "}
