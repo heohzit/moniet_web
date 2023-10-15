@@ -1,15 +1,25 @@
 import {
   DataGrid,
   GridActionsCellItem,
+  GridDeleteIcon,
+  GridLoadingOverlay,
   GridRowEditStopReasons,
   GridRowModes,
+  GridToolbarContainer,
+  GridToolbarExport,
+  useGridApiContext,
+  useGridApiEventHandler,
+  
 } from "@mui/x-data-grid";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/DeleteOutlined";
 import SaveIcon from "@mui/icons-material/Save";
 import CancelIcon from "@mui/icons-material/Close";
 import { useEffect, useState } from "react";
-import { Box } from "@mui/material";
+import { Box, LinearProgress } from "@mui/material";
+import clsx from 'clsx';
+import CashbookDel from "./CashbookDel";
+import axios from "axios";
 
 const CashbookTable = (props) => {
   const cashbookList = props.cashbookList;
@@ -21,50 +31,46 @@ const CashbookTable = (props) => {
 
   const [rows, setRows] = useState([]);
   useEffect(() => {
+    console.log(incomeCate)
     setRows(cashbookList);
   }, [cashbookList]);
-  console.log(cashbookList[0]); //3번씩 찍히는 거 확인필요
-
-  const [rowModesModel, setRowModesModel] = useState({});
-  const handleRowEditStop = (params, event) => {
-    if (params.reason === GridRowEditStopReasons.rowFocusOut) {
-      event.defaultMuiPrevented = true;
-    }
-  };
-
-  const handleEditClick = (id) => () => {
-    setRowModesModel({ ...rowModesModel, [id]: { mode: GridRowModes.Edit } });
-  };
-
-  const handleSaveClick = (id) => () => {
-    setRowModesModel({ ...rowModesModel, [id]: { mode: GridRowModes.View } });
-  };
-
-  const handleDeleteClick = (id) => () => {
-    setRows(rows.filter((row) => row.id !== id));
-  };
-
-  const handleCancelClick = (id) => () => {
-    setRowModesModel({
-      ...rowModesModel,
-      [id]: { mode: GridRowModes.View, ignoreModifications: true },
-    });
-
-    const editedRow = rows.find((row) => row.id === id);
-    if (editedRow.isNew) {
-      setRows(rows.filter((row) => row.id !== id));
-    }
-  };
-
-  const processRowUpdate = (newRow) => {
-    const updatedRow = { ...newRow, isNew: false };
-    setRows(rows.map((row) => (row.id === newRow.id ? updatedRow : row)));
-    return updatedRow;
-  };
-
-  const handleRowModesModelChange = (newRowModesModel) => {
-    setRowModesModel(newRowModesModel);
-  };
+  //console.log(cashbookList[0]); //3번씩 찍히는 거 확인필요
+  
+  const [rowSelectionModel, setRowSelectionModel] = useState([]);
+  
+  const CustomToolbar = ()=>{
+    const apiRef = useGridApiContext();
+    const handleRowClick = () => {
+      console.log(rowSelectionModel);
+      const delCashbookNo = "";
+      {rowSelectionModel.map((item)=>{
+        return (delCashbookNo += item+",")
+      })
+      }
+      console.log("delCashbookNo = "+delCashbookNo);
+      const token = window.localStorage.getItem("token");
+      
+      axios
+      .post("/cashbook/delete", {delCashbookNo : rowSelectionModel}, {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        })
+        .then((res) => {
+          console.log(res.data);
+        })
+        
+    };
+    
+    
+    return(
+      <GridToolbarContainer>
+        <GridToolbarExport />
+        <GridDeleteIcon onClick={handleRowClick}/>
+        
+      </GridToolbarContainer>
+    )
+  }
 
   const columns = [
     {
@@ -75,6 +81,7 @@ const CashbookTable = (props) => {
       valueFormatter: (params) =>
         new Date(params.value).toLocaleDateString("ko-KR"),
       type: "date",
+      headerAlign: 'center',
     },
     {
       field: "cashbookAsset",
@@ -84,73 +91,52 @@ const CashbookTable = (props) => {
       type: "singleSelect",
       valueOptions: assetList,
       valueGetter: (params) => assetToString(params.value),
+      headerAlign: 'center',
     },
     {
       field: "cashbookCateogory",
       headerName: "분류",
       width: 130,
       editable: true,
+      headerAlign: 'center',
+      valueGetter:  (params) =>{
+        if(params.row.cashbookFinance===1){
+          const category = incomeCate.find(item => item.categoryNo===params.row.cashbookCategory);
+          return category.categoryTitle;
+        } else if(params.row.cashbookFinance===2){
+          const category = spendingCate.find(item => item.categoryNo===params.row.cashbookCategory);
+          return category.categoryTitle;
+        } else{
+          return null;
+        }
+      }
+      
     },
     {
       field: "cashbookMoney",
       headerName: "금액",
       width: 130,
       editable: true,
+      headerAlign: 'center',
       valueFormatter: (params) => params.value?.toLocaleString("ko-KR"),
+      cellClassName: (params) =>{
+        if(params.value == null){
+          return "";
+        }
+        return clsx ('moneyColor',{
+          incomeNum: params.row.cashbookFinance === 1,
+          spendingNum :params.row.cashbookFinance ===2,
+        })
+      }
     },
     {
       field: "cashbookContent",
       headerName: "내용",
       width: 260,
       editable: true,
+      headerAlign: 'center',
     },
-    {
-      field: "actions",
-      type: "actions",
-      headerName: "Actions",
-      width: 100,
-      cellClassName: "actions",
-      getActions: ({ cashbookNo }) => {
-        const isInEditMode =
-          rowModesModel[cashbookNo]?.mode === GridRowModes.Edit;
 
-        if (isInEditMode) {
-          return [
-            <GridActionsCellItem
-              icon={<SaveIcon />}
-              label="Save"
-              sx={{
-                color: "primary.main",
-              }}
-              onClick={handleSaveClick(cashbookNo)}
-            />,
-            <GridActionsCellItem
-              icon={<CancelIcon />}
-              label="Cancel"
-              className="textPrimary"
-              onClick={handleCancelClick(cashbookNo)}
-              color="inherit"
-            />,
-          ];
-        }
-
-        return [
-          <GridActionsCellItem
-            icon={<EditIcon />}
-            label="Edit"
-            className="textPrimary"
-            onClick={handleEditClick(cashbookNo)}
-            color="inherit"
-          />,
-          <GridActionsCellItem
-            icon={<DeleteIcon />}
-            label="Delete"
-            onClick={handleDeleteClick(cashbookNo)}
-            color="inherit"
-          />,
-        ];
-      },
-    },
   ];
 
   return (
@@ -159,27 +145,33 @@ const CashbookTable = (props) => {
         sx={{
           height: 500,
           width: "100%",
-          "& .actions": {
-            color: "text.secondary",
-          },
           "& .textPrimary": {
             color: "text.primary",
+          },
+          "& .moneyColor.incomeNum":{
+            color: "#e66eb2",
+            justifyContent:"flex-end",
+          },
+          "& .moneyColor.spendingNum":{
+            color: "#6a6da6",
+            justifyContent:"flex-end",
           },
         }}
       >
         <DataGrid
           checkboxSelection
+          disableRowSelectionOnClick
           rows={rows}
           columns={columns}
           getRowId={(row) => row.cashbookNo}
-          editMode="row"
-          rowModesModel={rowModesModel}
-          onRowModesModelChange={handleRowModesModelChange}
-          onRowEditStop={handleRowEditStop}
-          processRowUpdate={processRowUpdate}
-          slotProps={{
-            toolbar: { setRows, setRowModesModel },
+          slots={
+            {toolbar: CustomToolbar,
+              loadingOverlay:LinearProgress,} 
+          }
+          onRowSelectionModelChange={(newRowSelectionModel) => {
+            setRowSelectionModel(newRowSelectionModel);
           }}
+          rowSelectionModel={rowSelectionModel}
         />
       </Box>
     </div>

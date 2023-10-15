@@ -32,6 +32,8 @@ public interface CashbookDao {
 	//라인 대시보드
 	List lineDash(String memberId);
 
+	int deleteCashbook(int cashbookNo, String memberId);
+
 
 
 }
