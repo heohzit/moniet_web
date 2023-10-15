@@ -3,6 +3,7 @@ package kr.or.iei.cashbook.model.service;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.StringTokenizer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -76,5 +77,22 @@ public class CashbookService {
 	public List lineDash(String memberId) {
 		List list = cashbookDao.lineDash(memberId);
 		return list;
+	}
+
+	@Transactional
+	public boolean deleteCashbook(String cashbookNoArr, String memberId) {
+		
+		StringTokenizer sT1 = new StringTokenizer(cashbookNoArr, "-");
+		boolean result = true;
+		while (sT1.hasMoreTokens()) {
+			int cashbookNo = Integer.parseInt(sT1.nextToken());
+			System.out.println(cashbookNo);
+			int delResult = cashbookDao.deleteCashbook(cashbookNo, memberId);
+			if (delResult == 0) { // 실패
+				result = false;
+				break;
+			}
+		}
+		return result;
 	}
 }

@@ -88,6 +88,9 @@
 	group by category_title, category_ref 
 	</select>
 	
+	<delete id="deleteCashbook">
+		delete from cashbook where cashbook_no =#{cashbookNo} and member_no=(select member_no from member where member_id=#{memberId})	
+	</delete>
 
 
 	
