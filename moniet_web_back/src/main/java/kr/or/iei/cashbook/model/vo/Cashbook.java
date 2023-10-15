@@ -34,4 +34,6 @@ public class Cashbook {
 	private String startDate;
 	private String endDate;
 	
+	private int month;
+	
 }

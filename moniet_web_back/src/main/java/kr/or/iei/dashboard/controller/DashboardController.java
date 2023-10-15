@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -24,14 +25,17 @@ public class DashboardController {
 	
 	//파이대시보드
 	@PostMapping (value="/pie")
-	public List pieDash(@RequestAttribute String memberId) {
-		return cashbookService.pieDash(memberId);
+	public List pieDash(@RequestAttribute String memberId,@RequestBody Cashbook c) {
+		int month = c.getMonth();
+		System.out.println(month);
+		return cashbookService.pieDash(memberId,month);
 	}
 	
 	//바 대시보드
 	@PostMapping (value="/bar")
-	public Map barDash (@RequestAttribute String memberId) {
-		List<Category> barList = cashbookService.barDash(memberId);
+	public Map barDash (@RequestAttribute String memberId ,@RequestBody Cashbook c1) {
+		int month = c1.getMonth();
+		List<Category> barList = cashbookService.barDash(memberId,month);
 		List incomeBar = new ArrayList<Category>();
 		List spendingBar = new ArrayList<Category>();
 		for(Category c : barList) {

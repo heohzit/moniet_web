@@ -24,10 +24,10 @@ public interface CashbookDao {
 	int insertCashbook(Cashbook cashbook);
 	
 	//파이 대시보드
-	List pieDash(String memberId);
+	List pieDash(String memberId, int month);
 	
 	//바 대시보드
-	List barDash(String memberId);
+	List barDash(String memberId, int month);
 	
 	//라인 대시보드
 	List lineDash(String memberId);

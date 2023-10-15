@@ -23,6 +23,7 @@ ChartJS.register(
 );
 const today = new Date();
 const formattedDate = `${today.getMonth() + 1}월`;
+const selectDate = `${today.getMonth() + 1}`;
 const options1 = {
   responsive: true,
   plugins: {
@@ -48,6 +49,24 @@ const options2 = {
   },
 };
 const BarDashboard = () => {
+  const [month, setMonth] = useState(selectDate);
+  const onChangeHanlder = (e) => {
+    setMonth(e.currentTarget.value);
+  };
+  const months = [
+    { key: 1, value: "1월" },
+    { key: 2, value: "2월" },
+    { key: 3, value: "3월" },
+    { key: 4, value: "4월" },
+    { key: 5, value: "5월" },
+    { key: 6, value: "6월" },
+    { key: 7, value: "7월" },
+    { key: 8, value: "8월" },
+    { key: 9, value: "9월" },
+    { key: 10, value: "10월" },
+    { key: 11, value: "11월" },
+    { key: 12, value: "12월" },
+  ];
   const [spendingBar, setSpendingBar] = useState({
     labels: [],
     datasets: [
@@ -66,11 +85,13 @@ const BarDashboard = () => {
       },
     ],
   });
-
+  const cashbook = {
+    month: month,
+  };
   useEffect(() => {
     const token = window.localStorage.getItem("token");
     axios
-      .post("/dashboard/bar", null, {
+      .post("/dashboard/bar", cashbook, {
         headers: {
           Authorization: "Bearer " + token,
         },
@@ -115,12 +136,25 @@ const BarDashboard = () => {
       .catch((res) => {
         console.log(res.response.status);
       });
-  }, []);
+  }, [month]);
   return (
-    <div>
-      <Bar options={options1} data={incomeBar} />
-      <Bar options={options2} data={spendingBar} />
-      <PieDashboard></PieDashboard>
+    <div className="dashboard-content">
+      <select defaultValue={month} onChange={onChangeHanlder}>
+        {months.map((item, index) => (
+          <option key={item.key} value={item.key} selected>
+            {item.value}
+          </option>
+        ))}
+      </select>
+      <div className="dashboard">
+        <Bar options={options1} data={incomeBar} />
+      </div>
+      <div className="dashboard">
+        <Bar options={options2} data={spendingBar} />
+      </div>
+      <div className="dashboard">
+        <PieDashboard></PieDashboard>
+      </div>
     </div>
   );
 };

@@ -74,14 +74,14 @@ public class CashbookService {
 	}
 	
 	//파이 대시보드
-	public List pieDash(String memberId) {
-		List sum = cashbookDao.pieDash(memberId);
+	public List pieDash(String memberId, int month) {
+		List sum = cashbookDao.pieDash(memberId,month);
 		return sum;
 	}
 	
 	//바 대시보드
-	public List barDash(String memberId) {
-		List list = cashbookDao.barDash(memberId);
+	public List barDash(String memberId, int month) {
+		List list = cashbookDao.barDash(memberId,month);
 		return list;
 	}
 	

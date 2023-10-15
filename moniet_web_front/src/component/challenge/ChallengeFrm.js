@@ -115,7 +115,7 @@ const ChallengeFrm = (props) => {
                     data={challengeTitle}
                     setData={setChallengeTitle}
                     content="challengeTitle"
-                    placeholder={"ex) 한달동안 식비 줄여보자 :("}
+                    placeholder={"ex) 한달동안 식비"}
                   ></Input>
                 </td>
               </tr>
