@@ -6,15 +6,14 @@ import { Button1, Button2, Button3, Button4 } from "../util/Buttons";
 import Swal from "sweetalert2";
 
 const CommunityBoardCommentWrite = (props) => {
+  const index = props.index;
   const communityBoardNo = props.communityBoardNo;
+  const navigate = useNavigate();
 
   const insertComment = () => {
-    const boardCommentContent = document.querySelector(
+    const boardCommentContent = document.querySelectorAll(
       ".comment-write-textareat-text"
-    ).value;
-
-    console.log(communityBoardNo);
-    console.log(boardCommentContent);
+    )[index].value;
 
     if (boardCommentContent !== "") {
       Swal.fire({
@@ -31,7 +30,7 @@ const CommunityBoardCommentWrite = (props) => {
           const token = window.localStorage.getItem("token");
 
           axios
-            .post("community/insertBoardComment", form, {
+            .post("/community/insertBoardComment", form, {
               headers: {
                 contentType: "multipart/form-data",
                 processdData: false,
@@ -39,17 +38,76 @@ const CommunityBoardCommentWrite = (props) => {
               },
             })
             .then((res) => {
-              console.log(res.data);
+              if (res.data > 0) {
+                Swal.fire(
+                  "작성 완료",
+                  "게시글작성이 완료되었습니다.",
+                  "success"
+                );
+              }
             })
             .catch((res) => {
               console.log(res.response.status);
             });
+        } else {
+          return;
         }
       });
     } else {
       Swal.fire("작성 실패", "입력값을 확인해주세요.", "warning");
     }
   };
+
+  //   const insertComment = () => {
+  //     const boardCommentContent = document.querySelectorAll(
+  //       ".comment-write-textareat-text"
+  //     )[index].value;
+
+  //     console.log(communityBoardNo);
+  //     console.log(boardCommentContent);
+
+  //     if (boardCommentContent !== "") {
+  //       Swal.fire({
+  //         icon: "question",
+  //         text: "게시글을 작성하시겠습니까?",
+  //         showCancelButton: true,
+  //         confirmButtonText: "확인",
+  //         cancelButtonText: "취소",
+  //       }).then((res) => {
+  //         if (res.isConfirmed) {
+  //           const form = new FormData();
+  //           form.append("comuBoardRef", communityBoardNo);
+  //           form.append("comuBoardCommentContent", boardCommentContent);
+  //           const token = window.localStorage.getItem("token");
+
+  //           axios
+  //             .post("/community/insertBoardComment", form, {
+  //               headers: {
+  //                 contentType: "multipart/form-data",
+  //                 processdData: false,
+  //                 Authorization: "Bearer " + token,
+  //               },
+  //             })
+  //             .then((res) => {
+  //               console.log(res.data);
+  //               if (res.data > 0) {
+  //                 Swal.fire(
+  //                   "작성 완료",
+  //                   "게시글작성이 완료되었습니다.",
+  //                   "success"
+  //                 );
+  //                 navigate("/community/view");
+  //               }
+  //             })
+  //             .catch((res) => {
+  //               console.log(res.response.status);
+  //             });
+  //         }
+  //       });
+  //     } else {
+  //       Swal.fire("작성 실패", "입력값을 확인해주세요.", "warning");
+  //     }
+  //   };
 
   return (
     <div className="comment-write-wrap">

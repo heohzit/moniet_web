@@ -456,12 +456,10 @@
 }
 
 .community-view-join-btn > button {
-  background-color: #323673;
 }
 
 .community-view-btns .community-view-join-btn {
   width: 80%;
-  padding-right: 20px;
 }
 
 .community-view-like-btn,
@@ -470,6 +468,7 @@
 }
 
 .community-view-like-btn > span {
+  padding-left: 10px;
   font-size: 46px;
   color: red;
   cursor: pointer;

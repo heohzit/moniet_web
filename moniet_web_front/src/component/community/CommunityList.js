@@ -52,7 +52,7 @@ const CommuintyList = (props) => {
           </span>
         </div>
         <div className="community-write-btn">
-          <Button2 text="글쓰기" clickEvent={write} />
+          {isLogin ? <Button2 text="글쓰기" clickEvent={write} /> : ""}
         </div>
       </div>
       {/* ) : ( */}
@@ -62,7 +62,11 @@ const CommuintyList = (props) => {
       <div className="community-list-wrap">
         {communityList.map((community, index) => {
           return (
-            <CommunityItem key={"community" + index} community={community} />
+            <CommunityItem
+              key={"community" + index}
+              community={community}
+              isLogin={isLogin}
+            />
           );
         })}
       </div>
@@ -75,12 +79,17 @@ const CommuintyList = (props) => {
 };
 
 const CommunityItem = (props) => {
+  const isLogin = props.isLogin;
   const community = props.community;
   const navigate = useNavigate();
-  const communityView = () => {
-    navigate("/community/view", {
-      state: { communityNo: community.communityNo },
-    });
+  const communityView = (props) => {
+    if (isLogin) {
+      navigate("/community/view", {
+        state: { communityNo: community.communityNo },
+      });
+    } else {
+      Swal.fire("이용 제한", "로그인 후 이용해주시기 바랍니다.", "info");
+    }
   };
 
   return (

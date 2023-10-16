@@ -25,7 +25,13 @@ const CommunityBoard = (props) => {
   return (
     <div className="community-view-board">
       {communityBoardList.map((board, index) => {
-        return <CommunityBoardItem key={"board" + index} board={board} />;
+        return (
+          <CommunityBoardItem
+            key={"board" + index}
+            board={board}
+            index={index}
+          />
+        );
       })}
     </div>
   );
@@ -33,6 +39,7 @@ const CommunityBoard = (props) => {
 
 const CommunityBoardItem = (props) => {
   const board = props.board;
+  const index = props.index;
   const navigate = useNavigate();
   const isLogin = props.isLogin;
 
@@ -81,6 +88,7 @@ const CommunityBoardItem = (props) => {
             <CommunityBoardComment
               communityBoardNo={board.communityBoardNo}
               isLogin={isLogin}
+              index={index}
             />
           </div>
         </div>

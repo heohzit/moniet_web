@@ -218,4 +218,9 @@
 		where comu_board_ref = #{communityBoardNo}
 	</select>
 
+	<insert id="insertBoardComment">
+		insert into COMU_BOARD_COMMENT values
+		(COMU_BOARD_COMMENT_SEQ.NEXTVAL, #{comuBoardCommentWriter}, #{comuBoardCommentContent}, sysdate, #{comuBoardRef}, null)
+	</insert>
+
 </mapper>

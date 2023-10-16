@@ -53,7 +53,7 @@ const Button5 = (props) => {
   const text = props.text;
   return (
     <>
-      <button className="btn st5" type="button" onClick={clickEvent}>
+      <button className="btn st5" type="button" onClick={clickEvent} disabled>
         {text}
       </button>
     </>
