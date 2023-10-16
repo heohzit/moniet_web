@@ -24,3 +24,7 @@ npm install @mui/x-data-grid          23.10.12
 //사이드바
 npm install @mui/icons-material
 npm install react-pro-sidebar
+
+//엑셀 다운로드
+npm install xlsx        23.10.16
+npm install file-saver --save bower install file-saver      23.10.16
