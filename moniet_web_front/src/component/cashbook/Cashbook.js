@@ -227,6 +227,7 @@ const Cashbook = (props) => {
         <div className="add-del-zone">
           <CashbookDel
             checkItems={checkItems}
+            setCheckItems={setCheckItems}
             select={select}
             setSelect={setSelect}
           />

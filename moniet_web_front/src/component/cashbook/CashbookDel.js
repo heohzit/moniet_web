@@ -5,6 +5,7 @@ import { useState } from "react";
 
 const CashbookDel = (props) => {
   const checkItems = props.checkItems;
+  const setCheckItems = props.setCheckItems;
   const select = props.select;
   const setSelect = props.setSelect;
 
@@ -40,6 +41,7 @@ const CashbookDel = (props) => {
           },
         })
         .then((res) => {
+          setCheckItems([]);
           setSelect(!select); //첫번째는 잘되는데 두번째는 안됨(삭제도 안됨) 확인필요
           onOpenClickHandler();
         })
