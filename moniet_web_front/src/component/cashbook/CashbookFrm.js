@@ -9,14 +9,17 @@ const CashbookFrm = (props) => {
   const title = props.title;
   const isOpen = props.isOpen;
   const closeFrm = props.closeFrm;
+  const setAddFrmOpen = props.setAddFrmOpen;
   const dateString = props.dateString;
   const assetList = props.assetList;
   const cashbookFinance = props.cashbookFinance;
   const setCashbookFinance = props.setCashbookFinance;
+
   useEffect(() => {
     const spendingBtn = document.querySelector(
       ".select-finance:last-child>button"
     );
+
     spendingBtn.click();
   }, []);
   const cashbookDate = props.cashbookDate;
@@ -53,7 +56,7 @@ const CashbookFrm = (props) => {
   const setChallengeCate = props.setChallengeCate;
   const incomeCate = props.incomeCate;
   const spendingCate = props.spendingCate;
-  const write = props.clickEvent;
+  const clickEvent = props.clickEvent;
   const [toggleOn, setToggleOn] = useState(false);
 
   const toggle = () => {
@@ -100,12 +103,33 @@ const CashbookFrm = (props) => {
       <div className="cashbook-modal-content">
         <div className="cashbook-modal-title">{title}</div>
         <div className="modalBtn-area finance-zone">
-          <div className="select-finance">
-            <Button5 text={"수입"} clickEvent={selectFinance} />
-          </div>
-          <div className="select-finance">
-            <Button5 text={"지출"} clickEvent={selectFinance} />
-          </div>
+          {cashbookFinance === 1 ? (
+            <>
+              <div className="select-finance">
+                <Button5
+                  className={"finance-checked"}
+                  text={"수입"}
+                  clickEvent={selectFinance}
+                />
+              </div>
+              <div className="select-finance">
+                <Button5 text={"지출"} clickEvent={selectFinance} />
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="select-finance">
+                <Button5 text={"수입"} clickEvent={selectFinance} />
+              </div>
+              <div className="select-finance finance-checked">
+                <Button5
+                  className={"finance-checked"}
+                  text={"지출"}
+                  clickEvent={selectFinance}
+                />
+              </div>
+            </>
+          )}
         </div>
         <div className="cashbook-modal-detail">
           <div className="cashbook-modal-detail-content">
@@ -219,7 +243,6 @@ const CashbookFrm = (props) => {
                         </option>
                       ))}
                 </select>
-
                 {cashbookCategory === "21" ? (
                   <select
                     name="challengeNo"
@@ -265,10 +288,29 @@ const CashbookFrm = (props) => {
           </div>
         </div>
         <div className="modalBtn-area">
-          <Button1 text={"등록"} clickEvent={write} />
-          <button className="closeModalBtn" id="closeModal" onClick={closeFrm}>
-            닫기
-          </button>
+          {title === "입력" ? (
+            <>
+              <Button1 text={"등록"} clickEvent={clickEvent} />
+              <button
+                className="closeModalBtn"
+                id="closeModal"
+                onClick={closeFrm}
+              >
+                닫기
+              </button>{" "}
+            </>
+          ) : (
+            <>
+              <Button1 text={"수정"} clickEvent={clickEvent} />
+              <button
+                className="closeModalBtn"
+                id="closeModal"
+                onClick={closeFrm}
+              >
+                닫기
+              </button>{" "}
+            </>
+          )}
         </div>
       </div>
     </div>

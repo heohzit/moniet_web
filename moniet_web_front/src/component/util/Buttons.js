@@ -51,9 +51,14 @@ const Button4 = (props) => {
 const Button5 = (props) => {
   const clickEvent = props.clickEvent;
   const text = props.text;
+  const className = props.className;
   return (
     <>
-      <button className="btn st5" type="button" onClick={clickEvent}>
+      <button
+        className={"btn st5 " + className}
+        type="button"
+        onClick={clickEvent}
+      >
         {text}
       </button>
     </>

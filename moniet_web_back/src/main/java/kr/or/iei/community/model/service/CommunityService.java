@@ -13,6 +13,7 @@ import kr.or.iei.community.model.vo.CommunityBoard;
 import kr.or.iei.community.model.vo.CommunityBoardFile;
 import kr.or.iei.community.model.vo.CommunityBoardType;
 import kr.or.iei.community.model.vo.CommunityType;
+import kr.or.iei.community.model.vo.ComuBoardComment;
 import kr.or.iei.member.model.dao.MemberDao;
 import kr.or.iei.member.model.vo.Member;
 
@@ -71,8 +72,6 @@ public class CommunityService {
 
 	@Transactional
 	public int insertBoard(CommunityBoard c, ArrayList<CommunityBoardFile> fileList) {
-		System.out.println(c);
-		System.out.println(fileList);
 		
 		Member member = memberDao.selectOneMember(c.getMemberId());
 		c.setCommunityBoardWriter(member.getMemberNo());
@@ -100,6 +99,19 @@ public class CommunityService {
 		}else {
 			return 0;
 		}
+	}
+
+	public List boardCommentList(int reqPage, int communityBoardNo) {
+		List list = communityDao.boardCommentList(communityBoardNo);
+		return list;
+	}
+
+	public int insertBoardComment(ComuBoardComment c) {
+		System.out.println(c);
+		Member member = memberDao.selectOneMember(c.getMemberId());
+		c.setComuBoardCommentWriter(member.getMemberNo());
+		int result = communityDao.insertBoardComment(c);
+		return result;
 	}
 
 }

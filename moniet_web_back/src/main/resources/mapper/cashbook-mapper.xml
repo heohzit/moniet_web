@@ -92,6 +92,20 @@
 		delete from cashbook where cashbook_no =#{cashbookNo} and member_no=(select member_no from member where member_id=#{memberId})	
 	</delete>
 
+	<update id="updateCashbook">
+		update cashbook set
+			 cashbook_finance = #{cashbookFinance},
+			 cashbook_date = #{cashbookDate},
+			 cashbook_loop = #{cashbookLoop},
+			 loop_month = #{loopMonth},
+			 cashbook_asset = #{cashbookAsset},
+			 cashbook_category = #{cashbookCategory},
+			 cashbook_money = #{cashbookMoney},
+			 cashbook_content = #{cashbookContent},
+			 cashbook_memo = #{cashbookMemo},
+			 challenge_no = #{challengeNo}
+		 where cashbook_no = #{cashbookNo} and member_no = (select member_no from member where member_id=#{memberId})
+	</update>
 
 	
 </mapper>

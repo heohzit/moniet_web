@@ -20,6 +20,7 @@ import kr.or.iei.community.model.vo.Community;
 import kr.or.iei.community.model.vo.CommunityBoard;
 import kr.or.iei.community.model.vo.CommunityBoardFile;
 import kr.or.iei.community.model.vo.CommunityType;
+import kr.or.iei.community.model.vo.ComuBoardComment;
 
 @RestController
 @RequestMapping(value="/community")
@@ -133,6 +134,21 @@ public class CommunityController {
 		int result = communityService.insertBoard(c, fileList);
 		System.out.println(result);
 		
+		return result;
+	}
+	
+	@GetMapping(value="/boardCommentList/{reqPage}/{communityBoardNo}")
+	public List boardCommentList(@PathVariable int reqPage, @PathVariable int communityBoardNo) {
+		List list = communityService.boardCommentList(reqPage, communityBoardNo);
+		return list;
+	}
+	
+	@PostMapping(value="/insertBoardComment")
+	public int insertBoardComment(@ModelAttribute ComuBoardComment c,
+									@RequestAttribute String memberId) {
+		c.setMemberId(memberId);
+		
+		int result = communityService.insertBoardComment(c);
 		return result;
 	}
 	

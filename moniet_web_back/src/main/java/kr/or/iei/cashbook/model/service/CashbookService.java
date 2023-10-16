@@ -112,4 +112,9 @@ public class CashbookService {
 		}
 		return result;
 	}
+
+	@Transactional
+	public int updateCashbook(Cashbook cashbook) {
+		return cashbookDao.updateCashbook(cashbook);
+	}
 }
