@@ -82,4 +82,12 @@ public class CashbookController {
 		boolean result = cashbookService.deleteCashbook(cashbookNoArr, memberId);
 		return result;
 	}
+	
+	@PostMapping(value="/update")
+	public int updateCashbook(@RequestBody Cashbook cashbook, @RequestAttribute String memberId) {
+		cashbook.setMemberId(memberId);
+		System.out.println("아이디 : "+cashbook.getMemberId());
+		System.out.println("번호:"+cashbook.getCashbookNo());
+		return cashbookService.updateCashbook(cashbook);
+	}
 }

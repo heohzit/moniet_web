@@ -62,7 +62,7 @@ const CashbookWrite = (props) => {
       })
       .then((res) => {
         if (res.data === 1) {
-          setCashbookFinance(0);
+          setCashbookFinance(2);
           setCashbookDate(new Date());
           setCashbookLoop(0);
           setLoopMonth(0);

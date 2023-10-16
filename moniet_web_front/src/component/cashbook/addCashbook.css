@@ -106,3 +106,6 @@
 input:invalid {
   border: 1px solid red;
 }
+.cashbook-detail .cashbook-modal-detail-content {
+  text-align: left;
+}

@@ -34,6 +34,8 @@ public interface CashbookDao {
 
 	int deleteCashbook(int cashbookNo, String memberId);
 
+	int updateCashbook(Cashbook cashbook);
+
 
 
 }
