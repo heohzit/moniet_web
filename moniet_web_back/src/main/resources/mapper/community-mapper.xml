@@ -142,7 +142,8 @@
 	        COMMUNITY_BOARD_CONTENT,
 	        TO_CHAR(COMMUNITY_BOARD_DATE, 'YYYY.MM.DD AM HH"시"MI"분"') AS COMMUNITY_BOARD_DATE,
 	        COMMUNITY_REF,
-	        COMMUNITY_BOARD_REF
+	        COMMUNITY_BOARD_REF,
+	        COMMUNITY_BOARD_LIKE
 	    FROM COMMUNITY_BOARD
 	    JOIN MEMBER ON (COMMUNITY_BOARD_WRITER = MEMBER_NO)
 	    WHERE COMMUNITY_REF = #{communityNo}
@@ -169,6 +170,7 @@
 		<result column="community_board_date" property="communityBoardDate" />
 		<result column="community_ref" property="communityRef" />
 		<result column="community_board_ref" property="communityBoardRef" />
+		<result column="community_board_like" property="communityBoardLike" />
 		
 		<collection 
 			property="communityBoardTypeList"
@@ -190,7 +192,7 @@
 	
 	<insert id="insertBoard">
 		insert into community_board values
-		(COMMUNITY_BOARD_SEQ.NEXTVAL, #{communityBoardWriter}, #{communityBoardContent}, sysdate, #{communityRef}, null)
+		(COMMUNITY_BOARD_SEQ.NEXTVAL, #{communityBoardWriter}, #{communityBoardContent}, sysdate, #{communityRef}, null, 0)
 		<selectKey resultType="int" keyProperty="communityBoardNo" order="AFTER">
 			select max(community_board_no) from community_board
 		</selectKey>

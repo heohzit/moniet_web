@@ -20,4 +20,7 @@ public class ComuBoardComment {
 	private int comuBoardCommentRef;
 	
 	private String memberId;
+	
+	private int isLike;
+	private int likeCount;
 }

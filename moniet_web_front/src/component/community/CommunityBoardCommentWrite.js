@@ -18,7 +18,7 @@ const CommunityBoardCommentWrite = (props) => {
     if (boardCommentContent !== "") {
       Swal.fire({
         icon: "question",
-        text: "게시글을 작성하시겠습니까?",
+        text: "댓글을 작성하시겠습니까?",
         showCancelButton: true,
         confirmButtonText: "확인",
         cancelButtonText: "취소",
@@ -41,7 +41,7 @@ const CommunityBoardCommentWrite = (props) => {
               if (res.data > 0) {
                 Swal.fire(
                   "작성 완료",
-                  "게시글작성이 완료되었습니다.",
+                  "댓글 작성이 완료되었습니다.",
                   "success"
                 );
               }

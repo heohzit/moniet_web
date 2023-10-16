@@ -20,6 +20,7 @@ public class CommunityBoard {
 	private String communityBoardDate;
 	private int communityRef;
 	private int communityBoardRef;
+	private int communityBoardLike;
 	
 	private int isLike;
 	private int likeCount;

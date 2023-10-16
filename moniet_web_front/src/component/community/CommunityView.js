@@ -49,6 +49,16 @@ const CommunityView = (props) => {
     }
   }, []);
 
+  // if (!isLogin) {
+  //   Swal.fire({
+  //     title: "로그인이 필요한 서비스입니다.",
+  //     text: "로그인페이지로 이동합니다.",
+  //     icon: "info",
+  //   }).then(() => {
+  //     navigate("/login");
+  //   });
+  // }
+
   // const deleteCommunity = () => {
   //   Swal.fire({
   //     icon: "warning",

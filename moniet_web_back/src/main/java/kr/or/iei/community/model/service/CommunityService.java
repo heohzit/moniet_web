@@ -106,6 +106,7 @@ public class CommunityService {
 		return list;
 	}
 
+	@Transactional
 	public int insertBoardComment(ComuBoardComment c) {
 		Member member = memberDao.selectOneMember(c.getMemberId());
 		c.setComuBoardCommentWriter(member.getMemberNo());
