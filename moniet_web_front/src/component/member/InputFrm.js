@@ -6,6 +6,7 @@ const Input = (props) => {
   const type = props.type;
   const content = props.content;
   const blurEvent = props.blurEvent;
+  const placeholder = props.placeholder;
 
   const onClick = props.onClick;
 
@@ -23,6 +24,7 @@ const Input = (props) => {
         onChange={changeValue}
         onBlur={blurEvent}
         onClick={onClick}
+        placeholder={placeholder}
       ></input>
     </>
   );
