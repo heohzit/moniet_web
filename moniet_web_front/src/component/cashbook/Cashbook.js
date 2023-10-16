@@ -386,7 +386,7 @@ const CashbookItem = (props) => {
       cashbookMemo: cashbookMemo,
       challengeNo: challengeNo,
     };
-
+    console.log(cashbookFinance);
     axios
       .post("/cashbook/update", cashbook, {
         headers: {
@@ -395,15 +395,6 @@ const CashbookItem = (props) => {
       })
       .then((res) => {
         if (res.data === 1) {
-          setCashbookFinance(2);
-          setCashbookDate(new Date());
-          setCashbookLoop(0);
-          setLoopMonth(0);
-          setCashbookAsset(1);
-          setCashbookCategory(11);
-          setCashbookMoney(0);
-          setCashbookContent("");
-          setCashbookMemo("");
           closeFrm();
           setSelect(!select);
         } else {
@@ -416,11 +407,13 @@ const CashbookItem = (props) => {
   };
 
   const [addFrmOpen, setAddFrmOpen] = useState(false);
+
   const isOpen = () => {
     setAddFrmOpen(true);
   };
-  const closeFrm = () => {
+  const closeFrm = (e) => {
     setAddFrmOpen(false);
+    e.stopPropagation();
   };
 
   return (
