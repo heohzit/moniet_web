@@ -19,3 +19,8 @@ npm install --save chart.js react-chartjs-2     23.10.10
 
 //mui테이블 컴포넌트
 npm install @mui/x-data-grid          23.10.12
+
+
+//사이드바
+npm install @mui/icons-material
+npm install react-pro-sidebar

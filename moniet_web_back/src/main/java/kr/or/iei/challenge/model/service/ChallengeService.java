@@ -74,7 +74,6 @@ public class ChallengeService {
 	//챌린지 레벨 조회
 	public int challengeLevel(String memberId) {
 		int level = challengeDao.challengeLevel(memberId);
-		System.out.println(level);
 		return level;
 	}
 
