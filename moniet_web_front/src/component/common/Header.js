@@ -26,7 +26,7 @@ const NaviSide = (props) => {
           <Link to="/cashbook">내역</Link>
         </li>
         <li>
-          <Link to="#">달력</Link>
+          <Link to="/cashCalendar">달력</Link>
         </li>
         <li>
           <Link to="/challenge">머니챌린지</Link>

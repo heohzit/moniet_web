@@ -422,11 +422,13 @@ const CashbookItem = (props) => {
     setAddFrmOpen(false);
     e.stopPropagation();
   };
-
+  const checkClick = (e) => {
+    e.stopPropagation();
+  };
   return (
     <>
       <tr className="cashbook-item" onClick={isOpen}>
-        <td>
+        <td onClick={checkClick}>
           <input
             type="checkbox"
             className="cashbook-checkbox cash-chk"
