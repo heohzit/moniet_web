@@ -15,7 +15,7 @@ public interface MemberDao {
 
 	int deleteMember(String memberId);
 
-	int updateMemberInfo(Member member);
+	int updateMemberInfo(Member m);
 
 	int updatePwMember(Member member);
 
@@ -24,6 +24,7 @@ public interface MemberDao {
 	Member selectOneMemberId(String memberName, String memberEmail);
 
 	int updateNewPwMember(Member member);
+	
 	
 	
 	//챌린지 성공했을때 레벨업
