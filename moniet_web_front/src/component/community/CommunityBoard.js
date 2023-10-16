@@ -6,6 +6,7 @@ import { Button1, Button2, Button3, Button4 } from "../util/Buttons";
 import CommunityBoardComment from "./CommunityBoardComment";
 
 const CommunityBoard = (props) => {
+  const isLogin = props.isLogin;
   const communityNo = props.communityNo;
   const [communityBoardList, setCommunityBoardList] = useState([]);
   const [reqPage, setReqPage] = useState(1);
@@ -33,6 +34,7 @@ const CommunityBoard = (props) => {
 const CommunityBoardItem = (props) => {
   const board = props.board;
   const navigate = useNavigate();
+  const isLogin = props.isLogin;
 
   return (
     <>
@@ -75,8 +77,11 @@ const CommunityBoardItem = (props) => {
               <span className="chat-count">5</span>
             </div>
           </div>
-          <div className="board-item-comment">
-            <CommunityBoardComment />
+          <div className="board-item-comment-wrap">
+            <CommunityBoardComment
+              communityBoardNo={board.communityBoardNo}
+              isLogin={isLogin}
+            />
           </div>
         </div>
       </div>

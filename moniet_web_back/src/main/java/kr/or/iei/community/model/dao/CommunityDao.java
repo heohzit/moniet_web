@@ -9,6 +9,7 @@ import kr.or.iei.community.model.vo.CommunityBoard;
 import kr.or.iei.community.model.vo.CommunityBoardFile;
 import kr.or.iei.community.model.vo.CommunityBoardType;
 import kr.or.iei.community.model.vo.CommunityType;
+import kr.or.iei.community.model.vo.ComuBoardComment;
 
 @Mapper
 public interface CommunityDao {
@@ -30,5 +31,9 @@ public interface CommunityDao {
 	int insertBoardFile(CommunityBoardFile communityBoardFile);
 
 	int insertCommunityBoardType(CommunityBoardType type);
+
+	List boardCommentList(int communityBoardNo);
+
+	int insertBoardComment(ComuBoardComment c);
 
 }

@@ -203,5 +203,19 @@
 	<insert id="insertCommunityBoardType">
 		insert into community_board_type values(COMMUNITY_BOARD_TYPE_SEQ.NEXTVAL, #{communityBoardNo}, #{communityBoardTypeDiv})
 	</insert>
+	
+	<select id="boardCommentList" resultType="comuBoardComment">
+		select
+			comu_board_comment_no,
+			comu_board_comment_writer,
+			member_id,
+			comu_board_comment_content,
+			TO_CHAR(comu_board_comment_date, 'YYYY.MM.DD AM HH"시"MI"분"') AS comu_board_comment_date,
+			comu_board_ref,
+			comu_board_comment_ref
+		from COMU_BOARD_COMMENT
+		join member on (comu_board_comment_writer = member_no)
+		where comu_board_ref = #{communityBoardNo}
+	</select>
 
 </mapper>

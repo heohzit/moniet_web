@@ -636,6 +636,7 @@
 }
 
 .board-write-wrap > .board-write-textarea > textarea {
+  border-radius: 5px;
   width: 98%;
   height: 200px;
   box-sizing: border-box;
@@ -839,5 +840,107 @@
   letter-spacing: 0.5px;
   color: #010440;
   font-family: ns-r;
-  max-height: 500px;
+  max-height: 300px;
+}
+
+.board-item-comment {
+  padding: 30px;
+  overflow: hidden;
+}
+
+.board-item-comment > .board-item-comment-arrow,
+.board-item-comment-list-wrap {
+  float: left;
+}
+
+.board-item-comment > .board-item-comment-arrow {
+  color: gray;
+}
+
+.board-item-comment > .board-item-comment-arrow > .arrow-right {
+  font-size: 80px;
+}
+
+.board-item-comment-list {
+  float: left;
+  padding: 10px;
+  padding-left: 100px;
+}
+
+.board-item-comment-list > .comment-profile {
+  width: 1200px;
+  float: left;
+  overflow: hidden;
+}
+
+.comment-profile {
+  width: 100%;
+}
+
+.comment-profile > .comment-account,
+.comment-writer {
+  float: left;
+}
+
+.comment-profile > .comment-account {
+  padding: 3px;
+}
+
+.comment-profile > .comment-account span {
+  font-size: 25px;
+}
+
+.comment-profile > .comment-writer {
+  font-family: ns-b;
+  font-size: 20px;
+}
+
+.comment-profile > .comment-date {
+  float: left;
+  padding-left: 10px;
+  font-family: ns-r;
+  font-size: 14px;
+  line-height: 33px;
+  color: gray;
+}
+
+.comment-content {
+  max-width: 970px;
+  float: left;
+  padding-left: 5px;
+  font-size: 15px;
+}
+
+.comment-write-wrap > .comment-write {
+  overflow: hidden;
+}
+
+.comment-write-textarea,
+.comment-write-btn {
+  float: left;
+}
+
+.comment-write-textarea {
+  width: 80%;
+}
+
+.comment-write-textarea > textarea {
+  border-radius: 5px;
+  width: 100%;
+  margin: 0px 20px;
+  margin-bottom: 10px;
+  height: 100px;
+  box-sizing: border-box;
+  resize: none;
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+.comment-write > .comment-write-btn {
+  width: 15%;
+  margin-left: 30px;
+}
+
+.comment-write > .comment-write-btn button {
+  height: 98px;
 }
