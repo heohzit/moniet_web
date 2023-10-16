@@ -14,28 +14,6 @@ const CashbookDown = (props) => {
   const excelFileName = "머니어트";
 
   const excelDownload = (cashbookList) => {
-    console.log(cashbookList);
-    console.log(spendingCate);
-    const categoryToString = (cashbookFinance, cashbookCategory) => {
-      if (cashbookFinance === 1 && incomeCate) {
-        const category = incomeCate.find(
-          (item) => item.categoryNo === cashbookCategory
-        );
-        console.log(category);
-        return category.categoryTitle;
-      } else if (cashbookFinance === 2 && spendingCate) {
-        const category = spendingCate.find(
-          (item) => item.categoryNo === cashbookCategory
-        );
-        console.log(category);
-        return category ? category.categoryTitle : "없음";
-      } else {
-        return "";
-      }
-    };
-    console.log(categoryToString(1, 7));
-    console.log(incomeCate);
-
     const ws = XLSX.utils.aoa_to_sheet([
       [excelFileName],
       [],

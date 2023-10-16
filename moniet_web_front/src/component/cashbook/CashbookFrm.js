@@ -4,6 +4,7 @@ import { Button1, Button5 } from "../util/Buttons";
 import Input from "../util/InputFrm";
 import { Calendar } from "react-date-range";
 import ko from "date-fns/locale/ko";
+import axios from "axios";
 
 const CashbookFrm = (props) => {
   const title = props.title;
@@ -19,9 +20,9 @@ const CashbookFrm = (props) => {
     const spendingBtn = document.querySelector(
       ".select-finance:last-child>button"
     );
-
     spendingBtn.click();
-  }, []);
+  }, [setCashbookFinance]);
+
   const cashbookDate = props.cashbookDate;
   const setCashbookDate = props.setCashbookDate;
   const cashbookLoop = props.cashbookLoop;
@@ -66,9 +67,13 @@ const CashbookFrm = (props) => {
     const financeBtn = document.querySelectorAll(".select-finance>.btn");
     financeBtn[0].classList.remove("finance-checked");
     financeBtn[1].classList.remove("finance-checked");
-    e.currentTarget.innerText === "수입"
-      ? setCashbookFinance(1)
-      : setCashbookFinance(2);
+    if (e.currentTarget.innerText === "수입") {
+      setCashbookFinance(1);
+      setCashbookCategory(3);
+    } else {
+      setCashbookFinance(2);
+      setCashbookCategory(11);
+    }
     e.currentTarget.classList.add("finance-checked");
     const loop = document.querySelector("select[name='cashbookLoop']");
     loop.value = 0;
@@ -77,6 +82,8 @@ const CashbookFrm = (props) => {
 
   const selectDate = (item) => {
     setCashbookDate(item);
+
+    console.log(challengeCate);
     toggle();
   };
 
@@ -93,6 +100,9 @@ const CashbookFrm = (props) => {
       document.querySelector("#add-money").value = "";
       setCashbookMoney("");
     }
+  };
+  const changeCategory = (e) => {
+    setCashbookCategory(e.currentTarget.value);
   };
   return (
     <div
@@ -225,7 +235,7 @@ const CashbookFrm = (props) => {
                 <select
                   name="cashbookCategory"
                   id="add-category"
-                  onChange={(e) => setCashbookCategory(e.currentTarget.value)}
+                  onChange={changeCategory}
                   value={cashbookCategory}
                 >
                   {cashbookFinance === 1
@@ -251,14 +261,19 @@ const CashbookFrm = (props) => {
                     className="cashbook-select"
                   >
                     <option value="">챌린지 없음</option>
-                    {challengeCate.map((item, index) => (
-                      <option
-                        value={item.challengeNo}
-                        key={"challenge" + index}
-                      >
-                        {item.challengeTitle}
-                      </option>
-                    ))}
+                    {challengeCate.map((item, index) =>
+                      new Date(cashbookDate) >= new Date(item.challengeStart) &&
+                      new Date(cashbookDate) <= new Date(item.challengeEnd) ? (
+                        <option
+                          value={item.challengeNo}
+                          key={"challenge" + index}
+                        >
+                          {item.challengeTitle}
+                        </option>
+                      ) : (
+                        ""
+                      )
+                    )}
                   </select>
                 ) : null}
               </div>
@@ -284,6 +299,7 @@ const CashbookFrm = (props) => {
               data={cashbookMemo}
               setData={setCashbookMemo}
               content={"add-memo"}
+              placeholder={"수입/지출에 대한 회고를 남겨보세요!"}
             />
           </div>
         </div>

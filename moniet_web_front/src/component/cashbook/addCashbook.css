@@ -109,3 +109,6 @@ input:invalid {
 .cashbook-detail .cashbook-modal-detail-content {
   text-align: left;
 }
+.challenge-select {
+  display: none;
+}

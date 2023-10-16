@@ -14,6 +14,7 @@ import Myinfo from "./component/member/Myinfo";
 import AgreeBox from "./component/member/AgreeBox";
 import FindPw from "./component/member/FindPw";
 import FindID from "./component/member/FindID";
+import CashCalendarMain from "./component/cashCalendar/CashCalendarMain";
 
 function App() {
   const [isLogin, setIsLogin] = useState(null);
@@ -54,6 +55,12 @@ function App() {
             element={
               <CommunityMain isLogin={isLogin} setIsLogin={setIsLogin} />
             }
+          />
+          <Route
+            path="/cashCalendar/*"
+            element={<CashCalendarMain />}
+            isLogin={isLogin}
+            setIsLogin={setIsLogin}
           />
           <Route path="/join" element={<AgreeBox />} />
           <Route path="/joinfrm" element={<Join />} />
