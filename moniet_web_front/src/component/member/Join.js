@@ -47,8 +47,7 @@ const Join = () => {
     if (e.target.value.includes("@")) {
       setIsDropbox(true);
       setEmailList(
-        Emails.filter((el) => el.includes(e.target.value.split("@")[1]),
-        ),
+        Emails.filter((el) => el.includes(e.target.value.split("@")[1]))
       );
     } else {
       setIsDropbox(false);
@@ -80,6 +79,7 @@ const Join = () => {
     if (files.length !== 0 && files[0] != 0) {
       setThumbnail(files[0]);
 
+      //화면에 프로필 사진 표시
       const reader = new FileReader();
       reader.readAsDataURL(files[0]);
       reader.onloadend = () => {
@@ -214,6 +214,7 @@ const Join = () => {
         label="아이디"
         checkMsg={checkIdMsg}
         blurEvent={idCheck}
+        placeholder="아이디는 영어/대소문자/숫자로 4~8글자를 입력해주세요."
       />
       <JoinInputWrap
         data={memberPw}
@@ -239,6 +240,7 @@ const Join = () => {
         label="이름"
         checkMsg={checkNameMsg}
         blurEvent={nameCheck}
+        placeholder="한글 2~4글자를 입력해주세요."
       />
       <JoinInputWrap
         data={memberPhone}
@@ -248,6 +250,7 @@ const Join = () => {
         label="전화번호"
         checkMsg={checkPhoneMsg}
         blurEvent={phoneCheck}
+        placeholder="'-'을 포함하여 입력해주세요.(ex: 010-0000-0000)"
       />
       <div ref={inputRef} className="join-mail-wrap">
         <label htmlFor="membeMail">이메일</label>
@@ -261,6 +264,7 @@ const Join = () => {
           }}
           onKeyUp={handleKeyUp}
           onBlur={emailCheck}
+          placeholder="'@'를 포함하여 입력해주세요."
         />
         <div className="check-msg">{checkEmailMsg}</div>
         {isDrobBox && (
@@ -278,12 +282,12 @@ const Join = () => {
             ))}
           </div>
         )}
-        </div>
-        <div className="join-button">
-          <button type="button" onClick={join}>
-            회원가입
-          </button>
-        </div>
+      </div>
+      <div className="join-button">
+        <button type="button" onClick={join}>
+          회원가입
+        </button>
+      </div>
     </div>
   );
 };
@@ -296,6 +300,7 @@ const JoinInputWrap = (props) => {
   const label = props.label;
   const checkMsg = props.checkMsg;
   const blurEvent = props.blurEvent;
+  const placeholder = props.placeholder;
 
   return (
     <div className="join-input-wrap">
@@ -309,6 +314,7 @@ const JoinInputWrap = (props) => {
           setData={setData}
           content={content}
           blurEvent={blurEvent}
+          placeholder={placeholder}
         />
       </div>
       <div className="check-msg">{checkMsg}</div>

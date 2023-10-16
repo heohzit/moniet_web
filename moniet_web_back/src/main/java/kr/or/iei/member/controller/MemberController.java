@@ -103,9 +103,17 @@ public class MemberController {
 	
 	//회원정보수정
 	@PostMapping(value="/updateMember")
-		public int update(@RequestBody Member member) {
-		System.out.println(member);
-			return memberService.updateMemberInfo(member);
+		
+		public int update(@ModelAttribute Member m, @ModelAttribute MultipartFile thumbnail) {
+		String savepath = root+"member/";
+		if(thumbnail != null) {
+			
+			String filename = thumbnail.getOriginalFilename();
+			String filepath = fileUtil.getFilepath(savepath, filename, thumbnail);
+			m.setImgFile(filepath);
+		}
+		System.out.println(m);
+			return memberService.updateMemberInfo(m);
 		}
 
 	//회원탈퇴 

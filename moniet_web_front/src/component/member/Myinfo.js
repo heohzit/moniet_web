@@ -15,6 +15,25 @@ const Myinfo = (props) => {
   const [checkPhoneMsg, setCheckPhoneMsg] = useState("");
   const [checkEmailMsg, setCheckEmailMsg] = useState("");
   const navigate = useNavigate();
+  const [thumbnail, setThumbnail] = useState(""); //보내주는 데이터
+  const [memberImg, setMemberImg] = useState(""); //썸네일
+
+  //이미지 업로드 input onChange
+  const thumbnailChange = (e) => {
+    const files = e.currentTarget.files;
+    if (files.length !== 0 && files[0] != 0) {
+      setThumbnail(files[0]);
+
+      const reader = new FileReader();
+      reader.readAsDataURL(files[0]);
+      reader.onloadend = () => {
+        setMemberImg(reader.result);
+      };
+    } else {
+      setThumbnail({});
+      setMemberImg(null);
+    }
+  };
 
   const pwUpdate = () => {
     const pwTr2 = document.querySelector(".pw-tr2");
@@ -87,8 +106,8 @@ const Myinfo = (props) => {
         },
       })
       .then((res) => {
-        console.log(res.data);
         setMember(res.data);
+        setMemberImg(res.data.imgFile);
       })
       .catch((res) => {
         //로그인이 풀린상태
@@ -133,10 +152,20 @@ const Myinfo = (props) => {
   const updateMember = () => {
     const token = window.localStorage.getItem("token");
     if (checkPhoneMsg === "" && checkEmailMsg === "") {
+      const form = new FormData();
+      form.append("memberId", member.memberId);
+      form.append("memberEmail", member.memberEmail);
+      form.append("memberPhone", member.memberPhone);
+      form.append("member", member);
+      form.append("thumbnail", thumbnail);
+      console.log(member);
+      console.log(thumbnail);
       axios
-        .post("/member/updateMember", member, {
+        .post("/member/updateMember", form, {
           headers: {
             Authorization: "Bearer " + token,
+            contentType: "multipart/form-data",
+            processdData: false,
           },
         })
         .then((res) => {
@@ -172,10 +201,10 @@ const Myinfo = (props) => {
       <div className="my-title">MY PAGE</div>
       <div className="my-content">
         <div className="my-profile-img-wrap">
-          {member.imgFile === null ? (
+          {memberImg === null ? (
             <img src="/image/piggy.jpg" />
           ) : (
-            <img src={"/member/" + member.imgFile} />
+            <img src={memberImg} />
           )}
         </div>
         <div className="my-info-profile-wrap">
@@ -190,6 +219,7 @@ const Myinfo = (props) => {
             id="my-info-profile-img"
             type="file"
             accept="image/*"
+            onChange={thumbnailChange}
           />
         </div>
         <table className="my-info-tbl">

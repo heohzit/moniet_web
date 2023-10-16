@@ -23,7 +23,7 @@
 	</delete>
 	
 	<update id="updateMemberInfo">
-		update member set member_phone=#{memberPhone}, member_email=#{memberEmail} where member_id=#{memberId}
+		update member set member_phone=#{memberPhone}, member_email=#{memberEmail}, img_file=#{imgFile} where member_id=#{memberId}
 	</update>
 	
 	<update id="updatePwMember">
