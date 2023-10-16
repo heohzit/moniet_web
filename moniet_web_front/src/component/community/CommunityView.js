@@ -2,7 +2,14 @@ import "./community.css";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import { Button1, Button2, Button3, Button4, Button5 } from "../util/Buttons";
+import {
+  Button1,
+  Button2,
+  Button3,
+  Button4,
+  Button5,
+  Button6,
+} from "../util/Buttons";
 import axios from "axios";
 import CommunityBoard from "./CommunityBoard";
 import CommunityBoardWrite from "./CommunityBoardWrite";
@@ -106,7 +113,7 @@ const CommunityView = (props) => {
             {isLogin ? (
               <Button3 text="참여하기" />
             ) : (
-              <Button5 text="로그인 해주시기 바랍니다." />
+              <Button6 text="로그인 해주시기 바랍니다." />
             )}
           </div>
           <div className="community-view-like-btn">
