@@ -340,7 +340,7 @@ const CashbookItem = (props) => {
   };
 
   return (
-    <tr className="cashbook-item" onClick={cashbookView}>
+    <tr className="cashbook-item">
       <td>
         <input
           type="checkbox"
@@ -360,6 +360,7 @@ const CashbookItem = (props) => {
             ? "money-color"
             : "money-color-spending"
         }`}
+        onClick={cashbookView}
       >
         {cashbook.cashbookMoney.toLocaleString("ko-KR")}
       </td>

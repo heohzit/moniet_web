@@ -51,6 +51,7 @@ const CashbookWrite = (props) => {
       cashbookMoney: cashbookMoney,
       cashbookContent: cashbookContent,
       cashbookMemo: cashbookMemo,
+      challengeNo: challengeNo,
     };
 
     axios
