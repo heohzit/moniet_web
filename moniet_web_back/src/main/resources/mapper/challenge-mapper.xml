@@ -54,7 +54,7 @@
 		    member_no2,member_id,c.category_no,
 		    to_char(challenge_start, 'yyyy-mm-dd') as challenge_start,to_char(challenge_end, 'yyyy-mm-dd') as challenge_end,
 		    (select sum(cb.cashbook_money) from cashbook cb where cb.member_no = (select m.member_no from member m where m.member_id = #{memberId})
-		     and cb.cashbook_finance = c.challenge_kind and cb.cashbook_date between challenge_start and challenge_end
+		    and cb.cashbook_date between challenge_start and challenge_end
        		and cb.challenge_no = c.challenge_no) as total, ct.category_title
 		from challenge c
 		join member m on (member_no2 = m.member_no)
@@ -89,7 +89,7 @@
   	</update>
   	 	
   	 <!--챌린지 레벨 조회-->
-  	<select id="challengeLevel" resultType="int">
+  	<select id="challengeLevel" resultType="String">
   		select challenge_status 
   		from(select  rownum as num,challenge_status from challenge join member on (member_no2 = member_no) 
   		where member_no=(select member_no from member where member_id=#{memberId})) X where X.num=1
@@ -99,10 +99,8 @@
   	<!--챌린지 성공/실패 결과-->
   	<update id="resultChallenge">
   	<![CDATA[
-  		update challenge set challenge_result =1 
-  		where challenge_amount <= (select sum(cashbook_money) 
-  		from cashbook where member_no=(select member_no from member where member_id=#{memberId}) and cashbook_finance = challenge_kind  
-  		and cashbook_date between challenge_start and challenge_end)
+		update challenge set challenge_result =1 
+		where challenge_amount <= (select sum(cashbook_money) from cashbook cb where challenge_no=#{challengeNo}) and challenge_no = #{challengeNo}
   	]]>
   	</update>
   	
@@ -122,7 +120,7 @@
   	<!-- 입력창에 띄울 챌린지 목록 조회용 -->
   	<select id="challengeListsByMember" resultType="challenge">
   	<![CDATA[
-  		select challenge_no, challenge_title, challenge_start, challenge_end from CHALLENGE where member_no2 = (select member_no from member where member_id=#{memberId}) and challenge_state=1 and CHALLENGE_KIND=1 and (sysdate >= challenge_start and sysdate <= challenge_end )
+  		select challenge_no, challenge_title, challenge_start, challenge_end from CHALLENGE where member_no2 = (select member_no from member where member_id=#{memberId}) and challenge_result=0 and CHALLENGE_KIND=1 and (sysdate >= challenge_start and sysdate <= challenge_end )
   	]]>
   	</select>
 </mapper>

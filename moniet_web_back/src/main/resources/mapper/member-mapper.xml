@@ -38,9 +38,8 @@
 	<update id="upgradeLevel">
 	<![CDATA[
 		update member set challenge_status =case
-			when challenge_status+1 >100 then 100
-			when challenge_status+1 <100 then 0
-			else challenge_status+1 
+			when challenge_status+1 > 100 then 100
+			else challenge_status+1
 		end
 		where member_id = #{memberId}
 	]]>
@@ -50,9 +49,8 @@
 	<update id="downLevel">
 	<![CDATA[
 		update member set challenge_status =case
-			when challenge_status-1 >100 then 100
-			when challenge_status-1 <100 then 0
-			else challenge_status-1 
+			when challenge_status-1 < 0 then 0
+			else challenge_status-1
 		end
 		where member_id = #{memberId}
 	]]>

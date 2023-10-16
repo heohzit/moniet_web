@@ -57,16 +57,20 @@ public class CashbookService {
 	@Transactional
 	public int insertCashbook(Cashbook cashbook) {
 		int result=cashbookDao.insertCashbook(cashbook);
+		int challengeNo = cashbook.getChallengeNo();
+		String memberId = cashbook.getMemberId();
 		if(result==1) {
-			String memberId = cashbook.getMemberId();
-			if(cashbook.getCashbookFinance()==1) {				
-			int result1 = challengeDao.resultChallenge(memberId);
-				if(result1==1) {
+			int cashbookCate=cashbook.getCashbookCategory();
+			if(cashbookCate==21) {
+				int result1=challengeDao.resultChallenge(challengeNo);
+				if(result1!=0) {
+					System.out.println(result1+"이건뭔대");
 					memberDao.upgradeLevel(memberId);
 				}
 			}else {
-				int result2 = challengeDao.resultChallenge2(memberId);
-				if(result2==1) {
+				int result2 =challengeDao.resultChallenge2(memberId);
+				System.out.println(result2+"여기까지 오나");
+				if(result2!=0) {
 					memberDao.downLevel(memberId);
 				}
 			}
