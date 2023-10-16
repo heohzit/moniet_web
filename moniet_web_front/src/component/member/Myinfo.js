@@ -180,7 +180,7 @@ const Myinfo = (props) => {
         </div>
         <div className="my-info-profile-wrap">
           <label
-            htmlFor="my-info-profile-label"
+            htmlFor="my-info-profile-img"
             className="my-info-profile-label"
           >
             프로필 이미지변경

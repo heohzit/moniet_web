@@ -131,6 +131,7 @@ public class CommunityController {
 		}
 		
 		int result = communityService.insertBoard(c, fileList);
+		System.out.println(result);
 		
 		return result;
 	}

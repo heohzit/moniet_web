@@ -9,11 +9,12 @@ import { DateRangePicker } from "react-date-range";
 import { addDays } from "date-fns";
 import ko from "date-fns/locale/ko";
 import { Button4, Button5 } from "../util/Buttons";
-import AddComma from "./AddComma";
 import Input from "../util/InputFrm";
 import { NextMonth, PrevMonth } from "./MoveMonth";
 import CashbookWrite from "./CashbookWrite";
-import CashbookTable from "./CashbookTable";
+
+import CashbookDel from "./CashbookDel";
+import { useNavigate } from "react-router-dom";
 
 const Cashbook = (props) => {
   const isLogin = props.isLogin;
@@ -55,6 +56,7 @@ const Cashbook = (props) => {
         console.log(res.response.status);
       });
   }, [select]);
+
   useEffect(() => {
     const token = window.localStorage.getItem("token");
     axios
@@ -139,6 +141,37 @@ const Cashbook = (props) => {
     setAddFrmOpen(false);
   };
 
+  //체크박스
+  const [checkItems, setCheckItems] = useState([]);
+
+  const selectChecked = (checked, no) => {
+    if (checked) {
+      setCheckItems((item) => [...item, no]);
+    } else {
+      setCheckItems(checkItems.filter((el) => el !== no));
+    }
+  };
+  const allChecked = (checked) => {
+    if (checked) {
+      const noArr = [];
+      cashbookList.forEach((el) => noArr.push(el.cashbookNo));
+      setCheckItems(noArr);
+    } else {
+      setCheckItems([]);
+    }
+  };
+
+  //스낵바 노출용
+  const [showSnackbar, setShowSnackbar] = useState(false);
+  const onOpenClickHandler = () => {
+    setShowSnackbar(true);
+  };
+  const onCloseClickHandler = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setShowSnackbar(false);
+  };
   return (
     <div>
       <div className="date-range-icon">
@@ -148,7 +181,6 @@ const Cashbook = (props) => {
           select={select}
           setSelect={setSelect}
         />
-
         <div onClick={() => toggle()}>
           <Input
             data={
@@ -159,7 +191,6 @@ const Cashbook = (props) => {
             id={"showDateRange"}
           />
         </div>
-
         <NextMonth
           dateRange={dateRange}
           setDateRange={setDateRange}
@@ -193,19 +224,27 @@ const Cashbook = (props) => {
       </div>
 
       <div className="cashbook-content">
-        <CashbookWrite
-          isOpen={isOpen}
-          addFrmOpen={addFrmOpen}
-          closeFrm={closeFrm}
-          dateString={dateString}
-          assetList={assetList}
-          challengeCate={challengeCate}
-          setChallengeCate={setChallengeCate}
-          incomeCate={incomeCate}
-          spendingCate={spendingCate}
-          select={select}
-          setSelect={setSelect}
-        />
+        <div className="add-del-zone">
+          <CashbookDel
+            checkItems={checkItems}
+            setCheckItems={setCheckItems}
+            select={select}
+            setSelect={setSelect}
+          />
+          <CashbookWrite
+            isOpen={isOpen}
+            addFrmOpen={addFrmOpen}
+            closeFrm={closeFrm}
+            dateString={dateString}
+            assetList={assetList}
+            challengeCate={challengeCate}
+            setChallengeCate={setChallengeCate}
+            incomeCate={incomeCate}
+            spendingCate={spendingCate}
+            select={select}
+            setSelect={setSelect}
+          />
+        </div>
         <div className="cashbook-btn-zone">
           <Button5
             text={
@@ -236,6 +275,7 @@ const Cashbook = (props) => {
           />
         </div>
         <div className="cashbook-detail">
+          {/**
           <CashbookTable
             cashbookList={cashbookList}
             setCashbookList={setCashbookList}
@@ -244,12 +284,22 @@ const Cashbook = (props) => {
             spendingCate={spendingCate}
             assetToString={assetToString}
           />
-
+ */}
           <table>
             <thead>
               <tr>
                 <td width={"5%"}>
-                  <input type="checkbox" className="cashbook-checkbox" />
+                  <input
+                    type="checkbox"
+                    className="cashbook-checkbox"
+                    id="cashAll"
+                    onChange={(e) => {
+                      allChecked(e.target.checked);
+                    }}
+                    checked={
+                      checkItems.length === cashbookList.length ? true : false
+                    }
+                  />
                 </td>
                 <td width={"20%"}>날짜</td>
                 <td width={"15%"}>자산</td>
@@ -266,6 +316,8 @@ const Cashbook = (props) => {
                       key={"cashbook" + index}
                       cashbook={cashbook}
                       assetToString={assetToString}
+                      selectChecked={selectChecked}
+                      checkItems={checkItems}
                     />
                   );
                 })}
@@ -280,11 +332,24 @@ const Cashbook = (props) => {
 const CashbookItem = (props) => {
   const cashbook = props.cashbook;
   const assetToString = props.assetToString;
+  const selectChecked = props.selectChecked;
+  const checkItems = props.checkItems;
+  const navigate = useNavigate();
+  const cashbookView = () => {
+    navigate("/cashbook/view", { state: { cashbookNo: cashbook.cashbookNo } });
+  };
 
   return (
-    <tr>
+    <tr className="cashbook-item">
       <td>
-        <input type="checkbox" className="cashbook-checkbox" />
+        <input
+          type="checkbox"
+          className="cashbook-checkbox cash-chk"
+          name="cashbookNo"
+          value={cashbook.cashbookNo}
+          onChange={(e) => selectChecked(e.target.checked, cashbook.cashbookNo)}
+          checked={checkItems.includes(cashbook.cashbookNo) ? true : false}
+        />
       </td>
       <td>{cashbook.cashbookDate}</td>
       <td>{assetToString(cashbook.cashbookAsset)}</td>
@@ -295,10 +360,11 @@ const CashbookItem = (props) => {
             ? "money-color"
             : "money-color-spending"
         }`}
+        onClick={cashbookView}
       >
-        <AddComma num={cashbook.cashbookMoney} />
+        {cashbook.cashbookMoney.toLocaleString("ko-KR")}
       </td>
-      <td>{cashbook.cashbookContent}</td>
+      <td className="content-text">{cashbook.cashbookContent}</td>
     </tr>
   );
 };

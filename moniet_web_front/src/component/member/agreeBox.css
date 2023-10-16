@@ -2,7 +2,7 @@
   font-size: 18px;
 }
 .agree-box-wrap {
-  width: 550px;
+  width: 650px;
   margin: 0 auto;
 }
 .agree-box-title {
@@ -42,6 +42,7 @@
 }
 .check {
   padding: 10px 0px;
+  position: relative;
 }
 .popUpBtn {
   color: #6e6e6e;
@@ -52,20 +53,104 @@
   position: absolute;
   right: 0;
 }
-.check {
-  position: relative;
-}
 
 /*모달창 css*/
+
+ 
 .modal-close-btn {
   border: none;
   background-color: #fff;
   cursor: pointer;
+  padding-left: 20px;
+}
+.modal-container{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.5);
 }
 .modal-content {
   border-radius: 0;
   background-color: #fff;
   border: 1px solid black;
-  width: 500px;
-  height: 500px;
+  width: 650px;
+  height: 350px;
+  padding: 30px;
+}
+.modal-title{
+  font-size: 24px;
+  font-family: ns-b;
+  float: left;
+  width: 90%;
+}
+.modal-close-btn-wrap{
+  float: left;
+  width: 10%;
+}
+.modalIcon {
+  color: #1b1b1b;
+  font-size: 32px;
+  margin: 5px 0px;
+}
+.option-table{
+  border-spacing: 0;
+  margin-top: 80px;
+  margin-bottom: 5px;
+  width: 100%;
+  border-top:3px solid black;
+}
+.option-table th,
+.option-table td{
+  padding: 10px;
+  text-align: center;
+  border-bottom: 1px solid black;
+}
+.option-ul{
+  padding: 20px;
+}
+.option-ul>li {
+  list-style: disc;
+}
+.text-underline{
+  text-decoration: underline;
+  font-family: ns-b;
+  
+}
+
+.required-modal-container {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.5);
+}
+.required-modal-content{
+  border-radius: 0;
+  background-color: #fff;
+  border: 1px solid black;
+  width: 650px;
+  height: 650px;
+  padding: 30px;
+}
+.scroll-wrap{
+  width: 630px;
+  height: 600px;
+  overflow-y: scroll;
+  font-size: 15px;  
+}
+.required-modal-title{
+  font-size: 24px;
+  font-family: ns-b;
+  float: left;
+  width: 90%;
+  margin-bottom: 40px;
 }

@@ -52,7 +52,6 @@ public class CashbookController {
 		List incomeCategory = new ArrayList<Category>();
 		List spendingCategory = new ArrayList<Category>();
 		List challengeCategory = challengeService.challengeListsByMember(memberId);
-		System.out.println(challengeCategory);
 		
 		//ref 1:수입, 2:지출
 		for(Category c : categoryList) {
@@ -73,5 +72,14 @@ public class CashbookController {
 	public int insertCashbook(@RequestBody Cashbook cashbook, @RequestAttribute String memberId) {
 		cashbook.setMemberId(memberId);
 		return cashbookService.insertCashbook(cashbook);
+	}
+	
+	@PostMapping(value="/delete")
+	public boolean deleteCashbook(@RequestBody String cashbookNos, @RequestAttribute String memberId) {
+		String cashbookNoArr = cashbookNos.replace("=", "");
+		System.out.println("cashbookNos : " + cashbookNos);
+		System.out.println("cashbookNoArr : " + cashbookNoArr);
+		boolean result = cashbookService.deleteCashbook(cashbookNoArr, memberId);
+		return result;
 	}
 }

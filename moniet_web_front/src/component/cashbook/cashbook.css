@@ -54,6 +54,10 @@
   margin-top: 10px;
   margin-right: 10px;
 }
+.add-del-zone {
+  display: flex;
+  justify-content: flex-end;
+}
 .cashbook-btn-zone {
   display: flex;
   height: 60px;
@@ -133,14 +137,40 @@
   display: flex;
   justify-content: flex-end;
 }
+.add-btn.etc-btn > svg {
+  color: #6a6da6;
+  background-color: #fff;
+}
+.add-btn.etc-btn > svg:hover {
+  background-color: #6a6da6;
+  color: #fff;
+}
 .cashbook-checkbox {
   width: 16px !important;
 }
 .css-1ytlwq5-MuiAlert-icon {
   align-items: center;
 }
-/*data-grid*/
-.css-gl260s-MuiDataGrid-columnHeadersInner.MuiDataGrid-columnHeadersInner--scrollable
-  .MuiDataGrid-columnHeader:last-child {
-  display: none;
+.content-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+/*TABLE*/
+.cashbook-detail {
+  border: 1px solid #323673;
+  border-radius: 3px;
+}
+.cashbook-detail > table {
+  border-collapse: collapse;
+}
+.cashbook-detail > table > thead > tr {
+  background-color: rgba(50, 54, 115, 0.2);
+}
+.cashbook-detail > table tr {
+  border: 1px solid rgba(50, 54, 115, 0.3);
+}
+.cashbook-detail > table td {
+  padding: 10px;
+  font-size: 16px;
 }

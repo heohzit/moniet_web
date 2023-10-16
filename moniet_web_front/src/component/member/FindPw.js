@@ -1,12 +1,14 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./findPw.css";
 import axios from "axios";
-import Swal from "sweetalert2";
+
 const FindPw = () => {
   const [memberId, setMemberId] = useState("");
   const [memberName, setMemberName] = useState("");
   const [memberEmail, setMemberEmail] = useState("");
   const [member, setMember] = useState("");
+  const navigate = useNavigate();
 
   const memberCheck = () => {
     const member = {
@@ -22,6 +24,7 @@ const FindPw = () => {
           alert("입력하신 정보로 가입 된 회원은 존재하지 않습니다.");
         } else {
           alert("입력하신 메일주소로 \n임시비밀번호가 발급되었습니다.");
+          navigate("/login");
           axios
             .post("/member/sendPw", member)
             .then((res) => {

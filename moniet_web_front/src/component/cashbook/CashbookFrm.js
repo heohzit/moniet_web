@@ -4,7 +4,6 @@ import { Button1, Button5 } from "../util/Buttons";
 import Input from "../util/InputFrm";
 import { Calendar } from "react-date-range";
 import ko from "date-fns/locale/ko";
-import ReactDOM from "react-dom/client";
 
 const CashbookFrm = (props) => {
   const title = props.title;
@@ -231,7 +230,7 @@ const CashbookFrm = (props) => {
                     <option value="">챌린지 없음</option>
                     {challengeCate.map((item, index) => (
                       <option
-                        defaultValue={item.challengeNo}
+                        value={item.challengeNo}
                         key={"challenge" + index}
                       >
                         {item.challengeTitle}

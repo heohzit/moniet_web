@@ -17,7 +17,8 @@ const CashbookWrite = (props) => {
   const spendingCate = props.spendingCate;
   const select = props.select;
   const setSelect = props.setSelect;
-  const [cashbookFinance, setCashbookFinance] = useState(0);
+
+  const [cashbookFinance, setCashbookFinance] = useState(2);
   const [cashbookDate, setCashbookDate] = useState(new Date());
   const [cashbookLoop, setCashbookLoop] = useState(0);
   const [loopMonth, setLoopMonth] = useState(0);
@@ -50,6 +51,7 @@ const CashbookWrite = (props) => {
       cashbookMoney: cashbookMoney,
       cashbookContent: cashbookContent,
       cashbookMemo: cashbookMemo,
+      challengeNo: challengeNo,
     };
 
     axios
@@ -84,7 +86,6 @@ const CashbookWrite = (props) => {
   return (
     <div className="add-btn">
       <AddIcon onClick={isOpen} />
-
       <CashbookFrm
         isOpen={addFrmOpen}
         closeFrm={closeFrm}

@@ -25,16 +25,14 @@ const Join = () => {
     "@gmail.com",
     "@daum.net",
     "@hanmail.net",
-    "@yahoo.com",
-    "@outlook.com",
     "@nate.com",
     "@kakao.com",
   ];
   const [emailList, setEmailList] = useState(Emails);
   const [selected, setSelected] = useState(-1);
   const [isDrobBox, setIsDropbox] = useState(false);
-
   const inputRef = useRef();
+
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (inputRef.current && !inputRef.current.contains(e.target)) {
@@ -49,7 +47,8 @@ const Join = () => {
     if (e.target.value.includes("@")) {
       setIsDropbox(true);
       setEmailList(
-        Emails.filter((el) => el.includes(e.target.value.split("@")[1]))
+        Emails.filter((el) => el.includes(e.target.value.split("@")[1]),
+        ),
       );
     } else {
       setIsDropbox(false);
@@ -135,13 +134,22 @@ const Join = () => {
       setCheckPhoneMsg("");
     }
   };
+  const emailCheck = () => {
+    const emailReg = /^[A-Za-z0-9_\\.\\-]+@[A-Za-z0-9\\-]+\.[A-za-z0-9\\-]+/;
+    if (!emailReg.test(memberEmail)) {
+      setCheckEmailMsg("'@'를 포함하여 올바른 형식으로 입력해주세요.");
+    } else {
+      setCheckEmailMsg("");
+    }
+  };
   //회원가입
   const join = () => {
     if (
       checkIdMsg === "" &&
       checkPwMsg === "" &&
       checkNameMsg === "" &&
-      checkPhoneMsg === ""
+      checkPhoneMsg === "" &&
+      checkEmailMsg == ""
     ) {
       const form = new FormData();
       form.append("thumbnail", thumbnail);
@@ -252,11 +260,13 @@ const Join = () => {
             onChangeEmail(e);
           }}
           onKeyUp={handleKeyUp}
+          onBlur={emailCheck}
         />
+        <div className="check-msg">{checkEmailMsg}</div>
         {isDrobBox && (
-          <div>
+          <div className="email-list">
             {emailList.map((item, idx) => (
-              <div
+              <li
                 key={idx}
                 onMouseOver={() => setSelected(idx)}
                 onClick={() => handleDropDownClick(memberEmail, item)}
@@ -264,16 +274,16 @@ const Join = () => {
               >
                 {memberEmail.split("@")[0]}
                 {item}
-              </div>
+              </li>
             ))}
           </div>
         )}
+        </div>
         <div className="join-button">
           <button type="button" onClick={join}>
             회원가입
           </button>
         </div>
-      </div>
     </div>
   );
 };

@@ -22,6 +22,7 @@ public class EmailSender {
 		MimeMessage message = sender.createMimeMessage();
 		MimeMessageHelper helper = new MimeMessageHelper(message);
 		
+	
 		StringBuffer sb = new StringBuffer();
 		
 		Random r = new Random();
@@ -39,14 +40,14 @@ public class EmailSender {
 				char ch = (char)(r.nextInt(26)+97);
 				sb.append(ch);
 			}
-			
+		}
 			try {
 				helper.setSentDate(new Date());
 				helper.setFrom(new InternetAddress("tnsgus1104@gmail.com", "머니어트"));
 				helper.setTo(memberEmail);
 				helper.setSubject("[머니어트] 임시 비밀번호가 생성되었습니다.");
 				helper.setText("<h3>안녕하세요 머니어트 입니다.</h3>"
-						+"<h3>임시비밀번호는 [<span style='color:#323673;'>"+sb.toString()+"</span>] 입니다. </h3>"
+						+"<h3>임시비밀번호는 [<span style='color:blue;'>"+sb.toString()+"</span>] 입니다. </h3>"
 						,true);
 				sender.send(message);
 			} catch (MessagingException e) {
@@ -56,9 +57,7 @@ public class EmailSender {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}	
-		}
+		
 		return sb.toString();
 	}
-	
-
 }
