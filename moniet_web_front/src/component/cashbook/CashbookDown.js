@@ -1,6 +1,5 @@
 import FileSaver from "file-saver";
 import * as XLSX from "xlsx";
-import { Button5 } from "../util/Buttons";
 import DownloadIcon from "@mui/icons-material/Download";
 
 const CashbookDown = (props) => {
@@ -15,22 +14,27 @@ const CashbookDown = (props) => {
   const excelFileName = "머니어트";
 
   const excelDownload = (cashbookList) => {
+    console.log(cashbookList);
+    console.log(spendingCate);
     const categoryToString = (cashbookFinance, cashbookCategory) => {
       if (cashbookFinance === 1 && incomeCate) {
         const category = incomeCate.find(
           (item) => item.categoryNo === cashbookCategory
         );
+        console.log(category);
         return category.categoryTitle;
-      } else if ((cashbookFinance === 2) & spendingCate) {
+      } else if (cashbookFinance === 2 && spendingCate) {
         const category = spendingCate.find(
           (item) => item.categoryNo === cashbookCategory
         );
-        return category.categoryTitle;
+        console.log(category);
+        return category ? category.categoryTitle : "없음";
       } else {
         return "";
       }
     };
     console.log(categoryToString(1, 7));
+    console.log(incomeCate);
 
     const ws = XLSX.utils.aoa_to_sheet([
       [excelFileName],
@@ -45,7 +49,7 @@ const CashbookDown = (props) => {
             data.cashbookDate,
             data.cashbookFinance === 1 ? "수입" : "지출",
             assetToString(data.cashbookAsset),
-            categoryToString(data.cashbookFinance, data.cashbookCategory),
+            data.categoryTitle,
             data.cashbookMoney.toLocaleString("ko-KR") + "원",
             data.cashbookContent,
             data.cashbookMemo,
