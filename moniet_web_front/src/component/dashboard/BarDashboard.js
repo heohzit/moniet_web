@@ -25,6 +25,7 @@ const today = new Date();
 const formattedDate = `${today.getMonth() + 1}월`;
 const selectDate = `${today.getMonth() + 1}`;
 const options1 = {
+  maxBarThickness: 40,
   responsive: true,
   plugins: {
     legend: {
@@ -37,6 +38,7 @@ const options1 = {
   },
 };
 const options2 = {
+  maxBarThickness: 40,
   responsive: true,
   plugins: {
     legend: {

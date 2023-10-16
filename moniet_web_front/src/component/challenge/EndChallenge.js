@@ -7,7 +7,6 @@ import { Button3 } from "../util/Buttons";
 const loadCount = 4;
 const EndChallenge = () => {
   const [challengeList, setChallengeList] = useState([]);
-
   const [showChallenge, setShowChallenge] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [backPage, setBackPage] = useState(false);
@@ -23,7 +22,6 @@ const EndChallenge = () => {
       .then((res) => {
         console.log(res.data);
         setChallengeList(res.data.challengeList);
-
         const allChallenge = res.data.challengeList;
         const oneChallenge = allChallenge.slice(0, loadCount);
         setShowChallenge(oneChallenge);
@@ -96,6 +94,7 @@ const ChallengeItem = (props) => {
       <div className="challenge-item-info">
         <div className="challenge-kind">
           {challenge.challengeKind === 1 ? <div>저축</div> : <div>지출</div>}
+          {challenge.categoryTitle}
         </div>
         <div>{challenge.challengeTitle}</div>
         <div className="challenge-result">

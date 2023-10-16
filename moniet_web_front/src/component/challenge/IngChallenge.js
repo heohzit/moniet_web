@@ -101,7 +101,6 @@ const ChallengeItem = (props) => {
         <div className="challenge-kind">
           {challenge.challengeKind === 1 ? <div>저축</div> : <div>지출</div>}
           {challenge.categoryTitle}
-          {challenge.categoryNo === 0 ? "" : <div>{challenge.categoryNo}</div>}
         </div>
         <div>{challenge.challengeTitle}</div>
         <Dayday challenge={challenge}></Dayday>

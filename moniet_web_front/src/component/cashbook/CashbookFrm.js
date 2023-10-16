@@ -4,7 +4,6 @@ import { Button1, Button5 } from "../util/Buttons";
 import Input from "../util/InputFrm";
 import { Calendar } from "react-date-range";
 import ko from "date-fns/locale/ko";
-import ReactDOM from "react-dom/client";
 
 const CashbookFrm = (props) => {
   const title = props.title;
@@ -54,7 +53,7 @@ const CashbookFrm = (props) => {
   const setChallengeCate = props.setChallengeCate;
   const incomeCate = props.incomeCate;
   const spendingCate = props.spendingCate;
-  const write = props.clickEvent;
+  const clickEvent = props.clickEvent;
   const [toggleOn, setToggleOn] = useState(false);
 
   const toggle = () => {
@@ -220,7 +219,6 @@ const CashbookFrm = (props) => {
                         </option>
                       ))}
                 </select>
-
                 {cashbookCategory === "21" ? (
                   <select
                     name="challengeNo"
@@ -231,7 +229,7 @@ const CashbookFrm = (props) => {
                     <option value="">챌린지 없음</option>
                     {challengeCate.map((item, index) => (
                       <option
-                        defaultValue={item.challengeNo}
+                        value={item.challengeNo}
                         key={"challenge" + index}
                       >
                         {item.challengeTitle}
@@ -266,10 +264,29 @@ const CashbookFrm = (props) => {
           </div>
         </div>
         <div className="modalBtn-area">
-          <Button1 text={"등록"} clickEvent={write} />
-          <button className="closeModalBtn" id="closeModal" onClick={closeFrm}>
-            닫기
-          </button>
+          {title === "입력" ? (
+            <>
+              <Button1 text={"등록"} clickEvent={clickEvent} />
+              <button
+                className="closeModalBtn"
+                id="closeModal"
+                onClick={closeFrm}
+              >
+                닫기
+              </button>{" "}
+            </>
+          ) : (
+            <>
+              <Button1 text={"수정"} clickEvent={clickEvent} />
+              <button
+                className="closeModalBtn"
+                id="closeModal"
+                onClick={closeFrm}
+              >
+                닫기
+              </button>{" "}
+            </>
+          )}
         </div>
       </div>
     </div>

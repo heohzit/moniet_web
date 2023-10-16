@@ -12,9 +12,8 @@ import { Button4, Button5 } from "../util/Buttons";
 import Input from "../util/InputFrm";
 import { NextMonth, PrevMonth } from "./MoveMonth";
 import CashbookWrite from "./CashbookWrite";
-
 import CashbookDel from "./CashbookDel";
-import { useNavigate } from "react-router-dom";
+import CashbookFrm from "./CashbookFrm";
 
 const Cashbook = (props) => {
   const isLogin = props.isLogin;
@@ -306,6 +305,7 @@ const Cashbook = (props) => {
                 <td width={"15%"}>분류</td>
                 <td width={"15%"}>금액</td>
                 <td width={"30%"}>내용</td>
+                <td></td>
               </tr>
             </thead>
             <tbody>
@@ -318,6 +318,15 @@ const Cashbook = (props) => {
                       assetToString={assetToString}
                       selectChecked={selectChecked}
                       checkItems={checkItems}
+                      isOpen={isOpen}
+                      dateString={dateString}
+                      assetList={assetList}
+                      challengeCate={challengeCate}
+                      setChallengeCate={setChallengeCate}
+                      incomeCate={incomeCate}
+                      spendingCate={spendingCate}
+                      select={select}
+                      setSelect={setSelect}
                     />
                   );
                 })}
@@ -334,37 +343,151 @@ const CashbookItem = (props) => {
   const assetToString = props.assetToString;
   const selectChecked = props.selectChecked;
   const checkItems = props.checkItems;
-  const navigate = useNavigate();
-  const cashbookView = () => {
-    navigate("/cashbook/view", { state: { cashbookNo: cashbook.cashbookNo } });
+  const dateString = props.dateString;
+  const assetList = props.assetList;
+  const challengeCate = props.challengeCate;
+  const setChallengeCate = props.setChallengeCate;
+  const incomeCate = props.incomeCate;
+  const spendingCate = props.spendingCate;
+  const select = props.select;
+  const setSelect = props.setSelect;
+
+  const [cashbookNo, setCashbookNo] = useState(cashbook.cashbookNo);
+  const [cashbookFinance, setCashbookFinance] = useState(
+    cashbook.cashbookFinance
+  );
+  const [cashbookDate, setCashbookDate] = useState(
+    new Date(cashbook.cashbookDate)
+  );
+  const [cashbookLoop, setCashbookLoop] = useState(cashbook.cashbookLoop);
+  const [loopMonth, setLoopMonth] = useState(cashbook.loopMonth);
+  const [cashbookAsset, setCashbookAsset] = useState(cashbook.cashbookAsset);
+  const [cashbookCategory, setCashbookCategory] = useState(
+    cashbook.cashbookCategory
+  );
+  const [cashbookMoney, setCashbookMoney] = useState(cashbook.cashbookMoney);
+  const [cashbookContent, setCashbookContent] = useState(
+    cashbook.cashbookContent
+  );
+  const [cashbookMemo, setCashbookMemo] = useState(cashbook.cashbookMemo);
+  const [challengeNo, setChallengeNo] = useState(cashbook.challengeNo);
+  const modify = () => {
+    const token = window.localStorage.getItem("token");
+    const cashbook = {
+      cashbookNo: cashbookNo,
+      cashbookFinance: cashbookFinance,
+      cashbookDate: dateString(cashbookDate),
+      cashbookLoop: cashbookLoop,
+      loopMonth: loopMonth,
+      cashbookAsset: cashbookAsset,
+      cashbookCategory: cashbookCategory,
+      cashbookMoney: cashbookMoney,
+      cashbookContent: cashbookContent,
+      cashbookMemo: cashbookMemo,
+      challengeNo: challengeNo,
+    };
+
+    axios
+      .post("/cashbook/update", cashbook, {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      })
+      .then((res) => {
+        if (res.data === 1) {
+          setCashbookFinance(2);
+          setCashbookDate(new Date());
+          setCashbookLoop(0);
+          setLoopMonth(0);
+          setCashbookAsset(1);
+          setCashbookCategory(11);
+          setCashbookMoney(0);
+          setCashbookContent("");
+          setCashbookMemo("");
+          closeFrm();
+          setSelect(!select);
+        } else {
+          console.log("등록 중 에러 발생");
+        }
+      })
+      .catch((res) => {
+        console.log(res.response.status);
+      });
+  };
+
+  const [addFrmOpen, setAddFrmOpen] = useState(false);
+  const isOpen = () => {
+    setAddFrmOpen(true);
+  };
+  const closeFrm = () => {
+    setAddFrmOpen(false);
   };
 
   return (
-    <tr className="cashbook-item" onClick={cashbookView}>
-      <td>
-        <input
-          type="checkbox"
-          className="cashbook-checkbox cash-chk"
-          name="cashbookNo"
-          value={cashbook.cashbookNo}
-          onChange={(e) => selectChecked(e.target.checked, cashbook.cashbookNo)}
-          checked={checkItems.includes(cashbook.cashbookNo) ? true : false}
-        />
-      </td>
-      <td>{cashbook.cashbookDate}</td>
-      <td>{assetToString(cashbook.cashbookAsset)}</td>
-      <td>{cashbook.categoryTitle}</td>
-      <td
-        className={`${
-          cashbook.cashbookFinance === 1
-            ? "money-color"
-            : "money-color-spending"
-        }`}
-      >
-        {cashbook.cashbookMoney.toLocaleString("ko-KR")}
-      </td>
-      <td className="content-text">{cashbook.cashbookContent}</td>
-    </tr>
+    <>
+      <tr className="cashbook-item" onClick={isOpen}>
+        <td>
+          <input
+            type="checkbox"
+            className="cashbook-checkbox cash-chk"
+            name="cashbookNo"
+            value={cashbook.cashbookNo}
+            onChange={(e) =>
+              selectChecked(e.target.checked, cashbook.cashbookNo)
+            }
+            checked={checkItems.includes(cashbook.cashbookNo) ? true : false}
+          />
+        </td>
+        <td>{cashbook.cashbookDate}</td>
+        <td>{assetToString(cashbook.cashbookAsset)}</td>
+        <td>{cashbook.categoryTitle}</td>
+        <td
+          className={`${
+            cashbook.cashbookFinance === 1
+              ? "money-color"
+              : "money-color-spending"
+          }`}
+        >
+          {cashbook.cashbookMoney.toLocaleString("ko-KR")}
+        </td>
+        <td className="content-text">{cashbook.cashbookContent}</td>
+        <td>
+          <CashbookFrm
+            isOpen={addFrmOpen}
+            closeFrm={closeFrm}
+            title={"수정"}
+            dateString={dateString}
+            cashbookFinance={cashbookFinance}
+            setCashbookFinance={setCashbookFinance}
+            cashbookDate={cashbookDate}
+            setCashbookDate={setCashbookDate}
+            cashbookLoop={cashbookLoop}
+            setCashbookLoop={setCashbookLoop}
+            loopMonth={loopMonth}
+            setLoopMonth={setLoopMonth}
+            cashbookAsset={cashbookAsset}
+            setCashbookAsset={setCashbookAsset}
+            assetList={assetList}
+            cashbookCategory={cashbookCategory}
+            setCashbookCategory={setCashbookCategory}
+            cashbookMoney={cashbookMoney}
+            setCashbookMoney={setCashbookMoney}
+            cashbookContent={cashbookContent}
+            setCashbookContent={setCashbookContent}
+            cashbookMemo={cashbookMemo}
+            setCashbookMemo={setCashbookMemo}
+            challengeNo={challengeNo}
+            setChallengeNo={setChallengeNo}
+            challengeCate={challengeCate}
+            setChallengeCate={setChallengeCate}
+            incomeCate={incomeCate}
+            spendingCate={spendingCate}
+            key={cashbook.cashbookNo}
+            clickEvent={modify}
+          />
+        </td>
+      </tr>
+    </>
   );
 };
 export default Cashbook;

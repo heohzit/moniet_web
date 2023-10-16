@@ -30,7 +30,6 @@ function App() {
   return (
     <div className="App">
       <Header isLogin={isLogin} setIsLogin={setIsLogin}></Header>
-
       <div className="App-content">
         <Routes>
           <Route path="/" element={<Main></Main>}></Route>
