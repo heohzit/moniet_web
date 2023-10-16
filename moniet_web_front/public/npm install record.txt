@@ -22,5 +22,5 @@ npm install @mui/x-data-grid          23.10.12
 
 
 //사이드바
-npm install @mui/icons-material
-npm install react-pro-sidebar
+npm install @mui/icons-material         23.10.16
+npm install react-pro-sidebar           23.10.16

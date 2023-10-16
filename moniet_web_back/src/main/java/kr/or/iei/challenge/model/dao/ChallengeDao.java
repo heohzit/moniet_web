@@ -34,12 +34,12 @@ public interface ChallengeDao {
 	void challengeFinish();
 
 	//챌린지 레벨 조회
-	int challengeLevel(String memberId);
+	String challengeLevel(String memberId);
 
 	List challengeListsByMember(String memberId);
 	
 	//챌린지 성공/실패 결과
-	int resultChallenge(String memberId);
+	int resultChallenge(int challengeNo);
 	
 	//챌린지 성공/실패 결과
 	int resultChallenge2(String memberId);

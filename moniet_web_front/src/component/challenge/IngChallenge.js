@@ -152,6 +152,7 @@ const ChallengeLevel = () => {
       })
       .then((res) => {
         setChallengeLevel(res.data);
+        console.log(res.data);
       })
       .catch((res) => {
         console.log(res.response.status);
