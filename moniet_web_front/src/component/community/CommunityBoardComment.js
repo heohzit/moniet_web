@@ -8,6 +8,7 @@ const CommunityBoardComment = () => {
   return (
     <div>
       <div>댓글존</div>
+      <div>댓글존</div>
     </div>
   );
 };
