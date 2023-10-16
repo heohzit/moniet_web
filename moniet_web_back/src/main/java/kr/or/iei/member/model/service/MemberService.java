@@ -50,9 +50,11 @@ public class MemberService {
 		return memberDao.deleteMember(memberId);
 	}
 
-	@Transactional
-	public int updateMemberInfo(Member member) {
-		return memberDao.updateMemberInfo(member);
+	@Transactional // 회원정보수정
+	public int updateMemberInfo(Member m) {
+		System.out.println(m);
+		return memberDao.updateMemberInfo(m);
+	
 	}
 
 	public int pwCheck(Member member) {
@@ -68,7 +70,6 @@ public class MemberService {
 		// TODO Auto-generated method stub
 		return memberDao.updatePwMember(member);
 	}
-
 
 
 	public Member selectOneMember(String memberId) {

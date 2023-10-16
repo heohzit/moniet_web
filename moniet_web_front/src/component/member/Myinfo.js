@@ -150,17 +150,22 @@ const Myinfo = (props) => {
   };
 
   const updateMember = () => {
-    const form = new FormData();
-    form.append(member);
-    form.append(thumbnail);
     const token = window.localStorage.getItem("token");
     if (checkPhoneMsg === "" && checkEmailMsg === "") {
+      const form = new FormData();
+      form.append("memberId", member.memberId);
+      form.append("memberEmail", member.memberEmail);
+      form.append("memberPhone", member.memberPhone);
+      form.append("member", member);
+      form.append("thumbnail", thumbnail);
+      console.log(member);
+      console.log(thumbnail);
       axios
         .post("/member/updateMember", form, {
           headers: {
+            Authorization: "Bearer " + token,
             contentType: "multipart/form-data",
             processdData: false,
-            Authorization: "Bearer " + token,
           },
         })
         .then((res) => {
