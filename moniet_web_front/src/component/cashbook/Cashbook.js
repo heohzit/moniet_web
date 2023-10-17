@@ -14,6 +14,7 @@ import { NextMonth, PrevMonth } from "./MoveMonth";
 import CashbookWrite from "./CashbookWrite";
 import CashbookDel from "./CashbookDel";
 import CashbookFrm from "./CashbookFrm";
+import CashbookDown from "./CashbookDown";
 
 const Cashbook = (props) => {
   const isLogin = props.isLogin;
@@ -224,6 +225,12 @@ const Cashbook = (props) => {
 
       <div className="cashbook-content">
         <div className="add-del-zone">
+          <CashbookDown
+            cashbookList={cashbookList}
+            assetToString={assetToString}
+            incomeCate={incomeCate}
+            spendingCate={spendingCate}
+          />
           <CashbookDel
             checkItems={checkItems}
             setCheckItems={setCheckItems}
@@ -415,11 +422,13 @@ const CashbookItem = (props) => {
     setAddFrmOpen(false);
     e.stopPropagation();
   };
-
+  const checkClick = (e) => {
+    e.stopPropagation();
+  };
   return (
     <>
       <tr className="cashbook-item" onClick={isOpen}>
-        <td>
+        <td onClick={checkClick}>
           <input
             type="checkbox"
             className="cashbook-checkbox cash-chk"

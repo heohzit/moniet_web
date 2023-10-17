@@ -2,7 +2,14 @@ import "./community.css";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import { Button1, Button2, Button3, Button4 } from "../util/Buttons";
+import {
+  Button1,
+  Button2,
+  Button3,
+  Button4,
+  Button5,
+  Button6,
+} from "../util/Buttons";
 import axios from "axios";
 import CommunityBoard from "./CommunityBoard";
 import CommunityBoardWrite from "./CommunityBoardWrite";
@@ -41,6 +48,16 @@ const CommunityView = (props) => {
         });
     }
   }, []);
+
+  // if (!isLogin) {
+  //   Swal.fire({
+  //     title: "로그인이 필요한 서비스입니다.",
+  //     text: "로그인페이지로 이동합니다.",
+  //     icon: "info",
+  //   }).then(() => {
+  //     navigate("/login");
+  //   });
+  // }
 
   // const deleteCommunity = () => {
   //   Swal.fire({
@@ -103,10 +120,18 @@ const CommunityView = (props) => {
 
         <div className="community-view-btns">
           <div className="community-view-join-btn">
-            <Button1 text="참여하기" />
+            {isLogin ? (
+              <Button3 text="참여하기" />
+            ) : (
+              <Button6 text="로그인 해주시기 바랍니다." />
+            )}
           </div>
           <div className="community-view-like-btn">
-            <span class="material-icons ab-btn1">favorite_border</span>
+            {isLogin ? (
+              <span class="material-icons ab-btn1">favorite_border</span>
+            ) : (
+              ""
+            )}
           </div>
           <div className="community-view-share-btn">
             <span class="material-icons sh-btn1">share</span>

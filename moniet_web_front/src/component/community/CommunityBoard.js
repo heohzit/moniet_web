@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Button1, Button2, Button3, Button4 } from "../util/Buttons";
 import CommunityBoardComment from "./CommunityBoardComment";
+import Swal from "sweetalert2";
 
 const CommunityBoard = (props) => {
   const isLogin = props.isLogin;
@@ -25,7 +26,13 @@ const CommunityBoard = (props) => {
   return (
     <div className="community-view-board">
       {communityBoardList.map((board, index) => {
-        return <CommunityBoardItem key={"board" + index} board={board} />;
+        return (
+          <CommunityBoardItem
+            key={"board" + index}
+            board={board}
+            index={index}
+          />
+        );
       })}
     </div>
   );
@@ -33,8 +40,39 @@ const CommunityBoard = (props) => {
 
 const CommunityBoardItem = (props) => {
   const board = props.board;
+  const index = props.index;
   const navigate = useNavigate();
   const isLogin = props.isLogin;
+
+  const boardLike = () => {
+    const likeBtn = document.querySelectorAll(
+      ".board-item-like-icon > .thumb_up"
+    )[index];
+
+    likeBtn.classList.toggle("thumb_up2");
+    console.log(likeBtn);
+
+    /* 따봉 클릭했을 때 위에서 클라스 토글 한번 돌고,
+      여기서 axios로 추가하면 되는지,
+
+      if문 사용해서 isLike 구현해야하는지..
+      todolist했던거 생각해보고 생각안나면 강사님 여쭤보기
+      
+    */
+  };
+
+  const ToggleComment = () => {
+    const boardCommentContent = document.querySelectorAll(
+      ".board-item-comment-wrap"
+    )[index];
+
+    const commentBtn = document.querySelectorAll(
+      ".board-item-like-icon > .chat"
+    )[index];
+
+    boardCommentContent.classList.toggle("showClass");
+    commentBtn.classList.toggle("chat2");
+  };
 
   return (
     <>
@@ -70,10 +108,17 @@ const CommunityBoardItem = (props) => {
             </div>
           </div>
           <div className="board-item-like">
-            <div className="board-item-like-text">2명이 공감했어요.</div>
+            <div className="board-item-like-text">
+              {board.communityBoardLike}명이 공감했어요.
+            </div>
             <div className="board-item-like-icon">
-              <span className="material-icons thumb_up">thumb_up</span>
-              <span className="material-icons chat">chat</span>
+              <span className="material-icons thumb_up" onClick={boardLike}>
+                thumb_up
+              </span>
+              <span className="material-icons chat" onClick={ToggleComment}>
+                chat
+              </span>
+
               <span className="chat-count">5</span>
             </div>
           </div>
@@ -81,6 +126,7 @@ const CommunityBoardItem = (props) => {
             <CommunityBoardComment
               communityBoardNo={board.communityBoardNo}
               isLogin={isLogin}
+              index={index}
             />
           </div>
         </div>

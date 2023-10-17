@@ -7,6 +7,7 @@ import Swal from "sweetalert2";
 import CommunityBoardCommentWrite from "./CommunityBoardCommentWrite";
 
 const CommunityBoardComment = (props) => {
+  const index = props.index;
   const isLogin = props.isLogin;
   const [boardCommentList, setBoardCommentList] = useState([]);
   const [reqPage, setReqPage] = useState(1);
@@ -32,7 +33,10 @@ const CommunityBoardComment = (props) => {
         </span>
       </div>
       <div className="board-item-comment-write-wrap">
-        <CommunityBoardCommentWrite communityBoardNo={communityBoardNo} />
+        <CommunityBoardCommentWrite
+          communityBoardNo={communityBoardNo}
+          index={index}
+        />
       </div>
       <div className="board-item-comment-list-wrap">
         {boardCommentList.map((comment, index) => {

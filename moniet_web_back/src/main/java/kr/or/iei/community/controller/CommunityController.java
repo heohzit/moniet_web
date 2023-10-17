@@ -147,7 +147,6 @@ public class CommunityController {
 	public int insertBoardComment(@ModelAttribute ComuBoardComment c,
 									@RequestAttribute String memberId) {
 		c.setMemberId(memberId);
-		
 		int result = communityService.insertBoardComment(c);
 		return result;
 	}

@@ -12,7 +12,9 @@ const CommunityMain = (props) => {
       <div className="community-main-top">COMMUNITY</div>
       <Routes>
         <Route path="view" element={<CommunityView isLogin={isLogin} />} />
-        <Route path="write" element={<CommunityWrite />} />
+
+        <Route path="write" element={<CommunityWrite isLogin={isLogin} />} />
+
         <Route path="*" element={<CommunityList isLogin={isLogin} />} />
       </Routes>
     </div>

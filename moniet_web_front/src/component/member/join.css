@@ -12,6 +12,10 @@
 .join-input-wrap {
   margin-bottom: 10px;
 }
+.join-input-wrap input {
+  font-size: 15px;
+  padding: 10px;
+}
 .join-input-wrap > div > label {
   font-size: 15px;
 }
@@ -64,31 +68,30 @@
   padding: 10px 0px;
   text-align: center;
 }
-.join-mail-wrap>input{
+.join-mail-wrap > input {
   width: 100%;
   border: 2px solid #ccc;
   border-radius: 5px;
   outline: none;
   box-sizing: border-box;
-  padding: 0.4rem;;
-
+  padding: 0.4rem;
+  font-size: 15px;
+  padding: 10px;
 }
-.join-mail-wrap>label{
+.join-mail-wrap > label {
   font-size: 15px;
 }
-.email-list{
+.email-list {
   border-radius: 5px;
   border: 1px solid #ccc;
   border-top: none;
   padding: 0.4rem;
 }
-.email-list>li{
-  font-size: 17px;
+.email-list > li {
+  font-size: 15px;
   padding: 5px;
 }
-.email-list>li:hover{
+.email-list > li:hover {
   color: #010440;
   font-family: ns-b;
 }
-
-

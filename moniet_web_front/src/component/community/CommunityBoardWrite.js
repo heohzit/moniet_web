@@ -93,12 +93,7 @@ const CommunityBoardWrite = (props) => {
       ".board-write-options-select"
     ).value;
 
-    // console.log(communityBoardContent);
-    // console.log(selectOption);
-    // console.log(boardFile);
-
     if (communityBoardContent !== "" && selectOption != 0) {
-      // ===을 3개쓰면 타입까지 비교하는데, ==을 2개쓰면 순수 데이터만 비교함
       Swal.fire({
         icon: "question",
         text: "게시글을 작성하시겠습니까?",
@@ -115,6 +110,7 @@ const CommunityBoardWrite = (props) => {
             form.append("boardFile", boardFile[i]);
           }
           const token = window.localStorage.getItem("token");
+
           axios
             .post("/community/insertBoard", form, {
               headers: {
@@ -141,6 +137,63 @@ const CommunityBoardWrite = (props) => {
       Swal.fire("작성 실패", "입력값을 확인해주세요.", "warning");
     }
   };
+
+  // const insertBoard2 = (props) => {
+  //   const communityBoardContent = document.querySelector(
+  //     ".board-write-textarea-text"
+  //   ).value;
+  //   const selectOption = document.querySelector(
+  //     ".board-write-options-select"
+  //   ).value;
+
+  //   // console.log(communityBoardContent);
+  //   // console.log(selectOption);
+  //   // console.log(boardFile);
+
+  //   if (communityBoardContent !== "" && selectOption != 0) {
+  //     // ===을 3개쓰면 타입까지 비교하는데, ==을 2개쓰면 순수 데이터만 비교함
+  //     Swal.fire({
+  //       icon: "question",
+  //       text: "게시글을 작성하시겠습니까?",
+  //       showCancelButton: true,
+  //       confirmButtonText: "확인",
+  //       cancelButtonText: "취소",
+  //     }).then((res) => {
+  //       if (res.isConfirmed) {
+  //         const form = new FormData();
+  //         form.append("communityRef", communityNo);
+  //         form.append("communityBoardContent", communityBoardContent);
+  //         form.append("communityBoardTypeList", selectOption);
+  //         for (let i = 0; i < boardFile.length; i++) {
+  //           form.append("boardFile", boardFile[i]);
+  //         }
+  //         const token = window.localStorage.getItem("token");
+  //         axios
+  //           .post("/community/insertBoard", form, {
+  //             headers: {
+  //               contentType: "multipart/form-data",
+  //               processdData: false,
+  //               Authorization: "Bearer " + token,
+  //             },
+  //           })
+  //           .then((res) => {
+  //             if (res.data > 0) {
+  //               Swal.fire(
+  //                 "작성 완료",
+  //                 "게시글작성이 완료되었습니다.",
+  //                 "success"
+  //               );
+  //             }
+  //           })
+  //           .catch((res) => {
+  //             console.log(res.response.status);
+  //           });
+  //       }
+  //     });
+  //   } else {
+  //     Swal.fire("작성 실패", "입력값을 확인해주세요.", "warning");
+  //   }
+  // };
 
   return (
     <div className="board-write">

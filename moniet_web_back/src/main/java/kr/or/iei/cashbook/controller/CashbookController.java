@@ -90,4 +90,5 @@ public class CashbookController {
 		System.out.println("번호:"+cashbook.getCashbookNo());
 		return cashbookService.updateCashbook(cashbook);
 	}
+
 }

@@ -456,12 +456,10 @@
 }
 
 .community-view-join-btn > button {
-  background-color: #323673;
 }
 
 .community-view-btns .community-view-join-btn {
   width: 80%;
-  padding-right: 20px;
 }
 
 .community-view-like-btn,
@@ -470,6 +468,7 @@
 }
 
 .community-view-like-btn > span {
+  padding-left: 10px;
   font-size: 46px;
   color: red;
   cursor: pointer;
@@ -771,6 +770,8 @@
 }
 
 .board-item-like {
+  padding-bottom: 30px;
+  border-bottom: 1px solid #ccc;
   overflow: hidden;
   width: 100%;
 }
@@ -814,6 +815,22 @@
   right: 2cm;
 }
 
+.board-item-like > .board-item-like-icon > .thumb_up2,
+.chat2 {
+  position: absolute;
+  font-size: 28px;
+  margin-top: 3px;
+
+  width: 21px;
+  height: 22px;
+  padding: 5px;
+  padding-bottom: 4px;
+  color: #6a6da6;
+
+  cursor: pointer;
+  right: 2cm;
+}
+
 .board-item-like > .board-item-like-icon > .chat {
   cursor: pointer;
   right: 1cm;
@@ -827,11 +844,13 @@
 .board-item-like > .board-item-like-icon > .thumb_up:hover {
   color: #6a6da6;
   transition: all 0.2s linear;
+  transform: rotate(-15deg);
 }
 
 .board-item-like > .board-item-like-icon > .chat:hover {
   color: #6a6da6;
   transition: all 0.2s linear;
+  transform: rotate(-15deg);
 }
 
 .board-item-info > .board-item-content {
@@ -841,6 +860,10 @@
   color: #010440;
   font-family: ns-r;
   max-height: 300px;
+}
+
+.board-item-comment-wrap {
+  display: none;
 }
 
 .board-item-comment {
@@ -853,6 +876,10 @@
   float: left;
 }
 
+.board-item-comment-list-wrap {
+  width: 800px;
+}
+
 .board-item-comment > .board-item-comment-arrow {
   color: gray;
 }
@@ -862,6 +889,8 @@
 }
 
 .board-item-comment-list {
+  max-width: 800px;
+  width: 800px;
   float: left;
   padding: 10px;
   padding-left: 100px;
@@ -943,4 +972,12 @@
 
 .comment-write > .comment-write-btn button {
   height: 98px;
+}
+
+.hideClass {
+  display: none;
+}
+
+.showClass {
+  display: block;
 }

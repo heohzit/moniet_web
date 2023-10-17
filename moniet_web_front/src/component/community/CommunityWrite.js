@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
-const CommunityWrite = () => {
+const CommunityWrite = (props) => {
   const [communityTitle, setCommunityTitle] = useState("");
   const [communitySubTitle, setCommunitySubTitle] = useState("");
   const [thumbnail, setThumbnail] = useState({});
@@ -19,6 +19,7 @@ const CommunityWrite = () => {
     { name: "types", text: "기타 💸", value: 8 },
   ]);
 
+  const isLogin = props.isLogin;
   const navigate = useNavigate();
 
   return (

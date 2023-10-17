@@ -4,7 +4,7 @@ import { TextEditor1, TextEditor2 } from "../util/TextEditor";
 import { Button1, Button2, Button3, Button4 } from "../util/Buttons";
 import Type from "./Type";
 import { useState } from "react";
-import axios from "axios";
+import axios, { isCancel } from "axios";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 
@@ -35,6 +35,69 @@ const CommunityFrm = (props) => {
   //   { name: "기타 💸", value: 8 },
   // ];
 
+  const buttonEvent = () => {
+    if (
+      communityTitle !== "" &&
+      communitySubTitle !== "" &&
+      communityContent !== "" &&
+      communityType.length !== 0
+    ) {
+      Swal.fire({
+        icon: "question",
+        text: "커뮤니티를 작성하시겠습니까?",
+        showCancelButton: true,
+        confirmButtonText: "확인",
+        cancelButtonText: "취소",
+      }).then((res) => {
+        if (res.isConfirmed) {
+          const checkbox = document.querySelectorAll("[name=types]:checked");
+
+          console.log(communityTitle);
+          console.log(communitySubTitle);
+          console.log(thumbnail);
+          console.log(communityContent);
+          console.log(checkbox); // 덩어리가 크니까 value값만 넘겨주기
+          console.log("type : " + communityType);
+
+          const form = new FormData();
+          form.append("communityTitle", communityTitle);
+          form.append("communitySubTitle", communitySubTitle);
+          form.append("thumbnail", thumbnail);
+          form.append("communityContent", communityContent);
+
+          form.append("communityType", communityType);
+
+          const token = window.localStorage.getItem("token");
+
+          axios
+            .post("/community/insert", form, {
+              headers: {
+                contentType: "multipart/form-data",
+                processdData: false,
+                Authorization: "Bearer " + token,
+              },
+            })
+            .then((res) => {
+              if (res.data > 1) {
+                Swal.fire(
+                  "작성 완료",
+                  "커뮤니티작성이 완료되었습니다.",
+                  "success"
+                );
+                navigate("community");
+              } else {
+                Swal.fire("작성 실패", "관리자에게 문의하세요.", "error");
+              }
+            });
+        } else {
+          return;
+        }
+      });
+    } else {
+      Swal.fire("작성 실패", "입력값을 확인해주세요.", "warning");
+    }
+  };
+
   const check = () => {
     const checkbox = document.querySelectorAll("[name=types]:checked");
 
@@ -48,66 +111,68 @@ const CommunityFrm = (props) => {
   };
 
   const navigate = useNavigate();
-  const buttonEvent = () => {
-    const checkbox = document.querySelectorAll("[name=types]:checked");
+  // const buttonEvent1 = () => {
+  //   const checkbox = document.querySelectorAll("[name=types]:checked");
 
-    console.log(communityTitle);
-    console.log(communitySubTitle);
-    console.log(thumbnail);
-    console.log(communityContent);
-    console.log(checkbox); // 덩어리가 크니까 value값만 넘겨주기
-    console.log("type : " + communityType);
+  //   console.log(communityTitle);
+  //   console.log(communitySubTitle);
+  //   console.log(thumbnail);
+  //   console.log(communityContent);
+  //   console.log(checkbox); // 덩어리가 크니까 value값만 넘겨주기
+  //   console.log("type : " + communityType);
 
-    if (
-      communityTitle !== "" &&
-      communitySubTitle !== "" &&
-      communityContent !== "" &&
-      communityType.length !== 0
-    ) {
-      const form = new FormData();
-      form.append("communityTitle", communityTitle);
-      form.append("communitySubTitle", communitySubTitle);
-      form.append("thumbnail", thumbnail);
-      form.append("communityContent", communityContent);
+  //   if (
+  //     communityTitle !== "" &&
+  //     communitySubTitle !== "" &&
+  //     communityContent !== "" &&
+  //     communityType.length !== 0
+  //   ) {
+  //     const form = new FormData();
+  //     form.append("communityTitle", communityTitle);
+  //     form.append("communitySubTitle", communitySubTitle);
+  //     form.append("thumbnail", thumbnail);
+  //     form.append("communityContent", communityContent);
 
-      form.append("communityType", communityType);
+  //     form.append("communityType", communityType);
 
-      const token = window.localStorage.getItem("token");
-      axios
-        .post("/community/insert", form, {
-          headers: {
-            contentType: "multipart/form-data",
-            processdData: false,
-            Authorization: "Bearer " + token,
-          },
-        })
-        .then((res) => {
-          // console.log(res.data);
+  //     const token = window.localStorage.getItem("token");
+  //     axios
+  //       .post("/community/insert", form, {
+  //         headers: {
+  //           contentType: "multipart/form-data",
+  //           processdData: false,
+  //           Authorization: "Bearer " + token,
+  //         },
+  //       })
+  //       .then((res) => {
+  //         // console.log(res.data);
 
-          Swal.fire({
-            icon: "question",
-            text: "커뮤니티를 작성하시겠습니까?",
-            showCancelButton: true,
-            confirmButtonText: "확인",
-            cancelButtonText: "취소",
-          }).then((res) => {
-            if (res.isConfirmed) {
-              Swal.fire(
-                "작성 완료",
-                "커뮤니티작성이 완료되었습니다.",
-                "success"
-              );
-              navigate("community");
-            }
-          });
-        })
-        .catch((res) => {
-          console.log(res.response.status);
-        });
-    } else {
-      Swal.fire("작성 실패", "입력값을 확인해주세요.", "warning");
-    }
-  };
+  //         Swal.fire({
+  //           icon: "question",
+  //           text: "커뮤니티를 작성하시겠습니까?",
+  //           showCancelButton: true,
+  //           confirmButtonText: "확인",
+  //           cancelButtonText: "취소",
+  //         }).then((res) => {
+  //           if (res.isConfirmed) {
+  //             Swal.fire(
+  //               "작성 완료",
+  //               "커뮤니티작성이 완료되었습니다.",
+  //               "success"
+  //             );
+  //             navigate("community");
+  //           } else if (res.isDismissed) {
+  //             return;
+  //           }
+  //         });
+  //       })
+  //       .catch((res) => {
+  //         console.log(res.response.status);
+  //       });
+  //   } else {
+  //     Swal.fire("작성 실패", "입력값을 확인해주세요.", "warning");
+  //   }
+  // };
 
   const thumbnailChange = (e) => {
     const files = e.currentTarget.files;
