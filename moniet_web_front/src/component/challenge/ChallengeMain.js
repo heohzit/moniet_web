@@ -11,7 +11,6 @@ const ChallengeMain = (props) => {
   return (
     <div className="challenge-main-wrap">
       <div className="challenge-title">MONEY CHALLENGE</div>
-      <div className="challengeMenu-detail"></div>
       <Routes>
         <Route path="view" element={<ChallengeView></ChallengeView>}></Route>
         <Route path="write" element={<ChallengeWrite></ChallengeWrite>}></Route>

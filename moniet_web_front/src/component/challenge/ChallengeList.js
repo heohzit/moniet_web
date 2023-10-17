@@ -6,7 +6,7 @@ import EndChallenge from "./EndChallenge";
 import { Link } from "react-router-dom";
 import { Route, Routes } from "react-router-dom";
 import { useEffect, useState } from "react";
-import Swal from "sweetalert2";
+import axios from "axios";
 
 const ChallengeList = (props) => {
   const isLogin = props.isLogin;
@@ -20,10 +20,14 @@ const ChallengeList = (props) => {
     { url: "end", text: "종료된 머니챌린지", active: false },
   ]);
   return (
-    <div>
+    <div className="challengeList-wrap">
       <ChallengeMenu menus={menus} setMenus={setMenus}></ChallengeMenu>
-      <div className="board-write-btn">
-        <Button3 text="머니챌린지 도전" clickEvent={write}></Button3>
+      <div className="challengeList-top">
+        <img src="../image/IMG_0610.jpg"></img>
+        <div className="board-write-btn">
+          <Button3 text="머니챌린지 도전" clickEvent={write}></Button3>
+        </div>
+        <ChallengeLevel />
       </div>
       <Routes>
         <Route
@@ -79,5 +83,29 @@ const ChallengeMenu = (props) => {
     </div>
   );
 };
-
+//챌린지 레벨 조회
+const ChallengeLevel = () => {
+  const token = window.localStorage.getItem("token");
+  const [challengeLevel, setChallengeLevel] = useState("");
+  useEffect(() => {
+    axios
+      .post("/challenge/challengeLevel", null, {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      })
+      .then((res) => {
+        setChallengeLevel(res.data);
+        console.log(res.data);
+      })
+      .catch((res) => {
+        console.log(res.response.status);
+      });
+  }, []);
+  return (
+    <div className="challenge-level">
+      <p>나의 챌린지 레벨은 {challengeLevel}입니다.</p>
+    </div>
+  );
+};
 export default ChallengeList;

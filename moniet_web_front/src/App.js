@@ -14,6 +14,7 @@ import Myinfo from "./component/member/Myinfo";
 import AgreeBox from "./component/member/AgreeBox";
 import FindPw from "./component/member/FindPw";
 import FindID from "./component/member/FindID";
+import SideBar from "./component/common/SideBar";
 
 function App() {
   const [isLogin, setIsLogin] = useState(null);

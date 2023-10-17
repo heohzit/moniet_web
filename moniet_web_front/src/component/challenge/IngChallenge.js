@@ -50,8 +50,7 @@ const IngChallenge = () => {
   return (
     <div className="challenge-content-wrap">
       <div className="challenge-content">
-        <ChallengeLevel />
-        <div className="challenge-list-wrap1">
+        <div className="challenge-list-wrap">
           {showChallenge.map((challenge, index) => {
             return (
               <ChallengeItem key={"challenge" + index} challenge={challenge} />
@@ -136,31 +135,6 @@ const Dayday = (props) => {
   return (
     <div className="challenge-content">
       <p>종료일까지 {dday.days}일 남았습니다.</p>
-    </div>
-  );
-};
-//챌린지 레벨 조회
-const ChallengeLevel = () => {
-  const token = window.localStorage.getItem("token");
-  const [challengeLevel, setChallengeLevel] = useState("");
-  useEffect(() => {
-    axios
-      .post("/challenge/challengeLevel", null, {
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      })
-      .then((res) => {
-        setChallengeLevel(res.data);
-        console.log(res.data);
-      })
-      .catch((res) => {
-        console.log(res.response.status);
-      });
-  }, []);
-  return (
-    <div>
-      <p>나의 챌린지 레벨은 {challengeLevel}입니다.</p>
     </div>
   );
 };
