@@ -110,7 +110,16 @@ public class CommunityService {
 	public int insertBoardComment(ComuBoardComment c) {
 		Member member = memberDao.selectOneMember(c.getMemberId());
 		c.setComuBoardCommentWriter(member.getMemberNo());
-		System.out.println(c);
+		System.out.println("service : "+c);
+//		String comuBoardCommentRefString = c.getComuBoardCommentRef() == 0 ? null : String.valueOf(c.getComuBoardCommentRef());
+//		int comuBoardCommentRef = Integer.parseInt(comuBoardCommentRefString);
+//		Object comuBoardCommentRef = comuBoardCommentRefString;
+//		c.setComuBoardCommentRef(comuBoardCommentRefString);
+		
+//		int comuBoardCommentRef = Integer.parseInt(comuBoardCommentRefString);
+//		c.setComuBoardCommentRef(comuBoardCommentRef);
+//		System.out.println("c : "+c);
+		
 		int result = communityDao.insertBoardComment(c);
 		return result;
 	}

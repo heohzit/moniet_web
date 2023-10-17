@@ -146,4 +146,13 @@ public class MemberController {
 			return memberService.updatePwMember(member);
 
 		}
+	
+	//email전송 : 회원가입 인증번호 발송
+	@PostMapping(value="/sendAuth") 
+	public String sendAuth(@RequestBody Member member) {
+		//System.out.println(member.getMemberEmail());
+		String authCode = emailSender.sendAuth(member.getMemberEmail());
+		return authCode;
+	}
+	
 	}

@@ -222,7 +222,14 @@
 
 	<insert id="insertBoardComment">
 		insert into COMU_BOARD_COMMENT values
-		(COMU_BOARD_COMMENT_SEQ.NEXTVAL, #{comuBoardCommentWriter}, #{comuBoardCommentContent}, sysdate, #{comuBoardRef}, null)
+		(COMU_BOARD_COMMENT_SEQ.NEXTVAL, #{comuBoardCommentWriter}, #{comuBoardCommentContent}, sysdate, #{comuBoardRef},
+		<if test = 'comuBoardCommentRef == 0'>
+			null
+		</if>
+		<if test = 'comuBoardCommentRef > 0'>
+			#{comuBoardCommentRef}			
+		</if>
+		)
 	</insert>
 
 </mapper>

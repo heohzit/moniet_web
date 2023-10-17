@@ -881,7 +881,6 @@
 }
 
 .board-item-comment > .board-item-comment-arrow {
-  color: gray;
 }
 
 .board-item-comment > .board-item-comment-arrow > .arrow-right {
@@ -933,6 +932,21 @@
   color: gray;
 }
 
+.comment-recomment-btn,
+.comment-update,
+.comment-delete {
+  float: left;
+  font-size: 15px;
+  padding: 3px;
+  font-family: ns-b;
+  cursor: pointer;
+  color: #323673;
+}
+
+.comment-recomment-btn {
+  padding-left: 595px;
+}
+
 .comment-content {
   max-width: 970px;
   float: left;
@@ -956,7 +970,7 @@
 .comment-write-textarea > textarea {
   border-radius: 5px;
   width: 100%;
-  margin: 0px 20px;
+  margin: 0px 8px;
   margin-bottom: 10px;
   height: 100px;
   box-sizing: border-box;
@@ -967,10 +981,11 @@
 
 .comment-write > .comment-write-btn {
   width: 15%;
-  margin-left: 30px;
+  margin-left: 20px;
 }
 
 .comment-write > .comment-write-btn button {
+  background-color: #323673;
   height: 98px;
 }
 
@@ -978,6 +993,81 @@
   display: none;
 }
 
+.comment-recomment-wrap {
+  width: 100%;
+  float: left;
+  padding: 15px;
+  margin: 10px;
+}
+
+.comment-recomment-arrow {
+  float: left;
+}
+
+.comment-recomment-write-wrap {
+  display: none;
+  margin-bottom: 10px;
+}
+
+.comment-recomment-write-wrap > .comment-write > .comment-write-btn button {
+  background-color: #6a6da6;
+}
+
+.comment-recomment-list {
+  margin: 0px 30px;
+}
+
+.recomment-account > .material-icons {
+  line-height: 28px;
+}
+
+.comment-recomment-list > .recomment-account,
+.recomment-writer,
+.recomment-date {
+  float: left;
+}
+
+.comment-recomment-list > .recomment-account > span {
+  font-size: 20px;
+}
+
+.comment-recomment-list > .recomment-writer {
+  padding-left: 3px;
+  font-size: 15px;
+  line-height: 25px;
+}
+
+.comment-recomment-list > .recomment-date {
+  font-size: 12px;
+  color: gray;
+  line-height: 28px;
+  padding-left: 10px;
+}
+
+.comment-recomment-list > .recomment-recomment-btn,
+.recomment-update,
+.recomment-delete {
+  float: left;
+  font-size: 12px;
+  line-height: 28px;
+  cursor: pointer;
+  font-family: ns-b;
+  color: #323673;
+}
+
+.comment-recomment-list > .recomment-update,
+.recomment-delete {
+  padding-left: 5px;
+}
+
+.recomment-recomment-btn {
+  padding-left: 415px;
+}
+
+.recomment-content {
+  float: left;
+  font-size: 12px;
+}
 .showClass {
   display: block;
 }
