@@ -3,7 +3,6 @@ import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
-
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import TrendingUpIcon from "@mui/icons-material/TrendingUp";
 import TrendingDownIcon from "@mui/icons-material/TrendingDown";
@@ -15,11 +14,12 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import DataSaverOffIcon from "@mui/icons-material/DataSaverOff";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
-  const theme = useTheme();
   return (
     <MenuItem
       active={selected === title}
-      style={{}}
+      style={{
+        color: {},
+      }}
       onClick={() => setSelected(title)}
       icon={icon}
     >
@@ -29,9 +29,6 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
   );
 };
 
-const logout = () => {
-  localStorage.clear();
-};
 const LItem = ({ title, icon, selected, setSelected }) => {
   const navigate = useNavigate();
 
@@ -39,7 +36,6 @@ const LItem = ({ title, icon, selected, setSelected }) => {
     <MenuItem
       onClick={() => {
         setSelected(title);
-        logout();
         navigate("/");
       }}
       icon={icon}
@@ -48,27 +44,46 @@ const LItem = ({ title, icon, selected, setSelected }) => {
     </MenuItem>
   );
 };
-const SideBar = () => {
+const SideBar = (props) => {
+  const logout = () => {
+    setIsLogin(false);
+    window.localStorage.removeItem("token");
+  };
+  const isLogin = props.isLogin;
+  const setIsLogin = props.setIsLogin;
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState("Dashboard");
 
   return (
     <Box
       sx={{
-        "& .pro-sidebar-inner": {
-          background: `!important`,
+        position: "sticky",
+        display: "flex",
+        height: "100vh",
+        top: 0,
+        bottom: 0,
+        zIndex: 10000,
+        "& .sidebar": {
+          border: "none",
         },
-        "& .pro-icon-wrapper": {
+        "& .menu-icon": {
           backgroundColor: "transparent !important",
         },
-        "& .pro-inner-item": {
-          padding: "5px 35px 5px 20px !important",
+        "& .menu-item": {
+          // padding: "5px 35px 5px 20px !important",
+          backgroundColor: "transparent !important",
         },
-        "& .pro-inner-item:hover": {
-          color: "#868dfb !important",
+        "& .menu-anchor": {
+          color: "inherit !important",
+          backgroundColor: "transparent !important",
         },
-        "& .pro-menu-item.active": {
-          color: "#6870fa !important",
+        "& .menu-item:hover": {
+          color: `!important`,
+          backgroundColor: "transparent !important",
+        },
+        "& .menu-item.active": {
+          color: ` !important`,
+          backgroundColor: "transparent !important",
         },
       }}
     >
@@ -77,9 +92,7 @@ const SideBar = () => {
           <MenuItem
             onClick={() => setIsCollapsed(!isCollapsed)}
             icon={isCollapsed ? <MenuOutlinedIcon /> : undefined}
-            style={{
-              margin: "10px 0 20px 0",
-            }}
+            style={{}}
           >
             {!isCollapsed && (
               <Box
@@ -98,8 +111,8 @@ const SideBar = () => {
 
           <Box paddingLeft={isCollapsed ? undefined : "10%"}>
             <Item
+              to={"/dashboard"}
               title="Dashboard"
-              to="/dashboard"
               icon={<HomeOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
@@ -110,14 +123,14 @@ const SideBar = () => {
             </Typography>
             <Item
               title="내역"
-              to="/income"
+              to="/cashbook"
               icon={<TrendingUpIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
               title="달력"
-              to="/spending"
+              to="#"
               icon={<TrendingDownIcon />}
               selected={selected}
               setSelected={setSelected}
@@ -127,8 +140,8 @@ const SideBar = () => {
               차트
             </Typography>
             <Item
-              title="차트"
               to="/bar"
+              title="차트"
               icon={<BarChartOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
@@ -148,7 +161,24 @@ const SideBar = () => {
             </Typography>
             <Item
               title="커뮤니티"
-              to="/challenge"
+              to="/community"
+              icon={<SavingsIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Typography variant="h6" sx={{ m: "15px 0 5px 20px" }}>
+              마이페이지
+            </Typography>
+            <Item
+              title="마이페이지"
+              to="/member/mypage"
+              icon={<SavingsIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="찜목록"
+              to="member/like"
               icon={<SavingsIcon />}
               selected={selected}
               setSelected={setSelected}
@@ -156,7 +186,7 @@ const SideBar = () => {
             <Typography variant="h6" sx={{ m: "15px 0 5px 20px" }}></Typography>
             <LItem
               title="로그아웃"
-              onClick={() => logout()}
+              onClick={logout}
               icon={<LogoutIcon />}
               selected={selected}
               setSelected={setSelected}
