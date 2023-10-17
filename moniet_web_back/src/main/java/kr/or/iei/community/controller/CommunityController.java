@@ -147,8 +147,18 @@ public class CommunityController {
 	public int insertBoardComment(@ModelAttribute ComuBoardComment c,
 									@RequestAttribute String memberId) {
 		c.setMemberId(memberId);
+		
+		System.out.println("c : "+c);
 		int result = communityService.insertBoardComment(c);
 		return result;
+	}
+	
+	@GetMapping(value="/recommentList/{reqPage}/{communityBoardNo}/{comuBoardCommentNo}")
+	public List recommentList(@PathVariable int reqPage, @PathVariable int communityBoardNo, @PathVariable int comuBoardCommentNo) {
+		List list = communityService.recommentList(reqPage, communityBoardNo);
+		System.out.println("communityBoardNo : "+communityBoardNo);
+		System.out.println("comuBoardCommentNo : "+comuBoardCommentNo);
+		return list;
 	}
 	
 }
