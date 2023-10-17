@@ -948,9 +948,9 @@
 }
 
 .comment-content {
+  padding-left: 32px;
   max-width: 970px;
   float: left;
-  padding-left: 5px;
   font-size: 15px;
 }
 
@@ -996,17 +996,20 @@
 .comment-recomment-wrap {
   width: 100%;
   float: left;
-  padding: 15px;
-  margin: 10px;
+  padding: 10px;
+  padding-bottom: 0;
 }
 
 .comment-recomment-arrow {
   float: left;
 }
 
+.comment-recomment-write {
+}
+
 .comment-recomment-write-wrap {
-  display: none;
   margin-bottom: 10px;
+  display: none;
 }
 
 .comment-recomment-write-wrap > .comment-write > .comment-write-btn button {
@@ -1014,7 +1017,10 @@
 }
 
 .comment-recomment-list {
+  float: left;
   margin: 0px 30px;
+  padding-bottom: 10px;
+  line-height: 20px;
 }
 
 .recomment-account > .material-icons {
@@ -1065,9 +1071,52 @@
 }
 
 .recomment-content {
+  padding-left: 22px;
   float: left;
   font-size: 12px;
 }
+
+.comment-recomment-write-wrap > .comment-recomment-write {
+  overflow: hidden;
+}
+
+.comment-recomment-write-textarea {
+  width: 80%;
+}
+
+.comment-recomment-write-textarea > textarea {
+  border-radius: 5px;
+  width: 100%;
+  margin: 0px 8px;
+  margin-bottom: 10px;
+  height: 100px;
+  box-sizing: border-box;
+  resize: none;
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+.comment-recomment-write-textarea,
+.comment-recomment-write-btn {
+  float: left;
+}
+
+.comment-recomment-write > .comment-recomment-write-btn {
+  width: 15%;
+  margin-left: 20px;
+}
+
+.comment-recomment-write > .comment-recomment-write-btn button {
+  background-color: #323673;
+  height: 98px;
+}
+
 .showClass {
   display: block;
+}
+
+.comment-recomment-write-wrap {
+}
+
+.comment-recomment-write-textarea {
 }

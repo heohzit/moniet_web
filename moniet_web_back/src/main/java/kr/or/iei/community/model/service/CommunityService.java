@@ -124,4 +124,9 @@ public class CommunityService {
 		return result;
 	}
 
+	public List recommentList(int reqPage, int communityBoardNo) {
+		List list = communityDao.recommentList(communityBoardNo);
+		return list;
+	}
+
 }

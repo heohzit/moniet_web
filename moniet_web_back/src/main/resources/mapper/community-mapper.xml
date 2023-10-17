@@ -217,7 +217,7 @@
 			comu_board_comment_ref
 		from COMU_BOARD_COMMENT
 		join member on (comu_board_comment_writer = member_no)
-		where comu_board_ref = #{communityBoardNo}
+		where comu_board_ref = #{communityBoardNo} and comu_board_comment_ref is null
 	</select>
 
 	<insert id="insertBoardComment">
@@ -231,5 +231,19 @@
 		</if>
 		)
 	</insert>
+
+	<select id="recommentList" resultType="comuBoardComment">
+		select
+			comu_board_comment_no,
+			comu_board_comment_writer,
+			member_id,
+			comu_board_comment_content,
+			TO_CHAR(comu_board_comment_date, 'YYYY.MM.DD AM HH"시"MI"분"') AS comu_board_comment_date,
+			comu_board_ref,
+			comu_board_comment_ref
+		from COMU_BOARD_COMMENT
+		join member on (comu_board_comment_writer = member_no)
+		where comu_board_ref = #{communityBoardNo} and comu_board_comment_ref = #{comuBoardCommentNo} and comu_board_comment_ref is not null
+	</select>
 
 </mapper>

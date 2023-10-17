@@ -132,7 +132,7 @@ const CommentItem = (props) => {
     recommentBtn.classList.toggle("showClass");
   };
 
-  console.log(index);
+  console.log(comment);
 
   return (
     <div className="board-item-comment-list">
@@ -150,13 +150,21 @@ const CommentItem = (props) => {
       </div>
       <div className="comment-content">{comment.comuBoardCommentContent}</div>
       <div className="comment-recomment-wrap">
-        <div className="comment-recomment-arrow">
+        {/* <div className="comment-recomment-arrow">
           <span className="material-symbols-outlined arrow-right">
             subdirectory_arrow_right
           </span>
-        </div>
-        <RecommentWrite />
-        <RecommentList />
+        </div> */}
+        <RecommentWrite
+          communityBoardNo={comment.comuBoardRef}
+          comuBoardCommentNo={comment.comuBoardCommentNo}
+          index={index}
+        />
+        <RecommentList
+          communityBoardNo={comment.comuBoardRef}
+          comuBoardCommentNo={comment.comuBoardCommentNo}
+          index={index}
+        />
       </div>
     </div>
   );
