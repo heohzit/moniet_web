@@ -24,6 +24,14 @@ const ChallengeFrm = (props) => {
   const setChallengeCategory = props.setChallengeCategory;
   const type = props.type;
 
+  const dataOnlyNum = (e) => {
+    const regNumber = /^[0-9]+$/;
+    let value = e.currentTarget.value;
+    if (!regNumber.test(value)) {
+      document.querySelector("#challengeAmount").value = "";
+      setChallengeAmount("");
+    }
+  };
   //챌린지 옵션
   const onChangeHanlder = (e) => {
     setChallengeKind(e.currentTarget.value);
@@ -43,7 +51,6 @@ const ChallengeFrm = (props) => {
   const canclePage = () => {
     navigate("/challenge/*");
   };
-
   const [spendingCate, setSpendingCate] = useState([]);
 
   useEffect(() => {
@@ -119,7 +126,7 @@ const ChallengeFrm = (props) => {
                   data={challengeTitle}
                   setData={setChallengeTitle}
                   content="challengeTitle"
-                  placeholder={"ex) 한달동안 식비"}
+                  placeholder={"ex) 한달동안 식비 50만원만 쓰기"}
                 ></Input>
               </td>
             </tr>
@@ -153,7 +160,7 @@ const ChallengeFrm = (props) => {
                   type="date"
                   data={challengeEnd}
                   setData={setChallengeEnd}
-                  content="challengeEnd"
+                  content={"challengeEnd"}
                   min={tomorrowString}
                 ></Input>
               </td>
@@ -168,8 +175,8 @@ const ChallengeFrm = (props) => {
                   data={challengeAmount}
                   setData={setChallengeAmount}
                   content="challengeAmount"
+                  keyUpEvent={dataOnlyNum}
                 ></Input>
-                <span>원</span>
               </td>
             </tr>
           </tbody>

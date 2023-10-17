@@ -9,13 +9,13 @@ import Swal from "sweetalert2";
 const ChallengeView = () => {
   const location = useLocation();
   const challengeNo = location.state.challengeNo;
-  const challengeKind = location.state.challengeKind;
+  const categoryNo = location.state.categoryNo;
   const [challenge, setChallenge] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
     const token = window.localStorage.getItem("token");
-    if (challengeKind === 1) {
+    if (categoryNo === 0) {
       axios
         .post("/challenge/view2/" + challengeNo, null, {
           headers: {

@@ -41,6 +41,7 @@ public class ChallengeService {
 	//챌린지 상세보기(저축)
 	public Challenge selectOneChallenge2(int challengeNo,String memberId) {
 		Challenge c = challengeDao.selectOneChallenge2(challengeNo,memberId);
+		System.out.println(c);
 		return c;
 	}
 	

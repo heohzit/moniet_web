@@ -49,7 +49,7 @@ const EndChallenge = () => {
   };
   return (
     <div className="challenge-content">
-      <div className="challenge-list-wrap1">
+      <div className="challenge-list-wrap">
         {showChallenge.map((challenge, index) => {
           return (
             <ChallengeItem key={"challenge" + index} challenge={challenge} />
@@ -75,7 +75,10 @@ const ChallengeItem = (props) => {
   const navigate = useNavigate();
   const challengeView = () => {
     navigate("/challenge/view", {
-      state: { challengeNo: challenge.challengeNo },
+      state: {
+        challengeNo: challenge.challengeNo,
+        categoryNo: challenge.categoryNo,
+      },
     });
   };
   //챌린지 성공/실패 이미지
