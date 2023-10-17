@@ -4,6 +4,8 @@ import Input from "../util/InputFrm";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import SavingsRoundedIcon from "@mui/icons-material/SavingsRounded";
+import CalendarMonthRoundedIcon from "@mui/icons-material/CalendarMonthRounded";
 
 //챌린지 작성 폼
 const ChallengeFrm = (props) => {
@@ -63,112 +65,119 @@ const ChallengeFrm = (props) => {
 
   return (
     <div>
-      <div className="challenge-frm-top">
-        <div className="challenge-info">
-          <table className="challenge-info-tbl">
-            <tbody>
-              <tr>
-                <td>
-                  <label htmlFor="challengeKind">머니챌린지 선택</label>
-                </td>
-                <td>
-                  <select onChange={onChangeHanlder} value={challengeKind}>
-                    {Options.map((item, index) => (
-                      <option key={item.key} value={item.key} selected>
-                        {item.value}
-                      </option>
-                    ))}
+      <div className="challenge-info">
+        <table className="challenge-info-tbl">
+          <tbody>
+            <tr>
+              <td>
+                <label htmlFor="challengeKind">
+                  <SavingsRoundedIcon />
+                  머니챌린지 선택
+                </label>
+              </td>
+              <td>
+                <select onChange={onChangeHanlder} value={challengeKind}>
+                  {Options.map((item, index) => (
+                    <option key={item.key} value={item.key} selected>
+                      {item.value}
+                    </option>
+                  ))}
+                </select>
+                {challengeKind === "2" ? (
+                  <select
+                    name="categoryChallenge"
+                    defaultValue={challengeCategory}
+                    onChange={(e) =>
+                      setChallengeCategory(e.currentTarget.value)
+                    }
+                  >
+                    <option value="">지출챌린지 종류 선택</option>
+                    {spendingCate.map((item, index) =>
+                      item.categoryTitle !== "저축" ? (
+                        <option
+                          key={"spending" + index}
+                          value={item.categoryNo}
+                          selected
+                        >
+                          {item.categoryTitle}
+                        </option>
+                      ) : (
+                        ""
+                      )
+                    )}
                   </select>
-                  {challengeKind === "2" ? (
-                    <select
-                      name="categoryChallenge"
-                      defaultValue={challengeCategory}
-                      onChange={(e) =>
-                        setChallengeCategory(e.currentTarget.value)
-                      }
-                    >
-                      <option value="">지출챌린지 종류 선택</option>
-                      {spendingCate.map((item, index) =>
-                        item.categoryTitle !== "저축" ? (
-                          <option
-                            key={"spending" + index}
-                            value={item.categoryNo}
-                            selected
-                          >
-                            {item.categoryTitle}
-                          </option>
-                        ) : (
-                          ""
-                        )
-                      )}
-                    </select>
-                  ) : null}
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <label htmlFor="challengeTitle">머니챌린지 다짐한마디!</label>
-                </td>
-                <td>
-                  <Input
-                    type="text"
-                    data={challengeTitle}
-                    setData={setChallengeTitle}
-                    content="challengeTitle"
-                    placeholder={"ex) 한달동안 식비"}
-                  ></Input>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <label htmlFor="challengeStart">시작일자</label>
-                </td>
-                <td>
-                  <Input
-                    type="date"
-                    data={challengeStart}
-                    setData={setChallengeStart}
-                    content="challengeStart"
-                    min={dateString}
-                    max={dateString}
-                  ></Input>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <label htmlFor="challengeEnd">종료일자</label>
-                </td>
-                <td>
-                  <Input
-                    type="date"
-                    data={challengeEnd}
-                    setData={setChallengeEnd}
-                    content="challengeEnd"
-                    min={tomorrowString}
-                  ></Input>
-                </td>
-              </tr>
-              <tr>
-                <td>
-                  <label htmlFor="challengeAmount">목표 금액</label>
-                </td>
-                <td>
-                  <Input
-                    type="text"
-                    data={challengeAmount}
-                    setData={setChallengeAmount}
-                    content="challengeAmount"
-                  ></Input>
-                  <span>원</span>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+                ) : null}
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label htmlFor="challengeTitle">머니챌린지 다짐한마디!</label>
+              </td>
+              <td>
+                <Input
+                  type="text"
+                  data={challengeTitle}
+                  setData={setChallengeTitle}
+                  content="challengeTitle"
+                  placeholder={"ex) 한달동안 식비"}
+                ></Input>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label htmlFor="challengeStart">
+                  <CalendarMonthRoundedIcon />
+                  시작일자
+                </label>
+              </td>
+              <td>
+                <Input
+                  type="date"
+                  data={challengeStart}
+                  setData={setChallengeStart}
+                  content="challengeStart"
+                  min={dateString}
+                  max={dateString}
+                ></Input>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label htmlFor="challengeEnd">
+                  <CalendarMonthRoundedIcon />
+                  종료일자
+                </label>
+              </td>
+              <td>
+                <Input
+                  type="date"
+                  data={challengeEnd}
+                  setData={setChallengeEnd}
+                  content="challengeEnd"
+                  min={tomorrowString}
+                ></Input>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <label htmlFor="challengeAmount">목표 금액</label>
+              </td>
+              <td>
+                <Input
+                  type="text"
+                  data={challengeAmount}
+                  setData={setChallengeAmount}
+                  content="challengeAmount"
+                ></Input>
+                <span>원</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div className="challenge-btn-box">
+          <Button3 text="취소하기" clickEvent={canclePage}></Button3>
+          <Button3 text="등록하기" clickEvent={buttonEvent}></Button3>
         </div>
-      </div>
-      <div className="challenge-btn-box">
-        <Button3 text="취소하기" clickEvent={canclePage}></Button3>
-        <Button3 text="등록하기" clickEvent={buttonEvent}></Button3>
       </div>
     </div>
   );

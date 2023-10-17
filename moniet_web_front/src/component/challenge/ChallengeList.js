@@ -24,7 +24,12 @@ const ChallengeList = (props) => {
       <ChallengeMenu menus={menus} setMenus={setMenus}></ChallengeMenu>
       <div className="challengeList-top">
         <img src="../image/IMG_0610.jpg"></img>
-        <div className="board-write-btn">
+        <div>
+          <p>MONEY CHALLENGE</p>
+          <h3>머니챌린지에 도전해보세요.</h3>
+          <p>성공시 챌린지 레벨이 올라가요!</p>
+        </div>
+        <div className="challenge-write-btn">
           <Button3 text="머니챌린지 도전" clickEvent={write}></Button3>
         </div>
         <ChallengeLevel />

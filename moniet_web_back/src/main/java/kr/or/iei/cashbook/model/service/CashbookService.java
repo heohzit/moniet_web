@@ -28,6 +28,14 @@ public class CashbookService {
 	public List cashbookList(Cashbook cashbook) {
 		return cashbookDao.cashbookList(cashbook);
 	}
+	
+	public List cashbookListSpending(Cashbook cashbook) {
+		return cashbookDao.cashbookListSpending(cashbook);
+	}
+	
+	public List cashbookListIncome(Cashbook cashbook) {
+		return cashbookDao.cashbookListIncome(cashbook);
+	}
 
 	public Map sumOfCashbook(Cashbook cashbook) {
 		

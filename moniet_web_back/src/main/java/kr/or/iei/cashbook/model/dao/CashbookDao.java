@@ -11,6 +11,7 @@ public interface CashbookDao {
 
 	List cashbookList(Cashbook cashbook);
 
+	List cashbookListSpending(Cashbook cashbook);
 	int totalSum(Cashbook cashbook);
 	int sumOfIncome(Cashbook cashbook);
 	int sumOfSpending(Cashbook cashbook);
@@ -35,6 +36,9 @@ public interface CashbookDao {
 	int deleteCashbook(int cashbookNo, String memberId);
 
 	int updateCashbook(Cashbook cashbook);
+
+	List cashbookListIncome(Cashbook cashbook);
+
 
 
 

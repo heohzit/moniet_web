@@ -168,7 +168,7 @@ const ChallengeView = () => {
   const dateString = today.toISOString().substring(0, 10);
   return (
     <div className="challenge-view-content">
-      <div className="challenge-detail">
+      <div className="challenge-kind">
         {challenge.challengeKind === 1 ? (
           <div>저축챌린지</div>
         ) : (
@@ -176,9 +176,13 @@ const ChallengeView = () => {
         )}
         <div>{challenge.categoryTitle}</div>
       </div>
-      <div>{ProgressMent(progress)}</div>
-      <div>목표 금액: {goalAmount.toLocaleString()}원</div>
-      <div>현재 금액: {currentAmount.toLocaleString()}원</div>
+      <div className="progress-ment">{ProgressMent(progress)}</div>
+      <div className="amount-info">
+        목표 금액: {goalAmount.toLocaleString()}원
+      </div>
+      <div className="amount-info">
+        현재 금액: {currentAmount.toLocaleString()}원
+      </div>
       <CircularProgressBar
         colorCircle="#ededed"
         colorSlice="#e54e21"

@@ -115,6 +115,39 @@ const Cashbook = (props) => {
       //no default
     }
   };
+  const listSpending = () => {
+    const token = window.localStorage.getItem("token");
+    axios
+      .post("/cashbook/listSpending", obj, {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      })
+      .then((res) => {
+        setCashbookList(res.data.cashbookList);
+      })
+      .catch((res) => {
+        console.log(res.response.status);
+      });
+  };
+  const listIncome = () => {
+    const token = window.localStorage.getItem("token");
+    axios
+      .post("/cashbook/listIncome", obj, {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      })
+      .then((res) => {
+        setCashbookList(res.data.cashbookList);
+      })
+      .catch((res) => {
+        console.log(res.response.status);
+      });
+  };
+  const listSum = () => {
+    setSelect(!select);
+  };
   const applyDate = () => {
     setSelect(!select);
     setToggleOn(!toggleOn);
@@ -253,6 +286,7 @@ const Cashbook = (props) => {
         </div>
         <div className="cashbook-btn-zone">
           <Button5
+            clickEvent={listSum}
             text={
               "합계(" +
               addComma(cashbookSum.totalCount) +
@@ -262,6 +296,7 @@ const Cashbook = (props) => {
             }
           />
           <Button5
+            clickEvent={listIncome}
             text={
               "수입(" +
               addComma(cashbookSum.countIn) +
@@ -271,6 +306,7 @@ const Cashbook = (props) => {
             }
           />
           <Button5
+            clickEvent={listSpending}
             text={
               "지출(" +
               addComma(cashbookSum.countOut) +

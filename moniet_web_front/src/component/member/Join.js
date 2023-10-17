@@ -1,9 +1,9 @@
-import { useState, useRef, useEffect } from "react";
-import Input from "./InputFrm";
 import "./join.css";
+import { useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
+import Input from "./InputFrm";
 import axios from "axios";
 import Swal from "sweetalert2";
-import { useNavigate } from "react-router-dom";
 
 const Join = () => {
   const [memberId, setMemberId] = useState("");
@@ -12,74 +12,62 @@ const Join = () => {
   const [memberName, setMemberName] = useState("");
   const [memberPhone, setMemberPhone] = useState("");
   const [memberEmail, setMemberEmail] = useState("");
+  const [thumbnail, setThumbnail] = useState("");
+  const [memberImg, setMemberImg] = useState(null);
+  const [authCode, setAuthCode] = useState("");
   const [checkIdMsg, setCheckIdMsg] = useState("");
   const [checkPwMsg, setCheckPwMsg] = useState("");
+  const [checkPwReMsg, setCheckPwReMsg] = useState("");
   const [checkNameMsg, setCheckNameMsg] = useState("");
   const [checkPhoneMsg, setCheckPhoneMsg] = useState("");
   const [checkEmailMsg, setCheckEmailMsg] = useState("");
-  const [thumbnail, setThumbnail] = useState("");
-  const [memberImg, setMemberImg] = useState(null);
+  const [checkAuthMsg, setCheckAuthMsg] = useState("");
   const navigate = useNavigate();
-  const Emails = [
-    "@naver.com",
-    "@gmail.com",
-    "@daum.net",
-    "@hanmail.net",
-    "@nate.com",
-    "@kakao.com",
-  ];
-  const [emailList, setEmailList] = useState(Emails);
-  const [selected, setSelected] = useState(-1);
-  const [isDrobBox, setIsDropbox] = useState(false);
-  const inputRef = useRef();
 
-  useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (inputRef.current && !inputRef.current.contains(e.target)) {
-        setIsDropbox(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-  }, [inputRef]);
-  const onChangeEmail = (e) => {
-    setMemberEmail(e.target.value);
-
-    if (e.target.value.includes("@")) {
-      setIsDropbox(true);
-      setEmailList(
-        Emails.filter((el) => el.includes(e.target.value.split("@")[1]))
-      );
+  //이메일 인증번호 체크
+  const authCheck = () => {
+    const authValue = document.querySelector("#authInput").value;
+    console.log("클릭");
+    if (authValue == authCode) {
+      setCheckAuthMsg("인증이 완료되었습니다.");
     } else {
-      setIsDropbox(false);
-      setSelected(-1);
-    }
-  };
-  const handleDropDownClick = (first, second) => {
-    setMemberEmail(`${first.split("@")[0]}${second}`);
-    setIsDropbox(false);
-    setSelected(-1);
-  };
-  const handleKeyUp = (e) => {
-    if (isDrobBox) {
-      if (e.key === "ArrowDown" && emailList.length - 1 > selected) {
-        setSelected(selected + 1);
-      }
-      if (e.key === "ArrowUp" && selected >= 0) {
-        setSelected(selected - 1);
-      }
-      if (e.key === "Enter" && selected >= 0) {
-        handleDropDownClick(memberEmail, emailList[selected]);
-      }
+      setCheckAuthMsg("인증코드가 일치하지 않습니다.");
     }
   };
 
-  //이미지 업로드 input onChange
+  //이메일 인증번호 발송
+  const sendAuth = () => {
+    const emailValue = document.querySelector("#memberEamil").value;
+    const emailReg = /^[A-Za-z0-9_\\.\\-]+@[A-Za-z0-9\\-]+\.[A-za-z0-9\\-]+/;
+    const authInput = document.querySelector(".auth-input-wrap");
+    const member = { memberEmail };
+
+    console.log(emailValue);
+    if (!emailReg.test(emailValue)) {
+      setCheckEmailMsg("'@'를 포함하여 올바른 형식으로 입력해주세요.");
+    } else {
+      setCheckEmailMsg("");
+      alert("인증번호가 발송되었습니다.");
+      axios
+        .post("/member/sendAuth", member)
+        .then((res) => {
+          setAuthCode(res.data);
+          console.log(res.data);
+          authInput.style.display = "block";
+        })
+        .catch((res) => {
+          console.log(res);
+          alert("이메일 인증에 실패했습니다.");
+        });
+    }
+  };
+
+  //이미지 업로드
   const thumbnailChange = (e) => {
     const files = e.currentTarget.files;
     if (files.length !== 0 && files[0] != 0) {
       setThumbnail(files[0]);
 
-      //화면에 프로필 사진 표시
       const reader = new FileReader();
       reader.readAsDataURL(files[0]);
       reader.onloadend = () => {
@@ -91,10 +79,11 @@ const Join = () => {
     }
   };
 
+  //유효성 검사
   const idCheck = () => {
     const idReg = /^[a-zA-Z0-9]{4,8}$/;
     if (!idReg.test(memberId)) {
-      setCheckIdMsg("아이디는 영어 대/소문자/숫자로 4~8글자를 입력해주세요.");
+      setCheckIdMsg("영문/숫자를 조합하여 4~8글자를 입력해주세요.");
     } else {
       axios
         .get("/member/checkId/", { params: { memberId: memberId } })
@@ -111,17 +100,27 @@ const Join = () => {
         });
     }
   };
+
   const pwCheck = () => {
-    if (memberPw !== memberPwRe) {
-      setCheckPwMsg("비밀번호가 일치하지 않습니다.");
+    const pwReg = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,16}$/;
+    if (!pwReg.test(memberPw)) {
+      setCheckPwMsg("영문/숫자/특수문자를 조합하여 8~16자를 입력해주세요.");
     } else {
       setCheckPwMsg("");
+    }
+  };
+
+  const pwReCheck = () => {
+    if (memberPw !== memberPwRe) {
+      setCheckPwReMsg("비밀번호가 일치하지 않습니다.");
+    } else {
+      setCheckPwReMsg("");
     }
   };
   const nameCheck = () => {
     const nameReg = /^[가-힣]{2,4}$/;
     if (!nameReg.test(memberName)) {
-      setCheckNameMsg("이름은 한글로 2~4글자를 입력해주세요.");
+      setCheckNameMsg("한글 2~4글자를 입력해주세요.");
     } else {
       setCheckNameMsg("");
     }
@@ -147,9 +146,11 @@ const Join = () => {
     if (
       checkIdMsg === "" &&
       checkPwMsg === "" &&
+      checkPwReMsg == "" &&
       checkNameMsg === "" &&
       checkPhoneMsg === "" &&
-      checkEmailMsg == ""
+      checkEmailMsg == "" &&
+      checkAuthMsg == "인증이 완료되었습니다."
     ) {
       const form = new FormData();
       form.append("thumbnail", thumbnail);
@@ -162,16 +163,12 @@ const Join = () => {
         .post("/member/join", form, {
           headers: {
             contentType: "multipart/form-data",
-            processdData: false, //문자열 말고 file type도 있는걸 알려줌
+            processdData: false, //문자열 + file전송
           },
         })
         .then((res) => {
           if (res.data === 1) {
-            Swal.fire(
-              "회원가입이 완료되었습니다!",
-              "로그인 페이지로 이동합니다.",
-              "success"
-            );
+            alert("회원가입이 완료되었습니다.");
             navigate("/login");
           } else {
             Swal.fire("회원가입 실패");
@@ -181,7 +178,7 @@ const Join = () => {
           console.log(res.data);
         });
     } else {
-      alert("필수 정보 항목을 입력해주세요.");
+      alert("이메일 인증 및 입력양식을 다시 한번 확인해주세요.");
     }
   };
   return (
@@ -214,7 +211,6 @@ const Join = () => {
         label="아이디"
         checkMsg={checkIdMsg}
         blurEvent={idCheck}
-        placeholder="아이디는 영어/대소문자/숫자로 4~8글자를 입력해주세요."
       />
       <JoinInputWrap
         data={memberPw}
@@ -222,6 +218,8 @@ const Join = () => {
         type="password"
         content="memberPw"
         label="비밀번호"
+        checkMsg={checkPwMsg}
+        blurEvent={pwCheck}
       />
       <JoinInputWrap
         data={memberPwRe}
@@ -229,8 +227,8 @@ const Join = () => {
         type="password"
         content="memberPwRe"
         label="비밀번호 확인"
-        checkMsg={checkPwMsg}
-        blurEvent={pwCheck}
+        checkMsg={checkPwReMsg}
+        blurEvent={pwReCheck}
       />
       <JoinInputWrap
         data={memberName}
@@ -240,7 +238,6 @@ const Join = () => {
         label="이름"
         checkMsg={checkNameMsg}
         blurEvent={nameCheck}
-        placeholder="한글 2~4글자를 입력해주세요."
       />
       <JoinInputWrap
         data={memberPhone}
@@ -250,38 +247,31 @@ const Join = () => {
         label="전화번호"
         checkMsg={checkPhoneMsg}
         blurEvent={phoneCheck}
-        placeholder="'-'을 포함하여 입력해주세요.(ex: 010-0000-0000)"
+        placeholder="ex) 010-0000-0000"
       />
-      <div ref={inputRef} className="join-mail-wrap">
-        <label htmlFor="membeMail">이메일</label>
+      <div className="email-wrap">
+        <JoinInputWrap
+          data={memberEmail}
+          setData={setMemberEmail}
+          type="type"
+          content="memberEamil"
+          label="이메일"
+          blurEvent={emailCheck}
+          placeholder="ex) moneiet@iei.or.kr"
+        />
+        <button className="email-auth-btn" onClick={sendAuth}>
+          이메일 인증
+        </button>
+      </div>
+      <div className="check-msg">{checkEmailMsg}</div>
+      <div className="auth-input-wrap">
         <input
           type="text"
-          value={memberEmail}
-          name={memberEmail}
-          id="memberMail"
-          onChange={(e) => {
-            onChangeEmail(e);
-          }}
-          onKeyUp={handleKeyUp}
-          onBlur={emailCheck}
-          placeholder="'@'를 포함하여 입력해주세요."
-        />
-        <div className="check-msg">{checkEmailMsg}</div>
-        {isDrobBox && (
-          <div className="email-list">
-            {emailList.map((item, idx) => (
-              <li
-                key={idx}
-                onMouseOver={() => setSelected(idx)}
-                onClick={() => handleDropDownClick(memberEmail, item)}
-                selected={selected === idx}
-              >
-                {memberEmail.split("@")[0]}
-                {item}
-              </li>
-            ))}
-          </div>
-        )}
+          placeholder="인증번호를 입력해주세요."
+          id="authInput"
+        ></input>
+        <button onClick={authCheck}>확인</button>
+        <div className="check-msg">{checkAuthMsg}</div>
       </div>
       <div className="join-button">
         <button type="button" onClick={join}>
