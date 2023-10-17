@@ -36,6 +36,8 @@ public interface CashbookDao {
 
 	int updateCashbook(Cashbook cashbook);
 
+	List calList(Cashbook cashbook);
+
 
 
 }

@@ -1,10 +1,12 @@
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
+import interactionPlugin from "@fullcalendar/interaction";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import "../cashbook/cashbook.css";
+import DateList from "./DateList";
 
 const CashCalendar = () => {
-  const [cashbookList, setCashbookList] = useState([]);
   const [select, setSelect] = useState(false);
   const [dateRange, setDateRange] = useState([
     {
@@ -13,6 +15,8 @@ const CashCalendar = () => {
       key: "selection",
     },
   ]);
+  const [cashbookList, setCashbookList] = useState([]);
+  const [calendarEventArr, setCalendarEventArr] = useState([]);
   const obj = {
     startDate: dateString(dateRange[0].startDate),
     endDate: dateString(dateRange[0].endDate),
@@ -23,8 +27,8 @@ const CashCalendar = () => {
     const day = date.getDate();
     return `${year}-${month}-${day}`;
   }
+  const token = window.localStorage.getItem("token");
   useEffect(() => {
-    const token = window.localStorage.getItem("token");
     axios
       .post("/cashbook/list", obj, {
         headers: {
@@ -35,13 +39,70 @@ const CashCalendar = () => {
         setCashbookList(res.data.cashbookList);
       })
       .catch((res) => {
-        console.log(res.response.status);
+        console.log(res);
       });
   }, [select]);
 
+  useEffect(() => {
+    axios
+      .post("/cashbook/calList", obj, {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      })
+      .then((res) => {
+        setCalendarEventArr(res.data.calList);
+      })
+      .catch((res) => {
+        console.log(res);
+      });
+  }, [select]);
+
+  const [info, setInfo] = useState([]);
+
+  //리스트 띄우는 모달
+  const [listOpen, setListOpen] = useState(false);
+  const listModalOpen = (info) => {
+    setListOpen(true);
+    setDatePick(dateString(info.date));
+    console.log(info);
+    setInfo(info);
+  };
+  const closeListFrm = (e) => {
+    setListOpen(false);
+    e.stopPropagation();
+  };
+  const [datePick, setDatePick] = useState("");
   return (
-    <div>
-      <FullCalendar plugins={[dayGridPlugin]} initialView="dayGridMonth" />
+    <div id="calendar">
+      <FullCalendar
+        plugins={[dayGridPlugin, interactionPlugin]}
+        initialView="dayGridMonth"
+        locale={"ko"}
+        events={calendarEventArr}
+        eventBackgroundColor="transparent"
+        eventTextColor="#323673"
+        eventBorderColor="transparent"
+        headerToolbar={{
+          start: "prev",
+          center: "title",
+          end: "next",
+        }}
+        fixedWeekCount={false}
+        height={700}
+        dateClick={listModalOpen}
+        defaultAllDay={true}
+      />
+
+      <DateList
+        info={info}
+        setInfo={setInfo}
+        listOpen={listOpen}
+        closeListFrm={closeListFrm}
+        datePick={datePick}
+        setDatePick={setDatePick}
+        calendarEventArr={calendarEventArr}
+      />
     </div>
   );
 };

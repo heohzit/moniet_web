@@ -117,4 +117,8 @@ public class CashbookService {
 	public int updateCashbook(Cashbook cashbook) {
 		return cashbookDao.updateCashbook(cashbook);
 	}
+
+	public List calList(Cashbook cashbook) {
+		return cashbookDao.calList(cashbook);
+	}
 }
