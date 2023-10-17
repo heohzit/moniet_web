@@ -10,6 +10,9 @@
   align-items: center;
   z-index: 9999;
 }
+.cashbook-modal.flex-no-end {
+  left: -480px;
+}
 .cashbook-modal-content {
   background-color: #f0f1f2;
   border-radius: 5px;
@@ -111,4 +114,9 @@ input:invalid {
 }
 .challenge-select {
   display: none;
+}
+/*수정 양식 속 버튼*/
+.modi-btn-zone {
+  display: flex;
+  justify-content: space-evenly;
 }

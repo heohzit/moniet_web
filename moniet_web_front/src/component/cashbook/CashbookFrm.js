@@ -5,6 +5,7 @@ import Input from "../util/InputFrm";
 import { Calendar } from "react-date-range";
 import ko from "date-fns/locale/ko";
 import axios from "axios";
+import CashbookDel from "./CashbookDel";
 
 const CashbookFrm = (props) => {
   const title = props.title;
@@ -15,6 +16,8 @@ const CashbookFrm = (props) => {
   const assetList = props.assetList;
   const cashbookFinance = props.cashbookFinance;
   const setCashbookFinance = props.setCashbookFinance;
+  const className = props.className;
+  const modifyFrmOpen = props.modifyFrmOpen;
 
   useEffect(() => {
     const spendingBtn = document.querySelector(
@@ -104,9 +107,34 @@ const CashbookFrm = (props) => {
   const changeCategory = (e) => {
     setCashbookCategory(e.currentTarget.value);
   };
+
+  //삭제 이벤트
+  const delNo = props.delNo;
+  const select = props.select;
+  const setSelect = props.setSelect;
+  const deleteOne = () => {
+    const token = window.localStorage.getItem("token");
+    const cashbookNos = delNo;
+    axios
+      .post("/cashbook/delete", cashbookNos, {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      })
+      .then((res) => {
+        closeFrm();
+        setSelect(!select);
+        //onOpenClickHandler();
+      })
+      .catch((res) => {
+        console.log(cashbookNos);
+        console.log(res.response.status);
+      });
+  };
+
   return (
     <div
-      className="cashbook-modal"
+      className={"cashbook-modal " + className}
       id="writeFrmModal"
       style={{ display: isOpen ? "flex" : "none" }}
     >
@@ -179,7 +207,7 @@ const CashbookFrm = (props) => {
                   onChange={changeLoop}
                 >
                   {cashbookLoopList.map((item, index) => (
-                    <option value={index} key={index}>
+                    <option value={index} key={"item" + index}>
                       {item}
                     </option>
                   ))}
@@ -193,7 +221,7 @@ const CashbookFrm = (props) => {
                   >
                     <option value="">주기 선택</option>
                     {loopMonthMap.map((item, index) => (
-                      <option value={item.i} key={index}>
+                      <option value={item.i} key={"item" + index}>
                         {item.cycle + "마다"}
                       </option>
                     ))}
@@ -222,7 +250,7 @@ const CashbookFrm = (props) => {
                   onChange={(e) => setCashbookAsset(e.currentTarget.value)}
                 >
                   {assetList.map((item, index) => (
-                    <option value={index + 1} key={index + 1}>
+                    <option value={index + 1} key={item + (index + 1)}>
                       {item}
                     </option>
                   ))}
@@ -318,6 +346,7 @@ const CashbookFrm = (props) => {
           ) : (
             <>
               <Button1 text={"수정"} clickEvent={clickEvent} />
+              <Button5 text={"삭제"} clickEvent={deleteOne} />
               <button
                 className="closeModalBtn"
                 id="closeModal"
@@ -332,4 +361,5 @@ const CashbookFrm = (props) => {
     </div>
   );
 };
+
 export default CashbookFrm;

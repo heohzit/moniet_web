@@ -32,7 +32,7 @@ public class CashbookController {
 	@PostMapping(value="/list")
 	public Map cashbookList(@RequestBody Cashbook cashbook, @RequestAttribute String memberId) {
 		cashbook.setMemberId(memberId);
-		System.out.println(cashbook);
+		//System.out.println(cashbook);
 		List cashbookList = cashbookService.cashbookList(cashbook);
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("cashbookList", cashbookList);
@@ -66,9 +66,9 @@ public class CashbookController {
 	
 	@PostMapping(value="/categoryList")
 	public Map categoryList(@RequestAttribute String memberId) {
-		System.out.println("카테고리:"+memberId);
+		//System.out.println("카테고리:"+memberId);
 		List<Category> categoryList = cashbookService.categoryList(memberId);
-		System.out.println(categoryList);
+		//System.out.println(categoryList);
 		List incomeCategory = new ArrayList<Category>();
 		List spendingCategory = new ArrayList<Category>();
 		List challengeCategory = challengeService.challengeListsByMember(memberId);
@@ -97,8 +97,6 @@ public class CashbookController {
 	@PostMapping(value="/delete")
 	public boolean deleteCashbook(@RequestBody String cashbookNos, @RequestAttribute String memberId) {
 		String cashbookNoArr = cashbookNos.replace("=", "");
-		System.out.println("cashbookNos : " + cashbookNos);
-		System.out.println("cashbookNoArr : " + cashbookNoArr);
 		boolean result = cashbookService.deleteCashbook(cashbookNoArr, memberId);
 		return result;
 	}
@@ -106,8 +104,8 @@ public class CashbookController {
 	@PostMapping(value="/update")
 	public int updateCashbook(@RequestBody Cashbook cashbook, @RequestAttribute String memberId) {
 		cashbook.setMemberId(memberId);
-		System.out.println("아이디 : "+cashbook.getMemberId());
-		System.out.println("번호:"+cashbook.getCashbookNo());
+		//System.out.println("아이디 : "+cashbook.getMemberId());
+		//System.out.println("번호:"+cashbook.getCashbookNo());
 		return cashbookService.updateCashbook(cashbook);
 	}
 	
@@ -116,7 +114,6 @@ public class CashbookController {
 	public Map selectCalList(@RequestBody Cashbook cashbook, @RequestAttribute String memberId) {
 		cashbook.setMemberId(memberId);
 		List calList = cashbookService.calList(cashbook);
-		System.out.println(calList);
 		for(Object obj: calList) {
 			CalendarElement ce = (CalendarElement) obj;
 			ce.setDate(ce.getCashbookDate());

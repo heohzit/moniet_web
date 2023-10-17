@@ -17,6 +17,7 @@ const CashCalendar = () => {
   ]);
   const [cashbookList, setCashbookList] = useState([]);
   const [calendarEventArr, setCalendarEventArr] = useState([]);
+
   const obj = {
     startDate: dateString(dateRange[0].startDate),
     endDate: dateString(dateRange[0].endDate),
@@ -70,8 +71,44 @@ const CashCalendar = () => {
   };
   const closeListFrm = (e) => {
     setListOpen(false);
+    setSelect(!select);
     e.stopPropagation();
   };
+
+  //헤더에 전월/익월 버튼누르기
+  useEffect(() => {
+    const prevBtn = document.querySelector("button.fc-prev-button");
+    prevBtn.onclick = function () {
+      const startDate = new Date(
+        dateRange[0].startDate.getFullYear(),
+        dateRange[0].startDate.getMonth() - 1,
+        1
+      );
+      const endDate = new Date(
+        dateRange[0].endDate.getFullYear(),
+        dateRange[0].endDate.getMonth(),
+        0
+      );
+      setDateRange([{ startDate: startDate, endDate: endDate }]);
+      setSelect(!select);
+    };
+    const nextBtn = document.querySelector("button.fc-next-button");
+    nextBtn.onclick = function () {
+      const startDate = new Date(
+        dateRange[0].startDate.getFullYear(),
+        dateRange[0].startDate.getMonth() - 1,
+        1
+      );
+      const endDate = new Date(
+        dateRange[0].endDate.getFullYear(),
+        dateRange[0].endDate.getMonth(),
+        0
+      );
+      setDateRange([{ startDate: startDate, endDate: endDate }]);
+      setSelect(!select);
+    };
+  });
+
   const [datePick, setDatePick] = useState("");
   return (
     <div id="calendar">
@@ -102,6 +139,9 @@ const CashCalendar = () => {
         datePick={datePick}
         setDatePick={setDatePick}
         calendarEventArr={calendarEventArr}
+        dateString={dateString}
+        select={select}
+        setSelect={setSelect}
       />
     </div>
   );

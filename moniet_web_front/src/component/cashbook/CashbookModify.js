@@ -1,50 +1,48 @@
 import { useState } from "react";
 import CashbookFrm from "./CashbookFrm";
 import axios from "axios";
-import AddIcon from "@mui/icons-material/Add";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 
-const CashbookWrite = (props) => {
+const CashbookModify = (props) => {
+  const cashbook = props.cashbook;
   const isOpen = props.isOpen;
-  const addFrmOpen = props.addFrmOpen;
   const closeFrm = props.closeFrm;
+  const title = props.title;
   const dateString = props.dateString;
+  const select = props.select;
+  const setSelect = props.setSelect;
   const assetList = props.assetList;
   const challengeCate = props.challengeCate;
   const setChallengeCate = props.setChallengeCate;
   const incomeCate = props.incomeCate;
   const spendingCate = props.spendingCate;
-  const select = props.select;
-  const setSelect = props.setSelect;
-  const className = props.className;
+  const modifyFrmOpen = props.modifyFrmOpen;
   const modalClass = props.modalClass;
 
-  const [cashbookFinance, setCashbookFinance] = useState(2);
-  const [cashbookDate, setCashbookDate] = useState(new Date());
-  const [cashbookLoop, setCashbookLoop] = useState(0);
-  const [loopMonth, setLoopMonth] = useState(0);
-  const [cashbookAsset, setCashbookAsset] = useState(1);
-  const [cashbookCategory, setCashbookCategory] = useState(11);
-  const [cashbookMoney, setCashbookMoney] = useState(0);
-  const [cashbookContent, setCashbookContent] = useState("");
-  const [cashbookMemo, setCashbookMemo] = useState("");
-  const [challengeNo, setChallengeNo] = useState(0);
-
-  const [showSnackbar, setShowSnackbar] = useState(false);
-  const onOpenClickHandler = () => {
-    setShowSnackbar(true);
-  };
-  const onCloseClickHandler = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-    setShowSnackbar(false);
-  };
-
-  const write = () => {
+  const [cashbookNo, setCashbookNo] = useState(cashbook.cashbookNo);
+  const [cashbookFinance, setCashbookFinance] = useState(
+    cashbook.cashbookFinance
+  );
+  const [cashbookDate, setCashbookDate] = useState(
+    new Date(cashbook.cashbookDate)
+  );
+  const [cashbookLoop, setCashbookLoop] = useState(cashbook.cashbookLoop);
+  const [loopMonth, setLoopMonth] = useState(cashbook.loopMonth);
+  const [cashbookAsset, setCashbookAsset] = useState(cashbook.cashbookAsset);
+  const [cashbookCategory, setCashbookCategory] = useState(
+    cashbook.cashbookCategory
+  );
+  const [cashbookMoney, setCashbookMoney] = useState(cashbook.cashbookMoney);
+  const [cashbookContent, setCashbookContent] = useState(
+    cashbook.cashbookContent
+  );
+  const [cashbookMemo, setCashbookMemo] = useState(cashbook.cashbookMemo);
+  const [challengeNo, setChallengeNo] = useState(cashbook.challengeNo);
+  const modify = () => {
     const token = window.localStorage.getItem("token");
     const cashbook = {
+      cashbookNo: cashbookNo,
       cashbookFinance: cashbookFinance,
       cashbookDate: dateString(cashbookDate),
       cashbookLoop: cashbookLoop,
@@ -58,22 +56,13 @@ const CashbookWrite = (props) => {
     };
 
     axios
-      .post("/cashbook/insert", cashbook, {
+      .post("/cashbook/update", cashbook, {
         headers: {
           Authorization: "Bearer " + token,
         },
       })
       .then((res) => {
         if (res.data === 1) {
-          setCashbookFinance(2);
-          setCashbookDate(new Date());
-          setCashbookLoop(0);
-          setLoopMonth(0);
-          setCashbookAsset(1);
-          setCashbookCategory(11);
-          setCashbookMoney(0);
-          setCashbookContent("");
-          setCashbookMemo("");
           onOpenClickHandler();
           closeFrm();
           setSelect(!select);
@@ -86,13 +75,24 @@ const CashbookWrite = (props) => {
       });
   };
 
+  //스낵바 띄워야돼
+  const [showSnackbar, setShowSnackbar] = useState(false);
+  const onOpenClickHandler = () => {
+    setShowSnackbar(true);
+  };
+  const onCloseClickHandler = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setShowSnackbar(false);
+  };
+
   return (
-    <div className="add-btn">
-      <AddIcon onClick={isOpen} className={className} />
+    <div>
       <CashbookFrm
-        isOpen={addFrmOpen}
+        isOpen={modifyFrmOpen}
         closeFrm={closeFrm}
-        title={"입력"}
+        title={title}
         dateString={dateString}
         cashbookFinance={cashbookFinance}
         setCashbookFinance={setCashbookFinance}
@@ -119,8 +119,12 @@ const CashbookWrite = (props) => {
         setChallengeCate={setChallengeCate}
         incomeCate={incomeCate}
         spendingCate={spendingCate}
-        clickEvent={write}
+        key={cashbook.cashbookNo}
+        clickEvent={modify}
         className={modalClass}
+        delNo={cashbookNo}
+        select={select}
+        setSelect={setSelect}
       />
       {showSnackbar && (
         <Snackbar
@@ -138,7 +142,7 @@ const CashbookWrite = (props) => {
               backgroundColor: "#6a6da6",
             }}
           >
-            가계부 등록 성공!
+            가계부 수정 성공!
           </Alert>
         </Snackbar>
       )}
@@ -146,4 +150,4 @@ const CashbookWrite = (props) => {
   );
 };
 
-export default CashbookWrite;
+export default CashbookModify;
