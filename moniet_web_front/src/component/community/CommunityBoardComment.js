@@ -5,6 +5,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { Button1, Button2, Button3, Button4 } from "../util/Buttons";
 import Swal from "sweetalert2";
 import CommunityBoardCommentWrite from "./CommunityBoardCommentWrite";
+import RecommentWrite from "./RecommentWrite";
+import RecommentList from "./RecommentList";
 
 const CommunityBoardComment = (props) => {
   const index = props.index;
@@ -40,7 +42,13 @@ const CommunityBoardComment = (props) => {
       </div>
       <div className="board-item-comment-list-wrap">
         {boardCommentList.map((comment, index) => {
-          return <CommentItem key={"comment" + index} comment={comment} />;
+          return (
+            <CommentItem
+              key={"comment" + index}
+              comment={comment}
+              index={index}
+            />
+          );
         })}
         {/* {boardCommentList.map((item, index) => {
           return <div key={"test" + index}>{item.comuBoardCommentContent}</div>;
@@ -112,8 +120,19 @@ const CommunityBoardComment = (props) => {
 // };
 
 const CommentItem = (props) => {
+  const index = props.index;
   const comment = props.comment;
   const navigate = useNavigate();
+
+  const ToggleRecomment = () => {
+    const recommentBtn = document.querySelectorAll(
+      ".comment-recomment-write-wrap"
+    )[index];
+
+    recommentBtn.classList.toggle("showClass");
+  };
+
+  console.log(index);
 
   return (
     <div className="board-item-comment-list">
@@ -123,8 +142,22 @@ const CommentItem = (props) => {
         </div>
         <div className="comment-writer">{comment.memberId}</div>
         <div className="comment-date">{comment.comuBoardCommentDate}</div>
+        <div className="comment-recomment-btn" onClick={ToggleRecomment}>
+          답글달기
+        </div>
+        <div className="comment-update">수정</div>
+        <div className="comment-delete">삭제</div>
       </div>
       <div className="comment-content">{comment.comuBoardCommentContent}</div>
+      <div className="comment-recomment-wrap">
+        <div className="comment-recomment-arrow">
+          <span className="material-symbols-outlined arrow-right">
+            subdirectory_arrow_right
+          </span>
+        </div>
+        <RecommentWrite />
+        <RecommentList />
+      </div>
     </div>
   );
 };
