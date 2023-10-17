@@ -11,6 +11,7 @@ const RecommentList = (props) => {
   const [reqPage, setReqPage] = useState(1);
   const communityBoardNo = props.communityBoardNo;
   const comuBoardCommentNo = props.comuBoardCommentNo;
+  const member = props.member;
 
   useEffect(() => {
     axios
@@ -39,6 +40,7 @@ const RecommentList = (props) => {
             key={"recomment" + index}
             recomment={recomment}
             index={index}
+            member={member}
           />
         );
       })}
@@ -47,6 +49,7 @@ const RecommentList = (props) => {
 };
 
 const RecommentItem = (props) => {
+  const member = props.member;
   const index = props.index;
   const recomment = props.recomment;
   const navigate = useNavigate();
@@ -59,12 +62,18 @@ const RecommentItem = (props) => {
         </div>
         <div className="recomment-writer">{recomment.memberId}</div>
         <div className="recomment-date">{recomment.comuBoardCommentDate}</div>
-        <div className="recomment-recomment-btn">답글달기</div>
-        <div className="recomment-update">수정</div>
-        <div className="recomment-delete">삭제</div>
-        <div className="recomment-content">
-          {recomment.comuBoardCommentContent}
-        </div>
+        <div className="recomment-recomment-btn"></div>
+        {member && member.memberNo == recomment.comuBoardCommentWriter ? (
+          <>
+            <div className="recomment-update">수정</div>
+            <div className="recomment-delete">삭제</div>
+          </>
+        ) : (
+          ""
+        )}
+      </div>
+      <div className="recomment-content">
+        {recomment.comuBoardCommentContent}
       </div>
     </>
   );

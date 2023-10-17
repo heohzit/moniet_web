@@ -140,6 +140,7 @@ public class CommunityController {
 	@GetMapping(value="/boardCommentList/{reqPage}/{communityBoardNo}")
 	public List boardCommentList(@PathVariable int reqPage, @PathVariable int communityBoardNo) {
 		List list = communityService.boardCommentList(reqPage, communityBoardNo);
+		System.out.println("controller list : "+list);
 		return list;
 	}
 	
@@ -155,9 +156,15 @@ public class CommunityController {
 	
 	@GetMapping(value="/recommentList/{reqPage}/{communityBoardNo}/{comuBoardCommentNo}")
 	public List recommentList(@PathVariable int reqPage, @PathVariable int communityBoardNo, @PathVariable int comuBoardCommentNo) {
-		List list = communityService.recommentList(reqPage, communityBoardNo);
 		System.out.println("communityBoardNo : "+communityBoardNo);
 		System.out.println("comuBoardCommentNo : "+comuBoardCommentNo);
+		
+		ComuBoardComment cbc = new ComuBoardComment();
+		cbc.setComuBoardCommentRef(comuBoardCommentNo);
+		cbc.setComuBoardRef(communityBoardNo);
+		
+		List list = communityService.recommentList(cbc);
+		
 		return list;
 	}
 	

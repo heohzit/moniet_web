@@ -23,4 +23,6 @@ public class ComuBoardComment {
 	
 	private int isLike;
 	private int likeCount;
+	
+	private int comuBoardCommentCount;
 }

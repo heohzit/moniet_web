@@ -7,6 +7,7 @@ import CommunityBoardComment from "./CommunityBoardComment";
 import Swal from "sweetalert2";
 
 const CommunityBoard = (props) => {
+  const member = props.member;
   const isLogin = props.isLogin;
   const communityNo = props.communityNo;
   const [communityBoardList, setCommunityBoardList] = useState([]);
@@ -16,6 +17,7 @@ const CommunityBoard = (props) => {
     axios
       .get("/community/communityBoardList/" + reqPage + "/" + communityNo)
       .then((res) => {
+        console.log(res.data);
         setCommunityBoardList(res.data);
       })
       .catch((res) => {
@@ -31,6 +33,7 @@ const CommunityBoard = (props) => {
             key={"board" + index}
             board={board}
             index={index}
+            member={member}
           />
         );
       })}
@@ -39,6 +42,7 @@ const CommunityBoard = (props) => {
 };
 
 const CommunityBoardItem = (props) => {
+  const member = props.member;
   const board = props.board;
   const index = props.index;
   const navigate = useNavigate();
@@ -119,7 +123,7 @@ const CommunityBoardItem = (props) => {
                 chat
               </span>
 
-              <span className="chat-count">5</span>
+              <span className="chat-count">{board.comuBoardCommentCount}</span>
             </div>
           </div>
           <div className="board-item-comment-wrap">
@@ -127,6 +131,7 @@ const CommunityBoardItem = (props) => {
               communityBoardNo={board.communityBoardNo}
               isLogin={isLogin}
               index={index}
+              member={member}
             />
           </div>
         </div>

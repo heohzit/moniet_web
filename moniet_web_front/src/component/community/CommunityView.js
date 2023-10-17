@@ -173,7 +173,11 @@ const CommunityView = (props) => {
           <CommunityBoardWrite communityNo={communityNo} />
         </div>
         <div className="community-view-board-list">
-          <CommunityBoard communityNo={communityNo} isLogin={isLogin} />
+          <CommunityBoard
+            communityNo={communityNo}
+            isLogin={isLogin}
+            member={member}
+          />
         </div>
       </div>
     </div>

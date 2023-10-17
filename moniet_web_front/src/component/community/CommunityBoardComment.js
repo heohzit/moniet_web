@@ -9,6 +9,8 @@ import RecommentWrite from "./RecommentWrite";
 import RecommentList from "./RecommentList";
 
 const CommunityBoardComment = (props) => {
+  const comuBoardCommentCount = props.comuBoardCommentCount;
+  const member = props.member;
   const index = props.index;
   const isLogin = props.isLogin;
   const [boardCommentList, setBoardCommentList] = useState([]);
@@ -47,6 +49,7 @@ const CommunityBoardComment = (props) => {
               key={"comment" + index}
               comment={comment}
               index={index}
+              member={member}
             />
           );
         })}
@@ -123,6 +126,7 @@ const CommentItem = (props) => {
   const index = props.index;
   const comment = props.comment;
   const navigate = useNavigate();
+  const member = props.member;
 
   const ToggleRecomment = () => {
     const recommentBtn = document.querySelectorAll(
@@ -145,8 +149,14 @@ const CommentItem = (props) => {
         <div className="comment-recomment-btn" onClick={ToggleRecomment}>
           답글달기
         </div>
-        <div className="comment-update">수정</div>
-        <div className="comment-delete">삭제</div>
+        {member && member.memberNo == comment.comuBoardCommentWriter ? (
+          <>
+            <div className="comment-update">수정</div>
+            <div className="comment-delete">삭제</div>
+          </>
+        ) : (
+          ""
+        )}
       </div>
       <div className="comment-content">{comment.comuBoardCommentContent}</div>
       <div className="comment-recomment-wrap">
@@ -159,11 +169,13 @@ const CommentItem = (props) => {
           communityBoardNo={comment.comuBoardRef}
           comuBoardCommentNo={comment.comuBoardCommentNo}
           index={index}
+          member={member}
         />
         <RecommentList
           communityBoardNo={comment.comuBoardRef}
           comuBoardCommentNo={comment.comuBoardCommentNo}
           index={index}
+          member={member}
         />
       </div>
     </div>

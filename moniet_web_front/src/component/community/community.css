@@ -808,6 +808,7 @@
   padding: 5px;
   padding-bottom: 4px;
   color: #010440;
+  padding-right: 20px;
 }
 
 .board-item-like > .board-item-like-icon > .thumb_up {
@@ -829,6 +830,7 @@
 
   cursor: pointer;
   right: 2cm;
+  padding-right: 20px;
 }
 
 .board-item-like > .board-item-like-icon > .chat {
@@ -944,7 +946,7 @@
 }
 
 .comment-recomment-btn {
-  padding-left: 595px;
+  padding-left: 590px;
 }
 
 .comment-content {
@@ -994,6 +996,7 @@
 }
 
 .comment-recomment-wrap {
+  margin-left: 25px;
   width: 100%;
   float: left;
   padding: 10px;
@@ -1008,6 +1011,7 @@
 }
 
 .comment-recomment-write-wrap {
+  margin-left: 20px;
   margin-bottom: 10px;
   display: none;
 }
@@ -1017,9 +1021,9 @@
 }
 
 .comment-recomment-list {
+  width: 100%;
   float: left;
-  margin: 0px 30px;
-  padding-bottom: 10px;
+  margin: 0px 20px;
   line-height: 20px;
 }
 
@@ -1066,12 +1070,13 @@
   padding-left: 5px;
 }
 
-.recomment-recomment-btn {
-  padding-left: 415px;
+.comment-recomment-list > .recomment-update {
+  padding-left: 482px;
 }
 
 .recomment-content {
-  padding-left: 22px;
+  padding-left: 54px;
+  padding-bottom: 7px;
   float: left;
   font-size: 12px;
 }
@@ -1087,8 +1092,6 @@
 .comment-recomment-write-textarea > textarea {
   border-radius: 5px;
   width: 100%;
-  margin: 0px 8px;
-  margin-bottom: 10px;
   height: 100px;
   box-sizing: border-box;
   resize: none;
@@ -1103,10 +1106,10 @@
 
 .comment-recomment-write > .comment-recomment-write-btn {
   width: 15%;
-  margin-left: 20px;
 }
 
 .comment-recomment-write > .comment-recomment-write-btn button {
+  margin-left: 12px;
   background-color: #323673;
   height: 98px;
 }
