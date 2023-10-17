@@ -11,25 +11,33 @@
   width: 30%;
   border: none;
   border-radius: 5px;
-  height: 45px;
-  line-height: 45px;
+  height: 44px;
+  line-height: 44px;
   color: #fff;
   background-color: #010440;
   font-family: ns-r;
   font-size: 15px;
+  margin-top: 5px;
+  position: absolute;
+  right: 0;
+  bottom: 10px;
 }
 .pw-hide {
   width: 100%;
 }
 
 /*프로필이미지*/
+.my-profile-img-wrap {
+  margin-top: 20px;
+}
+
 .my-info-profile-label {
   margin: 5px 0 20px 0;
   font-family: ns-b;
   color: #010440;
   display: inline-block;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 17px;
 }
 .my-info-profile-img-input {
   display: none;
@@ -50,4 +58,115 @@
 .join-profile-wrap {
   padding: 5px 0px;
   text-align: center;
+}
+
+.mypage-input-form,
+.mypage-pw-input-form,
+.mypage-pwRe-input-form {
+  width: 50%;
+  margin: 0 auto;
+  padding: 10px 0px;
+}
+.mypage-input-form input,
+.mypage-pw-input-form input,
+.mypage-pwRe-input-form input {
+  margin-top: 5px;
+  padding-left: 10px;
+  border: none;
+  border-bottom: 1px solid #010440;
+  border-radius: 0px;
+}
+.mypage-input-form > label,
+.mypage-pw-input-form > label,
+.mypage-pwRe-input-form > label {
+  font-size: 16px;
+  padding: 5px;
+  color: #010440;
+  font-family: ns-b;
+}
+.mypage-input-pw-form {
+  width: 50%;
+  margin: 0 auto;
+  padding: 5px 0px;
+  position: relative;
+}
+.mypage-input-pw-form input {
+  margin-top: 5px;
+  width: 100%;
+  padding-left: 10px;
+  border: none;
+  border-bottom: 1px solid #010440;
+  border-radius: 0px;
+}
+.mypage-input-pw-form > label {
+  font-size: 16px;
+  padding: 5px;
+  color: #010440;
+  font-family: ns-b;
+}
+
+/* 새비밀번호 */
+.display {
+  display: none;
+}
+
+/* 회원정보 수정 / 탈퇴 btn */
+.my-info-btn-wrap {
+  margin: 50px 0px;
+  text-align: center;
+}
+.my-info-btn-wrap > button {
+  margin-right: 10px;
+  border: none;
+  border-radius: 5px;
+  width: 200px;
+  height: 50px;
+  line-height: 50px;
+  font-size: 15px;
+  font-family: ns-r;
+  cursor: pointer;
+}
+#deleteBtn {
+  background-color: #010440;
+  color: #fff;
+}
+.mypage-pwRe-input-form {
+  position: relative;
+}
+.new-pw-update-btn,
+.new-pw-del-btn {
+  border: none;
+  border-radius: 5px;
+  height: 44px;
+  line-height: 44px;
+  font-size: 16px;
+  width: 100px;
+  position: absolute;
+  right: 0px;
+}
+.new-pw-del-btn {
+  background-color: #010440;
+  color: #fff;
+  margin-left: 10px;
+  position: absolute;
+  right: 0px;
+  bottom: 18px;
+}
+.new-pw-update-btn {
+  position: absolute;
+  right: 110px;
+  bottom: 18px;
+}
+.pw-check-msg {
+  color: red;
+  font-size: 14px;
+  margin-top: 10px;
+  padding-left: 5px;
+}
+.pwRe-check-msg {
+  color: red;
+  font-size: 14px;
+  width: 50%;
+  margin: 0 auto;
+  padding-left: 5px;
 }
