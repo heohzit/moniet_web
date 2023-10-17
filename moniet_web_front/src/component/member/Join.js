@@ -20,57 +20,24 @@ const Join = () => {
   const [thumbnail, setThumbnail] = useState("");
   const [memberImg, setMemberImg] = useState(null);
   const navigate = useNavigate();
-  const Emails = [
-    "@naver.com",
-    "@gmail.com",
-    "@daum.net",
-    "@hanmail.net",
-    "@nate.com",
-    "@kakao.com",
-  ];
-  const [emailList, setEmailList] = useState(Emails);
-  const [selected, setSelected] = useState(-1);
-  const [isDrobBox, setIsDropbox] = useState(false);
   const inputRef = useRef();
 
-  useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (inputRef.current && !inputRef.current.contains(e.target)) {
-        setIsDropbox(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-  }, [inputRef]);
-  const onChangeEmail = (e) => {
-    setMemberEmail(e.target.value);
+  //이메일 인증번호 발송
 
-    if (e.target.value.includes("@")) {
-      setIsDropbox(true);
-      setEmailList(
-        Emails.filter((el) => el.includes(e.target.value.split("@")[1]))
-      );
-    } else {
-      setIsDropbox(false);
-      setSelected(-1);
-    }
-  };
-  const handleDropDownClick = (first, second) => {
-    setMemberEmail(`${first.split("@")[0]}${second}`);
-    setIsDropbox(false);
-    setSelected(-1);
-  };
-  const handleKeyUp = (e) => {
-    if (isDrobBox) {
-      if (e.key === "ArrowDown" && emailList.length - 1 > selected) {
-        setSelected(selected + 1);
-      }
-      if (e.key === "ArrowUp" && selected >= 0) {
-        setSelected(selected - 1);
-      }
-      if (e.key === "Enter" && selected >= 0) {
-        handleDropDownClick(memberEmail, emailList[selected]);
-      }
-    }
+  const sendAuth = () => {
+    const emailValue = document.querySelector("#memberEamil").value;
+    console.log(emailValue);
+
+    const member = { memberEmail };
+    axios
+      .post("/member/sendAuth", member)
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((res) => {
+        console.log(res);
+        alert("이메일 인증에 실패했습니다.");
+      });
   };
 
   //이미지 업로드 input onChange
@@ -252,37 +219,21 @@ const Join = () => {
         blurEvent={phoneCheck}
         placeholder="'-'을 포함하여 입력해주세요.(ex: 010-0000-0000)"
       />
-      <div ref={inputRef} className="join-mail-wrap">
-        <label htmlFor="membeMail">이메일</label>
-        <input
-          type="text"
-          value={memberEmail}
-          name={memberEmail}
-          id="memberMail"
-          onChange={(e) => {
-            onChangeEmail(e);
-          }}
-          onKeyUp={handleKeyUp}
-          onBlur={emailCheck}
-          placeholder="'@'를 포함하여 입력해주세요."
+      <div className="email-wrap">
+        <JoinInputWrap
+          data={memberEmail}
+          setData={setMemberEmail}
+          type="type"
+          content="memberEamil"
+          label="이메일"
+          blurEvent={emailCheck}
+          placeholder="'@'을 포함하여 입력해주세요."
         />
-        <div className="check-msg">{checkEmailMsg}</div>
-        {isDrobBox && (
-          <div className="email-list">
-            {emailList.map((item, idx) => (
-              <li
-                key={idx}
-                onMouseOver={() => setSelected(idx)}
-                onClick={() => handleDropDownClick(memberEmail, item)}
-                selected={selected === idx}
-              >
-                {memberEmail.split("@")[0]}
-                {item}
-              </li>
-            ))}
-          </div>
-        )}
+        <button className="email-auth-btn" onClick={sendAuth}>
+          이메일 인증
+        </button>
       </div>
+      <div className="check-msg">{checkEmailMsg}</div>
       <div className="join-button">
         <button type="button" onClick={join}>
           회원가입

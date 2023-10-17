@@ -9,12 +9,10 @@
   padding-bottom: 50px;
   color: #010440;
 }
-.join-input-wrap {
-  margin-bottom: 10px;
-}
 .join-input-wrap input {
   font-size: 15px;
   padding: 10px;
+  margin: 5px 0px;
 }
 .join-input-wrap > div > label {
   font-size: 15px;
@@ -68,19 +66,34 @@
   padding: 10px 0px;
   text-align: center;
 }
-.join-mail-wrap > input {
-  width: 100%;
-  border: 2px solid #ccc;
+
+/* 이메일 */
+.email-wrap {
+  overflow: hidden;
+}
+.email-wrap input {
+  float: left;
+  width: 73%;
+}
+.email-auth-btn {
+  float: left;
+  margin-left: 10px;
+  border: none;
   border-radius: 5px;
-  outline: none;
-  box-sizing: border-box;
-  padding: 0.4rem;
+  background-color: #f0f1f2;
+  color: black;
+  width: 25%;
+  height: 45px;
+  line-height: 45px;
+  cursor: pointer;
   font-size: 15px;
-  padding: 10px;
+  margin-top: 5px;
 }
-.join-mail-wrap > label {
-  font-size: 15px;
+.email-auth-btn:hover {
+  background-color: #010440;
+  color: #fff;
 }
+
 .email-list {
   border-radius: 5px;
   border: 1px solid #ccc;
