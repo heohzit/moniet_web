@@ -37,6 +37,24 @@ public class CashbookController {
 		return map;
 	}
 	
+	@PostMapping(value="/listSpending")
+	public Map cashbookListSpending(@RequestBody Cashbook cashbook, @RequestAttribute String memberId) {
+		cashbook.setMemberId(memberId);
+		List cashbookList = cashbookService.cashbookListSpending(cashbook);
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("cashbookList", cashbookList);
+		return map;
+	}
+	
+	@PostMapping(value="/listIncome")
+	public Map cashbookListIncome(@RequestBody Cashbook cashbook, @RequestAttribute String memberId) {
+		cashbook.setMemberId(memberId);
+		List cashbookList = cashbookService.cashbookListIncome(cashbook);
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("cashbookList", cashbookList);
+		return map;
+	}
+	
 	@PostMapping(value="/total")
 	public Map cashbookSum(@RequestBody Cashbook cashbook, @RequestAttribute String memberId) {
 		cashbook.setMemberId(memberId);

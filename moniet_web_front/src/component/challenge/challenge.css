@@ -1,7 +1,8 @@
-/*챌린지Main 제목*/
+/*challengeMain*/
 .challenge-title {
   font-size: 20px;
 }
+
 /*챌린지 메뉴*/
 /* 챌린지 메뉴(진행/종료)
 .challengeMenu-tab {
@@ -36,15 +37,17 @@
   color: #fff;
 }
 */
+/*challengeList*/
 .challengeMenu-tab > ul {
   list-style-type: none;
   overflow: hidden;
+  border: 1px solid #ccc;
 }
 .challengeMenu-tab > ul > li > a {
   float: left;
   width: calc(100% / 2);
-  height: 100px;
-  line-height: 100px;
+  height: 80px;
+  line-height: 80px;
   text-align: center;
   box-sizing: border-box;
   border: 1px solid #ccc;
@@ -52,10 +55,9 @@
   cursor: pointer;
 }
 .challengeMenu-tab > ul > li > a.active-side {
-  border-top: 3px solid #323673;
-  color: #323673;
-  font-weight: 900;
-  border-bottom: none;
+  border: 2px solid #010440;
+  color: #010440;
+  font-weight: 600;
 }
 /*챌린지리스트 이미지*/
 .challengeList-top {
@@ -66,12 +68,75 @@
   height: 500px;
   float: left;
 }
-.challengeList-top > .board-write-btn {
+.challengeList-top > .challenge-write-btn {
   float: left;
+}
+/*챌린지 도전 버튼*/
+.challenge-write-btn > {
+  display: block;
+  margin: 0px auto;
+}
+.challenge-write-btn > button {
+  width: 250px;
+  height: 70px;
+  background-color: #323673;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.challenge-write-btn > button:hover {
+  background-color: #6a6da6;
+}
+/*챌린지 레벨*/
+.challenge-level {
+  float: left;
+}
+/*챌린지 작성*/
+.challenge-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f5f5f5;
+  border-radius: 10px;
+  padding: 20px;
+  max-width: 800px;
+}
+.challenge-info-tbl input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+.challenge-info-tbl select {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+.challenge-btn-box > button {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 5px;
+  background-color: #323673;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.challenge-btn-box > button:hover {
+  background-color: #323673;
 }
 /*챌린지 리스트*/
 .challenge-item-info {
-  border: 1px solid black;
   width: 300px;
   height: 100px;
   margin: 20px;
@@ -100,46 +165,35 @@
   height: 100%;
 }
 
-/*챌린지 작성 버튼*/
-.board-write-btn {
-  width: 150px;
-}
-/*챌린지 작성*/
-.challenge-frm-top {
-  width: 700px;
-  height: 500px;
-  margin: 0 auto;
-  background-color: #fff;
-  border: 1px solid #ccc;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  border-radius: 30px;
-}
-/*챌린지 타입 css*/
-.challenge-kind div {
-  border: 1px solid black;
-  width: 35px;
-  border-radius: 30px;
-}
-/*챌린지상세보기 버튼*/
+/*챌린지 작성완료 버튼*/
 .challenge-btn-box {
-  width: 150px;
-  margin: 0 auto;
+  display: flex;
+  gap: 20px;
 }
 
 /*챌린지 상세보기*/
 .challenge-view-content {
-  margin: 0 auto;
-  width: 700px;
-  height: 500px;
-  background-color: #fff;
-  border: 1px solid #ccc;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  border-radius: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
 }
 .challenge-content-wrap {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+.progress-ment {
+  font-size: 18px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+.amount-info {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+.circular-progress-bar {
+  margin-bottom: 20px;
 }
 
 .challenge-content {
@@ -193,3 +247,12 @@
   justify-content: center;
   margin-top: 20px;
 }
+
+/*
+    메인 색상 (진한 순서대로)
+    #151426 rgb(21, 20, 38)
+    #010440 rgb(1, 4, 64)
+    #323673 rgb(50, 54, 115)
+    #6A6DA6 rgb(106, 109, 166)
+    #F0F1F2 rgb(240, 241, 242)
+*/

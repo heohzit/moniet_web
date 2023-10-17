@@ -53,7 +53,7 @@ const ChallengeWrite = () => {
     }
   };
   return (
-    <div>
+    <div className="challenge-write-wrap">
       <ChallengeFrm
         challengeKind={challengeKind}
         setChallengeKind={setChallengeKind}
