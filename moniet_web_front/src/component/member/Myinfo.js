@@ -1,9 +1,8 @@
-import axios from "axios";
-import "./memberMain.css";
+import "./myinfo.css";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Input from "../util/InputFrm";
-import "./myinfo.css";
+import axios from "axios";
 
 const Myinfo = (props) => {
   const isLogin = props.isLogin;
@@ -12,13 +11,33 @@ const Myinfo = (props) => {
   const [member, setMember] = useState({});
   const [memberPw, setMemberPw] = useState();
   const [newMemberPwRe, setNewMemberPwRe] = useState();
+  const [checkPwMsg, setCheckPwMsg] = useState("");
+  const [checkPwReMsg, setCheckPwReMsg] = useState("");
   const [checkPhoneMsg, setCheckPhoneMsg] = useState("");
   const [checkEmailMsg, setCheckEmailMsg] = useState("");
-  const navigate = useNavigate();
   const [thumbnail, setThumbnail] = useState(""); //보내주는 데이터
   const [memberImg, setMemberImg] = useState(""); //썸네일
+  const navigate = useNavigate();
 
-  //이미지 업로드 input onChange
+  //비밀번호 유효성 검사
+  const pwCheck = () => {
+    const pwReg = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,16}$/;
+    if (!pwReg.test(memberPw)) {
+      setCheckPwMsg("영문/숫자/특수문자를 조합하여 8~16자를 입력해주세요.");
+    } else {
+      setCheckPwMsg("");
+    }
+  };
+
+  const pwReCheck = () => {
+    if (memberPw !== newMemberPwRe) {
+      setCheckPwReMsg("비밀번호가 일치하지 않습니다.");
+    } else {
+      setCheckPwReMsg("");
+    }
+  };
+
+  //프로필 change
   const thumbnailChange = (e) => {
     const files = e.currentTarget.files;
     if (files.length !== 0 && files[0] != 0) {
@@ -35,32 +54,34 @@ const Myinfo = (props) => {
     }
   };
 
+  //비밀번호 변경
   const pwUpdate = () => {
-    const pwTr2 = document.querySelector(".pw-tr2");
-    pwTr2.classList.remove("display");
+    const pwInput = document.querySelector(".mypage-pw-input-form");
+    pwInput.classList.remove("display");
 
-    const pwTr3 = document.querySelector(".pw-tr3");
-    pwTr3.classList.remove("display");
+    const pwReInput = document.querySelector(".mypage-pwRe-input-form");
+    pwReInput.classList.remove("display");
 
-    const curr = document.querySelector(".curr-pw-zone");
-    curr.classList.add("display");
+    const currPw = document.querySelector(".mypage-input-pw-form");
+    currPw.classList.add("display");
   };
 
+  //비밀번호 변경 취소
   const backPw = () => {
-    const pwTr2 = document.querySelector(".pw-tr2");
-    pwTr2.classList.add("display");
+    const pwInput = document.querySelector(".mypage-pw-input-form");
+    pwInput.classList.add("display");
 
-    const pwTr3 = document.querySelector(".pw-tr3");
-    pwTr3.classList.add("display");
+    const pwReInput = document.querySelector(".mypage-pwRe-input-form");
+    pwReInput.classList.add("display");
 
-    const curr = document.querySelector(".curr-pw-zone");
-    curr.classList.remove("display");
+    const currPw = document.querySelector(".mypage-input-pw-form");
+    currPw.classList.remove("display");
   };
 
   //비밀번호 update
   const newPwUpdate = () => {
     const token = window.localStorage.getItem("token");
-    if (memberPw !== "" && memberPw == newMemberPwRe) {
+    if (checkPwMsg == "" && checkPwReMsg == "" && memberPw == newMemberPwRe) {
       axios
         .post(
           "/member/updatePw",
@@ -85,7 +106,7 @@ const Myinfo = (props) => {
           }
         });
     } else {
-      alert("비밀번호가 일치 하지 않습니다.");
+      alert("입력양식이 올바르지 않습니다.");
     }
   };
 
@@ -122,6 +143,7 @@ const Myinfo = (props) => {
     navigate("/");
   }
 
+  //회원탈퇴
   const deleteMember = () => {
     if (window.confirm("회원 탈퇴를 진행하시겠습니까?")) {
       axios
@@ -179,6 +201,7 @@ const Myinfo = (props) => {
     }
   };
 
+  //정규표현식
   const phoneCheck = () => {
     const phoneReg = /^[0-9]{3}-[0-9]{3,4}-[0-9]{4}$/;
     if (!phoneReg.test(member.memberPhone)) {
@@ -197,7 +220,7 @@ const Myinfo = (props) => {
   };
 
   return (
-    <div>
+    <>
       <div className="my-title">MY PAGE</div>
       <div className="my-content">
         <div className="my-profile-img-wrap">
@@ -222,104 +245,100 @@ const Myinfo = (props) => {
             onChange={thumbnailChange}
           />
         </div>
-        <table className="my-info-tbl">
-          <tbody>
-            <tr>
-              <td>아이디</td>
-              <td>{member.memberId}</td>
-            </tr>
-            <tr>
-              <td>이름</td>
-              <td>{member.memberName}</td>
-            </tr>
-            <tr className="curr-pw-zone">
-              <td>비밀번호</td>
-              <td id="member-Pw">
-                <div className="pw-wrap">
-                  <UpdateInputWrap
-                    data="********"
-                    type="password"
-                    content="memberPw"
-                    disabled="true"
-                  />
-                  <button className="pw-btn" onClick={pwUpdate}>
-                    변경하기
-                  </button>
-                </div>
-              </td>
-            </tr>
-            <tr className="pw-tr2 display">
-              <td>새 비밀번호</td>
-              <td>
-                <div className="new-pw-check-wrap">
-                  <Input
-                    type="password"
-                    data={memberPw}
-                    setData={setMemberPw}
-                    content="newMemberPw"
-                  />
-                </div>
-              </td>
-            </tr>
-            <tr className="pw-tr3 display">
-              <td>새 비밀번호 확인</td>
-              <td>
-                <div className="new-pw-check-wrap">
-                  <Input
-                    type="password"
-                    data={newMemberPwRe}
-                    setData={setNewMemberPwRe}
-                    content="newMemberPwRe"
-                  />
-                  <button className="new-pw-update-btn" onClick={newPwUpdate}>
-                    변경
-                  </button>
-                  <button className="new-pw-del-btn" onClick={backPw}>
-                    취소
-                  </button>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>전화번호</td>
-              <td id="member-phone">
-                <div>
-                  <UpdateInputWrap
-                    data={member.memberPhone}
-                    setData={setMemberPhone}
-                    type="text"
-                    content="memberPhone"
-                    checkMsg={checkPhoneMsg}
-                    blurEvent={phoneCheck}
-                  />
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>이메일</td>
-              <td id="member-email">
-                <div>
-                  <UpdateInputWrap
-                    data={member.memberEmail}
-                    setData={setMemberEmail}
-                    type="text"
-                    content="memberEmail"
-                    checkMsg={checkEmailMsg}
-                    blurEvent={emailCheck}
-                  />
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <div className="my-info-btn-wrap">
-          <button onClick={updateMember}>정보수정</button>
-          <button onClick={deleteMember} id="deleteBtn">
-            회원탈퇴
+        <div className="mypage-input-form">
+          <label htmlFor="memberId">아이디</label>
+          <UpdateInputWrap
+            data={member.memberId}
+            type="text"
+            content="memberId"
+            disabled="true"
+          />
+        </div>
+        <div className="mypage-input-form">
+          <label htmlFor="memberName">이름</label>
+          <UpdateInputWrap
+            data={member.memberName}
+            type="text"
+            content="memberName"
+            disabled="true"
+          />
+        </div>
+        <div className="mypage-input-pw-form">
+          <label htmlFor="memberPw">비밀번호</label>
+          <div className="pw-wrap">
+            <UpdateInputWrap
+              data="********"
+              type="password"
+              content="memberPw"
+              disabled="true"
+            />
+            <button className="pw-btn" onClick={pwUpdate}>
+              변경하기
+            </button>
+          </div>
+        </div>
+        <div className="mypage-pw-input-form display">
+          <label htmlFor="newMeberPw">새 비밀번호</label>
+          <Input
+            type="password"
+            data={memberPw}
+            setData={setMemberPw}
+            content="newMemberPw"
+            checkMsg={checkPwMsg}
+            blurEvent={pwCheck}
+          />
+          <div className="pw-check-msg">{checkPwMsg}</div>
+        </div>
+        <div className="mypage-pwRe-input-form display">
+          <label htmlFor="newMeberPw">새 비밀번호 확인</label>
+          <Input
+            type="password"
+            data={newMemberPwRe}
+            setData={setNewMemberPwRe}
+            content="newMemberPwRe"
+            checkMsg={checkPwMsg}
+            blurEvent={pwReCheck}
+          />
+          <button className="new-pw-update-btn" onClick={newPwUpdate}>
+            변경
+          </button>
+          <button className="new-pw-del-btn" onClick={backPw}>
+            취소
           </button>
         </div>
+        <div className="pwRe-check-msg">{checkPwReMsg}</div>
+        <div>
+          <div className="mypage-input-form">
+            <label htmlFor="memberPhone">전화번호 *</label>
+            <UpdateInputWrap
+              data={member.memberPhone}
+              setData={setMemberPhone}
+              type="text"
+              content="memberPhone"
+              checkMsg={checkPhoneMsg}
+              blurEvent={phoneCheck}
+            />
+          </div>
+          <div className="mypage-input-form">
+            <label htmlFor="memberEmail">이메일 *</label>
+            <UpdateInputWrap
+              data={member.memberEmail}
+              setData={setMemberEmail}
+              type="text"
+              content="memberEmail"
+              checkMsg={checkEmailMsg}
+              blurEvent={emailCheck}
+            />
+          </div>
+          <div className="my-info-btn-wrap">
+            <button onClick={updateMember}>정보수정</button>
+            <button onClick={deleteMember} id="deleteBtn">
+              회원탈퇴
+            </button>
+          </div>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 const UpdateInputWrap = (props) => {

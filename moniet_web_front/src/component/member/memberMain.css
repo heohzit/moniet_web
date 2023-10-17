@@ -27,47 +27,8 @@
   padding-bottom: 30px;
   color: #010440;
 }
-/* 테이블 디자인*/
-.my-info-tbl {
-  width: 100%;
-  border-spacing: 0;
-  border-top: 2px solid #010440;
-  border-bottom: 2px solid #010440;
-  padding: 10px;
-  margin: 20px 0px;
-}
-.my-info-tbl > tbody > tr > td:first-child {
-  padding-right: 10px;
-  width: 30%;
-  font-family: ns-b;
-}
-.my-info-tbl > tbody > tr > td {
-  padding: 18px;
-}
 
-.update-input {
-  width: 80%;
-}
-.my-info-btn-wrap {
-  margin: 50px 0px;
-  text-align: center;
-}
-.my-info-btn-wrap > button {
-  margin-right: 10px;
-  border: none;
-  border-radius: 5px;
-  width: 200px;
-  height: 50px;
-  line-height: 50px;
-  font-size: 15px;
-  font-family: ns-r;
-  cursor: pointer;
-}
-#deleteBtn {
-  background-color: #010440;
-  color: #fff;
-}
-
+/* 비밀번호 확인 */
 .pw-check-zone-content {
   margin-top: 30px;
   text-align: center;
@@ -91,31 +52,4 @@
   line-height: 43px;
   padding: 0px;
   font-size: 15px;
-}
-
-.new-pw-check-wrap > * {
-  float: left;
-  overflow: hidden;
-}
-.new-pw-check-wrap > input {
-  width: 48%;
-  margin-right: 10px;
-}
-.new-pw-check-wrap > button {
-  margin-right: 10px;
-  border: none;
-  border-radius: 5px;
-  height: 42px;
-  line-height: 42px;
-  width: 95px;
-  font-size: 15px;
-  cursor: pointer;
-}
-.new-pw-del-btn {
-  background-color: #010440;
-  color: #fff;
-}
-
-.display {
-  display: none;
 }

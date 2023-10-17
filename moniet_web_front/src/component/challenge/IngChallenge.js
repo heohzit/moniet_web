@@ -48,15 +48,13 @@ const IngChallenge = () => {
     setBackPage(false);
   };
   return (
-    <div className="challenge-content-wrap">
-      <div className="challenge-content">
-        <div className="challenge-list-wrap">
-          {showChallenge.map((challenge, index) => {
-            return (
-              <ChallengeItem key={"challenge" + index} challenge={challenge} />
-            );
-          })}
-        </div>
+    <div className="challenge-content">
+      <div className="challenge-list-wrap">
+        {showChallenge.map((challenge, index) => {
+          return (
+            <ChallengeItem key={"challenge" + index} challenge={challenge} />
+          );
+        })}
       </div>
       {backPage ? (
         <div className="challenge-more">
@@ -79,7 +77,7 @@ const ChallengeItem = (props) => {
     navigate("/challenge/view", {
       state: {
         challengeNo: challenge.challengeNo,
-        challengeKind: challenge.challengeKind,
+        categoryNo: challenge.categoryNo,
       },
     });
   };

@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { Route, Routes } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import LinearProgress from "@mui/material/LinearProgress";
 
 const ChallengeList = (props) => {
   const isLogin = props.isLogin;
@@ -25,7 +26,7 @@ const ChallengeList = (props) => {
       <div className="challengeList-top">
         <img src="../image/IMG_0610.jpg"></img>
         <div>
-          <p>MONEY CHALLENGE</p>
+          <p className="title">MONEY CHALLENGE</p>
           <h3>머니챌린지에 도전해보세요.</h3>
           <p>성공시 챌린지 레벨이 올라가요!</p>
         </div>
@@ -110,7 +111,16 @@ const ChallengeLevel = () => {
   return (
     <div className="challenge-level">
       <p>나의 챌린지 레벨은 {challengeLevel}입니다.</p>
+      <div style={{ width: 200, height: 200 }}>
+        <LinearProgress
+          variant="determinate"
+          value={challengeLevel}
+          min={0}
+          max={100}
+        />
+      </div>
     </div>
   );
 };
+
 export default ChallengeList;

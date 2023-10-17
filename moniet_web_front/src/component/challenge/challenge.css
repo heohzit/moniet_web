@@ -42,21 +42,21 @@
   list-style-type: none;
   overflow: hidden;
   border: 1px solid #ccc;
+  border-radius: 5px;
 }
 .challengeMenu-tab > ul > li > a {
   float: left;
   width: calc(100% / 2);
-  height: 80px;
-  line-height: 80px;
+  height: 70px;
+  line-height: 70px;
   text-align: center;
   box-sizing: border-box;
-  border: 1px solid #ccc;
   color: #ccc;
   cursor: pointer;
 }
 .challengeMenu-tab > ul > li > a.active-side {
-  border: 2px solid #010440;
-  color: #010440;
+  background-color: #010440;
+  color: #fff;
   font-weight: 600;
 }
 /*챌린지리스트 이미지*/
@@ -70,6 +70,11 @@
 }
 .challengeList-top > .challenge-write-btn {
   float: left;
+}
+.challengeList-top .title {
+  font-size: xx-large;
+  color: #323673;
+  font-weight: bolder;
 }
 /*챌린지 도전 버튼*/
 .challenge-write-btn > {
@@ -92,9 +97,11 @@
 }
 /*챌린지 레벨*/
 .challenge-level {
+  width: 500px;
   float: left;
 }
-/*챌린지 작성*/
+
+/*challengeFrm*/
 .challenge-info {
   display: flex;
   flex-direction: column;
@@ -149,7 +156,11 @@
   float: left;
   height: auto;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
+
 .challenge-item-info {
   position: relative;
 }
@@ -206,13 +217,8 @@
   margin: 20px;
 }
 
-.challenge-list-wrap {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
 .challenge-item {
-  background-color: #ffffff;
+  background-color: #fff;
   border: 1px solid #e0e0e0;
   border-radius: 10px;
   padding: 10px;
@@ -221,7 +227,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  transition: background-color 0.2s ease-in-out;
 }
 
 .challenge-item:hover {
