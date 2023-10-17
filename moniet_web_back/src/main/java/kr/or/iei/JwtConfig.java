@@ -26,7 +26,7 @@ public class JwtConfig {
 				.csrf().disable().cors()
 				.and()
 				.authorizeRequests()				//요청에 대한 권한설정
-				.antMatchers(HttpMethod.POST, "/member/login","/member/join","/member/memberCheck","/member/searchId","/member/sendPw").permitAll()
+				.antMatchers(HttpMethod.POST, "/member/login","/member/join","/member/memberCheck","/member/searchId","/member/sendPw","/member/sendAuth").permitAll()
 				// /member/로 시작하면 반드시 인증 하도록 설정
 				.antMatchers(HttpMethod.POST,"/member/**").authenticated()
 				.and()
