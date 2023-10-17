@@ -34,6 +34,7 @@ const CommunityBoard = (props) => {
             board={board}
             index={index}
             member={member}
+            communityBoardNo={board.communityBoardNo}
           />
         );
       })}
@@ -48,13 +49,27 @@ const CommunityBoardItem = (props) => {
   const navigate = useNavigate();
   const isLogin = props.isLogin;
 
-  const boardLike = () => {
-    const likeBtn = document.querySelectorAll(
-      ".board-item-like-icon > .thumb_up"
-    )[index];
+  const [like, setLike] = useState(false);
 
-    likeBtn.classList.toggle("thumb_up2");
-    console.log(likeBtn);
+  const BoardLike = () => {
+    const communityBoardNo = props.communityBoardNo;
+
+    useEffect(() => {
+      axios
+        .get("/community/boardLike/" + communityBoardNo)
+        .then((res) => {
+          console.log(res.data);
+        })
+        .catch((res) => {
+          console.log(res.response.status);
+        });
+
+      const likeBtn = document.querySelectorAll(
+        ".board-item-like-icon > .thumb_up"
+      )[index];
+
+      likeBtn.classList.toggle("thumb_up2");
+    }, []);
 
     /* 따봉 클릭했을 때 위에서 클라스 토글 한번 돌고,
       여기서 axios로 추가하면 되는지,
@@ -88,6 +103,18 @@ const CommunityBoardItem = (props) => {
                   return <BoardTypesItem key={"types" + index} types={types} />;
                 })
               : ""}
+            {member && member.memberNo == board.communityBoardWriter ? (
+              <>
+                <div className="board-item-update">
+                  <span class="material-icons">settings</span>
+                </div>
+                <div className="board-item-delete">
+                  <span class="material-icons">clear</span>
+                </div>
+              </>
+            ) : (
+              ""
+            )}
           </div>
           <div className="board-item-profile">
             <div className="board-item-account">
@@ -116,7 +143,7 @@ const CommunityBoardItem = (props) => {
               {board.communityBoardLike}명이 공감했어요.
             </div>
             <div className="board-item-like-icon">
-              <span className="material-icons thumb_up" onClick={boardLike}>
+              <span className="material-icons thumb_up" onClick={BoardLike}>
                 thumb_up
               </span>
               <span className="material-icons chat" onClick={ToggleComment}>

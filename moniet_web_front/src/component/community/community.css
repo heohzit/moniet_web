@@ -314,6 +314,7 @@
   padding-bottom: 10px;
   color: red;
   font-size: 30px;
+  z-index: 100;
 }
 
 .community-item-wrap > .community-item > .heart-btns > .ab-btn2 {
@@ -324,6 +325,7 @@
   padding-bottom: 10px;
   color: red;
   font-size: 30px;
+  z-index: 100;
 }
 
 .community-item-wrap > .community-item > .sh-btn1 {
@@ -582,6 +584,11 @@
 
 .board-item-info {
   padding: 20px;
+  padding-left: 30px;
+}
+
+.board-item-type {
+  position: relative;
 }
 
 .board-item-profile {
@@ -611,6 +618,28 @@
   font-size: 15px;
   color: gray;
   font-family: ns-r;
+}
+
+.board-item-update,
+.board-item-delete {
+  position: absolute;
+  cursor: pointer;
+}
+
+.board-item-update > span,
+.board-item-delete > span {
+  font-size: 28px;
+}
+
+.board-item-update {
+  right: 1.3cm;
+  top: 0.2cm;
+}
+
+.board-item-delete {
+  right: 0.5cm;
+  top: 0.2cm;
+  font-weight: 900;
 }
 
 .board-item-content {
@@ -946,7 +975,7 @@
 }
 
 .comment-recomment-btn {
-  padding-left: 590px;
+  padding-left: 570px;
 }
 
 .comment-content {

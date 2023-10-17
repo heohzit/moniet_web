@@ -38,4 +38,8 @@ public interface CommunityDao {
 
 	List recommentList(ComuBoardComment cbc);
 
+	int boardlike(CommunityBoard c, int communityBoardNo);
+
+	int removeComment(int comuBoardCommentNo);
+
 }

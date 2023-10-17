@@ -8,6 +8,8 @@ import Swal from "sweetalert2";
 const CommunityBoardWrite = (props) => {
   const location = useLocation();
   const communityNo = props.communityNo;
+  const rendering = props.rendering;
+  const setRendering = props.setRendering;
 
   const [boardFile, setBoardFile] = useState([]); // 전송용
   const [boardImg, setBoardImg] = useState([]); // 미리보기용
@@ -86,6 +88,8 @@ const CommunityBoardWrite = (props) => {
   };
 
   const insertBoard = (props) => {
+    const rendering = props.rendering;
+    const setRendering = props.setRendering;
     const communityBoardContent = document.querySelector(
       ".board-write-textarea-text"
     ).value;
@@ -220,7 +224,12 @@ const CommunityBoardWrite = (props) => {
             onChange={changeFile}
             multiple
           />
-          <Button2 text="등록하기" clickEvent={insertBoard} />
+          <Button2
+            text="등록하기"
+            clickEvent={insertBoard}
+            rendering={rendering}
+            setRendering={setRendering}
+          />
         </div>
         <div className="insert-image-preview">
           {boardImg.length !== 0 ? (

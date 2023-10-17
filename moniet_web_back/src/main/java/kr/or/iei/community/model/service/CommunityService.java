@@ -131,4 +131,17 @@ public class CommunityService {
 		return list;
 	}
 
+	public int boardlike(CommunityBoard c, int communityBoardNo) {
+		System.out.println("service c : "+c);
+		System.out.println("service communityBoardNo : "+c);
+//		int result = communityDao.boardlike(c, communityBoardNo);
+		return 0;
+	}
+
+	public int removeComment(int comuBoardCommentNo) {
+		int result = communityDao.removeComment(comuBoardCommentNo);
+		return result;
+	}
+
+
 }

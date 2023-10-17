@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -166,6 +167,21 @@ public class CommunityController {
 		List list = communityService.recommentList(cbc);
 		
 		return list;
+	}
+	
+	@ResponseBody
+	@GetMapping(value="/boardLike/{communityBoardNo}")
+	public int boardLike (@ModelAttribute CommunityBoard c ,@RequestAttribute String memberId ,int communityBoardNo) {
+		System.out.println("controller c : "+c);
+		c.setMemberId(memberId);
+		int likeCount = communityService.boardlike(c, communityBoardNo);
+		return likeCount;
+	}
+	
+	@GetMapping(value="/removeComment/{comuBoardCommentNo}")
+	public int removeComment(@PathVariable int comuBoardCommentNo) {
+		int result = communityService.removeComment(comuBoardCommentNo);
+		return result;
 	}
 	
 }

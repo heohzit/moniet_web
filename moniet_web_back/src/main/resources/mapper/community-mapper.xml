@@ -248,5 +248,13 @@
 		join member on (comu_board_comment_writer = member_no)
 		where comu_board_ref = #{comuBoardRef} and comu_board_comment_ref = #{comuBoardCommentRef} and comu_board_comment_ref is not null
 	</select>
+	
+	<insert id="boardlike">
+		<!-- insert into community_board_like values (#{}, #{})  -->
+	</insert>
+	
+	<delete id="removeComment">
+		delete from comu_board_comment where comu_board_comment_no = #{comuBoardCommentNo}
+	</delete>
 
 </mapper>
