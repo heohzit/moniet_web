@@ -31,4 +31,4 @@ npm install file-saver --save bower install file-saver      23.10.16
 
 //풀캘린더
 npm install --save @fullcalendar/react @fullcalendar/core @fullcalendar/daygrid     23.10.16
-npm install style-loader css-loader sass-loader node-sass --save err...?
+npm install @fullcalendar/interaction       23-10-17 >> 한 번에 설치 안되면 npm update해주세요....

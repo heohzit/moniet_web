@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import kr.or.iei.cashbook.model.service.CashbookService;
+import kr.or.iei.cashbook.model.vo.CalendarElement;
 import kr.or.iei.cashbook.model.vo.Cashbook;
 import kr.or.iei.cashbook.model.vo.Category;
 import kr.or.iei.challenge.model.service.ChallengeService;
@@ -31,6 +32,7 @@ public class CashbookController {
 	@PostMapping(value="/list")
 	public Map cashbookList(@RequestBody Cashbook cashbook, @RequestAttribute String memberId) {
 		cashbook.setMemberId(memberId);
+		System.out.println(cashbook);
 		List cashbookList = cashbookService.cashbookList(cashbook);
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("cashbookList", cashbookList);
@@ -108,5 +110,19 @@ public class CashbookController {
 		System.out.println("번호:"+cashbook.getCashbookNo());
 		return cashbookService.updateCashbook(cashbook);
 	}
-
+	
+	//달력 화면 표시용
+	@PostMapping(value="/calList")
+	public Map selectCalList(@RequestBody Cashbook cashbook, @RequestAttribute String memberId) {
+		cashbook.setMemberId(memberId);
+		List calList = cashbookService.calList(cashbook);
+		System.out.println(calList);
+		for(Object obj: calList) {
+			CalendarElement ce = (CalendarElement) obj;
+			ce.setDate(ce.getCashbookDate());
+		}
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("calList", calList);
+	return map;
+	}
 }

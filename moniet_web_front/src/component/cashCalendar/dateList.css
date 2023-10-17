@@ -1,0 +1,11 @@
+.date-list {
+  border: 1px solid rgba(106, 109, 166, 0.3);
+  border-radius: 5px;
+}
+.date-finance {
+  justify-content: space-evenly;
+  margin-top: 10px;
+}
+.cal-list-label {
+  padding-left: 20px;
+}

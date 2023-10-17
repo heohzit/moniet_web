@@ -135,5 +135,24 @@
 		 where cashbook_no = #{cashbookNo} and member_no = (select member_no from member where member_id=#{memberId})
 	</update>
 
-	
+	<!-- 풀캘린더 이벤트 조회용 -->
+	<select id="calList" resultType="ce">
+		<![CDATA[
+		select
+	  		cashbook_finance, to_char(cashbook_date, 'yyyy-mm-dd') as cashbook_date,
+				CASE	
+            		WHEN cashbook_finance = 1 THEN to_char(sum(cashbook_money), 'L999,999,999')
+            		WHEN cashbook_finance = 2 THEN to_char(sum(cashbook_money)*-1, 'L999,999,999')
+				ELSE '0' end as title,
+	            CASE	
+					WHEN cashbook_finance = 1 THEN '#323673'
+					WHEN cashbook_finance = 2 THEN '#e66eb2'
+				ELSE '#fff'
+				END AS textColor
+	  	from cashbook
+	  	where cashbook_date >= #{startDate} and cashbook_date <= #{endDate} and member_no=(select member_no from member where member_id=#{memberId})
+	    group by cashbook_finance, cashbook_date
+	  	order by cashbook_date desc
+	  	]]>
+	</select>
 </mapper>
