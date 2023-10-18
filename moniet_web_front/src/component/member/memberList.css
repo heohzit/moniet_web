@@ -1,0 +1,32 @@
+.memberlist-title {
+  color: #010440;
+  font-size: 24px;
+  font-family: ns-b;
+  text-align: center;
+  padding-bottom: 40px;
+}
+.id-search-input {
+  position: relative;
+  text-align: right;
+}
+.id-search-input > input {
+  border: 3px solid #010440;
+  font-size: 15px;
+  padding: 5px;
+}
+.seacrh-icon {
+  color: #010440;
+  position: absolute;
+  right: 8px;
+  top: 8px;
+  font-weight: 600;
+}
+.membertable {
+  margin-top: 50px;
+  width: 100%;
+}
+.membertable th,
+.membertable td {
+  text-align: center;
+  padding: 5px 0px;
+}

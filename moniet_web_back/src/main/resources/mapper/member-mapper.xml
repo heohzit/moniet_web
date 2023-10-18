@@ -56,8 +56,18 @@
 	]]>
 	</update>
 	
+	<select id="allMember" resultType="member">
+		select
+			member_no,
+			member_grade,
+			member_id,
+			member_name,
+			member_phone,
+			member_email,
+			to_char(member_date, 'YYYY-MM-DD') as member_date
+		from member 
+	</select>
+	
 
-	
-	
 	
 </mapper>

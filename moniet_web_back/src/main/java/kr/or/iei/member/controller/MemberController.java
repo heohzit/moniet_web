@@ -1,6 +1,7 @@
 package kr.or.iei.member.controller;
 
 import java.io.File;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -154,5 +155,14 @@ public class MemberController {
 		String authCode = emailSender.sendAuth(member.getMemberEmail());
 		return authCode;
 	}
+	
+	//전체회원조회 
+	@GetMapping(value="/allMember")
+	public List allMember() {
+		return memberService.allMember();
+		
+	}
+	
+	
 	
 	}
