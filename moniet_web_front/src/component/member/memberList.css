@@ -1,3 +1,8 @@
+.memberlist-wrap {
+  width: 1200px;
+  margin: 0 auto;
+}
+
 .memberlist-title {
   color: #010440;
   font-size: 24px;
@@ -21,12 +26,20 @@
   top: 8px;
   font-weight: 600;
 }
-.membertable {
+.membertable-wrap {
   margin-top: 50px;
   width: 100%;
 }
-.membertable th,
+.membertable {
+  border-collapse: collapse;
+}
 .membertable td {
   text-align: center;
-  padding: 5px 0px;
+  padding: 10px 0px;
+  width: calc(100% / 7);
+}
+.membertable > thead > td {
+  background-color: #010440;
+  color: #fff;
+  font-family: ns-r;
 }

@@ -37,7 +37,11 @@ public interface MemberDao {
 
 	//전체 회원 조회
 	List allMember();
+	
+	//관리자페이지 - 아이디검색
+	List searchMemberId(String memberId);
 
+	
 	
 	
 	

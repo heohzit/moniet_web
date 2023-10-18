@@ -107,6 +107,16 @@ public class MemberService {
 		return memberDao.allMember();
 	}
 
+
+
+	public List searchMemberId(String memberId) {
+		return memberDao.searchMemberId(memberId);
+	}
+
+
+
+	
+
 	
 	
 

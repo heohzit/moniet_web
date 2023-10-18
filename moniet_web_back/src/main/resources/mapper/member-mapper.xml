@@ -65,9 +65,24 @@
 			member_phone,
 			member_email,
 			to_char(member_date, 'YYYY-MM-DD') as member_date
-		from member 
+		from member
+		order by decode(member_grade,'0',1), member_date desc
 	</select>
 	
+	
+	<select id="searchMemberId" resultType="member">
+		select
+			member_no,
+			member_grade,
+			member_id,
+			member_name,
+			member_phone,
+			member_email,
+			to_char(member_date, 'YYYY-MM-DD') as member_date
+		from member 
+		where member_id like '%'||#{memberId}||'%' 
+		order by decode(member_grade,'0',1), member_date desc
+	</select>
 
 	
 </mapper>

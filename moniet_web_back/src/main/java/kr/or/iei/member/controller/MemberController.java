@@ -163,6 +163,17 @@ public class MemberController {
 		
 	}
 	
-	
-	
+	//관리자페이지 아이디검색
+	@GetMapping(value="/searchMemberId/{memberId}")
+	public List searchMemberId(@PathVariable String memberId) {
+		System.out.println(memberId);
+		List list = memberService.searchMemberId(memberId);
+		if(! list.isEmpty()) {
+			return list;
+		}else {
+			return null; 
+			
+		}
 	}
+	
+}

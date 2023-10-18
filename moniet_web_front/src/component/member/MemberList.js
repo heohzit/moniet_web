@@ -2,19 +2,6 @@ import axios from "axios";
 import "./memberList.css";
 import { useEffect, useState } from "react";
 
-const searchMemberId = () => {
-  const memberId = document.querySelector("#memberId").value;
-  console.log(memberId);
-  axios
-    .get("/member/searchMemberId", memberId)
-    .then((res) => {
-      console.log(res.data);
-    })
-    .catch((res) => {
-      console.log(res);
-    });
-};
-
 const MemberList = () => {
   const [memberList, setMemberList] = useState([]);
   const [memberId, setMemberId] = useState("");
@@ -25,12 +12,29 @@ const MemberList = () => {
       console.log(res.data);
     });
   }, []);
+
+  const searchMemberId = () => {
+    console.log(memberId);
+    axios
+      .get("/member/searchMemberId/" + memberId)
+      .then((res) => {
+        if (res.data !== "") {
+          console.log(res.data);
+          setMemberList(res.data);
+        } else {
+          alert("조회되는 회원이 없습니다.");
+        }
+      })
+      .catch((res) => {
+        console.log(res);
+      });
+  };
+
   return (
     <div className="memberlist-wrap">
       <div className="memberlist-title">회원정보</div>
       <div className="id-search-input">
         <input
-          id="memberId"
           type="text"
           value={memberId}
           placeholder="아이디 검색"
@@ -40,16 +44,16 @@ const MemberList = () => {
           <span className="material-icons seacrh-icon">search</span>
         </button>
       </div>
-      <div className="membertable">
-        <table>
+      <div className="membertable-wrap">
+        <table className="membertable">
           <thead>
-            <th>회원번호</th>
-            <th>등급</th>
-            <th>아이디</th>
-            <th>이름</th>
-            <th>전화번호</th>
-            <th width="20%">이메일</th>
-            <th>가입일자</th>
+            <td>회원번호</td>
+            <td>등급</td>
+            <td>아이디</td>
+            <td>이름</td>
+            <td>전화번호</td>
+            <td>이메일</td>
+            <td>가입일자</td>
           </thead>
           <tbody>
             {memberList.map((member, index) => {
@@ -76,4 +80,5 @@ const MemberItem = (props) => {
     </tr>
   );
 };
+
 export default MemberList;
