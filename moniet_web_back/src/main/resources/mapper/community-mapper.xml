@@ -256,5 +256,25 @@
 	<delete id="removeComment">
 		delete from comu_board_comment where comu_board_comment_no = #{comuBoardCommentNo}
 	</delete>
+	
+	<select id="selectBoardFileList">
+		select * from community_board_file where community_board_no = #{communityBoardNo}
+	</select>
+	
+	<select id="selectBoardTypeList">
+		select * from community_board_type where community_board_no = #{communityBoardNo}
+	</select>
+	
+	<delete id="deleteBoard">
+		delete from community_board where community_board_no = #{communityBoardNo}
+	</delete>
+	
+	<insert id="insertCommunityLike">
+		insert into community_wish values (community_wish_seq.nextval ,#{communityNo}, #{memberNo})
+	</insert>
+	
+	<delete id="removeCommunityLike">
+		delete community_wish where community_no = #{communityNo}
+	</delete>
 
 </mapper>

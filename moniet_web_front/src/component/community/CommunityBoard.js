@@ -93,6 +93,37 @@ const CommunityBoardItem = (props) => {
     commentBtn.classList.toggle("chat2");
   };
 
+  const deleteBoard = () => {
+    console.log(board);
+    Swal.fire({
+      icon: "warning",
+      text: "게시물을 삭제하시겠습니까?",
+      showCancelButton: true,
+      confirmButtonText: "삭제",
+      cancelButtonText: "취소",
+    }).then((res) => {
+      if (res.isConfirmed) {
+        axios
+          .get("/community/deleteBoard/" + board.communityBoardNo)
+          .then((res) => {
+            console.log(res.data);
+            if (res.data > 0) {
+              Swal.fire(
+                "삭제 완료",
+                "게시글 삭제가 완료되었습니다.",
+                "success"
+              );
+            }
+          })
+          .catch((res) => {
+            console.log(res.response.status);
+          });
+      } else {
+        return;
+      }
+    });
+  };
+
   return (
     <>
       <div className="board-item">
@@ -109,7 +140,9 @@ const CommunityBoardItem = (props) => {
                   <span class="material-icons">settings</span>
                 </div>
                 <div className="board-item-delete">
-                  <span class="material-icons">clear</span>
+                  <span class="material-icons" onClick={deleteBoard}>
+                    clear
+                  </span>
                 </div>
               </>
             ) : (
@@ -189,6 +222,25 @@ const BoardTypesItem = (props) => {
 
 const FileItem = (props) => {
   const file = props.file;
+
+  // const showModal = () => {
+  //   let img = new Image();
+  //   img.src = $(this).attr("src");
+  //   $(".modalBox").html(img);
+  //   $(".modal").show();
+  // };
+
+  // const openModal = () => {
+  //   setModal(!modal);
+  // };
+
+  // const closwModal = () => {
+  //   setModal(!modal);
+  // };
+
+  const [modal, setModal] = useState(false);
+
+  const Modal = () => {};
 
   return (
     <div className="board-item-img">

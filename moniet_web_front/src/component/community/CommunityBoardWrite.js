@@ -127,7 +127,7 @@ const CommunityBoardWrite = (props) => {
               if (res.data > 0) {
                 Swal.fire(
                   "작성 완료",
-                  "게시글작성이 완료되었습니다.",
+                  "게시글 작성이 완료되었습니다.",
                   "success"
                 );
               }

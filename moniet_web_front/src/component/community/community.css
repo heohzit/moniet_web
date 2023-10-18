@@ -248,6 +248,7 @@
 }
 
 .community-item {
+  width: 100%;
 }
 
 .community-item-img {
@@ -317,6 +318,9 @@
   z-index: 100;
 }
 
+.heart-btns > .ab-btn1:hover {
+}
+
 .community-item-wrap > .community-item > .heart-btns > .ab-btn2 {
   position: absolute;
   bottom: 0;
@@ -326,6 +330,9 @@
   color: red;
   font-size: 30px;
   z-index: 100;
+}
+
+.heart-btns > .ab-btn2:hover {
 }
 
 .community-item-wrap > .community-item > .sh-btn1 {
@@ -1151,4 +1158,22 @@
 }
 
 .comment-recomment-write-textarea {
+}
+
+.modal {
+  display: none;
+  z-index: 500;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+.modalBox {
+  position: relative;
+  text-align: center;
+  top: 50%;
+  left: 50%;
+  position: sticky;
 }

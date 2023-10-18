@@ -42,4 +42,14 @@ public interface CommunityDao {
 
 	int removeComment(int comuBoardCommentNo);
 
+	List<CommunityBoardFile> selectBoardFileList(int communityBoardNo);
+
+	List<CommunityBoardType> selectBoardTypeList(int communityBoardNo);
+
+	int deleteBoard(int communityBoardNo);
+
+	int insertCommunityLike(int communityNo, int memberNo);
+
+	int removeCommunityLike(int communityNo, int memberNo);
+
 }

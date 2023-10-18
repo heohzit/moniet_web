@@ -1,5 +1,6 @@
 package kr.or.iei.community.controller;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +21,7 @@ import kr.or.iei.community.model.service.CommunityService;
 import kr.or.iei.community.model.vo.Community;
 import kr.or.iei.community.model.vo.CommunityBoard;
 import kr.or.iei.community.model.vo.CommunityBoardFile;
+import kr.or.iei.community.model.vo.CommunityBoardType;
 import kr.or.iei.community.model.vo.CommunityType;
 import kr.or.iei.community.model.vo.ComuBoardComment;
 
@@ -181,6 +183,33 @@ public class CommunityController {
 	@GetMapping(value="/removeComment/{comuBoardCommentNo}")
 	public int removeComment(@PathVariable int comuBoardCommentNo) {
 		int result = communityService.removeComment(comuBoardCommentNo);
+		return result;
+	}
+	
+	@GetMapping(value="/deleteBoard/{communityBoardNo}")
+	public int deleteBoard(@PathVariable int communityBoardNo) {
+		List<CommunityBoardFile> fileList = communityService.delete(communityBoardNo);
+		if(fileList != null) {
+			String savepath = root+"community/";
+			for(CommunityBoardFile boardFile : fileList) {
+				File file = new File(savepath+boardFile.getFilepath());
+				file.delete();
+			}
+			return 1;
+		} else {
+			return 0;
+		}
+	}
+	
+	@GetMapping(value="/insertCommunityLike/{communityNo}")
+	public int insertCommunityLike(@PathVariable int communityNo, @RequestAttribute String memberId) {
+		int result = communityService.insertCommunityLike(communityNo, memberId);
+		return result;
+	}
+	
+	@GetMapping(value="/removeCommunityLike/{communityNo}")
+	public int removeCommunityLike(@PathVariable int communityNo, @RequestAttribute String memberId) {
+		int result = communityService.removeCommunityLike(communityNo, memberId);
 		return result;
 	}
 	

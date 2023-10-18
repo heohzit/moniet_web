@@ -65,7 +65,7 @@ const RecommentWrite = (props) => {
     <div className="comment-recomment-write">
       <div className="comment-recomment-write-wrap">
         {/* <CommunityBoardCommentWrite /> */}
-        <div className="comment-recomment-write">
+        <div className="comment-recomment-write" id="comment-recomment-write">
           <div className="comment-recomment-write-textarea">
             <textarea className="comment-recomment-write-textareat-text"></textarea>
           </div>
