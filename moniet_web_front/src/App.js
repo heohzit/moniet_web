@@ -75,7 +75,7 @@ function App() {
             />
             <Route
               path="/AdminCommunityList"
-              element={<AdminCommunityList />}
+              element={<AdminCommunityList /> }
             />
             <Route path="/memberlist" element={<MemberList />} />
             <Route path="/join" element={<AgreeBox />} />
