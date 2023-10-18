@@ -1,6 +1,7 @@
 package kr.or.iei.member.controller;
 
 import java.io.File;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -155,4 +156,24 @@ public class MemberController {
 		return authCode;
 	}
 	
+	//전체회원조회 
+	@GetMapping(value="/allMember")
+	public List allMember() {
+		return memberService.allMember();
+		
 	}
+	
+	//관리자페이지 아이디검색
+	@GetMapping(value="/searchMemberId/{memberId}")
+	public List searchMemberId(@PathVariable String memberId) {
+		System.out.println(memberId);
+		List list = memberService.searchMemberId(memberId);
+		if(! list.isEmpty()) {
+			return list;
+		}else {
+			return null; 
+			
+		}
+	}
+	
+}
