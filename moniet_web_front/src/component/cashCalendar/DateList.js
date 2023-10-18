@@ -61,8 +61,6 @@ const DateList = (props) => {
   const [spendingCate, setSpendingCate] = useState([]);
   const [challengeCate, setChallengeCate] = useState([]);
 
-  const [cashbookDate, setCashbookDate] = useState(new Date(info.dateStr));
-
   useEffect(() => {
     const token = window.localStorage.getItem("token");
     axios
@@ -91,7 +89,9 @@ const DateList = (props) => {
 
   // modify용
   const [modifyFrmOpen, setModifyFrmOpen] = useState(false);
-  const isModiOpen = () => {
+
+  const isModiOpen = (cashbookNo) => {
+    console.log(cashbookNo);
     setModifyFrmOpen(true);
   };
   const modiClose = (e) => {
@@ -188,6 +188,7 @@ const DateList = (props) => {
                   select={select}
                   setSelect={setSelect}
                   modifyFrmOpen={modifyFrmOpen}
+                  setModifyFrmOpen={setModifyFrmOpen}
                   assetList={assetList}
                   challengeCate={challengeCate}
                   incomeCate={incomeCate}

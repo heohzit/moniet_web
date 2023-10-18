@@ -39,6 +39,7 @@ const CashbookModify = (props) => {
   );
   const [cashbookMemo, setCashbookMemo] = useState(cashbook.cashbookMemo);
   const [challengeNo, setChallengeNo] = useState(cashbook.challengeNo);
+
   const modify = () => {
     const token = window.localStorage.getItem("token");
     const cashbook = {
@@ -90,7 +91,7 @@ const CashbookModify = (props) => {
   return (
     <div>
       <CashbookFrm
-        isOpen={modifyFrmOpen}
+        isOpen={isOpen}
         closeFrm={closeFrm}
         title={title}
         dateString={dateString}

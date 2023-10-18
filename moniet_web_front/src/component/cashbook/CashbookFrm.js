@@ -5,7 +5,7 @@ import Input from "../util/InputFrm";
 import { Calendar } from "react-date-range";
 import ko from "date-fns/locale/ko";
 import axios from "axios";
-import CashbookDel from "./CashbookDel";
+import { Alert, Snackbar } from "@mui/material";
 
 const CashbookFrm = (props) => {
   const title = props.title;
@@ -18,13 +18,7 @@ const CashbookFrm = (props) => {
   const setCashbookFinance = props.setCashbookFinance;
   const className = props.className;
   const modifyFrmOpen = props.modifyFrmOpen;
-
-  useEffect(() => {
-    const spendingBtn = document.querySelector(
-      ".select-finance:last-child>button"
-    );
-    spendingBtn.click();
-  }, [setCashbookFinance]);
+  const setModifyFrmOpen = props.setModifyFrmOpen;
 
   const cashbookDate = props.cashbookDate;
   const setCashbookDate = props.setCashbookDate;
@@ -61,6 +55,7 @@ const CashbookFrm = (props) => {
   const incomeCate = props.incomeCate;
   const spendingCate = props.spendingCate;
   const clickEvent = props.clickEvent;
+  const cashbook = props.cashbook;
   const [toggleOn, setToggleOn] = useState(false);
 
   const toggle = () => {
@@ -85,7 +80,6 @@ const CashbookFrm = (props) => {
 
   const selectDate = (item) => {
     setCashbookDate(item);
-
     console.log(challengeCate);
     toggle();
   };
@@ -128,12 +122,23 @@ const CashbookFrm = (props) => {
       .then((res) => {
         closeFrm();
         setSelect(!select);
-        //onOpenClickHandler();
+        onOpenClickHandler();
       })
       .catch((res) => {
         console.log(cashbookNos);
-        console.log(res.response.status);
+        console.log(res);
       });
+  };
+  //삭제 스낵바
+  const [showSnackbar, setShowSnackbar] = useState(false);
+  const onOpenClickHandler = () => {
+    setShowSnackbar(true);
+  };
+  const onCloseClickHandler = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setShowSnackbar(false);
   };
 
   return (

@@ -1,5 +1,7 @@
 package kr.or.iei.member.model.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -100,6 +102,27 @@ public class MemberService {
 	}
 
 
+	//전체회원조회
+	public List allMember() {
+		return memberDao.allMember();
+	}
+
+
+
+	public List searchMemberId(String memberId) {
+		return memberDao.searchMemberId(memberId);
+	}
+
+
+
+	
+
+	
+	
+
+
+
+	
 
 	
 

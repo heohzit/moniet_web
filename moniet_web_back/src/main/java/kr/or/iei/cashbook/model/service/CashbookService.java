@@ -74,23 +74,26 @@ public class CashbookService {
 			result = cashbookDao.insertCashbook(cashbook);
 		} else if(cashbookLoop == 2) {	//할부 일때 
 			int loopMonth = cashbook.getLoopMonth();
+			int money = cashbook.getCashbookMoney();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			Calendar cal = Calendar.getInstance();
+			try {
+				//str>date
+				Date date = sdf.parse(cashbook.getCashbookDate());
+				cal.setTime(date);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			for(int i =0 ; i<cashbook.getLoopMonth() ; i++ ) {
+				System.out.println("할부"+i);
 				cashbook.setLoopRound(i+1);
-				cashbook.setCashbookMoney(cashbook.getCashbookMoney()/loopMonth);
-				SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd");
-				try {
-					//string>date
-					Date date = format.parse(cashbook.getCashbookDate());
-					Calendar cal = Calendar.getInstance();
-					cal.setTime(date);
-					cal.add(Calendar.MONTH, 1);
-					//date>string
-					String dateStr = format.format(cal.getTime());
-					cashbook.setCashbookDate(dateStr);
-				} catch (ParseException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				cashbook.setCashbookMoney(money/loopMonth);
+				//date>str
+				cal.add(Calendar.MONTH, i);
+				String cashDate = sdf.format(cal.getTime()); 
+				cashbook.setCashbookDate(cashDate);
+				System.out.println(i+"날짜 바뀌는 현황 : " + cashDate);
 				result+=cashbookDao.insertCashbook(cashbook);
 				if(result == cashbook.getLoopMonth()) {
 					result = -1;//성공여부 확인용

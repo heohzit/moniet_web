@@ -1,5 +1,7 @@
 package kr.or.iei.member.model.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import kr.or.iei.member.model.service.MemberService;
@@ -35,6 +37,18 @@ public interface MemberDao {
 	
 	//챌린지 포기했을때 레벨다운
 	void downMember(int memberNo);
+
+	//전체 회원 조회
+	List allMember();
+	
+	//관리자페이지 - 아이디검색
+	List searchMemberId(String memberId);
+
+	
+	
+	
+	
+	
 
 	
 
