@@ -16,6 +16,7 @@ import FindPw from "./component/member/FindPw";
 import FindID from "./component/member/FindID";
 import CashCalendarMain from "./component/cashCalendar/CashCalendarMain";
 import MemberList from "./component/member/MemberList";
+import AdminCommunityList from "./component/member/AdminCommunityList";
 
 function App() {
   const [isLogin, setIsLogin] = useState(null);
@@ -63,6 +64,7 @@ function App() {
             isLogin={isLogin}
             setIsLogin={setIsLogin}
           />
+          <Route path="/AdminCommunityList" element={<AdminCommunityList />} />
           <Route path="/memberlist" element={<MemberList />} />
           <Route path="/join" element={<AgreeBox />} />
           <Route path="/joinfrm" element={<Join />} />
