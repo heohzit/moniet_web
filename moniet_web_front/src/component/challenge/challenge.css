@@ -143,6 +143,7 @@
   border-radius: 10px;
   border: 2px solid #010440;
   color: #010440;
+  float: left;
 }
 .category-kind > div {
   width: 100px;
@@ -152,6 +153,10 @@
   border-radius: 10px;
   border: 2px solid #6a6da6;
   color: #6a6da6;
+  float: right;
+}
+.challenge-startEnd div {
+  width: 100%;
 }
 .challenge-progress {
   overflow: hidden;
@@ -160,6 +165,7 @@
   float: left;
 }
 .amount-info {
+  margin-top: 70px;
   float: left;
 }
 .challenge-content-wrap {
@@ -198,12 +204,27 @@
   height: 220px;
   float: left;
   position: relative;
+  overflow: hidden;
 }
 .day-strong {
   font-size: x-large;
 }
 .challenge-item:hover {
   background-color: #f9f9f9;
+}
+.challenge-item-info {
+  width: 100%;
+  float: left;
+}
+
+.challengeTitle {
+  width: 100%;
+  height: 80px;
+  float: left;
+}
+.challengeDay {
+  width: 100%;
+  float: left;
 }
 .challenge-more {
   display: flex;

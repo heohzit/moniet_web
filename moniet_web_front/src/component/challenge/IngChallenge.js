@@ -57,15 +57,17 @@ const IngChallenge = () => {
           );
         })}
       </div>
-      {backPage ? (
-        <div className="challenge-more">
-          <Button3 text="돌아가기" clickEvent={GoBackBtn} />
-        </div>
-      ) : (
-        <div className="challenge-more">
-          <Button3 text="더보기" clickEvent={moreChallengeBtn} />
-        </div>
-      )}
+      <div className="challenge-more-btn">
+        {backPage ? (
+          <div className="challenge-more">
+            <Button3 text="돌아가기" clickEvent={GoBackBtn} />
+          </div>
+        ) : (
+          <div className="challenge-more">
+            <Button3 text="더보기" clickEvent={moreChallengeBtn} />
+          </div>
+        )}
+      </div>
     </div>
   );
 };
@@ -106,11 +108,12 @@ const ChallengeItem = (props) => {
             <div>{challenge.categoryTitle}</div>
           )}
         </div>
+      </div>
+      <div className="challengeTitle">
         <h2>{challenge.challengeTitle}</h2>
+      </div>
+      <div className="challengeDay">
         <Dayday challenge={challenge}></Dayday>
-        <div className="challenge-result">
-          {ImgDiv(challenge.challengeResult)}
-        </div>
       </div>
     </div>
   );

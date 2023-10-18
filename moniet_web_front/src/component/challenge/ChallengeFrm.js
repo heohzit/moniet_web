@@ -33,7 +33,16 @@ const ChallengeFrm = (props) => {
       setChallengeAmount("");
     }
   };
+  const addComma = (price) => {
+    let returnString = price?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return returnString;
+  };
 
+  const onChangePoints = (e) => {
+    const { value } = e.target;
+    let str = value.replaceAll(",", "");
+    setChallengeAmount(str);
+  };
   //챌린지 옵션
   const onChangeHanlder = (e) => {
     setChallengeKind(e.currentTarget.value);
@@ -165,13 +174,15 @@ const ChallengeFrm = (props) => {
                   <SavingsRoundedIcon />
                   목표 금액
                 </label>
-                <Input
+                <input
                   type="text"
                   data={challengeAmount}
                   setData={setChallengeAmount}
                   content="challengeAmount"
                   keyUpEvent={dataOnlyNum}
-                ></Input>
+                  onChange={(e) => onChangePoints(e)}
+                  value={addComma(challengeAmount) || ""}
+                ></input>
               </td>
             </tr>
           </tbody>
