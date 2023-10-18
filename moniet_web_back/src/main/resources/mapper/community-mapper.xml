@@ -277,4 +277,20 @@
 		delete community_wish where community_no = #{communityNo}
 	</delete>
 
+	<insert id="insertBoardLike">
+		insert into COMMUNITY_BOARD_LIKE values (#{communityBoardNo}, #{memberNo})
+	</insert>
+
+	<delete id="removeBoardLike">
+		delete COMMUNITY_BOARD_LIKE where community_board_no = #{communityBoardNo}
+	</delete>
+
+	<update id="updateLikeCount">
+		UPDATE COMMUNITY_BOARD SET COMMUNITY_BOARD_LIKE = COMMUNITY_BOARD_LIKE+1 WHERE COMMUNITY_BOARD_NO = #{communityBoardNo}
+	</update>
+	
+	<update id="downLikeCount">
+		UPDATE COMMUNITY_BOARD SET COMMUNITY_BOARD_LIKE = COMMUNITY_BOARD_LIKE-1 WHERE COMMUNITY_BOARD_NO = #{communityBoardNo}
+	</update>
+
 </mapper>

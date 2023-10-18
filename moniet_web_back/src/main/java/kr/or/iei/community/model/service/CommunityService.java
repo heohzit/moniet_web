@@ -167,5 +167,19 @@ public class CommunityService {
 		int result = communityDao.removeCommunityLike(communityNo, member.getMemberNo());
 		return result;	}
 
+	public int insertBoardLike(int communityBoardNo, String memberId) {
+		Member member = memberDao.selectOneMember(memberId);
+		int result = communityDao.insertBoardLike(communityBoardNo, member.getMemberNo());
+		int updateLikeCount = communityDao.updateLikeCount(communityBoardNo);
+		return result;
+	}
+
+	public int removeBoardLike(int communityBoardNo, String memberId) {
+		Member member = memberDao.selectOneMember(memberId);
+		int result = communityDao.removeBoardLike(communityBoardNo, member.getMemberNo());
+		int updateLikeCount = communityDao.downLikeCount(communityBoardNo);
+		return result;
+	}
+
 
 }

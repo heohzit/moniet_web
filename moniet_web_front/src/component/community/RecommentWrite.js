@@ -8,6 +8,7 @@ import CommunityBoardCommentWrite from "./CommunityBoardCommentWrite";
 
 const RecommentWrite = (props) => {
   const index = props.index;
+  const indexComment = props.indexComment;
   const communityBoardNo = props.communityBoardNo;
   const comuBoardCommentNo = props.comuBoardCommentNo;
   const location = useLocation();
@@ -63,9 +64,12 @@ const RecommentWrite = (props) => {
 
   return (
     <div className="comment-recomment-write">
-      <div className="comment-recomment-write-wrap">
+      <div
+        className="comment-recomment-write-wrap"
+        id={"i" + index + "ic" + indexComment}
+      >
         {/* <CommunityBoardCommentWrite /> */}
-        <div className="comment-recomment-write" id="comment-recomment-write">
+        <div className="comment-recomment-write">
           <div className="comment-recomment-write-textarea">
             <textarea className="comment-recomment-write-textareat-text"></textarea>
           </div>

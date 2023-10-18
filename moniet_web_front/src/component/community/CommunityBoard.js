@@ -55,21 +55,49 @@ const CommunityBoardItem = (props) => {
     const communityBoardNo = props.communityBoardNo;
 
     useEffect(() => {
-      axios
-        .get("/community/boardLike/" + communityBoardNo)
-        .then((res) => {
-          console.log(res.data);
-        })
-        .catch((res) => {
-          console.log(res.response.status);
-        });
-
       const likeBtn = document.querySelectorAll(
         ".board-item-like-icon > .thumb_up"
       )[index];
 
       likeBtn.classList.toggle("thumb_up2");
-    }, []);
+
+      console.log("likeBtn : " + likeBtn.className);
+
+      const token = window.localStorage.getItem("token");
+      if (likeBtn.className === "material-icons thumb_up thumb_up2") {
+        axios
+          .get("/community/insertBoardLike/" + communityBoardNo, {
+            headers: {
+              contentType: "multipart/form-data",
+              processdData: false,
+              Authorization: "Bearer " + token,
+            },
+          })
+          .then((res) => {
+            console.log(res.data);
+            console.log("게시물 좋아요 성공");
+          })
+          .catch((res) => {
+            console.log(res.response.status);
+          });
+      } else if (likeBtn.className === "material-icons thumb_up") {
+        axios
+          .get("/community/removeBoardLike/" + communityBoardNo, {
+            headers: {
+              contentType: "multipart/form-data",
+              processdData: false,
+              Authorization: "Bearer " + token,
+            },
+          })
+          .then((res) => {
+            console.log(res.data);
+            console.log("게시물 좋아요취소 성공");
+          })
+          .catch((res) => {
+            console.log(res.response.status);
+          });
+      }
+    });
 
     /* 따봉 클릭했을 때 위에서 클라스 토글 한번 돌고,
       여기서 axios로 추가하면 되는지,
