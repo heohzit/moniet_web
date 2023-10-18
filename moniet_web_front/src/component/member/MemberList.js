@@ -32,7 +32,7 @@ const MemberList = () => {
 
   return (
     <div className="memberlist-wrap">
-      <div className="memberlist-title">회원정보</div>
+      <div className="memberlist-title">회원 정보</div>
       <div className="id-search-input">
         <input
           type="text"

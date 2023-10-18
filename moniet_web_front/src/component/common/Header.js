@@ -39,7 +39,10 @@ const NaviSide = (props) => {
             <Link to="/member/mypage">마이페이지</Link>
             <ul className="submenu">
               <li>
-                <Link to="/memberlist">회원관리</Link>
+                <Link to="/memberlist">회원정보</Link>
+              </li>
+              <li>
+                <Link to="/adminCommunityList">커뮤니티관리</Link>
               </li>
             </ul>
           </li>
