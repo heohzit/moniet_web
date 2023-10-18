@@ -17,10 +17,12 @@ const ChallengeWrite = () => {
   const write = () => {
     console.log(challengeCategory);
     if (
+      challengeKind !== "" &&
       challengeTitle !== "" &&
       challengeStart !== "" &&
       challengeEnd !== "" &&
-      challengeAmount !== ""
+      challengeAmount !== "" &&
+      challengeCategory !== ""
     ) {
       const challenge = {
         challengeKind,

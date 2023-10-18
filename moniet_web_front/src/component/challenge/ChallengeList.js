@@ -111,14 +111,18 @@ const ChallengeLevel = () => {
   return (
     <div className="challenge-level">
       <p>나의 챌린지 레벨은 {challengeLevel}입니다.</p>
-      <div style={{ width: 200, height: 200 }}>
-        <LinearProgress
-          variant="determinate"
-          value={challengeLevel}
-          min={0}
-          max={100}
-        />
-      </div>
+      <LinearProgress
+        variant="determinate"
+        value={challengeLevel}
+        min={0}
+        max={100}
+        style={{
+          height: "50px",
+          borderRadius: "5px",
+          backgroundColor: "#eee",
+        }}
+        progressLabelPosition="inside"
+      />
     </div>
   );
 };

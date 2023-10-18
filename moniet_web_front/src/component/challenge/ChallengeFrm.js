@@ -98,7 +98,7 @@ const ChallengeFrm = (props) => {
                       setChallengeCategory(e.currentTarget.value)
                     }
                   >
-                    <option value="">지출챌린지 종류 선택</option>
+                    <option value="">지출챌린지 선택</option>
                     {spendingCate.map((item, index) =>
                       item.categoryTitle !== "저축" ? (
                         <option
