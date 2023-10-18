@@ -91,7 +91,7 @@ const CashbookModify = (props) => {
   return (
     <div>
       <CashbookFrm
-        isOpen={modifyFrmOpen}
+        isOpen={isOpen}
         closeFrm={closeFrm}
         title={title}
         dateString={dateString}

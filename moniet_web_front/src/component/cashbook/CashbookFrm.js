@@ -55,6 +55,7 @@ const CashbookFrm = (props) => {
   const incomeCate = props.incomeCate;
   const spendingCate = props.spendingCate;
   const clickEvent = props.clickEvent;
+  const cashbook = props.cashbook;
   const [toggleOn, setToggleOn] = useState(false);
 
   const toggle = () => {
