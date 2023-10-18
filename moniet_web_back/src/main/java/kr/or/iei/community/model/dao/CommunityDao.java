@@ -52,4 +52,13 @@ public interface CommunityDao {
 
 	int removeCommunityLike(int communityNo, int memberNo);
 
+	int insertBoardLike(int communityBoardNo, int memberNo);
+
+	int removeBoardLike(int communityBoardNo, int memberNo);
+
+	int updateLikeCount(int communityBoardNo);
+
+	int downLikeCount(int communityBoardNo);
+
+
 }

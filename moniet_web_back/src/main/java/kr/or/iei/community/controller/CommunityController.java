@@ -213,4 +213,16 @@ public class CommunityController {
 		return result;
 	}
 	
+	@GetMapping(value="/insertBoardLike/{communityBoardNo}")
+	public int insertBoardLike(@PathVariable int communityBoardNo, @RequestAttribute String memberId) {
+		int result = communityService.insertBoardLike(communityBoardNo, memberId);
+		return result;
+	}
+	
+	@GetMapping(value="/removeBoardLike/{communityBoardNo}")
+	public int removeBoardLike(@PathVariable int communityBoardNo, @RequestAttribute String memberId) {
+		int result = communityService.removeBoardLike(communityBoardNo, memberId);
+		return result;
+	}
+	
 }

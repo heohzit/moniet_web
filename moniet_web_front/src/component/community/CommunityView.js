@@ -85,6 +85,35 @@ const CommunityView = (props) => {
   //   });
   // };
 
+  const deleteCommunity = () => {
+    Swal.fire({
+      icon: "warning",
+      text: "커뮤니티를 삭제하시겠습니까?",
+      showCancelButton: true,
+      confirmButtonText: "삭제",
+      cancelButtonText: "취소",
+    })
+      .then((res) => {
+        if (res.isConfirmed) {
+          axios.get("/community/deleteCommunity/" + communityNo).then((res) => {
+            console.log(res.data);
+            if (res.data > 0) {
+              Swal.fire(
+                "삭제 완료",
+                "커뮤니티 삭제가 완료되었습니다.",
+                "success"
+              );
+            }
+          });
+        } else {
+          return;
+        }
+      })
+      .catch((res) => {
+        console.log(res.response.status);
+      });
+  };
+
   return (
     <div className="community-view-wrap">
       <div className="community-view-thumbnail">
@@ -154,10 +183,7 @@ const CommunityView = (props) => {
                 <span className="community-view-update-btn">수정</span>
               </div>
 
-              <div
-                className="community-view-delete"
-                onClick={"deleteCommunity"}
-              >
+              <div className="community-view-delete" onClick={deleteCommunity}>
                 <span className="community-view-delete-btn">삭제</span>
               </div>
             </>

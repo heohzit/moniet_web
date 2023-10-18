@@ -130,14 +130,14 @@ const CommentItem = (props) => {
   const member = props.member;
   const indexComment = props.indexComment;
 
-  console.log("커뮤니티내에 게시물 인덱스 : " + index);
-
   const ToggleRecomment = () => {
     const recommentBtn = document.querySelectorAll(
       ".comment-recomment-write-wrap"
     )[(index, indexComment)];
 
-    const selectComment = document.querySelector("#comment-recomment-write");
+    const selectComment = document.querySelector(
+      "#i" + index + "ic" + indexComment
+    );
 
     // recommentBtn.classList.toggle("showClass");
     selectComment.classList.toggle("showClass"); // 쿼리셀렉터로 id로 불러오고 걔한테 toggle주면 되는거 아닌가?
@@ -203,6 +203,7 @@ const CommentItem = (props) => {
           communityBoardNo={comment.comuBoardRef}
           comuBoardCommentNo={comment.comuBoardCommentNo}
           index={index}
+          indexComment={indexComment}
           member={member}
         />
         <RecommentList
