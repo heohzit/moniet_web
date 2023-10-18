@@ -29,6 +29,9 @@ const CashbookItem = (props) => {
   const checkClick = (e) => {
     e.stopPropagation();
   };
+
+  //수정하기용
+  const [modiFrmOpen, setModiFrmOpen] = useState(false);
   return (
     <>
       <tr className="cashbook-item" onClick={isOpen}>

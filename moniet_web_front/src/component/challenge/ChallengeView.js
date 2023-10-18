@@ -169,34 +169,39 @@ const ChallengeView = () => {
   return (
     <div className="challenge-view-content">
       <div className="challenge-kind">
-        {challenge.challengeKind === 1 ? (
-          <div>저축챌린지</div>
+        {challenge.challengeKind === 1 ? <div>저축</div> : <div>지출</div>}
+      </div>
+      <div className="category-kind">
+        {challenge.categoryTitle === null ? (
+          <></>
         ) : (
-          <div>지출챌린지</div>
+          <div>{challenge.categoryTitle}</div>
         )}
-        <div>{challenge.categoryTitle}</div>
       </div>
-      <div className="progress-ment">{ProgressMent(progress)}</div>
-      <div className="amount-info">
-        목표 금액: {goalAmount.toLocaleString()}원
-      </div>
-      <div className="amount-info">
-        현재 금액: {currentAmount.toLocaleString()}원
-      </div>
-      <CircularProgressBar
-        colorCircle="#ededed"
-        colorSlice="#e54e21"
-        percent={challenge.challengeKind === 1 ? progress : 100 - progress}
-        fontColor="#e54e21"
-        round={true}
-        fontSize="15px"
-        textPosition="1.5rem"
-      ></CircularProgressBar>
-      <div className="challenge-view-title">{challenge.challengeTitle}</div>
+      <h2 className="challenge-view-title">{challenge.challengeTitle}</h2>
       <div className="challenge-view-info">
         <div>{challenge.challengeStart}</div>
         <div>{challenge.challengeEnd}</div>
       </div>
+      <div className="challenge-progress">
+        <div className="progress-bar">
+          <CircularProgressBar
+            colorCircle="#fff"
+            colorSlice="#e54e21"
+            percent={challenge.challengeKind === 1 ? progress : 100 - progress}
+            fontColor="#e54e21"
+            round={true}
+            fontSize="15px"
+            textPosition="1.5rem"
+          ></CircularProgressBar>
+        </div>
+        <div className="amount-info">
+          목표 금액: {goalAmount.toLocaleString()}원 현재 금액:
+          {currentAmount.toLocaleString()}원
+        </div>
+      </div>
+      <div className="progress-ment">{ProgressMent(progress)}</div>
+
       <div className="challenge-btn-box">
         {challenge.challengeResult === 2 ||
         challenge.challengeResult === 1 ||
@@ -204,8 +209,8 @@ const ChallengeView = () => {
           ""
         ) : (
           <>
-            <Button3 clickEvent={changeChallenge} text="포기하기"></Button3>
-            <Button3 clickEvent={deleteChallenge} text="삭제하기"></Button3>
+            <Button3 clickEvent={changeChallenge} text="챌린지 포기"></Button3>
+            <Button3 clickEvent={deleteChallenge} text="챌린지 삭제"></Button3>
           </>
         )}
       </div>

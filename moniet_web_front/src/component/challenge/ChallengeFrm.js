@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import SavingsRoundedIcon from "@mui/icons-material/SavingsRounded";
 import CalendarMonthRoundedIcon from "@mui/icons-material/CalendarMonthRounded";
+import MoodRoundedIcon from "@mui/icons-material/MoodRounded";
 
 //챌린지 작성 폼
 const ChallengeFrm = (props) => {
@@ -32,6 +33,7 @@ const ChallengeFrm = (props) => {
       setChallengeAmount("");
     }
   };
+
   //챌린지 옵션
   const onChangeHanlder = (e) => {
     setChallengeKind(e.currentTarget.value);
@@ -77,12 +79,7 @@ const ChallengeFrm = (props) => {
           <tbody>
             <tr>
               <td>
-                <label htmlFor="challengeKind">
-                  <SavingsRoundedIcon />
-                  머니챌린지 선택
-                </label>
-              </td>
-              <td>
+                <label htmlFor="challengeKind">머니챌린지 선택</label>
                 <select onChange={onChangeHanlder} value={challengeKind}>
                   {Options.map((item, index) => (
                     <option key={item.key} value={item.key} selected>
@@ -118,9 +115,10 @@ const ChallengeFrm = (props) => {
             </tr>
             <tr>
               <td>
-                <label htmlFor="challengeTitle">머니챌린지 다짐한마디!</label>
-              </td>
-              <td>
+                <label htmlFor="challengeTitle">
+                  <MoodRoundedIcon style={{}} />
+                  머니챌린지 다짐한마디!
+                </label>
                 <Input
                   type="text"
                   data={challengeTitle}
@@ -136,8 +134,6 @@ const ChallengeFrm = (props) => {
                   <CalendarMonthRoundedIcon />
                   시작일자
                 </label>
-              </td>
-              <td>
                 <Input
                   type="date"
                   data={challengeStart}
@@ -154,8 +150,6 @@ const ChallengeFrm = (props) => {
                   <CalendarMonthRoundedIcon />
                   종료일자
                 </label>
-              </td>
-              <td>
                 <Input
                   type="date"
                   data={challengeEnd}
@@ -167,9 +161,10 @@ const ChallengeFrm = (props) => {
             </tr>
             <tr>
               <td>
-                <label htmlFor="challengeAmount">목표 금액</label>
-              </td>
-              <td>
+                <label htmlFor="challengeAmount">
+                  <SavingsRoundedIcon />
+                  목표 금액
+                </label>
                 <Input
                   type="text"
                   data={challengeAmount}

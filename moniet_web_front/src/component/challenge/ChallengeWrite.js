@@ -21,8 +21,7 @@ const ChallengeWrite = () => {
       challengeTitle !== "" &&
       challengeStart !== "" &&
       challengeEnd !== "" &&
-      challengeAmount !== "" &&
-      challengeCategory !== ""
+      challengeAmount !== ""
     ) {
       const challenge = {
         challengeKind,

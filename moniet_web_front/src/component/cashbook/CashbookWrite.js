@@ -44,10 +44,16 @@ const CashbookWrite = (props) => {
 
   const write = () => {
     const token = window.localStorage.getItem("token");
+    console.log(cashbookLoop);
     const cashbook = {
       cashbookFinance: cashbookFinance,
       cashbookDate: dateString(cashbookDate),
-      cashbookLoop: cashbookLoop,
+      cashbookLoop:
+        cashbookLoop !== 0
+          ? loopMonth === 0
+            ? 0
+            : cashbookLoop
+          : cashbookLoop,
       loopMonth: loopMonth,
       cashbookAsset: cashbookAsset,
       cashbookCategory: cashbookCategory,
@@ -64,7 +70,7 @@ const CashbookWrite = (props) => {
         },
       })
       .then((res) => {
-        if (res.data === 1) {
+        if (res.data === 1 || -1) {
           setCashbookFinance(2);
           setCashbookDate(new Date());
           setCashbookLoop(0);

@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button3 } from "../util/Buttons";
-
+import "./challenge.css";
 //종료된 챌린지
 const loadCount = 4;
 const EndChallenge = () => {
@@ -97,12 +97,20 @@ const ChallengeItem = (props) => {
       <div className="challenge-item-info">
         <div className="challenge-kind">
           {challenge.challengeKind === 1 ? <div>저축</div> : <div>지출</div>}
-          {challenge.categoryTitle}
         </div>
-        <div>{challenge.challengeTitle}</div>
+        <div className="category-kind">
+          {challenge.categoryTitle === null ? (
+            <></>
+          ) : (
+            <div>{challenge.categoryTitle}</div>
+          )}
+        </div>
+        <h2>{challenge.challengeTitle}</h2>
+        {/*
         <div className="challenge-result">
           {ImgDiv(challenge.challengeResult)}
         </div>
+        */}
       </div>
     </div>
   );

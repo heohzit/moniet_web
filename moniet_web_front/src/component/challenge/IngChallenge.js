@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button3 } from "../util/Buttons";
+import "./challenge.css";
 
 //진행중인 챌린지
 const loadCount = 4;
@@ -97,9 +98,15 @@ const ChallengeItem = (props) => {
       <div className="challenge-item-info">
         <div className="challenge-kind">
           {challenge.challengeKind === 1 ? <div>저축</div> : <div>지출</div>}
-          {challenge.categoryTitle}
         </div>
-        <div>{challenge.challengeTitle}</div>
+        <div className="category-kind">
+          {challenge.categoryTitle === null ? (
+            <></>
+          ) : (
+            <div>{challenge.categoryTitle}</div>
+          )}
+        </div>
+        <h2>{challenge.challengeTitle}</h2>
         <Dayday challenge={challenge}></Dayday>
         <div className="challenge-result">
           {ImgDiv(challenge.challengeResult)}
@@ -132,7 +139,10 @@ const Dayday = (props) => {
   }, []);
   return (
     <div className="challenge-content">
-      <p>종료일까지 {dday.days}일 남았습니다.</p>
+      <p>
+        종료일까지 <strong className="day-strong">{dday.days}</strong>일
+        남았습니다.
+      </p>
     </div>
   );
 };

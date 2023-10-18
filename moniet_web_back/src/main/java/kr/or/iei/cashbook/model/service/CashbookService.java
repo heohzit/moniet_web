@@ -1,5 +1,9 @@
 package kr.or.iei.cashbook.model.service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -64,7 +68,35 @@ public class CashbookService {
 
 	@Transactional
 	public int insertCashbook(Cashbook cashbook) {
-		int result=cashbookDao.insertCashbook(cashbook);
+		int result=0;
+		int cashbookLoop = cashbook.getCashbookLoop();
+		if(cashbookLoop == 0) {
+			result = cashbookDao.insertCashbook(cashbook);
+		} else if(cashbookLoop == 2) {	//할부 일때 
+			int loopMonth = cashbook.getLoopMonth();
+			for(int i =0 ; i<cashbook.getLoopMonth() ; i++ ) {
+				cashbook.setLoopRound(i+1);
+				cashbook.setCashbookMoney(cashbook.getCashbookMoney()/loopMonth);
+				SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd");
+				try {
+					//string>date
+					Date date = format.parse(cashbook.getCashbookDate());
+					Calendar cal = Calendar.getInstance();
+					cal.setTime(date);
+					cal.add(Calendar.MONTH, 1);
+					//date>string
+					String dateStr = format.format(cal.getTime());
+					cashbook.setCashbookDate(dateStr);
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				result+=cashbookDao.insertCashbook(cashbook);
+				if(result == cashbook.getLoopMonth()) {
+					result = -1;//성공여부 확인용
+				}
+			}
+		}
 		int challengeNo = cashbook.getChallengeNo();
 		String memberId = cashbook.getMemberId();
 		if(result==1) {
