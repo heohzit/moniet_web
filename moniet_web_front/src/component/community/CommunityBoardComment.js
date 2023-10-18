@@ -9,6 +9,8 @@ import RecommentWrite from "./RecommentWrite";
 import RecommentList from "./RecommentList";
 
 const CommunityBoardComment = (props) => {
+  const comuBoardCommentCount = props.comuBoardCommentCount;
+  const member = props.member;
   const index = props.index;
   const isLogin = props.isLogin;
   const [boardCommentList, setBoardCommentList] = useState([]);
@@ -47,6 +49,7 @@ const CommunityBoardComment = (props) => {
               key={"comment" + index}
               comment={comment}
               index={index}
+              member={member}
             />
           );
         })}
@@ -123,6 +126,9 @@ const CommentItem = (props) => {
   const index = props.index;
   const comment = props.comment;
   const navigate = useNavigate();
+  const member = props.member;
+
+  console.log("커뮤니티내에 게시물 인덱스 : " + index);
 
   const ToggleRecomment = () => {
     const recommentBtn = document.querySelectorAll(
@@ -132,7 +138,32 @@ const CommentItem = (props) => {
     recommentBtn.classList.toggle("showClass");
   };
 
-  console.log(comment);
+  // console.log(comment);
+
+  const deleteComment = () => {
+    console.log(comment);
+    Swal.fire({
+      icon: "warning",
+      text: "댓글을 삭제하시겠습니까?",
+      showCancelButton: true,
+      confirmButtonText: "삭제",
+      cancelButtonText: "취소",
+    }).then((res) => {
+      if (res.isConfirmed) {
+        axios
+          .get("/community/removeComment/" + comment.comuBoardCommentNo)
+          .then((res) => {
+            console.log(res.data);
+            console.log("성공");
+          })
+          .catch((res) => {
+            console.log(res.response.status);
+          });
+      } else {
+        return;
+      }
+    });
+  };
 
   return (
     <div className="board-item-comment-list">
@@ -145,8 +176,16 @@ const CommentItem = (props) => {
         <div className="comment-recomment-btn" onClick={ToggleRecomment}>
           답글달기
         </div>
-        <div className="comment-update">수정</div>
-        <div className="comment-delete">삭제</div>
+        {member && member.memberNo == comment.comuBoardCommentWriter ? (
+          <>
+            <div className="comment-update">수정</div>
+            <div className="comment-delete" onClick={deleteComment}>
+              삭제
+            </div>
+          </>
+        ) : (
+          ""
+        )}
       </div>
       <div className="comment-content">{comment.comuBoardCommentContent}</div>
       <div className="comment-recomment-wrap">
@@ -159,11 +198,13 @@ const CommentItem = (props) => {
           communityBoardNo={comment.comuBoardRef}
           comuBoardCommentNo={comment.comuBoardCommentNo}
           index={index}
+          member={member}
         />
         <RecommentList
           communityBoardNo={comment.comuBoardRef}
           comuBoardCommentNo={comment.comuBoardCommentNo}
           index={index}
+          member={member}
         />
       </div>
     </div>

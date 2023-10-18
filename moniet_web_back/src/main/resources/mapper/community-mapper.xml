@@ -143,8 +143,9 @@
 	        TO_CHAR(COMMUNITY_BOARD_DATE, 'YYYY.MM.DD AM HH"시"MI"분"') AS COMMUNITY_BOARD_DATE,
 	        COMMUNITY_REF,
 	        COMMUNITY_BOARD_REF,
-	        COMMUNITY_BOARD_LIKE
-	    FROM COMMUNITY_BOARD
+	        COMMUNITY_BOARD_LIKE,
+	        (select count(*) from comu_board_comment where comu_board_ref = cb.COMMUNITY_BOARD_NO) as comu_board_comment_count
+	    FROM COMMUNITY_BOARD cb
 	    JOIN MEMBER ON (COMMUNITY_BOARD_WRITER = MEMBER_NO)
 	    WHERE COMMUNITY_REF = #{communityNo}
 	    ORDER BY 1 DESC)C)
@@ -171,6 +172,7 @@
 		<result column="community_ref" property="communityRef" />
 		<result column="community_board_ref" property="communityBoardRef" />
 		<result column="community_board_like" property="communityBoardLike" />
+		<result column="comu_board_comment_count" property="comuBoardCommentCount" />
 		
 		<collection 
 			property="communityBoardTypeList"
@@ -217,7 +219,8 @@
 			comu_board_comment_ref
 		from COMU_BOARD_COMMENT
 		join member on (comu_board_comment_writer = member_no)
-		where comu_board_ref = #{communityBoardNo} and comu_board_comment_ref is null
+		where comu_board_ref =#{communityBoardNo} and comu_board_comment_ref is null
+		
 	</select>
 
 	<insert id="insertBoardComment">
@@ -243,7 +246,15 @@
 			comu_board_comment_ref
 		from COMU_BOARD_COMMENT
 		join member on (comu_board_comment_writer = member_no)
-		where comu_board_ref = #{communityBoardNo} and comu_board_comment_ref = #{comuBoardCommentNo} and comu_board_comment_ref is not null
+		where comu_board_ref = #{comuBoardRef} and comu_board_comment_ref = #{comuBoardCommentRef} and comu_board_comment_ref is not null
 	</select>
+	
+	<insert id="boardlike">
+		<!-- insert into community_board_like values (#{}, #{})  -->
+	</insert>
+	
+	<delete id="removeComment">
+		delete from comu_board_comment where comu_board_comment_no = #{comuBoardCommentNo}
+	</delete>
 
 </mapper>

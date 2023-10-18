@@ -124,9 +124,24 @@ public class CommunityService {
 		return result;
 	}
 
-	public List recommentList(int reqPage, int communityBoardNo) {
-		List list = communityDao.recommentList(communityBoardNo);
+	public List recommentList(ComuBoardComment cbc) {
+		
+		List list = communityDao.recommentList(cbc);
+		System.out.println("cbc : "+cbc);
 		return list;
 	}
+
+	public int boardlike(CommunityBoard c, int communityBoardNo) {
+		System.out.println("service c : "+c);
+		System.out.println("service communityBoardNo : "+c);
+//		int result = communityDao.boardlike(c, communityBoardNo);
+		return 0;
+	}
+
+	public int removeComment(int comuBoardCommentNo) {
+		int result = communityDao.removeComment(comuBoardCommentNo);
+		return result;
+	}
+
 
 }

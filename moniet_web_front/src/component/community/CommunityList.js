@@ -66,6 +66,7 @@ const CommuintyList = (props) => {
               key={"community" + index}
               community={community}
               isLogin={isLogin}
+              index={index}
             />
           );
         })}
@@ -79,9 +80,12 @@ const CommuintyList = (props) => {
 };
 
 const CommunityItem = (props) => {
+  const index = props.index;
   const isLogin = props.isLogin;
   const community = props.community;
   const navigate = useNavigate();
+  const [heart, setHeart] = useState(false);
+
   const communityView = (props) => {
     if (isLogin) {
       navigate("/community/view", {
@@ -92,10 +96,14 @@ const CommunityItem = (props) => {
     }
   };
 
+  const communityLike = () => {
+    setHeart(!heart);
+  };
+
   return (
     <div className="community-item-wrap">
-      <div className="community-item" onClick={communityView}>
-        <div className="community-item-img">
+      <div className="community-item">
+        <div className="community-item-img" onClick={communityView}>
           {community.communityThumb === null ? (
             <img src="/image/default.png" className="default-img" />
           ) : (
@@ -128,8 +136,15 @@ const CommunityItem = (props) => {
           </div>
         </div>
         <div className="heart-btns">
-          <span class="material-icons ab-btn1">favorite_border</span>
-          <span class="material-icons ab-btn2">favorite</span>
+          {heart ? (
+            <span class="material-icons ab-btn2" onClick={communityLike}>
+              favorite
+            </span>
+          ) : (
+            <span class="material-icons ab-btn1" onClick={communityLike}>
+              favorite_border
+            </span>
+          )}
         </div>
         <span class="material-icons sh-btn1">share</span>
       </div>

@@ -42,7 +42,7 @@ const CashbookDel = (props) => {
         })
         .then((res) => {
           setCheckItems([]);
-          setSelect(!select); //첫번째는 잘되는데 두번째는 안됨(삭제도 안됨) 확인필요
+          setSelect(!select);
           onOpenClickHandler();
         })
         .catch((res) => {

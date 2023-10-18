@@ -1,0 +1,51 @@
+.date-list {
+  border: 1px solid rgba(106, 109, 166, 0.3);
+  border-radius: 5px;
+  box-sizing: border-box;
+  background-color: #fff;
+}
+.date-list.total-box {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.list-box {
+  margin: 20px;
+  padding: 20px;
+  display: flex;
+  justify-content: flex-start;
+}
+.box-style {
+  width: 100px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.date-list > .box-style:nth-child(2) {
+  width: 150px;
+}
+.date-list > .box-style:nth-child(3) {
+  padding-right: 0;
+  text-align: right;
+}
+.box-style > span {
+  font-size: 14px;
+}
+.date-finance {
+  justify-content: space-evenly;
+  margin-top: 10px;
+}
+.cal-list-label {
+  padding-left: 20px;
+}
+.date-finance.date-list-over {
+  height: 600px;
+  overflow-y: auto;
+}
+.MuiSvgIcon-root.small-add {
+  width: 20px;
+  height: 20px;
+}
+.cal-title-zone {
+  display: flex;
+  justify-content: space-between;
+}

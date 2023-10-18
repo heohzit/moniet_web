@@ -39,6 +39,7 @@ public interface CashbookDao {
 
 	List cashbookListIncome(Cashbook cashbook);
 
+	List calList(Cashbook cashbook);
 
 
 

@@ -36,6 +36,10 @@ public interface CommunityDao {
 
 	int insertBoardComment(ComuBoardComment c);
 
-	List recommentList(int communityBoardNo);
+	List recommentList(ComuBoardComment cbc);
+
+	int boardlike(CommunityBoard c, int communityBoardNo);
+
+	int removeComment(int comuBoardCommentNo);
 
 }

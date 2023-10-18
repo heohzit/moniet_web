@@ -29,4 +29,6 @@ public class CommunityBoard {
 	private String memberId;
 	private List communityBoardTypeList;
 	
+	private int comuBoardCommentCount;
+	
 }

@@ -5,8 +5,6 @@ import DownloadIcon from "@mui/icons-material/Download";
 const CashbookDown = (props) => {
   const cashbookList = props.cashbookList;
   const assetToString = props.assetToString;
-  const incomeCate = props.incomeCate;
-  const spendingCate = props.spendingCate;
 
   const excelFileType =
     "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8";

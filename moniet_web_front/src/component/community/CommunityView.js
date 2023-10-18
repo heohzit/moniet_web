@@ -21,12 +21,14 @@ const CommunityView = (props) => {
   const [community, setCommunity] = useState({});
   const [member, setMember] = useState(null);
   const navigate = useNavigate();
+  const [rendering, setRendering] = useState(false);
 
   useEffect(() => {
     axios
       .get("/community/view/" + communityNo)
       .then((res) => {
         setCommunity(res.data);
+        // setRendering(!rendering);
       })
       .catch((res) => {
         console.log(res.response.status);
@@ -170,10 +172,18 @@ const CommunityView = (props) => {
       <div className="community-view-board-zone">
         <div className="board-top">게시물 등록 〉</div>
         <div className="community-view-board-write">
-          <CommunityBoardWrite communityNo={communityNo} />
+          <CommunityBoardWrite
+            communityNo={communityNo}
+            rendering={rendering}
+            setRendering={setRendering}
+          />
         </div>
         <div className="community-view-board-list">
-          <CommunityBoard communityNo={communityNo} isLogin={isLogin} />
+          <CommunityBoard
+            communityNo={communityNo}
+            isLogin={isLogin}
+            member={member}
+          />
         </div>
       </div>
     </div>

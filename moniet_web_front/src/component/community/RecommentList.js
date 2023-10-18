@@ -11,6 +11,7 @@ const RecommentList = (props) => {
   const [reqPage, setReqPage] = useState(1);
   const communityBoardNo = props.communityBoardNo;
   const comuBoardCommentNo = props.comuBoardCommentNo;
+  const member = props.member;
 
   useEffect(() => {
     axios
@@ -23,7 +24,7 @@ const RecommentList = (props) => {
           comuBoardCommentNo
       )
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setRecommentList(res.data);
       })
       .catch((res) => {
@@ -39,6 +40,7 @@ const RecommentList = (props) => {
             key={"recomment" + index}
             recomment={recomment}
             index={index}
+            member={member}
           />
         );
       })}
@@ -47,9 +49,50 @@ const RecommentList = (props) => {
 };
 
 const RecommentItem = (props) => {
+  const member = props.member;
   const index = props.index;
   const recomment = props.recomment;
   const navigate = useNavigate();
+
+  const updateComment = () => {
+    Swal.fire({
+      icon: "warning",
+      text: "댓글을 수정하시겠습니까?",
+      showCancelButton: true,
+      confirmButtonText: "확인",
+      cancelButtonText: "취소",
+    }).then((res) => {
+      if (res.isConfirmed) {
+        // 수정하시겠습니까? 확인 누르면 textarea로 바뀌면서 수정하는 법
+      } else {
+        return;
+      }
+    });
+  };
+
+  const deleteComment = () => {
+    Swal.fire({
+      icon: "warning",
+      text: "댓글을 삭제하시겠습니까?",
+      showCancelButton: true,
+      confirmButtonText: "삭제",
+      cancelButtonText: "취소",
+    }).then((res) => {
+      if (res.isConfirmed) {
+        axios
+          .get("/community/removeComment/" + recomment.comuBoardCommentNo)
+          .then((res) => {
+            console.log(res.data);
+            console.log("성공");
+          })
+          .catch((res) => {
+            console.log(res.response.status);
+          });
+      } else {
+        return;
+      }
+    });
+  };
 
   return (
     <>
@@ -59,12 +102,22 @@ const RecommentItem = (props) => {
         </div>
         <div className="recomment-writer">{recomment.memberId}</div>
         <div className="recomment-date">{recomment.comuBoardCommentDate}</div>
-        <div className="recomment-recomment-btn">답글달기</div>
-        <div className="recomment-update">수정</div>
-        <div className="recomment-delete">삭제</div>
-        <div className="recomment-content">
-          {recomment.comuBoardCommentContent}
-        </div>
+        <div className="recomment-recomment-btn"></div>
+        {member && member.memberNo == recomment.comuBoardCommentWriter ? (
+          <>
+            <div className="recomment-update" onClick={updateComment}>
+              수정
+            </div>
+            <div className="recomment-delete" onClick={deleteComment}>
+              삭제
+            </div>
+          </>
+        ) : (
+          ""
+        )}
+      </div>
+      <div className="recomment-content">
+        {recomment.comuBoardCommentContent}
       </div>
     </>
   );

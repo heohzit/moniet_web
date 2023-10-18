@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import kr.or.iei.cashbook.model.service.CashbookService;
+import kr.or.iei.cashbook.model.vo.CalendarElement;
 import kr.or.iei.cashbook.model.vo.Cashbook;
 import kr.or.iei.cashbook.model.vo.Category;
 import kr.or.iei.challenge.model.service.ChallengeService;
@@ -31,6 +32,7 @@ public class CashbookController {
 	@PostMapping(value="/list")
 	public Map cashbookList(@RequestBody Cashbook cashbook, @RequestAttribute String memberId) {
 		cashbook.setMemberId(memberId);
+		//System.out.println(cashbook);
 		List cashbookList = cashbookService.cashbookList(cashbook);
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("cashbookList", cashbookList);
@@ -64,9 +66,9 @@ public class CashbookController {
 	
 	@PostMapping(value="/categoryList")
 	public Map categoryList(@RequestAttribute String memberId) {
-		System.out.println("카테고리:"+memberId);
+		//System.out.println("카테고리:"+memberId);
 		List<Category> categoryList = cashbookService.categoryList(memberId);
-		System.out.println(categoryList);
+		//System.out.println(categoryList);
 		List incomeCategory = new ArrayList<Category>();
 		List spendingCategory = new ArrayList<Category>();
 		List challengeCategory = challengeService.challengeListsByMember(memberId);
@@ -95,8 +97,6 @@ public class CashbookController {
 	@PostMapping(value="/delete")
 	public boolean deleteCashbook(@RequestBody String cashbookNos, @RequestAttribute String memberId) {
 		String cashbookNoArr = cashbookNos.replace("=", "");
-		System.out.println("cashbookNos : " + cashbookNos);
-		System.out.println("cashbookNoArr : " + cashbookNoArr);
 		boolean result = cashbookService.deleteCashbook(cashbookNoArr, memberId);
 		return result;
 	}
@@ -104,9 +104,22 @@ public class CashbookController {
 	@PostMapping(value="/update")
 	public int updateCashbook(@RequestBody Cashbook cashbook, @RequestAttribute String memberId) {
 		cashbook.setMemberId(memberId);
-		System.out.println("아이디 : "+cashbook.getMemberId());
-		System.out.println("번호:"+cashbook.getCashbookNo());
+		//System.out.println("아이디 : "+cashbook.getMemberId());
+		//System.out.println("번호:"+cashbook.getCashbookNo());
 		return cashbookService.updateCashbook(cashbook);
 	}
-
+	
+	//달력 화면 표시용
+	@PostMapping(value="/calList")
+	public Map selectCalList(@RequestBody Cashbook cashbook, @RequestAttribute String memberId) {
+		cashbook.setMemberId(memberId);
+		List calList = cashbookService.calList(cashbook);
+		for(Object obj: calList) {
+			CalendarElement ce = (CalendarElement) obj;
+			ce.setDate(ce.getCashbookDate());
+		}
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("calList", calList);
+	return map;
+	}
 }
