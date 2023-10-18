@@ -106,11 +106,9 @@ const ChallengeItem = (props) => {
           )}
         </div>
         <h2>{challenge.challengeTitle}</h2>
-        {/*
         <div className="challenge-result">
           {ImgDiv(challenge.challengeResult)}
         </div>
-        */}
       </div>
     </div>
   );

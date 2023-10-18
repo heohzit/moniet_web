@@ -10,11 +10,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.iei.challenge.model.dao.ChallengeDao;
 import kr.or.iei.challenge.model.vo.Challenge;
+import kr.or.iei.member.model.dao.MemberDao;
 
 @Service
 public class ChallengeService {
 	@Autowired
 	private ChallengeDao challengeDao;
+	@Autowired
+	private MemberDao memberDao;
 	
 	//챌린지 목록
 	public Map challengeList1(String memberId) {
@@ -61,9 +64,13 @@ public class ChallengeService {
 	
 	//챌린지 포기
 	@Transactional
-	public int changeChallenge(Challenge c) {
-		// TODO Auto-generated method stub
-		return challengeDao.changeChallenge(c);
+	public int changeChallenge(Challenge c,String memberId) {
+		int result = challengeDao.changeChallenge(c);
+		System.out.println(result);
+		if(result==1) {
+			memberDao.downLevel(memberId);
+		}
+		return result;
 	}
 	
 	//챌린지 기간 종료
@@ -73,8 +80,8 @@ public class ChallengeService {
 	}
 	
 	//챌린지 레벨 조회
-	public String challengeLevel(String memberId) {
-		String challenge = challengeDao.challengeLevel(memberId);
+	public int challengeLevel(String memberId) {
+		int challenge = challengeDao.challengeLevel(memberId);
 		return challenge;
 	}
 

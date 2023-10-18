@@ -56,6 +56,17 @@
 	]]>
 	</update>
 	
+	<!--포기시 레벨다운-->
+	<update id="downMember">
+	<![CDATA[
+		update member set challenge_status =case
+			when challenge_status-1 < 0 then 0
+			else challenge_status-1
+		end
+		where member_no = #{memberNo}
+	]]>
+	</update>
+	
 
 	
 	

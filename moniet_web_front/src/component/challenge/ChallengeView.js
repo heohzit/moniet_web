@@ -146,9 +146,17 @@ const ChallengeView = () => {
       cancelButtonText: "취소",
     }).then((res) => {
       if (res.isConfirmed) {
-        const obj = { challengeNo: challenge.challengeNo, challengeResult: 2 };
+        const obj = {
+          challengeNo: challenge.challengeNo,
+          challengeResult: 2,
+        };
+        const token = window.localStorage.getItem("token");
         axios
-          .post("/challenge/changeChallenge", obj)
+          .post("/challenge/changeChallenge", obj, {
+            headers: {
+              Authorization: "Bearer " + token,
+            },
+          })
           .then((res) => {
             if (res.data === 1) {
               navigate("/challenge");

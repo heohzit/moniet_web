@@ -32,6 +32,9 @@ public interface MemberDao {
 	
 	//챌린지 성공했을때 레벨다운
 	void downLevel(String memberId);
+	
+	//챌린지 포기했을때 레벨다운
+	void downMember(int memberNo);
 
 	
 
