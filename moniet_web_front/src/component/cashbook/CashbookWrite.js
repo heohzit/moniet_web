@@ -44,7 +44,6 @@ const CashbookWrite = (props) => {
 
   const write = () => {
     const token = window.localStorage.getItem("token");
-    console.log(cashbookLoop);
     const cashbook = {
       cashbookFinance: cashbookFinance,
       cashbookDate: dateString(cashbookDate),

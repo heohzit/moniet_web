@@ -31,10 +31,18 @@ const CashbookItem = (props) => {
   };
 
   //수정하기용
-  const [modiFrmOpen, setModiFrmOpen] = useState(false);
+  const [modifyFrmOpen, setModifyFrmOpen] = useState(false);
+  const isModiOpen = () => {
+    setModifyFrmOpen(true);
+  };
+  const modiClose = (e) => {
+    setModifyFrmOpen(false);
+    //e.stopPropagation();
+  };
+
   return (
     <>
-      <tr className="cashbook-item" onClick={isOpen}>
+      <tr className="cashbook-item" onClick={isModiOpen}>
         <td onClick={checkClick}>
           <input
             type="checkbox"
@@ -63,8 +71,8 @@ const CashbookItem = (props) => {
         <td>
           <CashbookModify
             cashbook={cashbook}
-            isOpen={isOpen}
-            closeFrm={closeFrm}
+            isOpen={modifyFrmOpen}
+            closeFrm={modiClose}
             title={"수정"}
             dateString={dateString}
             select={select}
@@ -74,6 +82,7 @@ const CashbookItem = (props) => {
             challengeCate={challengeCate}
             incomeCate={incomeCate}
             spendingCate={spendingCate}
+            modifyFrmOpen={modifyFrmOpen}
           />
         </td>
       </tr>

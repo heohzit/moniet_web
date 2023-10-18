@@ -188,6 +188,7 @@ const DateList = (props) => {
                   select={select}
                   setSelect={setSelect}
                   modifyFrmOpen={modifyFrmOpen}
+                  setModifyFrmOpen={setModifyFrmOpen}
                   assetList={assetList}
                   challengeCate={challengeCate}
                   incomeCate={incomeCate}
