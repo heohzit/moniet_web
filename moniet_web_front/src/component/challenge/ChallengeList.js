@@ -9,7 +9,6 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import LinearProgress from "@mui/material/LinearProgress";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { blue } from "@mui/material/colors";
 import "./challenge.css";
 
 const theme = createTheme({

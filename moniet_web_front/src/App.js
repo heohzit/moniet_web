@@ -15,6 +15,14 @@ import AgreeBox from "./component/member/AgreeBox";
 import FindPw from "./component/member/FindPw";
 import FindID from "./component/member/FindID";
 import CashCalendarMain from "./component/cashCalendar/CashCalendarMain";
+import SideBar from "./component/common/SideBar";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+
+const theme = createTheme({
+  typography: {
+    fontFamily: "ns-r",
+  },
+});
 
 function App() {
   const [isLogin, setIsLogin] = useState(null);
@@ -29,56 +37,57 @@ function App() {
   }, []);
 
   return (
-    <div className="App">
-      <Header isLogin={isLogin} setIsLogin={setIsLogin}></Header>
-      <div className="App-content">
-        <Routes>
-          <Route path="/" element={<Main></Main>}></Route>
-          <Route
-            path="/dashboard/*"
-            element={<DashboardMain></DashboardMain>}
-          ></Route>
-          <Route
-            path="/challenge/*"
-            element={<ChallengeMain />}
-            isLogin={isLogin}
-            setIsLogin={setIsLogin}
-          />
-          <Route
-            path="/cashbook/*"
-            element={<CashbookMain />}
-            isLogin={isLogin}
-            setIsLogin={setIsLogin}
-          />
-          <Route
-            path="/community/*"
-            element={
-              <CommunityMain isLogin={isLogin} setIsLogin={setIsLogin} />
-            }
-          />
-          <Route
-            path="/cashCalendar/*"
-            element={<CashCalendarMain />}
-            isLogin={isLogin}
-            setIsLogin={setIsLogin}
-          />
-          <Route path="/join" element={<AgreeBox />} />
-          <Route path="/joinfrm" element={<Join />} />
-          <Route path="/login" element={<Login setIsLogin={setIsLogin} />} />
-          <Route path="/findId" element={<FindID />} />
-          <Route path="/findPw" element={<FindPw />} />
-          <Route
-            path="/member/myinfo"
-            element={<Myinfo isLogin={isLogin} setIsLogin={setIsLogin} />}
-          />
-          <Route
-            path="/member/*"
-            element={<MemberMain setIsLogin={setIsLogin} isLogin={isLogin} />}
-          />
-        </Routes>
+    <ThemeProvider theme={theme}>
+      <div className="App">
+        <SideBar></SideBar>
+        <div className="App-content">
+          <Routes>
+            <Route path="/" element={<Main></Main>}></Route>
+            <Route
+              path="/dashboard/*"
+              element={<DashboardMain></DashboardMain>}
+            ></Route>
+            <Route
+              path="/challenge/*"
+              element={<ChallengeMain />}
+              isLogin={isLogin}
+              setIsLogin={setIsLogin}
+            />
+            <Route
+              path="/cashbook/*"
+              element={<CashbookMain />}
+              isLogin={isLogin}
+              setIsLogin={setIsLogin}
+            />
+            <Route
+              path="/community/*"
+              element={
+                <CommunityMain isLogin={isLogin} setIsLogin={setIsLogin} />
+              }
+            />
+            <Route
+              path="/cashCalendar/*"
+              element={<CashCalendarMain />}
+              isLogin={isLogin}
+              setIsLogin={setIsLogin}
+            />
+            <Route path="/join" element={<AgreeBox />} />
+            <Route path="/joinfrm" element={<Join />} />
+            <Route path="/login" element={<Login setIsLogin={setIsLogin} />} />
+            <Route path="/findId" element={<FindID />} />
+            <Route path="/findPw" element={<FindPw />} />
+            <Route
+              path="/member/myinfo"
+              element={<Myinfo isLogin={isLogin} setIsLogin={setIsLogin} />}
+            />
+            <Route
+              path="/member/*"
+              element={<MemberMain setIsLogin={setIsLogin} isLogin={isLogin} />}
+            />
+          </Routes>
+        </div>
       </div>
-      <Footer></Footer>
-    </div>
+    </ThemeProvider>
   );
 }
 

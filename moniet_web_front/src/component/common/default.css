@@ -26,6 +26,7 @@
   margin: 0;
   padding: 0;
   font-family: ns-r;
+  font-size: 18px;
 }
 a {
   text-decoration: none;
@@ -65,17 +66,16 @@ footer {
   padding: 50px;
   background-color: #f0f1f2;
 }
+
 /*메인 css*/
 .App {
   display: flex;
-  flex-direction: column;
   min-height: 100vh;
 }
 .App-content {
-  flex: 1;
   width: 1000px;
-  margin: 0px auto;
-  padding-left: 100px;
+  margin: 80px;
+  margin-left: 300px;
 }
 
 /*member sub 메뉴 css*/
