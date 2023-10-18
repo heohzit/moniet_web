@@ -24,6 +24,7 @@ public class Cashbook {
 	private String cashbookContent;
 	private String cashbookMemo;
 	private int challengeNo;
+	private int loopRound;		//할부 회차 저장용(몇번째 할부인지 저장하기 위함)
 	
 	//화면 노출용
 	private String memberId;

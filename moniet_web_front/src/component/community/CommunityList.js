@@ -86,7 +86,7 @@ const CommunityItem = (props) => {
   const navigate = useNavigate();
   const [heart, setHeart] = useState(false);
 
-  const communityView = (props) => {
+  const communityView = () => {
     if (isLogin) {
       navigate("/community/view", {
         state: { communityNo: community.communityNo },
@@ -96,14 +96,52 @@ const CommunityItem = (props) => {
     }
   };
 
-  const communityLike = () => {
+  const communityLike = (e) => {
     setHeart(!heart);
+    const token = window.localStorage.getItem("token");
+    axios
+      .get("/community/insertCommunityLike/" + community.communityNo, {
+        headers: {
+          contentType: "multipart/form-data",
+          processdData: false,
+          Authorization: "Bearer " + token,
+        },
+      })
+      .then((res) => {
+        console.log(res.data);
+        console.log("좋아요 성공");
+      })
+      .catch((res) => {
+        console.log(res.response.status);
+      });
+    e.stopPropagation();
+  };
+
+  const communityRemoveLike = (e) => {
+    setHeart(!heart);
+    const token = window.localStorage.getItem("token");
+    axios
+      .get("/community/removeCommunityLike/" + community.communityNo, {
+        headers: {
+          contentType: "multipart/form-data",
+          processdData: false,
+          Authorization: "Bearer " + token,
+        },
+      })
+      .then((res) => {
+        console.log(res.data);
+        console.log("좋아요 해제 성공");
+      })
+      .catch((res) => {
+        console.log(res.response.status);
+      });
+    e.stopPropagation();
   };
 
   return (
     <div className="community-item-wrap">
-      <div className="community-item">
-        <div className="community-item-img" onClick={communityView}>
+      <div className="community-item" onClick={communityView}>
+        <div className="community-item-img">
           {community.communityThumb === null ? (
             <img src="/image/default.png" className="default-img" />
           ) : (
@@ -137,7 +175,7 @@ const CommunityItem = (props) => {
         </div>
         <div className="heart-btns">
           {heart ? (
-            <span class="material-icons ab-btn2" onClick={communityLike}>
+            <span class="material-icons ab-btn2" onClick={communityRemoveLike}>
               favorite
             </span>
           ) : (

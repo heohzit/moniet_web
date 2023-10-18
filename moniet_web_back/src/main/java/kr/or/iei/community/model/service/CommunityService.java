@@ -131,6 +131,7 @@ public class CommunityService {
 		return list;
 	}
 
+	@Transactional
 	public int boardlike(CommunityBoard c, int communityBoardNo) {
 		System.out.println("service c : "+c);
 		System.out.println("service communityBoardNo : "+c);
@@ -138,10 +139,33 @@ public class CommunityService {
 		return 0;
 	}
 
+	@Transactional
 	public int removeComment(int comuBoardCommentNo) {
 		int result = communityDao.removeComment(comuBoardCommentNo);
 		return result;
 	}
+
+	@Transactional
+	public List<CommunityBoardFile> delete(int communityBoardNo) {
+		List<CommunityBoardFile> fileList = communityDao.selectBoardFileList(communityBoardNo);
+		List<CommunityBoardType> typeList = communityDao.selectBoardTypeList(communityBoardNo);
+		int result = communityDao.deleteBoard(communityBoardNo);
+		if(result > 0) {
+			return fileList;
+		}
+		return null;
+	}
+
+	public int insertCommunityLike(int communityNo, String memberId) {
+		Member member = memberDao.selectOneMember(memberId);
+		int result = communityDao.insertCommunityLike(communityNo, member.getMemberNo());
+		return result;
+	}
+
+	public int removeCommunityLike(int communityNo, String memberId) {
+		Member member = memberDao.selectOneMember(memberId);
+		int result = communityDao.removeCommunityLike(communityNo, member.getMemberNo());
+		return result;	}
 
 
 }

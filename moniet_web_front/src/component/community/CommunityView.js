@@ -123,7 +123,7 @@ const CommunityView = (props) => {
         <div className="community-view-btns">
           <div className="community-view-join-btn">
             {isLogin ? (
-              <Button3 text="참여하기" />
+              <Button3 text="참여하기" /> // onClick해서 axios 못 돌리는지(위에서 돌려서)
             ) : (
               <Button6 text="로그인 해주시기 바랍니다." />
             )}
