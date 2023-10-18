@@ -90,7 +90,7 @@ public class CashbookService {
 				cashbook.setLoopRound(i+1);
 				cashbook.setCashbookMoney(money/loopMonth);
 				//date>str
-				cal.add(Calendar.MONTH, i+1);
+				cal.add(Calendar.MONTH, i);
 				String cashDate = sdf.format(cal.getTime()); 
 				cashbook.setCashbookDate(cashDate);
 				System.out.println(i+"날짜 바뀌는 현황 : " + cashDate);

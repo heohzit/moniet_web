@@ -82,7 +82,6 @@ const CashbookItem = (props) => {
             challengeCate={challengeCate}
             incomeCate={incomeCate}
             spendingCate={spendingCate}
-            modifyFrmOpen={modifyFrmOpen}
           />
         </td>
       </tr>
