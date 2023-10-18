@@ -8,7 +8,7 @@
   		cashbook_no, member_no, cashbook_finance, to_char(cashbook_date, 'yyyy-mm-dd') as cashbook_date,
   		cashbook_loop, loop_month, cashbook_asset, cashbook_category,
   		(select category_title from category_tbl where category_no = cashbook.cashbook_category) as CATEGORY_TITLE,
-  		cashbook_money, cashbook_content, cashbook_memo, challenge_no
+  		cashbook_money, cashbook_content, cashbook_memo, challenge_no, loop_round
   	from cashbook
   	where cashbook_date >= #{startDate} and cashbook_date <= #{endDate} and member_no=(select member_no from member where member_id=#{memberId})
   	order by cashbook_date desc
@@ -88,13 +88,14 @@
 		order by category_no
 	</select>
 	
+	<!--삽입 -->
 	<insert id="insertCashbook">
 		insert into cashbook values
 			(CASHBOOK_SEQ.nextval,
 			(select member_no from member where member_id=#{memberId}),
 			 #{cashbookFinance},#{cashbookDate}, #{cashbookLoop},
 			 #{loopMonth}, #{cashbookAsset}, #{cashbookCategory},
-			 #{cashbookMoney}, #{cashbookContent}, #{cashbookMemo}, #{challengeNo})
+			 #{cashbookMoney}, #{cashbookContent}, #{cashbookMemo}, #{challengeNo}, #{loopRound})
 	</insert>
 	
 	<!--파이대시보드-->

@@ -94,7 +94,11 @@ const CashbookFrm = (props) => {
     setCashbookLoop(e.currentTarget.value);
   };
   const changeLoopMonth = (e) => {
-    setLoopMonth(e.currentTarget.value);
+    if (e.currentTargetValue === "") {
+      setCashbookLoop(0);
+    } else {
+      setLoopMonth(e.currentTarget.value);
+    }
   };
   const dataOnlyNum = (e) => {
     const regNumber = /^[0-9]+$/;
