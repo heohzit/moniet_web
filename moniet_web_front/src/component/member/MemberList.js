@@ -69,9 +69,12 @@ const MemberList = () => {
 const MemberItem = (props) => {
   const member = props.member;
   return (
-    <tr>
+    
+    <tr className="scrollBar">
       <td>{member.memberNo}</td>
-      <td>{member.memberGrade == 0 ? "관리자" : "일반회원"}</td>
+      <td>{member.memberGrade == 0 ? <span class="material-icons admin-icon">
+admin_panel_settings
+</span>  : "일반회원"}</td>
       <td>{member.memberId}</td>
       <td>{member.memberName}</td>
       <td>{member.memberPhone}</td>
@@ -80,5 +83,6 @@ const MemberItem = (props) => {
     </tr>
   );
 };
+
 
 export default MemberList;
