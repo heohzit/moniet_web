@@ -8,6 +8,17 @@ import { Route, Routes } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import LinearProgress from "@mui/material/LinearProgress";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { blue } from "@mui/material/colors";
+import "./challenge.css";
+
+const theme = createTheme({
+  palette: {
+    secondary: {
+      main: "#6A6DA6",
+    },
+  },
+});
 
 const ChallengeList = (props) => {
   const isLogin = props.isLogin;
@@ -24,16 +35,23 @@ const ChallengeList = (props) => {
     <div className="challengeList-wrap">
       <ChallengeMenu menus={menus} setMenus={setMenus}></ChallengeMenu>
       <div className="challengeList-top">
-        <img src="../image/IMG_0610.jpg"></img>
-        <div>
+        <div className="challenge-top-img">
+          <img src="../image/IMG_0610.jpg"></img>
+        </div>
+        <div className="challenge-top-ment">
           <p className="title">MONEY CHALLENGE</p>
-          <h3>머니챌린지에 도전해보세요.</h3>
-          <p>성공시 챌린지 레벨이 올라가요!</p>
+          <br></br>
+          <h2>머니챌린지에 도전해보세요.</h2>
+          <p>
+            성공시 챌린지 <strong className="strong">레벨</strong>이 올라가요!
+          </p>
+          <br></br>
+          <div className="challenge-write-btn">
+            <Button3 text="머니챌린지 도전" clickEvent={write}></Button3>
+          </div>
+          <br></br>
+          <ChallengeLevel />
         </div>
-        <div className="challenge-write-btn">
-          <Button3 text="머니챌린지 도전" clickEvent={write}></Button3>
-        </div>
-        <ChallengeLevel />
       </div>
       <Routes>
         <Route
@@ -110,19 +128,27 @@ const ChallengeLevel = () => {
   }, []);
   return (
     <div className="challenge-level">
-      <p>나의 챌린지 레벨은 {challengeLevel}입니다.</p>
-      <LinearProgress
-        variant="determinate"
-        value={challengeLevel}
-        min={0}
-        max={100}
-        style={{
-          height: "50px",
-          borderRadius: "5px",
-          backgroundColor: "#eee",
-        }}
-        progressLabelPosition="inside"
-      />
+      <br></br>
+      <p>
+        현재 나의 챌린지 레벨은 <strong>{challengeLevel}</strong>입니다.
+      </p>
+      <ThemeProvider theme={theme}>
+        <LinearProgress
+          color="secondary"
+          theme={theme}
+          variant="determinate"
+          value={challengeLevel}
+          min={0}
+          max={100}
+          style={{
+            margin: "0 auto",
+            width: "350px",
+            height: "40px",
+            borderRadius: "5px",
+            backgroundColor: "#eee",
+          }}
+        />
+      </ThemeProvider>
     </div>
   );
 };
