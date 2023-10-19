@@ -33,12 +33,9 @@
 
 .community-del {
   border: none;
-  background-color: #010440;
-  color: #fff;
-  font-size: 15px;
-  padding: 10px;
-  cursor: pointer;
-  border-radius: 5px;
+  background-color: #fff;
+  color: #010440;
+  margin-top: 6px;
 }
 .chk {
   width: 18px;
@@ -59,9 +56,23 @@
   height: 45px;
   width: 80px;
   font-size: 16px;
-  margin-right: 20px;
-}
-.chk-del-btn:hover {
+  margin-right: 22px;
   background-color: #010440;
   color: #fff;
+  font-family: ns-b;
+}
+.none-button {
+  cursor: pointer;
+  background-color: #fff;
+  outline: none;
+  border: none;
+  margin-top: 6px;
+}
+.detail-view {
+  font-size: 30px;
+  color: #010440;
+}
+.deletecommunity {
+  font-size: 30px;
+  color: #010440;
 }

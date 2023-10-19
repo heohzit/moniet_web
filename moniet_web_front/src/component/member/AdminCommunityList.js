@@ -24,7 +24,7 @@ const AdminCommunityList = (props) => {
       <div className="admin-comunity-list-content">
         <div className="community-check-del-btn-wrap">
           <button className="chk-del-btn" onClick={checkDel}>
-            선택삭제
+            삭제
           </button>
         </div>
         <table className="admin-community-list-table">
@@ -37,6 +37,7 @@ const AdminCommunityList = (props) => {
             <th>참여인원수</th>
             <th>작성일</th>
             <th>삭제</th>
+            <th>게시글 상세</th>
           </thead>
           <tbody>
             {communityList.map((community, index) => {
@@ -66,7 +67,7 @@ const checkDel = () => {
     //체크된 게시글 번호를 저장할 배열
     const no = new Array();
     check.forEach(function (index, item) {
-      const communityNo = check.parentNode.nextSibling.innerText;
+      const communityNo = check.parentNode.innerText;
       console.log(communityNo);
     });
   }
@@ -75,8 +76,9 @@ const checkDel = () => {
 //게시글 개별 삭제
 const commmunityDel = (e) => {
   const communityNo =
-    e.target.parentNode.previousSibling.previousSibling.previousSibling
-      .previousSibling.previousSibling.previousSibling.innerText;
+    e.target.parentNode.parentNode.previousSibling.previousSibling
+      .previousSibling.previousSibling.previousSibling.previousSibling
+      .innerText;
   console.log(communityNo);
   if (window.confirm("게시글을 삭제 하시겠습니까?")) {
     axios
@@ -105,7 +107,7 @@ const CommunityItem = (props) => {
   };
 
   return (
-    <tr onClick={detailedPage}>
+    <tr>
       <td>
         <input type="checkbox" className="chk"></input>
       </td>
@@ -117,7 +119,12 @@ const CommunityItem = (props) => {
       <td>{community.communityDate}</td>
       <td>
         <button className="community-del" onClick={commmunityDel}>
-          삭제
+          <span className="material-icons deletecommunity">delete</span>
+        </button>
+      </td>
+      <td>
+        <button className="none-button" onClick={detailedPage}>
+          <span className="material-icons detail-view">pageview</span>
         </button>
       </td>
     </tr>
