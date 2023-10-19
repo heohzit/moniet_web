@@ -1,4 +1,7 @@
 /*challengeMain*/
+.challenge-main-wrap {
+  width: 1000px;
+}
 .challenge-title {
   font-size: 20px;
 }
@@ -193,6 +196,18 @@
   height: auto;
   overflow: hidden;
 }
+.challenge-content-day {
+  background-color: #f0f0f0;
+  padding: 20px;
+  border-radius: 10px;
+  margin: 20px;
+  text-align: center;
+  height: auto;
+  overflow: hidden;
+}
+.challenge-list-wrap {
+  margin-left: 18px;
+}
 .challenge-item {
   background-color: #fff;
   border: 1px solid #e0e0e0;
@@ -227,7 +242,6 @@
   float: left;
 }
 .challenge-more {
-  display: flex;
   justify-content: center;
   margin-top: 20px;
 }

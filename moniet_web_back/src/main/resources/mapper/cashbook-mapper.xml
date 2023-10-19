@@ -156,4 +156,12 @@
 	  	order by cashbook_date desc
 	  	]]>
 	</select>
+	
+	<select id="todayIncome" resultType="int">
+		select sum(cashbook_money) from cashbook where member_no=(select member_no from member where member_id=#{memberId}) and cashbook_finance=1 and cashbook_date=TO_CHAR(SYSDATE,'YYYYMMDD')
+	</select>
+	
+	<select id="todaySpending" resultType="int">
+		select sum(cashbook_money) from cashbook where member_no=(select member_no from member where member_id=#{memberId}) and cashbook_finance=2 and cashbook_date=TO_CHAR(SYSDATE,'YYYYMMDD')
+	</select>
 </mapper>

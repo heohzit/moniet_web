@@ -107,12 +107,10 @@ public class CashbookService {
 			if(cashbookCate==21) {
 				int result1=challengeDao.resultChallenge(challengeNo);
 				if(result1!=0) {
-					System.out.println(result1+"이건뭔대");
 					memberDao.upgradeLevel(memberId);
 				}
 			}else {
 				int result2 =challengeDao.resultChallenge2(memberId);
-				System.out.println(result2+"여기까지 오나");
 				if(result2!=0) {
 					memberDao.downLevel(memberId);
 				}
@@ -133,11 +131,6 @@ public class CashbookService {
 		return list;
 	}
 	
-	//라인 대시보드
-	public List lineDash(String memberId) {
-		List list = cashbookDao.lineDash(memberId);
-		return list;
-	}
 
 	@Transactional
 	public boolean deleteCashbook(String cashbookNoArr, String memberId) {
@@ -163,5 +156,15 @@ public class CashbookService {
 
 	public List calList(Cashbook cashbook) {
 		return cashbookDao.calList(cashbook);
+	}
+
+	public int todayIncome(String memberId) {
+		// TODO Auto-generated method stub
+		return cashbookDao.todayIncome(memberId);
+	}
+
+	public int todaySpending(String memberId) {
+		// TODO Auto-generated method stub
+		return cashbookDao.todaySpending(memberId);
 	}
 }

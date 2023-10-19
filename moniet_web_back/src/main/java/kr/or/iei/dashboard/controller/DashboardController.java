@@ -52,23 +52,14 @@ public class DashboardController {
 		return map;
 	}
 	
-	//라인 대시보드
-	@PostMapping (value="/line")
-	public Map lineDash (@RequestAttribute String memberId) {
-		List<Category> lineList = cashbookService.lineDash(memberId);
-		List incomeLine = new ArrayList<Category>();
-		List spendingLine = new ArrayList<Category>();
-		for(Category c : lineList) {
-			if(c.getCategoryRef() == 1) {
-				incomeLine.add(c);
-			} else if(c.getCategoryRef()==2) {
-				spendingLine.add(c);
-			}
-			System.out.println(incomeLine);
-		}
-		Map map = new HashMap<String, Object>();
-		map.put("incomeLine", incomeLine);
-		map.put("spendingLine",spendingLine);
-		return map;
+	@PostMapping (value="todayIncome")
+	public int todayIncome(@RequestAttribute String memberId) {
+		return cashbookService.todayIncome(memberId);
 	}
+	
+	@PostMapping (value="todaySpending")
+	public int todaySpending(@RequestAttribute String memberId) {
+		return cashbookService.todaySpending(memberId);
+	}
+
 }

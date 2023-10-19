@@ -30,8 +30,6 @@ public interface CashbookDao {
 	//바 대시보드
 	List barDash(String memberId, int month);
 	
-	//라인 대시보드
-	List lineDash(String memberId);
 
 	int deleteCashbook(int cashbookNo, String memberId);
 
@@ -40,6 +38,10 @@ public interface CashbookDao {
 	List cashbookListIncome(Cashbook cashbook);
 
 	List calList(Cashbook cashbook);
+
+	int todayIncome(String memberId);
+
+	int todaySpending(String memberId);
 
 
 

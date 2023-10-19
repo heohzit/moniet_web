@@ -19,6 +19,7 @@ import MemberList from "./component/member/MemberList";
 import AdminCommunityList from "./component/member/AdminCommunityList";
 import SideBar from "./component/common/SideBar";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import MainDash from "./component/common/MainDash";
 
 const theme = createTheme({
   typography: {
@@ -49,6 +50,12 @@ function App() {
         <div className="App-content">
           <Routes>
             <Route path="/" element={<Main></Main>}></Route>
+            <Route
+              path="/maindash/*"
+              element={
+                <MainDash isLogin={isLogin} setIsLogin={setIsLogin}></MainDash>
+              }
+            ></Route>
             <Route
               path="/dashboard/*"
               element={<DashboardMain></DashboardMain>}

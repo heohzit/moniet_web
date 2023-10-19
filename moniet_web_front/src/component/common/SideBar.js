@@ -13,6 +13,8 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import FeedIcon from "@mui/icons-material/Feed";
 import PersonIcon from "@mui/icons-material/Person";
+import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
+import PieChartOutlineOutlinedIcon from "@mui/icons-material/PieChartOutlineOutlined";
 import axios from "axios";
 const tokens = () => ({
   grey: {
@@ -71,10 +73,8 @@ const SideBar = (props) => {
       .then((res) => {
         setMember(res.data);
         setMemberImg(res.data.imgFile);
-        console.log(res.data.imgFile);
       })
       .catch((res) => {
-        //로그인이 풀린상태
         if (res.response.status === 403) {
           alert("로그인 후 이용해주세요.");
         }
@@ -179,117 +179,159 @@ const SideBar = (props) => {
               </Box>
             </Box>
           )}
-          <Box paddingLeft={isCollapsed ? undefined : "10%"}>
-            <Item
-              title="Dashboard"
-              to="/dashboard"
-              icon={<HomeOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
+          {member.memberGrade === 0 ? (
+            <Box paddingLeft={isCollapsed ? undefined : "10%"}>
+              <Typography
+                style={{
+                  fontSize: "20px",
+                }}
+                variant="h6"
+                color={colors.grey[300]}
+                sx={{ m: "15px 0 5px 10px" }}
+              >
+                관리자페이지
+              </Typography>
+              <Item
+                title="회원 관리"
+                to="/memberlist"
+                icon={<AddCardIcon />}
+                selected={selected}
+                setSelected={setSelected}
+              />
+              <Item
+                title="커뮤니티 관리"
+                to="/adminCommunityList"
+                icon={<CalendarMonthIcon />}
+                selected={selected}
+                setSelected={setSelected}
+              />
+              <LItem
+                title="로그아웃"
+                onClick={() => logout()}
+                icon={<LogoutIcon />}
+                selected={selected}
+                setSelected={setSelected}
+              />
+            </Box>
+          ) : (
+            <Box paddingLeft={isCollapsed ? undefined : "10%"}>
+              <Item
+                title="Dashboard"
+                to="/maindash"
+                icon={<HomeOutlinedIcon />}
+                selected={selected}
+                setSelected={setSelected}
+              />
 
-            <Typography
-              style={{
-                fontSize: "20px",
-              }}
-              variant="h6"
-              color={colors.grey[300]}
-              sx={{ m: "15px 0 5px 10px" }}
-            >
-              가계부
-            </Typography>
-            <Item
-              title="내역"
-              to="/cashbook"
-              icon={<AddCardIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="달력"
-              to="/cashCalendar"
-              icon={<CalendarMonthIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Typography
-              style={{
-                fontSize: "20px",
-              }}
-              variant="h6"
-              color={colors.grey[300]}
-              sx={{ m: "15px 0 5px 10px" }}
-            >
-              챌린지
-            </Typography>
-            <Item
-              title="챌린지"
-              to="/challenge"
-              icon={<SavingsIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Typography
-              style={{
-                fontSize: "20px",
-              }}
-              variant="h6"
-              color={colors.grey[300]}
-              sx={{ m: "15px 0 5px 10px" }}
-            >
-              커뮤니티
-            </Typography>
-            <Item
-              title="커뮤니티"
-              to="/community"
-              icon={<FeedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Typography
-              variant="h6"
-              color={colors.grey[300]}
-              sx={{ m: "15px 0 5px 10px" }}
-            ></Typography>
-            <Typography
-              style={{
-                fontSize: "20px",
-              }}
-              variant="h6"
-              color={colors.grey[300]}
-              sx={{ m: "15px 0 5px 0px" }}
-            >
-              마이페이지
-            </Typography>
-            <Item
-              title="마이페이지"
-              to="/member/mypage"
-              icon={<PersonIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="찜하기"
-              to="/member/like"
-              icon={<FavoriteIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="관리자"
-              to="#"
-              icon={<AdminPanelSettingsIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <LItem
-              title="로그아웃"
-              onClick={() => logout()}
-              icon={<LogoutIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-          </Box>
+              <Typography
+                style={{
+                  fontSize: "20px",
+                }}
+                variant="h6"
+                color={colors.grey[300]}
+              >
+                가계부
+              </Typography>
+              <Item
+                title="내역"
+                to="/cashbook"
+                icon={<AddCardIcon />}
+                selected={selected}
+                setSelected={setSelected}
+              />
+              <Item
+                title="달력"
+                to="/cashCalendar"
+                icon={<CalendarMonthIcon />}
+                selected={selected}
+                setSelected={setSelected}
+              />
+              <Typography variant="h6" color={colors.grey[300]}>
+                Charts
+              </Typography>
+              <Item
+                title="Bar Chart"
+                to="/dashboard/bar"
+                icon={<BarChartOutlinedIcon />}
+                selected={selected}
+                setSelected={setSelected}
+              />
+              <Item
+                title="Pie Chart"
+                to="/dashboard/pie"
+                icon={<PieChartOutlineOutlinedIcon />}
+                selected={selected}
+                setSelected={setSelected}
+              />
+              <Typography
+                style={{
+                  fontSize: "20px",
+                }}
+                variant="h6"
+                color={colors.grey[300]}
+              >
+                챌린지
+              </Typography>
+              <Item
+                title="챌린지"
+                to="/challenge"
+                icon={<SavingsIcon />}
+                selected={selected}
+                setSelected={setSelected}
+              />
+              <Typography
+                style={{
+                  fontSize: "20px",
+                }}
+                variant="h6"
+                color={colors.grey[300]}
+              >
+                커뮤니티
+              </Typography>
+              <Item
+                title="커뮤니티"
+                to="/community"
+                icon={<FeedIcon />}
+                selected={selected}
+                setSelected={setSelected}
+              />
+              <Typography
+                variant="h6"
+                color={colors.grey[300]}
+                sx={{ m: "15px 0 5px 10px" }}
+              ></Typography>
+              <Typography
+                style={{
+                  fontSize: "20px",
+                }}
+                variant="h6"
+                color={colors.grey[300]}
+              >
+                마이페이지
+              </Typography>
+              <Item
+                title="마이페이지"
+                to="/member/mypage"
+                icon={<PersonIcon />}
+                selected={selected}
+                setSelected={setSelected}
+              />
+              <Item
+                title="찜하기"
+                to="/member/like"
+                icon={<FavoriteIcon />}
+                selected={selected}
+                setSelected={setSelected}
+              />
+              <LItem
+                title="로그아웃"
+                onClick={() => logout()}
+                icon={<LogoutIcon />}
+                selected={selected}
+                setSelected={setSelected}
+              />
+            </Box>
+          )}
         </Menu>
       </Sidebar>
     </Box>
