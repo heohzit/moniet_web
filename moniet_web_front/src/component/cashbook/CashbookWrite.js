@@ -4,9 +4,10 @@ import axios from "axios";
 import AddIcon from "@mui/icons-material/Add";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
+import CashInputModal from "../cashModal/CashInputModal";
 
 const CashbookWrite = (props) => {
-  const isOpen = props.isOpen;
+  //const isOpen = props.isOpen;
   const addFrmOpen = props.addFrmOpen;
   const closeFrm = props.closeFrm;
   const dateString = props.dateString;
@@ -61,7 +62,7 @@ const CashbookWrite = (props) => {
       cashbookMemo: cashbookMemo,
       challengeNo: challengeNo,
     };
-
+    console.log(cashbook);
     axios
       .post("/cashbook/insert", cashbook, {
         headers: {
@@ -91,9 +92,60 @@ const CashbookWrite = (props) => {
       });
   };
 
+  //모달추가
+  //const [isOpen, setIsOpen] = useState(false);
+  const [isOpen1, setIsOpen1] = useState(false);
+  const onClickButton1 = () => {
+    setIsOpen1(true);
+  };
+  {
+    /**모달추가 일단생략
+  const onClickButton = () => {
+    setIsOpen(true);
+  };
+   */
+  }
+
   return (
     <div className="add-btn">
-      <AddIcon onClick={isOpen} className={className} />
+      <AddIcon onClick={onClickButton1} />
+      {isOpen1 && (
+        <CashInputModal
+          open={isOpen1}
+          onClose={() => {
+            setIsOpen1(false);
+          }}
+          title={"입력"}
+          dateString={dateString}
+          cashbookFinance={cashbookFinance}
+          setCashbookFinance={setCashbookFinance}
+          cashbookDate={cashbookDate}
+          setCashbookDate={setCashbookDate}
+          cashbookLoop={cashbookLoop}
+          setCashbookLoop={setCashbookLoop}
+          loopMonth={loopMonth}
+          setLoopMonth={setLoopMonth}
+          cashbookAsset={cashbookAsset}
+          setCashbookAsset={setCashbookAsset}
+          assetList={assetList}
+          cashbookCategory={cashbookCategory}
+          setCashbookCategory={setCashbookCategory}
+          cashbookMoney={cashbookMoney}
+          setCashbookMoney={setCashbookMoney}
+          cashbookContent={cashbookContent}
+          setCashbookContent={setCashbookContent}
+          cashbookMemo={cashbookMemo}
+          setCashbookMemo={setCashbookMemo}
+          challengeNo={challengeNo}
+          setChallengeNo={setChallengeNo}
+          challengeCate={challengeCate}
+          setChallengeCate={setChallengeCate}
+          incomeCate={incomeCate}
+          spendingCate={spendingCate}
+          clickEvent={write}
+        />
+      )}
+      {/*
       <CashbookFrm
         isOpen={addFrmOpen}
         closeFrm={closeFrm}
@@ -127,6 +179,8 @@ const CashbookWrite = (props) => {
         clickEvent={write}
         className={modalClass}
       />
+      */}
+
       {showSnackbar && (
         <Snackbar
           anchorOrigin={{ vertical: "bottom", horizontal: "right" }}

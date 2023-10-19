@@ -141,7 +141,7 @@ const Dayday = (props) => {
     };
   }, []);
   return (
-    <div className="challenge-content">
+    <div className="challenge-content-day">
       <p>
         종료일까지 <strong className="day-strong">{dday.days}</strong>일
         남았습니다.

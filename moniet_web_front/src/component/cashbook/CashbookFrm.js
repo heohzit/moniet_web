@@ -28,7 +28,6 @@ const CashbookFrm = (props) => {
   const loopMonth = props.loopMonth;
   const setLoopMonth = props.setLoopMonth;
   const loopMonthMap = [
-    { i: 0, cycle: "매 주" },
     { i: 1, cycle: "1개월" },
     { i: 2, cycle: "2개월" },
     { i: 3, cycle: "3개월" },

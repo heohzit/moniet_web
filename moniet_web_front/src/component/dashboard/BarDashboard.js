@@ -11,7 +11,6 @@ import {
 import { Bar } from "react-chartjs-2";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import PieDashboard from "./PieDashboard";
 
 ChartJS.register(
   CategoryScale,
@@ -148,14 +147,11 @@ const BarDashboard = () => {
           </option>
         ))}
       </select>
-      <div className="dashboard">
+      <div className="dashboard1">
         <Bar options={options1} data={incomeBar} />
       </div>
-      <div className="dashboard">
+      <div className="dashboard2">
         <Bar options={options2} data={spendingBar} />
-      </div>
-      <div className="dashboard">
-        <PieDashboard></PieDashboard>
       </div>
     </div>
   );

@@ -67,8 +67,20 @@ const CashbookItem = (props) => {
         >
           {cashbook.cashbookMoney.toLocaleString("ko-KR")}
         </td>
-        <td className="content-text">{cashbook.cashbookContent}</td>
+        <td className="content-text">
+          {cashbook.cashbookContent}
+          {cashbook.cashbookLoop === 0 ? (
+            ""
+          ) : cashbook.cashbookLoop === 1 ? (
+            ""
+          ) : (
+            <span className="loop-style">
+              (할부 : {cashbook.loopRound} / {cashbook.loopMonth})
+            </span>
+          )}
+        </td>
         <td>
+          {/* 모다루
           <CashbookModify
             cashbook={cashbook}
             isOpen={modifyFrmOpen}
@@ -83,6 +95,7 @@ const CashbookItem = (props) => {
             incomeCate={incomeCate}
             spendingCate={spendingCate}
           />
+           */}
         </td>
       </tr>
     </>
