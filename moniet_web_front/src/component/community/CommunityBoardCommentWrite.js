@@ -12,10 +12,13 @@ const CommunityBoardCommentWrite = (props) => {
   const setRenderingComment = props.setRenderingComment;
   const navigate = useNavigate();
 
+  const renderingBoard = props.renderingBoard;
+  const setRenderingBoard = props.setRenderingBoard;
+
   const insertComment = () => {
     const boardCommentContent = document.querySelectorAll(
       ".comment-write-textareat-text"
-    )[index].value;
+    )[index];
 
     if (boardCommentContent !== "") {
       Swal.fire({
@@ -28,7 +31,7 @@ const CommunityBoardCommentWrite = (props) => {
         if (res.isConfirmed) {
           const form = new FormData();
           form.append("comuBoardRef", communityBoardNo);
-          form.append("comuBoardCommentContent", boardCommentContent);
+          form.append("comuBoardCommentContent", boardCommentContent.value);
           const token = window.localStorage.getItem("token");
 
           axios
@@ -46,6 +49,8 @@ const CommunityBoardCommentWrite = (props) => {
                   "댓글 작성이 완료되었습니다.",
                   "success"
                 );
+                boardCommentContent.value = "";
+                setRenderingBoard(!renderingBoard);
                 setRenderingComment(!renderingComment);
               }
             })

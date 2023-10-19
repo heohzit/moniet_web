@@ -32,7 +32,7 @@ const MemberList = () => {
 
   return (
     <div className="memberlist-wrap">
-      <div className="memberlist-title">회원 정보</div>
+      <div className="memberlist-title">회원 관리</div>
       <div className="id-search-input">
         <input
           type="text"
@@ -69,12 +69,9 @@ const MemberList = () => {
 const MemberItem = (props) => {
   const member = props.member;
   return (
-    
     <tr className="scrollBar">
       <td>{member.memberNo}</td>
-      <td>{member.memberGrade == 0 ? <span class="material-icons admin-icon">
-admin_panel_settings
-</span>  : "일반회원"}</td>
+      <td>{member.memberGrade == 0 ? "관리자" : "일반회원"}</td>
       <td>{member.memberId}</td>
       <td>{member.memberName}</td>
       <td>{member.memberPhone}</td>
@@ -83,6 +80,5 @@ admin_panel_settings
     </tr>
   );
 };
-
 
 export default MemberList;

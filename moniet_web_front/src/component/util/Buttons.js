@@ -76,4 +76,16 @@ const Button6 = (props) => {
     </>
   );
 };
-export { Button1, Button2, Button3, Button4, Button5, Button6 };
+
+const Button7 = (props) => {
+  const clickEvent = props.clickEvent;
+  const text = props.text;
+  return (
+    <>
+      <button className="btn st7" type="button" onClick={clickEvent}>
+        {text}
+      </button>
+    </>
+  );
+};
+export { Button1, Button2, Button3, Button4, Button5, Button6, Button7 };

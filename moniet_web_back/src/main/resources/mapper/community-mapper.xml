@@ -42,8 +42,9 @@
 		        TO_CHAR(COMMUNITY_DATE, 'YYYY-MM-DD') AS COMMUNITY_DATE,
 		        COMMUNITY_THUMB,
 		        COMMUNITY_STATUS,
-		        COMMUNITY_PARTI
-		    FROM COMMUNITY
+		        COMMUNITY_PARTI,
+		        (select count(*) isWish from community_wish where member_no = #{memberNo} and community_no = c.COMMUNITY_NO) IS_WISH
+		    FROM COMMUNITY c
 		    JOIN MEMBER ON (COMMUNITY_WRITER = MEMBER_NO)
 		    WHERE COMMUNITY_STATUS = 1
 		    ORDER BY 1 DESC)C)
@@ -63,6 +64,8 @@
 		<result column="community_thumb" property="communityThumb" />
 		<result column="community_status" property="communityStatus" />
 		<result column="community_parti" property="communityParti" />
+		<result column="is_wish" property="isWish" />
+		
 		<collection 
 			property="typeList"
 			select="selectOneCommunityType"
@@ -97,9 +100,10 @@
 		    TO_CHAR(COMMUNITY_DATE, 'YYYY-MM-DD HH:MI') AS COMMUNITY_DATE,
 		    COMMUNITY_THUMB,
 		    COMMUNITY_STATUS,
-		    COMMUNITY_PARTI
+		    COMMUNITY_PARTI,
+		    (select count(*) isParti from community_parti where member_no = (select member_no from member where member_id = #{memberId}) and community_no = #{communityNo}) IS_PARTI
 		FROM
-		    COMMUNITY
+		    COMMUNITY c
 		JOIN
 		    MEMBER ON (COMMUNITY_WRITER = MEMBER_NO)
 		WHERE
@@ -123,6 +127,8 @@
 		<result column="community_thumb" property="communityThumb" />
 		<result column="community_status" property="communityStatus" />
 		<result column="community_parti" property="communityParti" />
+		<result column="is_parti" property="isParti" />
+		
 		<collection 
 			property="typeList"
 			select="selectOneCommunityType"
@@ -222,6 +228,7 @@
 		from COMU_BOARD_COMMENT
 		join member on (comu_board_comment_writer = member_no)
 		where comu_board_ref =#{communityBoardNo} and comu_board_comment_ref is null
+		order by 1
 		
 	</select>
 
@@ -249,6 +256,7 @@
 		from COMU_BOARD_COMMENT
 		join member on (comu_board_comment_writer = member_no)
 		where comu_board_ref = #{comuBoardRef} and comu_board_comment_ref = #{comuBoardCommentRef} and comu_board_comment_ref is not null
+		order by 1
 	</select>
 	
 	<insert id="boardlike">
@@ -336,4 +344,21 @@
 	        community_thumb = #{communityThumb}
     	where community_no = #{communityNo}
 	</update>
+	
+	<insert id="insertParti">
+		insert into community_parti values (community_parti_seq.nextval, #{communityNo}, #{memberNo})
+	</insert>
+	
+	<update id="updatePartiCount">
+		update community set community_parti = community_parti+1 where community_no = #{communityNo}
+	</update>
+	
+	<delete id="outParti">
+		delete community_parti where community_no = #{communityNo} and member_no = #{memberNo}
+	</delete>
+	
+	<update id="downPartiCount">
+		update community set community_parti = community_parti-1 where community_no = #{communityNo}
+	</update>
+	
 </mapper>

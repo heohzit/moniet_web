@@ -62,23 +62,20 @@
 .id-result-cotent {
   margin: 50px 0px;
 }
-.id-find-pw{
+.id-find-pw {
   margin-top: 60px;
 }
-.id-find-pw>div>a{
+.id-find-pw > div > a {
   color: #010440;
+  font-family: ns-b;
 }
-.member-info {
-  width: 100%;
-  border-collapse: collapse;
-  
+.id-result-cotent span {
+  color: #010440;
+  font-family: ns-b;
 }
-.member-info td{
-  padding: 10px 10px;
-  border: 1px solid #eee;
+.id-result-cotent {
+  background-color: #f0f8ff;
+  text-align: center;
+  padding: 50px 0px;
+  font-size: 18px;
 }
-
-
-
-
-
