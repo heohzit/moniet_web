@@ -66,9 +66,19 @@ const checkDel = () => {
   } else {
     //체크된 게시글 번호를 저장할 배열
     const no = new Array();
-    check.forEach(function (index, item) {
-      const communityNo = check.parentNode.innerText;
+    check.forEach(function (item) {
+      const communityNo = item.parentElement.nextElementSibling.innerText;
       console.log(communityNo);
+      no.push(communityNo);
+      console.log(no);
+      axios
+        .post("/community/checkDelete", { communityNo: no.join("/") })
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((res) => {
+          console.log(res);
+        });
     });
   }
 };

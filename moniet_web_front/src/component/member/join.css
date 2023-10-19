@@ -36,6 +36,7 @@
   border-radius: 5px;
   border: none;
   cursor: pointer;
+  outline: none;
 }
 /* 프로필 사진 */
 .signup-profileImg-label {
