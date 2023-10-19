@@ -1,5 +1,13 @@
+.admin-community-list-wrap{
+  width: 1200px;
+  margin: 0 auto;
+}
+
 .admin-community-list-title {
   font-size: 24px;
   color: #010440;
   font-family: ns-b;
+}
+.admin-community-list-table{
+  width: 100%;
 }

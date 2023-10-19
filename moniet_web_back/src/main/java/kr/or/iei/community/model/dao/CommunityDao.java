@@ -60,5 +60,18 @@ public interface CommunityDao {
 
 	int downLikeCount(int communityBoardNo);
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//관리자
+	List allCommunityList(int reqPage);
+
 
 }
