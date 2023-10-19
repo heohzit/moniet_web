@@ -278,9 +278,6 @@ const Cashbook = (props) => {
             setSelect={setSelect}
           />
           <CashbookWrite
-            //모다루isOpen={isOpen}
-            //모다루addFrmOpen={addFrmOpen}
-            //모다루closeFrm={closeFrm}
             dateString={dateString}
             assetList={assetList}
             challengeCate={challengeCate}

@@ -68,47 +68,47 @@ const ChallengeView = () => {
   const ProgressMent = (progress) => {
     if (challenge.challengeKind === 1) {
       if (progress >= 100) {
-        return <span className="material-icons">thumb_up_alt 성공!!!!!</span>;
-      } else if (progress >= 90) {
-        return (
-          <span className="material-icons">
-            sentiment_very_satisfied 성공이 눈앞에!
-          </span>
-        );
+        return "축하드려요! 성공입니다!";
+      } else if (progress >= 85) {
+        return "성공이 눈 앞에 있습니다!";
       } else if (progress >= 50) {
-        return (
-          <span className="material-icons">
-            sentiment_very_satisfied 잘하고있어요!
-          </span>
-        );
+        return "저축을 잘 하시고 계시네요!";
       } else {
-        return (
-          <span className="material-icons">
-            sentiment_satisfied_alt 시작이 좋아요!
-          </span>
-        );
+        return "시작이 좋아요!";
       }
     } else {
       if (progress >= 100) {
-        return (
-          <span className="material-icons">
-            sentiment_very_dissatisfied 실패.
-          </span>
-        );
+        return "실패.. 다음에는 꼭 성공해요!";
       } else if (progress >= 90) {
-        return (
-          <span className="material-icons">
-            sentiment_very_dissatisfied 자린고비 시작이에요.
-          </span>
-        );
+        return "이대로 실패 할 수는 없어요! 화이팅!";
       } else if (progress >= 50) {
-        return (
-          <span className="material-icons">
-            sentiment_dissatisfied 조금만 더 아껴주세요.
-          </span>
-        );
+        return "조금만 더 아껴봐요!";
       } else {
-        return "돈을 매우 아껴쓰고 있어요!";
+        return "돈을 매우 아껴쓰고 있으시네요!";
+      }
+    }
+  };
+  //진행률 색상
+  const ProgressColor = (progress) => {
+    if (challenge.challengeKind === 1) {
+      if (progress >= 100) {
+        return "rgb(25, 118, 210)";
+      } else if (progress >= 85) {
+        return "rgb(25, 118, 210)";
+      } else if (progress >= 50) {
+        return "rgb(255, 69, 0)";
+      } else {
+        return "rgb(255, 69, 0)";
+      }
+    } else {
+      if (progress >= 100) {
+        return "rgb(255, 69, 0)";
+      } else if (progress >= 90) {
+        return "rgb(255, 69, 0)";
+      } else if (progress >= 50) {
+        return "rgb(25, 118, 210)";
+      } else {
+        return "rgb(25, 118, 210)";
       }
     }
   };
@@ -174,6 +174,7 @@ const ChallengeView = () => {
   //달력 날짜 지정
   const today = new Date();
   const dateString = today.toISOString().substring(0, 10);
+
   return (
     <div className="challenge-view-content">
       <div className="challenge-item-info">
@@ -192,16 +193,16 @@ const ChallengeView = () => {
         <h2>{challenge.challengeTitle}</h2>
       </div>
       <div className="challenge-startEnd">
-        <div>{challenge.challengeStart}</div>
-        <div>{challenge.challengeEnd}</div>
+        <div>시작 일자 : {challenge.challengeStart}</div>
+        <div>종료 일자 : {challenge.challengeEnd}</div>
       </div>
       <div className="challenge-progress">
         <div className="progress-bar">
           <CircularProgressBar
             colorCircle="#fff"
-            colorSlice="#e54e21"
+            colorSlice={ProgressColor(progress)}
             percent={challenge.challengeKind === 1 ? progress : 100 - progress}
-            fontColor="#e54e21"
+            fontColor={ProgressColor(progress)}
             round={true}
             fontSize="15px"
             textPosition="1.5rem"
@@ -209,14 +210,14 @@ const ChallengeView = () => {
         </div>
         <div className="amount-info">
           <div className="goalAmount">
-            목표 금액: {goalAmount.toLocaleString()}원
+            목표 금액 : {goalAmount.toLocaleString()}원
           </div>
           <div className="currentAmount">
-            현재 금액:{currentAmount.toLocaleString()}원
+            현재 금액 : {currentAmount.toLocaleString()}원
           </div>
         </div>
       </div>
-      <div className="progress-ment">{ProgressMent(progress)}</div>
+      <div className="progress-ment">📢{ProgressMent(progress)}📢</div>
 
       <div className="challenge-btn-box">
         {challenge.challengeResult === 2 ||

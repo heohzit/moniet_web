@@ -81,7 +81,7 @@ const CashbookWrite = (props) => {
           setCashbookContent("");
           setCashbookMemo("");
           onOpenClickHandler();
-          closeFrm();
+          setIsOpen1(false);
           setSelect(!select);
         } else {
           console.log("등록 중 에러 발생");
@@ -94,6 +94,7 @@ const CashbookWrite = (props) => {
 
   //모달추가
   //const [isOpen, setIsOpen] = useState(false);
+  //const { openModal } = useModal();
   const [isOpen1, setIsOpen1] = useState(false);
   const onClickButton1 = () => {
     setIsOpen1(true);
@@ -114,6 +115,7 @@ const CashbookWrite = (props) => {
           open={isOpen1}
           onClose={() => {
             setIsOpen1(false);
+            setSelect(!select);
           }}
           title={"입력"}
           dateString={dateString}

@@ -34,6 +34,37 @@ li {
   list-style: none;
 }
 
+/*메인 css*/
+.App {
+  display: flex;
+  min-height: 100vh;
+}
+.App-content {
+  width: 1000px;
+  margin-left: 300px;
+}
+
+/*member sub 메뉴 css*/
+
+.submenu {
+  height: 0;
+  overflow: hidden;
+}
+.submenu > li {
+  height: 45px;
+  box-sizing: border-box;
+}
+.submenu > li > a {
+  display: block;
+  padding: 10px;
+  font-family: ns-b;
+}
+
+.menu > li:hover .submenu {
+  height: 90px;
+  transition-duration: 1s;
+}
+
 /*헤더 css*/
 .header-wrap {
   width: 1200px;
@@ -64,36 +95,4 @@ li {
 footer {
   padding: 50px;
   background-color: #f0f1f2;
-}
-
-/*메인 css*/
-.App {
-  display: flex;
-  min-height: 100vh;
-}
-.App-content {
-  width: 1000px;
-  margin: 80px;
-  margin-left: 300px;
-}
-
-/*member sub 메뉴 css*/
-
-.submenu {
-  height: 0;
-  overflow: hidden;
-}
-.submenu > li {
-  height: 45px;
-  box-sizing: border-box;
-}
-.submenu > li > a {
-  display: block;
-  padding: 10px;
-  font-family: ns-b;
-}
-
-.menu > li:hover .submenu {
-  height: 90px;
-  transition-duration: 1s;
 }
