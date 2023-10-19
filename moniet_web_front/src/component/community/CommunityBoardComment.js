@@ -26,7 +26,6 @@ const CommunityBoardComment = (props) => {
     axios
       .get("/community/boardCommentList/" + reqPage + "/" + communityBoardNo)
       .then((res) => {
-        console.log(res.data);
         setBoardCommentList(res.data);
       })
       .catch((res) => {
@@ -163,7 +162,6 @@ const CommentItem = (props) => {
   // console.log(comment);
 
   const deleteComment = () => {
-    console.log(comment);
     Swal.fire({
       icon: "warning",
       text: "댓글을 삭제하시겠습니까?",
@@ -175,8 +173,6 @@ const CommentItem = (props) => {
         axios
           .get("/community/removeComment/" + comment.comuBoardCommentNo)
           .then((res) => {
-            console.log(res.data);
-            console.log("성공");
             setRenderingComment(!renderingComment);
           })
           .catch((res) => {

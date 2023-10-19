@@ -30,4 +30,5 @@ public class Community {
 	private List typeList;
 	
 	private int isParti;
+	private int isWish;
 }

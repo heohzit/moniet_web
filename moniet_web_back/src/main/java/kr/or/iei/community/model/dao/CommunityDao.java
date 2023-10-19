@@ -1,5 +1,6 @@
 package kr.or.iei.community.model.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -15,7 +16,7 @@ import kr.or.iei.community.model.vo.ComuBoardComment;
 @Mapper
 public interface CommunityDao {
 
-	List communityList();
+	List communityList(Map map);
 
 	int insertCommunity(Community c);
 
@@ -84,6 +85,10 @@ public interface CommunityDao {
 	int insertParti(Map map);
 
 	int updatePartiCount(int communityNo);
+
+	int outParti(Map map);
+
+	int downPartiCount(int communityNo);
 
 
 }

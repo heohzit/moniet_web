@@ -25,8 +25,15 @@ const CommunityView = (props) => {
   const [rendering, setRendering] = useState(false);
 
   useEffect(() => {
+    const token = window.localStorage.getItem("token");
     axios
-      .get("/community/view/" + communityNo)
+      .get("/community/view/" + communityNo, {
+        headers: {
+          contentType: "multipart/form-data",
+          processdData: false,
+          Authorization: "Bearer " + token,
+        },
+      })
       .then((res) => {
         setCommunity(res.data);
         // setRendering(!rendering);
@@ -39,11 +46,12 @@ const CommunityView = (props) => {
       axios
         .post("/member/getMember", null, {
           headers: {
+            contentType: "multipart/form-data",
+            processdData: false,
             Authorization: "Bearer " + token,
           },
         })
         .then((res) => {
-          console.log(res.data);
           setMember(res.data);
         })
         .catch((res) => {
@@ -117,8 +125,6 @@ const CommunityView = (props) => {
       .then((res) => {
         if (res.isConfirmed) {
           axios.get("/community/deleteCommunity/" + communityNo).then((res) => {
-            console.log(res.data);
-            console.log("커뮤니티 삭제 성공");
             if (res.data > 0) {
               Swal.fire(
                 "삭제 완료",
@@ -157,8 +163,6 @@ const CommunityView = (props) => {
               },
             })
             .then((res) => {
-              console.log(res.data);
-              console.log("참여 성공");
               setRendering(!rendering);
             })
             .catch((res) => {
@@ -173,7 +177,39 @@ const CommunityView = (props) => {
       });
   };
 
-  console.log(community);
+  const outParti = () => {
+    Swal.fire({
+      icon: "warning",
+      text: "커뮤니티에서 탈퇴하시겠습니까?",
+      showCancelButton: true,
+      confirmButtonText: "확인",
+      cancelButtonText: "취소",
+    })
+      .then((res) => {
+        if (res.isConfirmed) {
+          const token = window.localStorage.getItem("token");
+          axios
+            .get("/community/outParti/" + communityNo, {
+              headers: {
+                contentType: "multipart/form-data",
+                processdData: false,
+                Authorization: "Bearer " + token,
+              },
+            })
+            .then((res) => {
+              setRendering(!rendering);
+            })
+            .catch((res) => {
+              console.log(res.response.status);
+            });
+        } else {
+          return;
+        }
+      })
+      .catch((res) => {
+        Swal.fire("실패", "관리자에게 문의하세요.", "warning");
+      });
+  };
 
   return (
     <div className="community-view-wrap">
@@ -215,7 +251,7 @@ const CommunityView = (props) => {
             {community.isParti === 0 ? (
               <Button3 text="참여하기" clickEvent={insertParti} />
             ) : (
-              <Button6 text="탈퇴하기" clickEvent={insertParti} />
+              <Button6 text="탈퇴하기" clickEvent={outParti} />
             )}
           </div>
           <div className="community-view-like-btn">

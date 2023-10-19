@@ -15,9 +15,18 @@ const CommuintyList = (props) => {
   const [communityTitle, setCommunityTitle] = useState("");
   const [communityWriter, setCommunityWriter] = useState("");
 
+  const [renderingList, setRenderingList] = useState(false);
+
   useEffect(() => {
+    const token = window.localStorage.getItem("token");
     axios
-      .get("/community/list/" + reqPage)
+      .get("/community/list/" + reqPage, {
+        headers: {
+          contentType: "multipart/form-data",
+          processdData: false,
+          Authorization: "Bearer " + token,
+        },
+      })
       .then((res) => {
         // console.log(res.data);
         setCommunityList(res.data);
@@ -26,7 +35,7 @@ const CommuintyList = (props) => {
       .catch((res) => {
         console.log(res.response.status);
       });
-  }, []);
+  }, [renderingList]);
 
   const navigate = useNavigate();
   const write = () => {
@@ -67,6 +76,8 @@ const CommuintyList = (props) => {
               community={community}
               isLogin={isLogin}
               index={index}
+              renderingList={renderingList}
+              setRenderingList={setRenderingList}
             />
           );
         })}
@@ -85,6 +96,9 @@ const CommunityItem = (props) => {
   const community = props.community;
   const navigate = useNavigate();
   const [heart, setHeart] = useState(false);
+
+  const renderingList = props.renderingList;
+  const setRenderingList = props.setRenderingList;
 
   const communityView = () => {
     if (isLogin) {
@@ -108,8 +122,7 @@ const CommunityItem = (props) => {
         },
       })
       .then((res) => {
-        console.log(res.data);
-        console.log("좋아요 성공");
+        setRenderingList(!renderingList);
       })
       .catch((res) => {
         console.log(res.response.status);
@@ -129,8 +142,7 @@ const CommunityItem = (props) => {
         },
       })
       .then((res) => {
-        console.log(res.data);
-        console.log("좋아요 해제 성공");
+        setRenderingList(!renderingList);
       })
       .catch((res) => {
         console.log(res.response.status);
@@ -174,13 +186,13 @@ const CommunityItem = (props) => {
           </div>
         </div>
         <div className="heart-btns">
-          {heart ? (
-            <span class="material-icons ab-btn2" onClick={communityRemoveLike}>
-              favorite
-            </span>
-          ) : (
+          {community.isWish === 0 ? (
             <span class="material-icons ab-btn1" onClick={communityLike}>
               favorite_border
+            </span>
+          ) : (
+            <span class="material-icons ab-btn2" onClick={communityRemoveLike}>
+              favorite
             </span>
           )}
         </div>

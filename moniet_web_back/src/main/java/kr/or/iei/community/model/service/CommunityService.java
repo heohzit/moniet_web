@@ -27,8 +27,13 @@ public class CommunityService {
 	@Autowired
 	private MemberDao memberDao;
 	
-	public List communityList(int reqPage) {
-		List list = communityDao.communityList();
+	public List communityList(int reqPage, String memberId) {
+		Member member = memberDao.selectOneMember(memberId);
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("reqPage", reqPage);
+		map.put("memberNo", member.getMemberNo());
+		
+		List list = communityDao.communityList(map);
 		return list;
 	}
 
@@ -65,6 +70,7 @@ public class CommunityService {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("communityNo", communityNo);
 		map.put("memberId", memberId);
+		System.out.println("map : "+map);
 		Community c = communityDao.selectOneCommunity(map);
 		return c;
 	}
@@ -201,7 +207,7 @@ public class CommunityService {
 		map.put("communityBoardNo", communityBoardNo);
 		map.put("memberNo", member.getMemberNo());
 		int result = communityDao.removeBoardLike(map);
-		int updateLikeCount = communityDao.downLikeCount(communityBoardNo);
+		int downLikeCount = communityDao.downLikeCount(communityBoardNo);
 		return result;
 	}
 	
@@ -270,6 +276,17 @@ public class CommunityService {
 				
 		int result = communityDao.insertParti(map);
 		int updatePartiCount = communityDao.updatePartiCount(communityNo);
+		return result;
+	}
+
+	public int outParti(int communityNo, String memberId) {
+		Member member = memberDao.selectOneMember(memberId);
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("communityNo", communityNo);
+		map.put("memberNo", member.getMemberNo());
+		
+		int result = communityDao.outParti(map);
+		int downPartiCount = communityDao.downPartiCount(communityNo);
 		return result;
 	}
 

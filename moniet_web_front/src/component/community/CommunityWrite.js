@@ -40,12 +40,12 @@ const CommunityWrite = (props) => {
         if (res.isConfirmed) {
           const checkbox = document.querySelectorAll("[name=types]:checked");
 
-          console.log(communityTitle);
-          console.log(communitySubTitle);
-          console.log(thumbnail);
-          console.log(communityContent);
-          console.log(checkbox); // 덩어리가 크니까 value값만 넘겨주기
-          console.log("type : " + communityType);
+          // console.log(communityTitle);
+          // console.log(communitySubTitle);
+          // console.log(thumbnail);
+          // console.log(communityContent);
+          // console.log(checkbox); // 덩어리가 크니까 value값만 넘겨주기
+          // console.log("type : " + communityType);
 
           const form = new FormData();
           form.append("communityTitle", communityTitle);

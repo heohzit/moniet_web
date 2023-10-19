@@ -134,9 +134,7 @@ const CommunityBoardWrite = (props) => {
                 setBoardImg([]);
               }
             })
-            .catch((res) => {
-              console.log(res);
-            });
+            .catch((res) => {});
         }
       });
     } else {

@@ -29,7 +29,6 @@ const CommunityBoard = (props) => {
         },
       })
       .then((res) => {
-        console.log(res.data);
         setCommunityBoardList(res.data);
       })
       .catch((res) => {
@@ -82,8 +81,6 @@ const CommunityBoardItem = (props) => {
 
     likeBtn.classList.toggle("thumb_up2");
 
-    console.log("likeBtn : " + likeBtn.className);
-
     const token = window.localStorage.getItem("token");
     if (likeBtn.className === "material-icons thumb_up thumb_up2") {
       axios
@@ -95,8 +92,6 @@ const CommunityBoardItem = (props) => {
           },
         })
         .then((res) => {
-          console.log(res.data);
-          console.log("게시물 좋아요 성공");
           setRenderingBoard(!renderingBoard);
         })
         .catch((res) => {
@@ -112,8 +107,6 @@ const CommunityBoardItem = (props) => {
           },
         })
         .then((res) => {
-          console.log(res.data);
-          console.log("게시물 좋아요취소 성공");
           setRenderingBoard(!renderingBoard);
         })
         .catch((res) => {
@@ -144,7 +137,6 @@ const CommunityBoardItem = (props) => {
   };
 
   const deleteBoard = () => {
-    console.log(board);
     Swal.fire({
       icon: "warning",
       text: "게시물을 삭제하시겠습니까?",
@@ -156,7 +148,6 @@ const CommunityBoardItem = (props) => {
         axios
           .get("/community/deleteBoard/" + board.communityBoardNo)
           .then((res) => {
-            console.log(res.data);
             if (res.data > 0) {
               Swal.fire(
                 "삭제 완료",
@@ -174,8 +165,6 @@ const CommunityBoardItem = (props) => {
       }
     });
   };
-
-  console.log("board like : " + board.communityBoardLike);
 
   return (
     <>

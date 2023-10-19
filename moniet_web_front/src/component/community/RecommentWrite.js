@@ -24,12 +24,12 @@ const RecommentWrite = (props) => {
       "#i" + index + "ic" + indexComment + " textarea"
     );
 
-    console.log("자식의 값 : " + recommentContent);
+    // console.log("자식의 값 : " + recommentContent);
 
-    console.log("게시물 인덱스 : " + index);
-    console.log("댓글 인덱스 : " + indexComment);
-    console.log("communityBoardNo : " + communityBoardNo);
-    console.log("comuBoardCommentNo : " + comuBoardCommentNo);
+    // console.log("게시물 인덱스 : " + index);
+    // console.log("댓글 인덱스 : " + indexComment);
+    // console.log("communityBoardNo : " + communityBoardNo);
+    // console.log("comuBoardCommentNo : " + comuBoardCommentNo);
 
     if (recommentContent !== "") {
       Swal.fire({
