@@ -80,6 +80,7 @@ const CashbookItem = (props) => {
           )}
         </td>
         <td>
+          {/* 모다루
           <CashbookModify
             cashbook={cashbook}
             isOpen={modifyFrmOpen}
@@ -94,6 +95,7 @@ const CashbookItem = (props) => {
             incomeCate={incomeCate}
             spendingCate={spendingCate}
           />
+           */}
         </td>
       </tr>
     </>
