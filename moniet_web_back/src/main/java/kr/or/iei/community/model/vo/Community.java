@@ -28,4 +28,6 @@ public class Community {
 	private String memberId;
 	private String memberEmail;
 	private List typeList;
+	
+	private int isParti;
 }

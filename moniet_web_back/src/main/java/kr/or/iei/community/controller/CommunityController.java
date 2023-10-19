@@ -97,8 +97,10 @@ public class CommunityController {
 	}
 
 	@GetMapping(value="/view/{communityNo}")
-	public Community view(@PathVariable int communityNo) {
-		return communityService.selectOneCommunity(communityNo);
+	public Community view(@PathVariable int communityNo, @ModelAttribute String memberId) {
+		Community c = communityService.selectOneCommunity(communityNo, memberId);
+		System.out.println("asdfdsafasdf : "+c);
+		return c;
 	}
 	
 //	@GetMapping(value="/delete/{communityNo}")
@@ -253,29 +255,16 @@ public class CommunityController {
 	
 	}
 	
-	
-	
-	
-	
-	
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-//	//관리자 
+	//관리자 
 	@GetMapping(value="/allCommunityList/{reqPage}")
 	public List allCommunityList(@PathVariable int reqPage) {
 		return communityService.allCommunityList(reqPage);
+	}
+	
+	@GetMapping(value="/insertParti/{communityNo}")
+	public int insertParti(@PathVariable int communityNo, @RequestAttribute String memberId) {
+		int result = communityService.insertParti(communityNo, memberId);
+		return result;
 	}
 	
 }

@@ -13,6 +13,8 @@ const CommunityBoard = (props) => {
   const [communityBoardList, setCommunityBoardList] = useState([]);
   const [reqPage, setReqPage] = useState(1);
 
+  const [renderingBoard, setRenderingBoard] = useState(false);
+
   const rendering = props.rendering;
   const setRendering = props.setRendering;
 
@@ -33,7 +35,7 @@ const CommunityBoard = (props) => {
       .catch((res) => {
         console.log(res.response.status);
       });
-  }, [reqPage, props]);
+  }, [reqPage, props, renderingBoard]);
 
   return (
     <div className="community-view-board">
@@ -47,6 +49,8 @@ const CommunityBoard = (props) => {
             communityBoardNo={board.communityBoardNo}
             rendering={rendering}
             setRendering={setRendering}
+            renderingBoard={renderingBoard}
+            setRenderingBoard={setRenderingBoard}
           />
         );
       })}
@@ -63,6 +67,9 @@ const CommunityBoardItem = (props) => {
 
   const rendering = props.rendering;
   const setRendering = props.setRendering;
+
+  const renderingBoard = props.renderingBoard;
+  const setRenderingBoard = props.setRenderingBoard;
 
   const [like, setLike] = useState(false);
 
@@ -90,6 +97,7 @@ const CommunityBoardItem = (props) => {
         .then((res) => {
           console.log(res.data);
           console.log("게시물 좋아요 성공");
+          setRenderingBoard(!renderingBoard);
         })
         .catch((res) => {
           console.log(res.response.status);
@@ -106,6 +114,7 @@ const CommunityBoardItem = (props) => {
         .then((res) => {
           console.log(res.data);
           console.log("게시물 좋아요취소 성공");
+          setRenderingBoard(!renderingBoard);
         })
         .catch((res) => {
           console.log(res.response.status);
@@ -246,6 +255,8 @@ const CommunityBoardItem = (props) => {
               isLogin={isLogin}
               index={index}
               member={member}
+              renderingBoard={renderingBoard}
+              setRenderingBoard={setRenderingBoard}
             />
           </div>
         </div>

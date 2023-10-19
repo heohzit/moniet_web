@@ -9,6 +9,7 @@ import {
   Button4,
   Button5,
   Button6,
+  Button7,
 } from "../util/Buttons";
 import axios from "axios";
 import CommunityBoard from "./CommunityBoard";
@@ -136,6 +137,44 @@ const CommunityView = (props) => {
       });
   };
 
+  const insertParti = () => {
+    Swal.fire({
+      icon: "question",
+      text: "커뮤니티에 참여하시겠습니까?",
+      showCancelButton: true,
+      confirmButtonText: "확인",
+      cancelButtonText: "취소",
+    })
+      .then((res) => {
+        if (res.isConfirmed) {
+          const token = window.localStorage.getItem("token");
+          axios
+            .get("/community/insertParti/" + communityNo, {
+              headers: {
+                contentType: "multipart/form-data",
+                processdData: false,
+                Authorization: "Bearer " + token,
+              },
+            })
+            .then((res) => {
+              console.log(res.data);
+              console.log("참여 성공");
+              setRendering(!rendering);
+            })
+            .catch((res) => {
+              console.log(res.response.status);
+            });
+        } else {
+          return;
+        }
+      })
+      .catch((res) => {
+        Swal.fire("실패", "관리자에게 문의하세요.", "warning");
+      });
+  };
+
+  console.log(community);
+
   return (
     <div className="community-view-wrap">
       <div className="community-view-thumbnail">
@@ -173,10 +212,10 @@ const CommunityView = (props) => {
 
         <div className="community-view-btns">
           <div className="community-view-join-btn">
-            {isLogin ? (
-              <Button3 text="참여하기" /> // onClick해서 axios 못 돌리는지(위에서 돌려서)
+            {community.isParti === 0 ? (
+              <Button3 text="참여하기" clickEvent={insertParti} />
             ) : (
-              <Button6 text="로그인 해주시기 바랍니다." />
+              <Button6 text="탈퇴하기" clickEvent={insertParti} />
             )}
           </div>
           <div className="community-view-like-btn">

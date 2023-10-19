@@ -22,7 +22,7 @@ const RecommentWrite = (props) => {
 
     const recommentContent = document.querySelector(
       "#i" + index + "ic" + indexComment + " textarea"
-    ).value;
+    );
 
     console.log("자식의 값 : " + recommentContent);
 
@@ -43,7 +43,7 @@ const RecommentWrite = (props) => {
           const form = new FormData();
           form.append("comuBoardRef", communityBoardNo);
           form.append("comuBoardCommentRef", comuBoardCommentNo);
-          form.append("comuBoardCommentContent", recommentContent);
+          form.append("comuBoardCommentContent", recommentContent.value);
           const token = window.localStorage.getItem("token");
 
           axios
@@ -61,6 +61,7 @@ const RecommentWrite = (props) => {
                   "댓글 작성이 완료되었습니다.",
                   "success"
                 );
+                recommentContent.value = "";
                 setRenderingRecomment(!renderingRecomment);
               }
             })

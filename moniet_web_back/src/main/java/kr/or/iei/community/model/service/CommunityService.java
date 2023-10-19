@@ -3,7 +3,6 @@ package kr.or.iei.community.model.service;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -62,8 +61,11 @@ public class CommunityService {
 		}
 	}
 
-	public Community selectOneCommunity(int communityNo) {
-		Community c = communityDao.selectOneCommunity(communityNo);
+	public Community selectOneCommunity(int communityNo, String memberId) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("communityNo", communityNo);
+		map.put("memberId", memberId);
+		Community c = communityDao.selectOneCommunity(map);
 		return c;
 	}
 
@@ -164,20 +166,30 @@ public class CommunityService {
 	@Transactional
 	public int insertCommunityLike(int communityNo, String memberId) {
 		Member member = memberDao.selectOneMember(memberId);
-		int result = communityDao.insertCommunityLike(communityNo, member.getMemberNo());
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("communityNo", communityNo);
+		map.put("memberNo", member.getMemberNo());
+		
+		int result = communityDao.insertCommunityLike(map);
 		return result;
 	}
 
 	@Transactional
 	public int removeCommunityLike(int communityNo, String memberId) {
 		Member member = memberDao.selectOneMember(memberId);
-		int result = communityDao.removeCommunityLike(communityNo, member.getMemberNo());
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("communityNo", communityNo);
+		map.put("memberNo", member.getMemberNo());
+		int result = communityDao.removeCommunityLike(map);
 		return result;	}
 
 	@Transactional
 	public int insertBoardLike(int communityBoardNo, String memberId) {
 		Member member = memberDao.selectOneMember(memberId);
-		int result = communityDao.insertBoardLike(communityBoardNo, member.getMemberNo());
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("communityBoardNo", communityBoardNo);
+		map.put("memberNo", member.getMemberNo());
+		int result = communityDao.insertBoardLike(map);
 		int updateLikeCount = communityDao.updateLikeCount(communityBoardNo);
 		return result;
 	}
@@ -185,7 +197,10 @@ public class CommunityService {
 	@Transactional
 	public int removeBoardLike(int communityBoardNo, String memberId) {
 		Member member = memberDao.selectOneMember(memberId);
-		int result = communityDao.removeBoardLike(communityBoardNo, member.getMemberNo());
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("communityBoardNo", communityBoardNo);
+		map.put("memberNo", member.getMemberNo());
+		int result = communityDao.removeBoardLike(map);
 		int updateLikeCount = communityDao.downLikeCount(communityBoardNo);
 		return result;
 	}
@@ -244,6 +259,18 @@ public class CommunityService {
 		} else {
 			return 0;
 		}
+	}
+
+	@Transactional
+	public int insertParti(int communityNo, String memberId) {
+		Member member = memberDao.selectOneMember(memberId);
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("communityNo", communityNo);
+		map.put("memberNo", member.getMemberNo());
+				
+		int result = communityDao.insertParti(map);
+		int updatePartiCount = communityDao.updatePartiCount(communityNo);
+		return result;
 	}
 
 

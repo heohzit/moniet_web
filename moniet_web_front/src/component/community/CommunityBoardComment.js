@@ -19,6 +19,9 @@ const CommunityBoardComment = (props) => {
   const [renderingComment, setRenderingComment] = useState(false);
   const [renderingRecomment, setRenderingRecomment] = useState(false);
 
+  const renderingBoard = props.renderingBoard;
+  const setRenderingBoard = props.setRenderingBoard;
+
   useEffect(() => {
     axios
       .get("/community/boardCommentList/" + reqPage + "/" + communityBoardNo)
@@ -44,6 +47,8 @@ const CommunityBoardComment = (props) => {
           index={index}
           renderingComment={renderingComment}
           setRenderingComment={setRenderingComment}
+          renderingBoard={renderingBoard}
+          setRenderingBoard={setRenderingBoard}
         />
       </div>
       <div className="board-item-comment-list-wrap">

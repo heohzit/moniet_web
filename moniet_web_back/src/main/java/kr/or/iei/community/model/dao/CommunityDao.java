@@ -21,7 +21,7 @@ public interface CommunityDao {
 
 	int insertCommunityType(CommunityType type);
 
-	Community selectOneCommunity(int communityNo);
+	Community selectOneCommunity(Map map);
 	
 	List selectOneCommunityType(int communityNo);
 
@@ -49,13 +49,13 @@ public interface CommunityDao {
 
 	int deleteBoard(int communityBoardNo);
 
-	int insertCommunityLike(int communityNo, int memberNo);
+	int insertCommunityLike(Map map);
 
-	int removeCommunityLike(int communityNo, int memberNo);
+	int removeCommunityLike(Map map);
 
-	int insertBoardLike(int communityBoardNo, int memberNo);
+	int insertBoardLike(Map map);
 
-	int removeBoardLike(int communityBoardNo, int memberNo);
+	int removeBoardLike(Map map);
 
 	int updateLikeCount(int communityBoardNo);
 
@@ -80,6 +80,10 @@ public interface CommunityDao {
 	int deleteCommunityType(Community c);
 
 	int modifyCommunity(Community c);
+
+	int insertParti(Map map);
+
+	int updatePartiCount(int communityNo);
 
 
 }
