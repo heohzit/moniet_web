@@ -128,7 +128,7 @@ const Myinfo = (props) => {
       })
       .then((res) => {
         setMember(res.data);
-        setMemberImg(res.data.imgFile);
+        setMemberImg("/member/" + res.data.imgFile);
       })
       .catch((res) => {
         //로그인이 풀린상태

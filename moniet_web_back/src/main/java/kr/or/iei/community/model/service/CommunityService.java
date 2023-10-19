@@ -223,6 +223,11 @@ public class CommunityService {
 		return result;
 	}
 
+	public List allCommunityList(int reqPage) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 
 }

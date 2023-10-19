@@ -167,14 +167,14 @@ const SideBar = (props) => {
                   <img
                     width="210px"
                     height="180px"
-                    src={memberImg}
+                    src={"/member/" + memberImg}
                     style={{ borderRadius: "50%" }}
                   />
                 )}
               </Box>
               <Box textAlign="center">
                 <Typography color={colors.grey[100]} sx={{ m: "10px 0 0 0" }}>
-                  {member.memberId}
+                  <strong>{member.memberId}</strong>님 환영합니다.
                 </Typography>
               </Box>
             </Box>
