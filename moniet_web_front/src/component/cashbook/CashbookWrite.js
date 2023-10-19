@@ -5,7 +5,6 @@ import AddIcon from "@mui/icons-material/Add";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 import CashInputModal from "../cashModal/CashInputModal";
-import useModal from "../../hooks/useModal";
 
 const CashbookWrite = (props) => {
   //const isOpen = props.isOpen;
@@ -95,10 +94,10 @@ const CashbookWrite = (props) => {
 
   //모달추가
   //const [isOpen, setIsOpen] = useState(false);
-  const { openModal } = useModal();
+  //const { openModal } = useModal();
   const [isOpen1, setIsOpen1] = useState(false);
   const onClickButton1 = () => {
-    openModal({ type: "first" });
+    setIsOpen1(true);
   };
   {
     /**모달추가 일단생략
