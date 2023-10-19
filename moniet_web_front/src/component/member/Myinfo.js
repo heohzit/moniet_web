@@ -218,13 +218,13 @@ const Myinfo = (props) => {
       setCheckEmailMsg("");
     }
   };
-
+  console.log("memberImg", memberImg);
   return (
     <>
       <div className="my-title">MY PAGE</div>
       <div className="my-content">
         <div className="my-profile-img-wrap">
-          {memberImg === null ? (
+          {memberImg === null || memberImg === "/member/null" ? (
             <img src="/image/piggy.jpg" />
           ) : (
             <img src={memberImg} />
