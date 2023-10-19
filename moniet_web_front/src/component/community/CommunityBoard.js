@@ -18,6 +18,9 @@ const CommunityBoard = (props) => {
   const rendering = props.rendering;
   const setRendering = props.setRendering;
 
+  const isParti = props.isParti;
+  const community = props.community;
+
   useEffect(() => {
     const token = window.localStorage.getItem("token");
     axios
@@ -50,6 +53,8 @@ const CommunityBoard = (props) => {
             setRendering={setRendering}
             renderingBoard={renderingBoard}
             setRenderingBoard={setRenderingBoard}
+            isParti={isParti}
+            community={community}
           />
         );
       })}
@@ -71,6 +76,8 @@ const CommunityBoardItem = (props) => {
   const setRenderingBoard = props.setRenderingBoard;
 
   const [like, setLike] = useState(false);
+  const isParti = props.isParti;
+  const community = props.community;
 
   const BoardLike = () => {
     const communityBoardNo = props.communityBoardNo;
@@ -166,6 +173,8 @@ const CommunityBoardItem = (props) => {
     });
   };
 
+  console.log(board);
+
   return (
     <>
       <div className="board-item">
@@ -176,7 +185,9 @@ const CommunityBoardItem = (props) => {
                   return <BoardTypesItem key={"types" + index} types={types} />;
                 })
               : ""}
-            {member && member.memberNo == board.communityBoardWriter ? (
+            {member &&
+            member.memberNo == board.communityBoardWriter &&
+            isParti != 0 ? (
               <>
                 <div className="board-item-update">
                   <span class="material-icons">settings</span>
@@ -246,6 +257,8 @@ const CommunityBoardItem = (props) => {
               member={member}
               renderingBoard={renderingBoard}
               setRenderingBoard={setRenderingBoard}
+              isParti={isParti}
+              community={community}
             />
           </div>
         </div>

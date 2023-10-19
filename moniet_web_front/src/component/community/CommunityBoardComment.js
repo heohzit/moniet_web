@@ -22,6 +22,9 @@ const CommunityBoardComment = (props) => {
   const renderingBoard = props.renderingBoard;
   const setRenderingBoard = props.setRenderingBoard;
 
+  const isParti = props.isParti;
+  const community = props.community;
+
   useEffect(() => {
     axios
       .get("/community/boardCommentList/" + reqPage + "/" + communityBoardNo)
@@ -33,6 +36,8 @@ const CommunityBoardComment = (props) => {
       });
   }, [renderingComment]);
 
+  console.log(member);
+
   return (
     <div className="board-item-comment">
       <div className="board-item-comment-arrow">
@@ -40,16 +45,24 @@ const CommunityBoardComment = (props) => {
           subdirectory_arrow_right
         </span>
       </div>
-      <div className="board-item-comment-write-wrap">
-        <CommunityBoardCommentWrite
-          communityBoardNo={communityBoardNo}
-          index={index}
-          renderingComment={renderingComment}
-          setRenderingComment={setRenderingComment}
-          renderingBoard={renderingBoard}
-          setRenderingBoard={setRenderingBoard}
-        />
-      </div>
+
+      {isParti === 0 && member.memberNo != community.communityWriter ? (
+        ""
+      ) : (
+        <>
+          <div className="board-item-comment-write-wrap">
+            <CommunityBoardCommentWrite
+              communityBoardNo={communityBoardNo}
+              index={index}
+              renderingComment={renderingComment}
+              setRenderingComment={setRenderingComment}
+              renderingBoard={renderingBoard}
+              setRenderingBoard={setRenderingBoard}
+            />
+          </div>
+        </>
+      )}
+
       <div className="board-item-comment-list-wrap">
         {boardCommentList.map((comment, indexComment) => {
           return (
@@ -63,6 +76,8 @@ const CommunityBoardComment = (props) => {
               setRenderingComment={setRenderingComment}
               renderingRecomment={renderingRecomment}
               setRenderingRecomment={setRenderingRecomment}
+              isParti={isParti}
+              community={community}
             />
           );
         })}
@@ -145,6 +160,8 @@ const CommentItem = (props) => {
   const setRenderingComment = props.setRenderingComment;
   const renderingRecomment = props.renderingRecomment;
   const setRenderingRecomment = props.setRenderingRecomment;
+  const isParti = props.isParti;
+  const community = props.community;
 
   const ToggleRecomment = () => {
     const recommentBtn = document.querySelectorAll(
@@ -192,18 +209,25 @@ const CommentItem = (props) => {
         </div>
         <div className="comment-writer">{comment.memberId}</div>
         <div className="comment-date">{comment.comuBoardCommentDate}</div>
-        <div className="comment-recomment-btn" onClick={ToggleRecomment}>
-          답글달기
-        </div>
-        {member && member.memberNo == comment.comuBoardCommentWriter ? (
-          <>
-            <div className="comment-update">수정</div>
-            <div className="comment-delete" onClick={deleteComment}>
-              삭제
-            </div>
-          </>
-        ) : (
+
+        {isParti === 0 && member.memberNo != community.communityWriter ? (
           ""
+        ) : (
+          <>
+            <div className="comment-recomment-btn" onClick={ToggleRecomment}>
+              답글달기
+            </div>
+            {member && member.memberNo == comment.comuBoardCommentWriter ? (
+              <>
+                <div className="comment-update">수정</div>
+                <div className="comment-delete" onClick={deleteComment}>
+                  삭제
+                </div>
+              </>
+            ) : (
+              ""
+            )}
+          </>
         )}
       </div>
       <div className="comment-content">{comment.comuBoardCommentContent}</div>
@@ -221,6 +245,8 @@ const CommentItem = (props) => {
           member={member}
           renderingRecomment={renderingRecomment}
           setRenderingRecomment={setRenderingRecomment}
+          isParti={isParti}
+          community={community}
         />
         <RecommentList
           communityBoardNo={comment.comuBoardRef}
@@ -229,6 +255,8 @@ const CommentItem = (props) => {
           member={member}
           renderingRecomment={renderingRecomment}
           setRenderingRecomment={setRenderingRecomment}
+          isParti={isParti}
+          community={community}
         />
       </div>
     </div>

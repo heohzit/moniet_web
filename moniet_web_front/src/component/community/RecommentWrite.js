@@ -14,6 +14,9 @@ const RecommentWrite = (props) => {
   const location = useLocation();
   const renderingRecomment = props.renderingRecomment;
   const setRenderingRecomment = props.setRenderingRecomment;
+  const isParti = props.isParti;
+  const community = props.community;
+  const member = props.member;
 
   const insertRecomment = () => {
     // const recommentContent = document.querySelectorAll(
@@ -84,14 +87,18 @@ const RecommentWrite = (props) => {
         id={"i" + index + "ic" + indexComment}
       >
         {/* <CommunityBoardCommentWrite /> */}
-        <div className="comment-recomment-write">
-          <div className="comment-recomment-write-textarea">
-            <textarea className="comment-recomment-write-textareat-text"></textarea>
+        {isParti === 0 && member.memberNo != community.communityWriter ? (
+          ""
+        ) : (
+          <div className="comment-recomment-write">
+            <div className="comment-recomment-write-textarea">
+              <textarea className="comment-recomment-write-textareat-text"></textarea>
+            </div>
+            <div className="comment-recomment-write-btn">
+              <Button1 text="등록하기" clickEvent={insertRecomment} />
+            </div>
           </div>
-          <div className="comment-recomment-write-btn">
-            <Button1 text="등록하기" clickEvent={insertRecomment} />
-          </div>
-        </div>
+        )}
       </div>
     </div>
   );

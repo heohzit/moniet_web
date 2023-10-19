@@ -537,7 +537,6 @@
   width: 100%;
   float: left;
   margin-top: 30px;
-  border-top: 1px solid #ccc;
 }
 
 .community-item-types {
@@ -576,6 +575,8 @@
 }
 
 .board-top {
+  padding-top: 25px;
+  border-top: 1px solid #ccc;
   font-size: 24px;
   font-family: ns-eb;
   color: #010440;

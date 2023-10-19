@@ -283,5 +283,5 @@ public class CommunityController {
 		public String checkDelete(@PathVariable String communityNo) {
 			System.out.println(communityNo);
 			return null;
-	
+	}
 }

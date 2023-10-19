@@ -28,7 +28,7 @@ const theme = createTheme({
 });
 
 function App() {
-  const [isLogin, setIsLogin] = useState(null);
+  const [isLogin, setIsLogin] = useState(true);
 
   useEffect(() => {
     const token = window.localStorage.getItem("token");

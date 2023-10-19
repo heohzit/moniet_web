@@ -101,7 +101,8 @@
 		    COMMUNITY_THUMB,
 		    COMMUNITY_STATUS,
 		    COMMUNITY_PARTI,
-		    (select count(*) isParti from community_parti where member_no = (select member_no from member where member_id = #{memberId}) and community_no = #{communityNo}) IS_PARTI
+		    (select count(*) isParti from community_parti where member_no = (select member_no from member where member_id = #{memberId}) and community_no = #{communityNo}) IS_PARTI,
+		    (select count(*) isWish from community_wish where member_no = (select member_no from member where member_id = #{memberId}) and community_no = #{communityNo}) IS_WISH
 		FROM
 		    COMMUNITY c
 		JOIN
@@ -128,6 +129,7 @@
 		<result column="community_status" property="communityStatus" />
 		<result column="community_parti" property="communityParti" />
 		<result column="is_parti" property="isParti" />
+		<result column="is_wish" property="isWish" />
 		
 		<collection 
 			property="typeList"
@@ -151,7 +153,7 @@
 	        COMMUNITY_BOARD_REF,
 	        COMMUNITY_BOARD_LIKE,
 	        (select count(*) from comu_board_comment where comu_board_ref = cb.COMMUNITY_BOARD_NO) as comu_board_comment_count,
-	        (select count(*) isLike from community_board_like where member_no = (select member_no from member where member_id = #{memberId}) and community_board_no = cb.COMMUNITY_BOARD_NO)
+	        (select count(*) isLike from community_board_like where member_no = (select member_no from member where member_id = #{memberId}) and community_board_no = cb.COMMUNITY_BOARD_NO) IS_LIKE
 	    FROM COMMUNITY_BOARD cb
 	    JOIN MEMBER ON (COMMUNITY_BOARD_WRITER = MEMBER_NO)
 	    WHERE COMMUNITY_REF = #{communityNo}

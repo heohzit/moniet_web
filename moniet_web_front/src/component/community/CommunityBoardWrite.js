@@ -11,6 +11,7 @@ const CommunityBoardWrite = (props) => {
   const rendering = props.rendering;
   const setRendering = props.setRendering;
   const [val, setVal] = useState("");
+  const community = props.community;
 
   const [boardFile, setBoardFile] = useState([]); // 전송용
   const [boardImg, setBoardImg] = useState([]); // 미리보기용

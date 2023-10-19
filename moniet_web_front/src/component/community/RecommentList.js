@@ -14,6 +14,8 @@ const RecommentList = (props) => {
   const member = props.member;
   const renderingRecomment = props.renderingRecomment;
   const setRenderingRecomment = props.setRenderingRecomment;
+  const isParti = props.isParti;
+  const community = props.community;
 
   useEffect(() => {
     axios
@@ -45,6 +47,8 @@ const RecommentList = (props) => {
             member={member}
             renderingRecomment={renderingRecomment}
             setRenderingRecomment={setRenderingRecomment}
+            isParti={isParti}
+            community={community}
           />
         );
       })}
@@ -59,6 +63,8 @@ const RecommentItem = (props) => {
   const navigate = useNavigate();
   const renderingRecomment = props.renderingRecomment;
   const setRenderingRecomment = props.setRenderingRecomment;
+  const isParti = props.isParti;
+  const community = props.community;
 
   const updateComment = () => {
     Swal.fire({
@@ -100,6 +106,9 @@ const RecommentItem = (props) => {
     });
   };
 
+  console.log(member);
+  console.log(recomment);
+
   return (
     <>
       <div className="comment-recomment-list">
@@ -109,7 +118,9 @@ const RecommentItem = (props) => {
         <div className="recomment-writer">{recomment.memberId}</div>
         <div className="recomment-date">{recomment.comuBoardCommentDate}</div>
         <div className="recomment-recomment-btn"></div>
-        {member && member.memberNo == recomment.comuBoardCommentWriter ? (
+        {member &&
+        member.memberNo === recomment.comuBoardCommentWriter &&
+        isParti != 0 ? (
           <>
             <div className="recomment-update" onClick={updateComment}>
               수정

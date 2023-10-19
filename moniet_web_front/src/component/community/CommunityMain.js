@@ -7,16 +7,28 @@ import CommunityModify from "./CommunityModify";
 
 const CommunityMain = (props) => {
   const isLogin = props.isLogin;
+  const setIsLogin = props.setIsLogin;
 
   return (
     <div className="community-all-wrap">
       <div className="community-main-top">COMMUNITY</div>
       <Routes>
-        <Route path="view" element={<CommunityView isLogin={isLogin} />} />
+        <Route
+          path="view"
+          element={<CommunityView isLogin={isLogin} setIsLogin={setIsLogin} />}
+        />
 
-        <Route path="write" element={<CommunityWrite isLogin={isLogin} />} />
+        <Route
+          path="write"
+          element={<CommunityWrite isLogin={isLogin} setIsLogin={setIsLogin} />}
+        />
 
-        <Route path="modify" element={<CommunityModify />} />
+        <Route
+          path="modify"
+          element={
+            <CommunityModify isLogin={isLogin} setIsLogin={setIsLogin} />
+          }
+        />
 
         <Route path="*" element={<CommunityList isLogin={isLogin} />} />
       </Routes>

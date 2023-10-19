@@ -17,6 +17,7 @@ import CommunityBoardWrite from "./CommunityBoardWrite";
 
 const CommunityView = (props) => {
   const isLogin = props.isLogin;
+  const setIsLogin = props.setIsLogin;
   const location = useLocation();
   const communityNo = location.state.communityNo;
   const [community, setCommunity] = useState({});
@@ -52,6 +53,7 @@ const CommunityView = (props) => {
           },
         })
         .then((res) => {
+          console.log(res.data);
           setMember(res.data);
         })
         .catch((res) => {
@@ -211,6 +213,9 @@ const CommunityView = (props) => {
       });
   };
 
+  console.log(community);
+  console.log(member);
+
   return (
     <div className="community-view-wrap">
       <div className="community-view-thumbnail">
@@ -246,25 +251,33 @@ const CommunityView = (props) => {
           참여인원 {community.communityParti}
         </div>
 
-        <div className="community-view-btns">
-          <div className="community-view-join-btn">
-            {community.isParti === 0 ? (
-              <Button3 text="참여하기" clickEvent={insertParti} />
-            ) : (
-              <Button6 text="탈퇴하기" clickEvent={outParti} />
-            )}
+        {member && member.memberNo == community.communityWriter ? (
+          ""
+        ) : (
+          <div className="community-view-btns">
+            <div className="community-view-join-btn">
+              {community.isParti === 0 ? (
+                <Button3 text="참여하기" clickEvent={insertParti} />
+              ) : (
+                <Button6 text="탈퇴하기" clickEvent={outParti} />
+              )}
+            </div>
+            <div className="community-view-like-btn">
+              {community.isWish === 0 ? (
+                <span class="material-icons ab-btn1" onClick={""}>
+                  favorite_border
+                </span>
+              ) : (
+                <span class="material-icons ab-btn2" onClick={""}>
+                  favorite
+                </span>
+              )}
+            </div>
+            <div className="community-view-share-btn">
+              <span class="material-icons sh-btn1">share</span>
+            </div>
           </div>
-          <div className="community-view-like-btn">
-            {isLogin ? (
-              <span class="material-icons ab-btn1">favorite_border</span>
-            ) : (
-              ""
-            )}
-          </div>
-          <div className="community-view-share-btn">
-            <span class="material-icons sh-btn1">share</span>
-          </div>
-        </div>
+        )}
       </div>
       <div className="community-view-content-top">INFO</div>
       <div
@@ -298,14 +311,22 @@ const CommunityView = (props) => {
       </div>
 
       <div className="community-view-board-zone">
-        <div className="board-top">게시물 등록 〉</div>
-        <div className="community-view-board-write">
-          <CommunityBoardWrite
-            communityNo={communityNo}
-            rendering={rendering}
-            setRendering={setRendering}
-          />
-        </div>
+        {community.isParti === 0 &&
+        member.memberNo != community.communityWriter ? (
+          ""
+        ) : (
+          <>
+            <div className="board-top">게시물 등록 〉</div>
+            <div className="community-view-board-write">
+              <CommunityBoardWrite
+                communityNo={communityNo}
+                rendering={rendering}
+                setRendering={setRendering}
+              />
+            </div>
+          </>
+        )}
+
         <div className="community-view-board-list">
           <CommunityBoard
             communityNo={communityNo}
@@ -313,6 +334,8 @@ const CommunityView = (props) => {
             setRendering={setRendering}
             isLogin={isLogin}
             member={member}
+            isParti={community.isParti}
+            community={community}
           />
         </div>
       </div>
