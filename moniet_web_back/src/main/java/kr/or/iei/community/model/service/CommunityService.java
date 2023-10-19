@@ -1,7 +1,9 @@
 package kr.or.iei.community.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -65,8 +67,11 @@ public class CommunityService {
 		return c;
 	}
 
-	public List communityBoardList(int reqPage, int communityNo) {
-		List list = communityDao.communityBoardList(communityNo);
+	public List communityBoardList(int reqPage, int communityNo, String memberId) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("communityNo", communityNo);
+		map.put("memberId", memberId);
+		List list = communityDao.communityBoardList(map);
 		return list;
 	}
 
@@ -156,17 +161,20 @@ public class CommunityService {
 		return null;
 	}
 
+	@Transactional
 	public int insertCommunityLike(int communityNo, String memberId) {
 		Member member = memberDao.selectOneMember(memberId);
 		int result = communityDao.insertCommunityLike(communityNo, member.getMemberNo());
 		return result;
 	}
 
+	@Transactional
 	public int removeCommunityLike(int communityNo, String memberId) {
 		Member member = memberDao.selectOneMember(memberId);
 		int result = communityDao.removeCommunityLike(communityNo, member.getMemberNo());
 		return result;	}
 
+	@Transactional
 	public int insertBoardLike(int communityBoardNo, String memberId) {
 		Member member = memberDao.selectOneMember(memberId);
 		int result = communityDao.insertBoardLike(communityBoardNo, member.getMemberNo());
@@ -174,6 +182,7 @@ public class CommunityService {
 		return result;
 	}
 
+	@Transactional
 	public int removeBoardLike(int communityBoardNo, String memberId) {
 		Member member = memberDao.selectOneMember(memberId);
 		int result = communityDao.removeBoardLike(communityBoardNo, member.getMemberNo());
@@ -204,9 +213,16 @@ public class CommunityService {
 	
 	
 	//관리자
-	public List allCommunityList(int reqPage) {
-		return communityDao.allCommunityList(reqPage);
+//	public List allCommunityList(int reqPage) {
+//		return communityDao.allCommunityList(reqPage);
+//	}
+
+	@Transactional
+	public int deleteCommunity(int communityNo) {
+		int result = communityDao.deleteCommunity(communityNo);
+		return result;
 	}
+
 
 
 }

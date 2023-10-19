@@ -3,6 +3,7 @@ import "./community.css";
 import CommunityView from "./CommunityView";
 import CommunityWrite from "./CommunityWrite";
 import CommunityList from "./CommunityList";
+import CommunityModify from "./CommunityModify";
 
 const CommunityMain = (props) => {
   const isLogin = props.isLogin;
@@ -14,6 +15,8 @@ const CommunityMain = (props) => {
         <Route path="view" element={<CommunityView isLogin={isLogin} />} />
 
         <Route path="write" element={<CommunityWrite isLogin={isLogin} />} />
+
+        <Route path="modify" element={<CommunityModify />} />
 
         <Route path="*" element={<CommunityList isLogin={isLogin} />} />
       </Routes>

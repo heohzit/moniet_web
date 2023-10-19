@@ -49,7 +49,7 @@ const CommunityView = (props) => {
           console.log(res.response.status);
         });
     }
-  }, []);
+  }, [rendering]);
 
   // if (!isLogin) {
   //   Swal.fire({
@@ -85,6 +85,26 @@ const CommunityView = (props) => {
   //   });
   // };
 
+  const modifyCommunity = () => {
+    Swal.fire({
+      icon: "warning",
+      text: "커뮤니티를 수정하시겠습니까?",
+      showCancelButton: true,
+      confirmButtonText: "삭제",
+      cancelButtonText: "취소",
+    })
+      .then((res) => {
+        if (res.isConfirmed) {
+          navigate("/community/modify", { state: { community: community } });
+        } else {
+          return;
+        }
+      })
+      .catch((res) => {
+        console.log(res.response.status);
+      });
+  };
+
   const deleteCommunity = () => {
     Swal.fire({
       icon: "warning",
@@ -97,6 +117,7 @@ const CommunityView = (props) => {
         if (res.isConfirmed) {
           axios.get("/community/deleteCommunity/" + communityNo).then((res) => {
             console.log(res.data);
+            console.log("커뮤니티 삭제 성공");
             if (res.data > 0) {
               Swal.fire(
                 "삭제 완료",
@@ -180,7 +201,12 @@ const CommunityView = (props) => {
           member && member.memberNo == community.communityWriter ? (
             <>
               <div className="community-view-update" clickEvent={""}>
-                <span className="community-view-update-btn">수정</span>
+                <span
+                  className="community-view-update-btn"
+                  onClick={modifyCommunity}
+                >
+                  수정
+                </span>
               </div>
 
               <div className="community-view-delete" onClick={deleteCommunity}>

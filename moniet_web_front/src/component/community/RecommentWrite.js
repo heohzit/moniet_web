@@ -14,9 +14,20 @@ const RecommentWrite = (props) => {
   const location = useLocation();
 
   const insertRecomment = () => {
-    const recommentContent = document.querySelectorAll(
-      ".comment-recomment-write-textareat-text"
-    )[index].value;
+    // const recommentContent = document.querySelectorAll(
+    //   ".comment-recomment-write-textareat-text"
+    // )[(index, indexComment)].value;
+
+    const recommentContent = document.querySelector(
+      "#i" + index + "ic" + indexComment + " textarea"
+    ).value;
+
+    console.log("자식의 값 : " + recommentContent);
+
+    console.log("게시물 인덱스 : " + index);
+    console.log("댓글 인덱스 : " + indexComment);
+    console.log("communityBoardNo : " + communityBoardNo);
+    console.log("comuBoardCommentNo : " + comuBoardCommentNo);
 
     if (recommentContent !== "") {
       Swal.fire({
