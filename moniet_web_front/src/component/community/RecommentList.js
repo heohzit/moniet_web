@@ -12,6 +12,8 @@ const RecommentList = (props) => {
   const communityBoardNo = props.communityBoardNo;
   const comuBoardCommentNo = props.comuBoardCommentNo;
   const member = props.member;
+  const renderingRecomment = props.renderingRecomment;
+  const setRenderingRecomment = props.setRenderingRecomment;
 
   useEffect(() => {
     axios
@@ -30,7 +32,7 @@ const RecommentList = (props) => {
       .catch((res) => {
         console.log(res.response.status);
       });
-  }, [reqPage]);
+  }, [renderingRecomment]);
 
   return (
     <>
@@ -41,6 +43,8 @@ const RecommentList = (props) => {
             recomment={recomment}
             index={index}
             member={member}
+            renderingRecomment={renderingRecomment}
+            setRenderingRecomment={setRenderingRecomment}
           />
         );
       })}
@@ -53,6 +57,8 @@ const RecommentItem = (props) => {
   const index = props.index;
   const recomment = props.recomment;
   const navigate = useNavigate();
+  const renderingRecomment = props.renderingRecomment;
+  const setRenderingRecomment = props.setRenderingRecomment;
 
   const updateComment = () => {
     Swal.fire({
@@ -64,6 +70,7 @@ const RecommentItem = (props) => {
     }).then((res) => {
       if (res.isConfirmed) {
         // 수정하시겠습니까? 확인 누르면 textarea로 바뀌면서 수정하는 법
+        setRenderingRecomment(!renderingRecomment);
       } else {
         return;
       }
@@ -84,6 +91,7 @@ const RecommentItem = (props) => {
           .then((res) => {
             console.log(res.data);
             console.log("성공");
+            setRenderingRecomment(!renderingRecomment);
           })
           .catch((res) => {
             console.log(res.response.status);

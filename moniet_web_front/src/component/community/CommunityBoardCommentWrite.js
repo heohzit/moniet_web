@@ -8,6 +8,8 @@ import Swal from "sweetalert2";
 const CommunityBoardCommentWrite = (props) => {
   const index = props.index;
   const communityBoardNo = props.communityBoardNo;
+  const renderingComment = props.renderingComment;
+  const setRenderingComment = props.setRenderingComment;
   const navigate = useNavigate();
 
   const insertComment = () => {
@@ -44,6 +46,7 @@ const CommunityBoardCommentWrite = (props) => {
                   "댓글 작성이 완료되었습니다.",
                   "success"
                 );
+                setRenderingComment(!renderingComment);
               }
             })
             .catch((res) => {

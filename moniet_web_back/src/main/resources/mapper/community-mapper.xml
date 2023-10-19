@@ -319,4 +319,21 @@
 		    ORDER BY 1 DESC)C)
 		WHERE RNUM BETWEEN 1 AND 100
 	</select>
+	
+	<delete id="deleteCommunityType">
+		delete community_type where community_no = #{communityNo}
+	</delete>
+	
+	<insert id="modifyCommunityType">
+		insert into community_type values(COMMUNITY_TYPE_SEQ.NEXTVAL, #{communityNo}, #{communityTypeDiv})
+	</insert>
+	
+	<update id="modifyCommunity">
+		update community
+    		set community_title = #{communityTitle},
+	        community_subtitle = #{communitySubTitle},
+	        community_content = #{communityContent},
+	        community_thumb = #{communityThumb}
+    	where community_no = #{communityNo}
+	</update>
 </mapper>

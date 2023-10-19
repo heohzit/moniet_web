@@ -13,6 +13,9 @@ const CommunityBoard = (props) => {
   const [communityBoardList, setCommunityBoardList] = useState([]);
   const [reqPage, setReqPage] = useState(1);
 
+  const rendering = props.rendering;
+  const setRendering = props.setRendering;
+
   useEffect(() => {
     const token = window.localStorage.getItem("token");
     axios
@@ -42,6 +45,8 @@ const CommunityBoard = (props) => {
             index={index}
             member={member}
             communityBoardNo={board.communityBoardNo}
+            rendering={rendering}
+            setRendering={setRendering}
           />
         );
       })}
@@ -55,6 +60,9 @@ const CommunityBoardItem = (props) => {
   const index = props.index;
   const navigate = useNavigate();
   const isLogin = props.isLogin;
+
+  const rendering = props.rendering;
+  const setRendering = props.setRendering;
 
   const [like, setLike] = useState(false);
 
@@ -146,6 +154,7 @@ const CommunityBoardItem = (props) => {
                 "게시글 삭제가 완료되었습니다.",
                 "success"
               );
+              setRendering(!rendering);
             }
           })
           .catch((res) => {

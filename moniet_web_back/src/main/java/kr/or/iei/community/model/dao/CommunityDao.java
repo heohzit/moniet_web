@@ -75,5 +75,11 @@ public interface CommunityDao {
 	//관리자
 	List allCommunityList(int reqPage);
 
+	int modifyCommunityType(CommunityType type);
+
+	int deleteCommunityType(Community c);
+
+	int modifyCommunity(Community c);
+
 
 }
