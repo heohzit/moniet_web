@@ -21,6 +21,11 @@ const AdminCommunityList = (props) => {
     <div className="admin-community-list-wrap">
       <div className="admin-community-list-title">커뮤니티 목록</div>
       <div className="admin-comunity-list-content">
+        <div className="community-check-del-btn-wrap">
+          <button className="chk-del-btn" onClick={checkDel}>
+            선택삭제
+          </button>
+        </div>
         <table className="admin-community-list-table">
           <thead>
             <th>선택</th>
@@ -48,6 +53,10 @@ const AdminCommunityList = (props) => {
   );
 };
 
+//게시글 선택 삭제
+const checkDel = () => {};
+
+//게시글 개별 삭제
 const commmunityDel = (e) => {
   const communityNo = e.target.parentNode.parentNode.firstChild.innerText;
   console.log(communityNo);
