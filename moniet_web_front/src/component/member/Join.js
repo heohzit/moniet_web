@@ -185,11 +185,7 @@ const Join = () => {
     <div className="join-wrap">
       <div className="join-title">MEMBERSHIP</div>
       <div className="join-img-wrap">
-        {memberImg === null ? (
-          <img src="./image/piggy.jpg" />
-        ) : (
-          <img src={memberImg} />
-        )}
+        {memberImg ? <img src={memberImg} /> : <img src="./image/piggy.jpg" />}
       </div>
       <div className="join-profile-wrap">
         <label htmlFor="profileImg" className="signup-profileImg-label">

@@ -255,3 +255,6 @@
 .fc-daygrid-day-frame.fc-scrollgrid-sync-inner {
   cursor: pointer;
 }
+.loop-style {
+  color: #6a6da6;
+}

@@ -124,6 +124,7 @@ const CommunityView = (props) => {
                 "커뮤니티 삭제가 완료되었습니다.",
                 "success"
               );
+              navigate("community");
             }
           });
         } else {
@@ -233,6 +234,8 @@ const CommunityView = (props) => {
         <div className="community-view-board-list">
           <CommunityBoard
             communityNo={communityNo}
+            rendering={rendering}
+            setRendering={setRendering}
             isLogin={isLogin}
             member={member}
           />

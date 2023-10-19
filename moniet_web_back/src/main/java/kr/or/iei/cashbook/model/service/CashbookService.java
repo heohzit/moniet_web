@@ -70,27 +70,30 @@ public class CashbookService {
 	public int insertCashbook(Cashbook cashbook) {
 		int result=0;
 		int cashbookLoop = cashbook.getCashbookLoop();
+		int loopMonth = cashbook.getLoopMonth();
+		int money = cashbook.getCashbookMoney();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Calendar cal = Calendar.getInstance();
+		Calendar finalCal = Calendar.getInstance();
+		try {
+			Date date = sdf.parse(cashbook.getCashbookDate());	//str>date
+			cal.setTime(date);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if(cashbookLoop == 0) {
 			result = cashbookDao.insertCashbook(cashbook);
 		} else if(cashbookLoop == 2) {	//할부 일때 
-			int loopMonth = cashbook.getLoopMonth();
-			int money = cashbook.getCashbookMoney();
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-			Calendar cal = Calendar.getInstance();
-			try {
-				//str>date
-				Date date = sdf.parse(cashbook.getCashbookDate());
-				cal.setTime(date);
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 			for(int i =0 ; i<cashbook.getLoopMonth() ; i++ ) {
 				System.out.println("할부"+i);
 				cashbook.setLoopRound(i+1);
 				cashbook.setCashbookMoney(money/loopMonth);
-				//date>str
-				cal.add(Calendar.MONTH, i);
+				if(i==0) {
+					cal.add(Calendar.MONTH, 0);					
+				} else {
+					cal.add(Calendar.MONTH, 1);
+				}
 				String cashDate = sdf.format(cal.getTime()); 
 				cashbook.setCashbookDate(cashDate);
 				System.out.println(i+"날짜 바뀌는 현황 : " + cashDate);
@@ -99,6 +102,48 @@ public class CashbookService {
 					result = -1;//성공여부 확인용
 				}
 			}
+		} else if(cashbookLoop == 1) {	//반복일 때
+			try {
+				Date date = sdf.parse(cashbook.getCashbookDate());
+				String finalDateStr = "2024-12-31";
+				Date finalDate = sdf.parse(finalDateStr);
+				System.out.println("finalDate: "+finalDate);
+				cal.setTime(date);
+				//최초로 들어온 날짜에 한번삽입
+				cal.add(Calendar.MONTH, 0);
+				String cashDate = sdf.format(cal.getTime()); 
+				cashbook.setCashbookDate(cashDate);
+				result=cashbookDao.insertCashbook(cashbook);
+				System.out.println("cashDate : "+cashDate);
+				//반복개월만큼 삽입
+				
+				while(date.before(finalDate)) {
+					cal.add(Calendar.MONTH, loopMonth);
+					cashDate = sdf.format(cal.getTime());
+					System.out.println("cashDate : "+cashDate);
+					cashbook.setCashbookDate(cashDate);
+					result+=cashbookDao.insertCashbook(cashbook);
+					date=cal.getTime();
+					if(date.after(finalDate)) {
+						break;
+					}
+				}
+				//성공여부 확인 위한 개월수 구하기
+				int year = Integer.parseInt(cashbook.getCashbookDate().substring(0, 4));
+				int month = Integer.parseInt(cashbook.getCashbookDate().substring(5, 7));
+				int finalYear = Integer.parseInt(finalDateStr.substring(0, 4));
+				int finalMonth = Integer.parseInt(finalDateStr.substring(5, 7));
+				int month_diff = (year-finalYear)*12+(month-finalMonth);
+				
+				int resultChk = Math.abs(month_diff/cashbook.getLoopMonth());
+				System.out.println("resultChk : "+resultChk);
+				if(result == resultChk) {
+					result = -1;//성공여부 확인용
+				}
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} 
 		}
 		int challengeNo = cashbook.getChallengeNo();
 		String memberId = cashbook.getMemberId();

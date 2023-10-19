@@ -12,6 +12,8 @@ const RecommentWrite = (props) => {
   const communityBoardNo = props.communityBoardNo;
   const comuBoardCommentNo = props.comuBoardCommentNo;
   const location = useLocation();
+  const renderingRecomment = props.renderingRecomment;
+  const setRenderingRecomment = props.setRenderingRecomment;
 
   const insertRecomment = () => {
     // const recommentContent = document.querySelectorAll(
@@ -59,6 +61,7 @@ const RecommentWrite = (props) => {
                   "댓글 작성이 완료되었습니다.",
                   "success"
                 );
+                setRenderingRecomment(!renderingRecomment);
               }
             })
             .catch((res) => {

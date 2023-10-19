@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import "./adminCommunityList.css";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 const AdminCommunityList = (props) => {
   const isLogin = props.isLogin;
   const [communityList, setCommunityList] = useState([]);
   const [reqPage, setReqPage] = useState(1);
-  const [communityNo, setCommunityNo] = useState("");
+
   useEffect(() => {
     axios
       .get("/community/allCommunityList/" + reqPage)
@@ -21,6 +22,11 @@ const AdminCommunityList = (props) => {
     <div className="admin-community-list-wrap">
       <div className="admin-community-list-title">커뮤니티 목록</div>
       <div className="admin-comunity-list-content">
+        <div className="community-check-del-btn-wrap">
+          <button className="chk-del-btn" onClick={checkDel}>
+            선택삭제
+          </button>
+        </div>
         <table className="admin-community-list-table">
           <thead>
             <th>선택</th>
@@ -38,6 +44,7 @@ const AdminCommunityList = (props) => {
                 <CommunityItem
                   community={community}
                   key={"commmunity" + index}
+                  isLogin={isLogin}
                 />
               );
             })}
@@ -48,14 +55,33 @@ const AdminCommunityList = (props) => {
   );
 };
 
+//게시글 선택 삭제
+const checkDel = () => {
+  //체크된 체크박스
+  const check = document.querySelectorAll(".chk:checked");
+  console.log(check);
+  if (check.length == 0) {
+    alert("삭제할 게시글을 선택해주세요.");
+  } else {
+    //체크된 게시글 번호를 저장할 배열
+    const no = new Array();
+    check.forEach(function (index, item) {
+      const communityNo = check.parentNode.nextSibling.innerText;
+      console.log(communityNo);
+    });
+  }
+};
+
+//게시글 개별 삭제
 const commmunityDel = (e) => {
-  const communityNo = e.target.parentNode.parentNode.firstChild.innerText;
+  const communityNo =
+    e.target.parentNode.previousSibling.previousSibling.previousSibling
+      .previousSibling.previousSibling.previousSibling.innerText;
   console.log(communityNo);
-  if (window.confirm("게시글을 삭제하시겠습니까?") == true) {
+  if (window.confirm("게시글을 삭제 하시겠습니까?")) {
     axios
-      .get("/community/adminDelete/" + communityNo)
+      .get("/community/deleteCommunity/" + communityNo)
       .then((res) => {
-        console.log(res.data);
         alert("게시글이 삭제 되었습니다.");
       })
       .catch((res) => {
@@ -68,8 +94,18 @@ const commmunityDel = (e) => {
 
 const CommunityItem = (props) => {
   const community = props.community;
+  const navigate = useNavigate();
+
+  //상세 페이지로 이동
+  const detailedPage = () => {
+    console.log(community.communityNo);
+    navigate("/community/view", {
+      state: { communityNo: community.communityNo },
+    });
+  };
+
   return (
-    <tr>
+    <tr onClick={detailedPage}>
       <td>
         <input type="checkbox" className="chk"></input>
       </td>
