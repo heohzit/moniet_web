@@ -144,7 +144,8 @@
 	        COMMUNITY_REF,
 	        COMMUNITY_BOARD_REF,
 	        COMMUNITY_BOARD_LIKE,
-	        (select count(*) from comu_board_comment where comu_board_ref = cb.COMMUNITY_BOARD_NO) as comu_board_comment_count
+	        (select count(*) from comu_board_comment where comu_board_ref = cb.COMMUNITY_BOARD_NO) as comu_board_comment_count,
+	        (select count(*) isLike from community_board_like where member_no = (select member_no from member where member_id = #{memberId}) and community_board_no = cb.COMMUNITY_BOARD_NO)
 	    FROM COMMUNITY_BOARD cb
 	    JOIN MEMBER ON (COMMUNITY_BOARD_WRITER = MEMBER_NO)
 	    WHERE COMMUNITY_REF = #{communityNo}
@@ -173,6 +174,7 @@
 		<result column="community_board_ref" property="communityBoardRef" />
 		<result column="community_board_like" property="communityBoardLike" />
 		<result column="comu_board_comment_count" property="comuBoardCommentCount" />
+		<result column="is_like" property="isLike" />
 		
 		<collection 
 			property="communityBoardTypeList"
@@ -292,5 +294,9 @@
 	<update id="downLikeCount">
 		UPDATE COMMUNITY_BOARD SET COMMUNITY_BOARD_LIKE = COMMUNITY_BOARD_LIKE-1 WHERE COMMUNITY_BOARD_NO = #{communityBoardNo}
 	</update>
+
+	<delete id="deleteCommunity">
+		delete community where community_no = #{communityNo}
+	</delete>
 
 </mapper>

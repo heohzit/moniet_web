@@ -1,6 +1,7 @@
 package kr.or.iei.community.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -24,7 +25,7 @@ public interface CommunityDao {
 	
 	List selectOneCommunityType(int communityNo);
 
-	List communityBoardList(int communityNo);
+	List communityBoardList(Map map);
 
 	int insertBoard(CommunityBoard c);
 
@@ -59,6 +60,8 @@ public interface CommunityDao {
 	int updateLikeCount(int communityBoardNo);
 
 	int downLikeCount(int communityBoardNo);
+
+	int deleteCommunity(int communityNo);
 
 
 }

@@ -14,8 +14,15 @@ const CommunityBoard = (props) => {
   const [reqPage, setReqPage] = useState(1);
 
   useEffect(() => {
+    const token = window.localStorage.getItem("token");
     axios
-      .get("/community/communityBoardList/" + reqPage + "/" + communityNo)
+      .get("/community/communityBoardList/" + reqPage + "/" + communityNo, {
+        headers: {
+          contentType: "multipart/form-data",
+          processdData: false,
+          Authorization: "Bearer " + token,
+        },
+      })
       .then((res) => {
         console.log(res.data);
         setCommunityBoardList(res.data);
@@ -23,7 +30,7 @@ const CommunityBoard = (props) => {
       .catch((res) => {
         console.log(res.response.status);
       });
-  }, [reqPage]);
+  }, [reqPage, props]);
 
   return (
     <div className="community-view-board">
@@ -54,50 +61,48 @@ const CommunityBoardItem = (props) => {
   const BoardLike = () => {
     const communityBoardNo = props.communityBoardNo;
 
-    useEffect(() => {
-      const likeBtn = document.querySelectorAll(
-        ".board-item-like-icon > .thumb_up"
-      )[index];
+    const likeBtn = document.querySelectorAll(
+      ".board-item-like-icon > .thumb_up"
+    )[index];
 
-      likeBtn.classList.toggle("thumb_up2");
+    likeBtn.classList.toggle("thumb_up2");
 
-      console.log("likeBtn : " + likeBtn.className);
+    console.log("likeBtn : " + likeBtn.className);
 
-      const token = window.localStorage.getItem("token");
-      if (likeBtn.className === "material-icons thumb_up thumb_up2") {
-        axios
-          .get("/community/insertBoardLike/" + communityBoardNo, {
-            headers: {
-              contentType: "multipart/form-data",
-              processdData: false,
-              Authorization: "Bearer " + token,
-            },
-          })
-          .then((res) => {
-            console.log(res.data);
-            console.log("게시물 좋아요 성공");
-          })
-          .catch((res) => {
-            console.log(res.response.status);
-          });
-      } else if (likeBtn.className === "material-icons thumb_up") {
-        axios
-          .get("/community/removeBoardLike/" + communityBoardNo, {
-            headers: {
-              contentType: "multipart/form-data",
-              processdData: false,
-              Authorization: "Bearer " + token,
-            },
-          })
-          .then((res) => {
-            console.log(res.data);
-            console.log("게시물 좋아요취소 성공");
-          })
-          .catch((res) => {
-            console.log(res.response.status);
-          });
-      }
-    });
+    const token = window.localStorage.getItem("token");
+    if (likeBtn.className === "material-icons thumb_up thumb_up2") {
+      axios
+        .get("/community/insertBoardLike/" + communityBoardNo, {
+          headers: {
+            contentType: "multipart/form-data",
+            processdData: false,
+            Authorization: "Bearer " + token,
+          },
+        })
+        .then((res) => {
+          console.log(res.data);
+          console.log("게시물 좋아요 성공");
+        })
+        .catch((res) => {
+          console.log(res.response.status);
+        });
+    } else if (likeBtn.className === "material-icons thumb_up") {
+      axios
+        .get("/community/removeBoardLike/" + communityBoardNo, {
+          headers: {
+            contentType: "multipart/form-data",
+            processdData: false,
+            Authorization: "Bearer " + token,
+          },
+        })
+        .then((res) => {
+          console.log(res.data);
+          console.log("게시물 좋아요취소 성공");
+        })
+        .catch((res) => {
+          console.log(res.response.status);
+        });
+    }
 
     /* 따봉 클릭했을 때 위에서 클라스 토글 한번 돌고,
       여기서 axios로 추가하면 되는지,
@@ -152,6 +157,8 @@ const CommunityBoardItem = (props) => {
     });
   };
 
+  console.log("board like : " + board.communityBoardLike);
+
   return (
     <>
       <div className="board-item">
@@ -204,9 +211,19 @@ const CommunityBoardItem = (props) => {
               {board.communityBoardLike}명이 공감했어요.
             </div>
             <div className="board-item-like-icon">
-              <span className="material-icons thumb_up" onClick={BoardLike}>
+              <span
+                className={
+                  board.isLike === 0
+                    ? "material-icons thumb_up"
+                    : "material-icons thumb_up thumb_up2"
+                }
+                onClick={BoardLike}
+              >
                 thumb_up
               </span>
+              {/* <span className="material-icons thumb_up" onClick={BoardLike}>
+                thumb_up
+              </span> */}
               <span className="material-icons chat" onClick={ToggleComment}>
                 chat
               </span>

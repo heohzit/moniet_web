@@ -453,7 +453,7 @@
 }
 
 .community-view-btns {
-  padding-top: 20px;
+  padding-top: 30px;
 }
 
 .community-view-btns div {
@@ -465,6 +465,7 @@
 }
 
 .community-view-join-btn > button {
+  font-size: 16px;
 }
 
 .community-view-btns .community-view-join-btn {
@@ -690,6 +691,7 @@
 }
 
 .board-write-options button {
+  font-size: 18px;
   height: 75px;
 }
 
@@ -736,6 +738,7 @@
 }
 
 .insert-image-btn {
+  font-size: 18px;
   width: 240px;
   height: 75px;
   text-align: center;

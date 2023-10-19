@@ -10,6 +10,7 @@ const CommunityBoardWrite = (props) => {
   const communityNo = props.communityNo;
   const rendering = props.rendering;
   const setRendering = props.setRendering;
+  const [val, setVal] = useState("");
 
   const [boardFile, setBoardFile] = useState([]); // 전송용
   const [boardImg, setBoardImg] = useState([]); // 미리보기용
@@ -88,14 +89,10 @@ const CommunityBoardWrite = (props) => {
   };
 
   const insertBoard = (props) => {
-    const rendering = props.rendering;
-    const setRendering = props.setRendering;
     const communityBoardContent = document.querySelector(
       ".board-write-textarea-text"
-    ).value;
-    const selectOption = document.querySelector(
-      ".board-write-options-select"
-    ).value;
+    );
+    const selectOption = document.querySelector(".board-write-options-select");
 
     if (communityBoardContent !== "" && selectOption != 0) {
       Swal.fire({
@@ -108,8 +105,8 @@ const CommunityBoardWrite = (props) => {
         if (res.isConfirmed) {
           const form = new FormData();
           form.append("communityRef", communityNo);
-          form.append("communityBoardContent", communityBoardContent);
-          form.append("communityBoardTypeList", selectOption);
+          form.append("communityBoardContent", communityBoardContent.value);
+          form.append("communityBoardTypeList", selectOption.value);
           for (let i = 0; i < boardFile.length; i++) {
             form.append("boardFile", boardFile[i]);
           }
@@ -130,10 +127,15 @@ const CommunityBoardWrite = (props) => {
                   "게시글 작성이 완료되었습니다.",
                   "success"
                 );
+                setRendering(!rendering);
+                communityBoardContent.value = "";
+                selectOption.value = 0;
+                setBoardFile([]);
+                setBoardImg([]);
               }
             })
             .catch((res) => {
-              console.log(res.response.status);
+              console.log(res);
             });
         }
       });
@@ -224,12 +226,7 @@ const CommunityBoardWrite = (props) => {
             onChange={changeFile}
             multiple
           />
-          <Button2
-            text="등록하기"
-            clickEvent={insertBoard}
-            rendering={rendering}
-            setRendering={setRendering}
-          />
+          <Button2 text="등록하기" clickEvent={insertBoard} />
         </div>
         <div className="insert-image-preview">
           {boardImg.length !== 0 ? (

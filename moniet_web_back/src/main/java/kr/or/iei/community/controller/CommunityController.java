@@ -3,6 +3,7 @@ package kr.or.iei.community.controller;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -106,8 +107,9 @@ public class CommunityController {
 //	}
 	
 	@GetMapping(value="/communityBoardList/{reqPage}/{communityNo}")
-	public List communityBoardList(@PathVariable int reqPage, @PathVariable int communityNo) {
-		List list = communityService.communityBoardList(reqPage, communityNo);
+	public List communityBoardList(@PathVariable int reqPage, @PathVariable int communityNo, @RequestAttribute String memberId) {
+		List list = communityService.communityBoardList(reqPage, communityNo, memberId);
+		System.out.println("list : "+list);
 		return list;
 	}
 	
@@ -223,6 +225,31 @@ public class CommunityController {
 	public int removeBoardLike(@PathVariable int communityBoardNo, @RequestAttribute String memberId) {
 		int result = communityService.removeBoardLike(communityBoardNo, memberId);
 		return result;
+	}
+	
+	@GetMapping(value="/deleteCommunity/{communityNo}")
+	public int deleteCommunity(@PathVariable int communityNo) {
+		int result = communityService.deleteCommunity(communityNo);
+		return result;
+	}
+	
+	@PostMapping(value="/modifyCommunity")
+	public int modifyCommunity(@ModelAttribute Community c, @ModelAttribute MultipartFile communityImg, String communityType) {
+		System.out.println("컨트롤에서 c : "+c);
+		System.out.println("컨트롤에서 커뮤니티 타입 : "+communityType);
+		if (c.getCommunityThumb().equals("null")) {
+			c.setCommunityThumb(null);
+		}
+		
+		String savepath = root+"community/";
+		
+		if (communityImg != null) {
+			String filepath = fileUtil.getFilepath(savepath, communityImg.getOriginalFilename(), communityImg);
+			c.setCommunityThumb(filepath);
+		}
+		
+		
+		return 0;
 	}
 	
 }
