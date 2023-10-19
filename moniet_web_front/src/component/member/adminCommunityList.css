@@ -7,7 +7,8 @@
   font-size: 24px;
   color: #010440;
   font-family: ns-b;
-  padding-bottom: 50px;
+  padding-bottom: 30px;
+  margin-bottom: 30px;
 }
 .admin-community-list-table {
   width: 100%;
@@ -36,10 +37,31 @@
   color: #fff;
   font-size: 15px;
   padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
 }
 .chk {
   width: 18px;
   height: 18px;
   accent-color: #010440;
   cursor: pointer;
+  margin-top: 10px;
+  cursor: pointer;
+}
+.community-check-del-btn-wrap {
+  float: right;
+}
+.chk-del-btn {
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  height: 45px;
+  width: 80px;
+  font-size: 16px;
+  margin-right: 20px;
+}
+.chk-del-btn:hover {
+  background-color: #010440;
+  color: #fff;
 }
