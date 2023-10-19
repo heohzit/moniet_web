@@ -108,6 +108,13 @@ const CashCalendar = () => {
     setSelect(!select);
     e.stopPropagation();
   };
+  //리스트용모달추가
+  const [isListOpen, setIsListOpen] = useState(false);
+  const onClickButton2 = (info) => {
+    setIsListOpen(true);
+    setDatePick(dateString(info.date));
+    setInfo(info);
+  };
 
   const [datePick, setDatePick] = useState("");
   return (
@@ -127,22 +134,27 @@ const CashCalendar = () => {
         }}
         fixedWeekCount={false}
         height={700}
-        dateClick={listModalOpen}
+        dateClick={onClickButton2}
         defaultAllDay={true}
       />
 
-      <DateList
-        info={info}
-        setInfo={setInfo}
-        listOpen={listOpen}
-        closeListFrm={closeListFrm}
-        datePick={datePick}
-        setDatePick={setDatePick}
-        calendarEventArr={calendarEventArr}
-        dateString={dateString}
-        select={select}
-        setSelect={setSelect}
-      />
+      {isListOpen && (
+        <DateList
+          info={info}
+          setInfo={setInfo}
+          //listOpen={listOpen}
+          //closeListFrm={closeListFrm}
+          onClose={() => {
+            setIsListOpen(false);
+          }}
+          datePick={datePick}
+          setDatePick={setDatePick}
+          calendarEventArr={calendarEventArr}
+          dateString={dateString}
+          select={select}
+          setSelect={setSelect}
+        />
+      )}
     </div>
   );
 };

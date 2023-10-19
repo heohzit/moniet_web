@@ -13,12 +13,10 @@ import Input from "../util/InputFrm";
 import { NextMonth, PrevMonth } from "./MoveMonth";
 import CashbookWrite from "./CashbookWrite";
 import CashbookDel from "./CashbookDel";
-import CashbookFrm from "./CashbookFrm";
 import CashbookDown from "./CashbookDown";
-import CashbookItem from "./CashbookItem";
-import AddIcon from "@mui/icons-material/Add";
-import ModalFrm from "../cashModal/ModalFrm";
 import CashInputModal from "../cashModal/CashInputModal";
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
 
 const Cashbook = (props) => {
   const isLogin = props.isLogin;
@@ -54,7 +52,6 @@ const Cashbook = (props) => {
         },
       })
       .then((res) => {
-        console.log(dateRange);
         setCashbookList(res.data.cashbookList);
       })
       .catch((res) => {
@@ -214,6 +211,7 @@ const Cashbook = (props) => {
     }
     setShowSnackbar(false);
   };
+
   return (
     <div>
       <div className="date-range-icon">
@@ -295,7 +293,7 @@ const Cashbook = (props) => {
               "합계(" +
               addComma(cashbookSum.totalCount) +
               "건) " +
-              addComma(cashbookSum.total) +
+              cashbookSum.total +
               "원"
             }
           />
@@ -360,20 +358,22 @@ const Cashbook = (props) => {
                 cashbookList.map((cashbook, index) => {
                   return (
                     <CashbookItem
-                      key={"cashbook" + index}
                       cashbook={cashbook}
-                      assetToString={assetToString}
-                      selectChecked={selectChecked}
-                      checkItems={checkItems}
-                      //모다루isOpen={isOpen}
                       dateString={dateString}
+                      onOpenClickHandler={onOpenClickHandler}
+                      select={select}
+                      setSelect={setSelect}
+                      checkItems={checkItems}
+                      assetToString={assetToString}
                       assetList={assetList}
                       challengeCate={challengeCate}
                       setChallengeCate={setChallengeCate}
                       incomeCate={incomeCate}
                       spendingCate={spendingCate}
-                      select={select}
-                      setSelect={setSelect}
+                      showSnackbar={showSnackbar}
+                      selectChecked={selectChecked}
+                      onCloseClickHandler={onCloseClickHandler}
+                      key={cashbook.cashbookNo + "item" + index}
                     />
                   );
                 })}
@@ -386,3 +386,194 @@ const Cashbook = (props) => {
 };
 
 export default Cashbook;
+
+const CashbookItem = (props) => {
+  const cashbook = props.cashbook;
+  const dateString = props.dateString;
+  const onOpenClickHandler = props.onOpenClickHandler;
+  const select = props.select;
+  const setSelect = props.setSelect;
+  const checkItems = props.checkItems;
+  const assetToString = props.assetToString;
+  const assetList = props.assetList;
+  const challengeCate = props.challengeCate;
+  const setChallengeCate = props.setChallengeCate;
+  const incomeCate = props.incomeCate;
+  const spendingCate = props.spendingCate;
+  const showSnackbar = props.showSnackbar;
+  const selectChecked = props.selectChecked;
+  const onCloseClickHandler = props.onCloseClickHandler;
+
+  //모달추가 / 수정용
+  const [isOpen1, setIsOpen1] = useState(false);
+  const onClickButton1 = (e) => {
+    setIsOpen1(true);
+    e.stopPropagation();
+    console.log(e.currentTarget);
+  };
+
+  const [cashbookNo, setCashbookNo] = useState(cashbook.cashbookNo);
+  const [cashbookFinance, setCashbookFinance] = useState(
+    cashbook.cashbookFinance
+  );
+  const [cashbookDate, setCashbookDate] = useState(
+    new Date(cashbook.cashbookDate)
+  );
+  const [cashbookLoop, setCashbookLoop] = useState(cashbook.cashbookLoop);
+  const [loopMonth, setLoopMonth] = useState(cashbook.loopMonth);
+  const [cashbookAsset, setCashbookAsset] = useState(cashbook.cashbookAsset);
+  const [cashbookCategory, setCashbookCategory] = useState(
+    cashbook.cashbookCategory
+  );
+  const [cashbookMoney, setCashbookMoney] = useState(cashbook.cashbookMoney);
+  const [cashbookContent, setCashbookContent] = useState(
+    cashbook.cashbookContent
+  );
+  const [cashbookMemo, setCashbookMemo] = useState(cashbook.cashbookMemo);
+  const [challengeNo, setChallengeNo] = useState(cashbook.challengeNo);
+
+  const modify = () => {
+    const token = window.localStorage.getItem("token");
+    const cashbook = {
+      cashbookNo: cashbookNo,
+      cashbookFinance: cashbookFinance,
+      cashbookDate: dateString(cashbookDate),
+      cashbookLoop: cashbookLoop,
+      loopMonth: loopMonth,
+      cashbookAsset: cashbookAsset,
+      cashbookCategory: cashbookCategory,
+      cashbookMoney: cashbookMoney,
+      cashbookContent: cashbookContent,
+      cashbookMemo: cashbookMemo,
+      challengeNo: challengeNo,
+    };
+    axios
+      .post("/cashbook/update", cashbook, {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      })
+      .then((res) => {
+        if (res.data === 1) {
+          onOpenClickHandler();
+          setIsOpen1(false);
+          setSelect(!select);
+        } else {
+          console.log("등록 중 에러 발생");
+        }
+      })
+      .catch((res) => {
+        console.log(res.response);
+      });
+  };
+  return (
+    <tr
+      className="cashbook-item"
+      key={"item" + cashbook.cashbookNo}
+      onClick={onClickButton1}
+    >
+      <td>
+        <input
+          type="checkbox"
+          className="cashbook-checkbox cash-chk"
+          name="cashbookNo"
+          value={cashbook.cashbookNo}
+          onChange={(e) => selectChecked(e.target.checked, cashbook.cashbookNo)}
+          checked={checkItems.includes(cashbook.cashbookNo) ? true : false}
+        />
+      </td>
+      <td>{cashbook.cashbookDate}</td>
+      <td>{assetToString(cashbook.cashbookAsset)}</td>
+      <td>{cashbook.categoryTitle}</td>
+      <td
+        className={`${
+          cashbook.cashbookFinance === 1
+            ? "money-color"
+            : "money-color-spending"
+        }`}
+      >
+        {cashbook.cashbookMoney.toLocaleString("ko-KR")}
+      </td>
+      <td className="content-text">
+        {cashbook.cashbookContent}
+        {cashbook.cashbookLoop === 0 ? (
+          ""
+        ) : cashbook.cashbookLoop === 1 ? (
+          ""
+        ) : (
+          <span className="loop-style">
+            (할부 : {cashbook.loopRound} / {cashbook.loopMonth})
+          </span>
+        )}
+      </td>
+      <td>
+        {isOpen1 && (
+          <CashInputModal
+            open={isOpen1}
+            onClose={(e) => {
+              setIsOpen1(false);
+              e.stopPropagation();
+              setSelect(!select);
+            }}
+            title={"수정"}
+            dateString={dateString}
+            cashbook={cashbook}
+            cashbookFinance={cashbook.cashbookFinance}
+            setCashbookFinance={setCashbookFinance}
+            cashbookDate={cashbookDate}
+            setCashbookDate={setCashbookDate}
+            cashbookLoop={cashbookLoop}
+            setCashbookLoop={setCashbookLoop}
+            loopMonth={loopMonth}
+            setLoopMonth={setLoopMonth}
+            cashbookAsset={cashbookAsset}
+            setCashbookAsset={setCashbookAsset}
+            assetList={assetList}
+            cashbookCategory={cashbookCategory}
+            setCashbookCategory={setCashbookCategory}
+            cashbookMoney={cashbookMoney}
+            setCashbookMoney={setCashbookMoney}
+            cashbookContent={cashbookContent}
+            setCashbookContent={setCashbookContent}
+            cashbookMemo={cashbookMemo}
+            setCashbookMemo={setCashbookMemo}
+            challengeNo={challengeNo}
+            setChallengeNo={setChallengeNo}
+            challengeCate={challengeCate}
+            setChallengeCate={setChallengeCate}
+            incomeCate={incomeCate}
+            spendingCate={spendingCate}
+            clickEvent={modify}
+            delNo={cashbookNo}
+            select={select}
+            setSelect={setSelect}
+            key={"modal" + cashbookNo}
+          />
+        )}
+        {showSnackbar && (
+          <Snackbar
+            anchorOrigin={{
+              vertical: "bottom",
+              horizontal: "right",
+            }}
+            open //갑자기 에러나서 open 함수 삭제함
+            autoHideDuration={1000}
+            onClose={onCloseClickHandler}
+          >
+            <Alert
+              variant="filled"
+              onClose={onCloseClickHandler}
+              severity="success"
+              sx={{
+                width: "100%",
+                backgroundColor: "#6a6da6",
+              }}
+            >
+              가계부 수정 성공!
+            </Alert>
+          </Snackbar>
+        )}
+      </td>
+    </tr>
+  );
+};

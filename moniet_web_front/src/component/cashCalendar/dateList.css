@@ -5,8 +5,7 @@
   background-color: #fff;
 }
 .date-list.total-box {
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding: 10px;
 }
 .list-box {
   margin: 20px;
@@ -32,9 +31,11 @@
 }
 .date-finance {
   justify-content: space-evenly;
-  margin-top: 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 .cal-list-label {
+  font-size: 20px;
   padding-left: 20px;
 }
 .date-finance.date-list-over {

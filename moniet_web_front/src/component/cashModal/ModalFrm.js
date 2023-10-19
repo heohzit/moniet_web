@@ -5,8 +5,9 @@ import useOutSideClick from "./UseOutSideClick";
 
 const ModalFrm = ({ onClose, children }) => {
   //모달 닫기
-  const handleClose = () => {
+  const handleClose = (e) => {
     onClose?.();
+    //e.stopPropagation();
   };
 
   //모달 프레임 바깥 눌러서 닫기

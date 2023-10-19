@@ -7,6 +7,7 @@ import { Calendar } from "react-date-range";
 import ko from "date-fns/locale/ko";
 
 const CashInputModal = (props) => {
+  const cashbook = props.cashbook;
   const onClose = props.onClose;
   const title = props.title;
   const dateString = props.dateString;
@@ -47,7 +48,7 @@ const CashInputModal = (props) => {
   const incomeCate = props.incomeCate;
   const spendingCate = props.spendingCate;
   const clickEvent = props.clickEvent;
-  const cashbook = props.cashbook;
+
   const [toggleOn, setToggleOn] = useState(false);
 
   const toggle = () => {

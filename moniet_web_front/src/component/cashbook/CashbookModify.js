@@ -3,10 +3,11 @@ import CashbookFrm from "./CashbookFrm";
 import axios from "axios";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
+import CashInputModal from "../cashModal/CashInputModal";
 
 const CashbookModify = (props) => {
-  const cashbook = props.cashbook;
-  const isOpen = props.isOpen;
+  const item = props.cashbook;
+  //const isOpen = props.isOpen;
   const closeFrm = props.closeFrm;
   const title = props.title;
   const dateString = props.dateString;
@@ -17,28 +18,23 @@ const CashbookModify = (props) => {
   const setChallengeCate = props.setChallengeCate;
   const incomeCate = props.incomeCate;
   const spendingCate = props.spendingCate;
-  const modifyFrmOpen = props.modifyFrmOpen;
-  const modalClass = props.modalClass;
+  //모달추가
+  const isOpen2 = props.isOpen2;
+  const setIsOpen2 = props.setIsOpen2;
 
-  const [cashbookNo, setCashbookNo] = useState(cashbook.cashbookNo);
-  const [cashbookFinance, setCashbookFinance] = useState(
-    cashbook.cashbookFinance
-  );
-  const [cashbookDate, setCashbookDate] = useState(
-    new Date(cashbook.cashbookDate)
-  );
-  const [cashbookLoop, setCashbookLoop] = useState(cashbook.cashbookLoop);
-  const [loopMonth, setLoopMonth] = useState(cashbook.loopMonth);
-  const [cashbookAsset, setCashbookAsset] = useState(cashbook.cashbookAsset);
+  const [cashbookNo, setCashbookNo] = useState(item.cashbookNo);
+  const [cashbookFinance, setCashbookFinance] = useState(item.cashbookFinance);
+  const [cashbookDate, setCashbookDate] = useState(new Date(item.cashbookDate));
+  const [cashbookLoop, setCashbookLoop] = useState(item.cashbookLoop);
+  const [loopMonth, setLoopMonth] = useState(item.loopMonth);
+  const [cashbookAsset, setCashbookAsset] = useState(item.cashbookAsset);
   const [cashbookCategory, setCashbookCategory] = useState(
-    cashbook.cashbookCategory
+    item.cashbookCategory
   );
-  const [cashbookMoney, setCashbookMoney] = useState(cashbook.cashbookMoney);
-  const [cashbookContent, setCashbookContent] = useState(
-    cashbook.cashbookContent
-  );
-  const [cashbookMemo, setCashbookMemo] = useState(cashbook.cashbookMemo);
-  const [challengeNo, setChallengeNo] = useState(cashbook.challengeNo);
+  const [cashbookMoney, setCashbookMoney] = useState(item.cashbookMoney);
+  const [cashbookContent, setCashbookContent] = useState(item.cashbookContent);
+  const [cashbookMemo, setCashbookMemo] = useState(item.cashbookMemo);
+  const [challengeNo, setChallengeNo] = useState(item.challengeNo);
 
   const modify = () => {
     const token = window.localStorage.getItem("token");
@@ -55,7 +51,6 @@ const CashbookModify = (props) => {
       cashbookMemo: cashbookMemo,
       challengeNo: challengeNo,
     };
-
     axios
       .post("/cashbook/update", cashbook, {
         headers: {
@@ -90,43 +85,47 @@ const CashbookModify = (props) => {
 
   return (
     <div>
-      <CashbookFrm
-        isOpen={isOpen}
-        closeFrm={closeFrm}
-        title={title}
-        dateString={dateString}
-        cashbookFinance={cashbookFinance}
-        setCashbookFinance={setCashbookFinance}
-        cashbookDate={cashbookDate}
-        setCashbookDate={setCashbookDate}
-        cashbookLoop={cashbookLoop}
-        setCashbookLoop={setCashbookLoop}
-        loopMonth={loopMonth}
-        setLoopMonth={setLoopMonth}
-        cashbookAsset={cashbookAsset}
-        setCashbookAsset={setCashbookAsset}
-        assetList={assetList}
-        cashbookCategory={cashbookCategory}
-        setCashbookCategory={setCashbookCategory}
-        cashbookMoney={cashbookMoney}
-        setCashbookMoney={setCashbookMoney}
-        cashbookContent={cashbookContent}
-        setCashbookContent={setCashbookContent}
-        cashbookMemo={cashbookMemo}
-        setCashbookMemo={setCashbookMemo}
-        challengeNo={challengeNo}
-        setChallengeNo={setChallengeNo}
-        challengeCate={challengeCate}
-        setChallengeCate={setChallengeCate}
-        incomeCate={incomeCate}
-        spendingCate={spendingCate}
-        key={cashbook.cashbookNo}
-        clickEvent={modify}
-        className={modalClass}
-        delNo={cashbookNo}
-        select={select}
-        setSelect={setSelect}
-      />
+      {isOpen2 && (
+        <CashInputModal
+          isOpen={isOpen2}
+          onClose={() => {
+            setIsOpen2(false);
+            setSelect(!select);
+          }}
+          title={title}
+          dateString={dateString}
+          cashbookFinance={cashbookFinance}
+          setCashbookFinance={setCashbookFinance}
+          cashbookDate={cashbookDate}
+          setCashbookDate={setCashbookDate}
+          cashbookLoop={cashbookLoop}
+          setCashbookLoop={setCashbookLoop}
+          loopMonth={loopMonth}
+          setLoopMonth={setLoopMonth}
+          cashbookAsset={cashbookAsset}
+          setCashbookAsset={setCashbookAsset}
+          assetList={assetList}
+          cashbookCategory={cashbookCategory}
+          setCashbookCategory={setCashbookCategory}
+          cashbookMoney={cashbookMoney}
+          setCashbookMoney={setCashbookMoney}
+          cashbookContent={cashbookContent}
+          setCashbookContent={setCashbookContent}
+          cashbookMemo={cashbookMemo}
+          setCashbookMemo={setCashbookMemo}
+          challengeNo={challengeNo}
+          setChallengeNo={setChallengeNo}
+          challengeCate={challengeCate}
+          setChallengeCate={setChallengeCate}
+          incomeCate={incomeCate}
+          spendingCate={spendingCate}
+          key={item.cashbookNo}
+          clickEvent={modify}
+          delNo={cashbookNo}
+          select={select}
+          setSelect={setSelect}
+        />
+      )}
       {showSnackbar && (
         <Snackbar
           anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
