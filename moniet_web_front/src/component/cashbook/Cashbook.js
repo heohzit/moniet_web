@@ -51,6 +51,7 @@ const Cashbook = (props) => {
         },
       })
       .then((res) => {
+        console.log(dateRange);
         setCashbookList(res.data.cashbookList);
       })
       .catch((res) => {

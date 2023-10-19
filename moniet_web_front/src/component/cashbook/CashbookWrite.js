@@ -61,7 +61,7 @@ const CashbookWrite = (props) => {
       cashbookMemo: cashbookMemo,
       challengeNo: challengeNo,
     };
-
+    console.log(cashbook);
     axios
       .post("/cashbook/insert", cashbook, {
         headers: {
