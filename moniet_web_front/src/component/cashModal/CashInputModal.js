@@ -55,10 +55,11 @@ const CashInputModal = (props) => {
     setToggleOn(!toggleOn);
   };
   const selectFinance = (e) => {
+    console.log(e.currentTarget.innerText);
     const financeBtn = document.querySelectorAll(".select-finance>.btn");
     financeBtn[0].classList.remove("finance-checked");
     financeBtn[1].classList.remove("finance-checked");
-    if (e.currentTarget.innerText === "수 입") {
+    if (e.currentTarget.innerText === "수입") {
       setCashbookFinance(1);
       setCashbookCategory(3);
     } else {
@@ -70,7 +71,8 @@ const CashInputModal = (props) => {
     loop.value = 0;
     setCashbookLoop(0);
   };
-
+  console.log(cashbookCategory);
+  console.log(cashbookFinance);
   const selectDate = (item) => {
     setCashbookDate(item);
     console.log(challengeCate);
@@ -142,23 +144,23 @@ const CashInputModal = (props) => {
             <div className="select-finance">
               <Button5
                 className={"finance-checked"}
-                text={"수 입"}
+                text={"수입"}
                 clickEvent={selectFinance}
               />
             </div>
             <div className="select-finance">
-              <Button5 text={"지 출"} clickEvent={selectFinance} />
+              <Button5 text={"지출"} clickEvent={selectFinance} />
             </div>
           </>
         ) : (
           <>
             <div className="select-finance">
-              <Button5 text={"수 입"} clickEvent={selectFinance} />
+              <Button5 text={"수입"} clickEvent={selectFinance} />
             </div>
             <div className="select-finance finance-checked">
               <Button5
                 className={"finance-checked"}
-                text={"지 출"}
+                text={"지출"}
                 clickEvent={selectFinance}
               />
             </div>
@@ -323,17 +325,17 @@ const CashInputModal = (props) => {
       <div className="modalBtn-area">
         {title === "입력" ? (
           <>
-            <Button1 text={"등 록"} clickEvent={clickEvent} />
+            <Button1 text={"등록"} clickEvent={clickEvent} />
             <button className="closeModalBtn" id="closeModal" onClick={onClose}>
               닫기
             </button>{" "}
           </>
         ) : (
           <>
-            <Button1 text={"수 정"} clickEvent={clickEvent} />
-            <Button5 text={"삭 제"} clickEvent={deleteOne} />
+            <Button1 text={"수정"} clickEvent={clickEvent} />
+            <Button5 text={"삭제"} clickEvent={deleteOne} />
             <button className="closeModalBtn" id="closeModal" onClick={onClose}>
-              닫 기
+              닫기
             </button>{" "}
           </>
         )}

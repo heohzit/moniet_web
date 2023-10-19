@@ -8,6 +8,7 @@ import CashInputModal from "../cashModal/CashInputModal";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 import ModalFrm from "../cashModal/ModalFrm";
+import useModal from "./useModal";
 
 const DateList = (props) => {
   const onClose = props.onClose;
@@ -40,7 +41,7 @@ const DateList = (props) => {
       .catch((res) => {
         console.log(res);
       });
-  }, [datePick]);
+  }, [datePick, select]);
 
   const assetList = ["현금", "신용카드", "체크카드", "이체", "기타"];
   const assetToString = (num) => {
@@ -83,7 +84,8 @@ const DateList = (props) => {
         console.log(res.response.status);
       });
   }, []);
-
+  {
+    /**
   const isOpen = () => {
     setAddFrmOpen(true);
   };
@@ -91,7 +93,8 @@ const DateList = (props) => {
     setAddFrmOpen(false);
     e.stopPropagation();
   };
-
+ */
+  }
   // modify용
   const [modifyFrmOpen, setModifyFrmOpen] = useState(false);
 
@@ -115,15 +118,17 @@ const DateList = (props) => {
     }
     setShowSnackbar(false);
   };
-
+  const { isOpen, open, close } = useModal();
   return (
-    <ModalFrm onClose={onClose}>
+    <ModalFrm onClick={open}>
       <div className="cash-modal-title">{info.dateStr}</div>
       <div className="cal-title-zone">
         <div>
           <p className="cal-list-label">내역</p>
         </div>
+
         <CashbookWrite
+          open={isOpen}
           dateString={dateString}
           assetList={assetList}
           challengeCate={challengeCate}
@@ -178,6 +183,7 @@ const DateList = (props) => {
                 spendingCate={spendingCate}
                 showSnackbar={showSnackbar}
                 onCloseClickHandler={onCloseClickHandler}
+                key={"dateCash" + index}
               />
             );
           })}
@@ -298,50 +304,51 @@ const DateCashItem = (props) => {
         >
           {cashbook.cashbookMoney.toLocaleString("ko-KR")}원
         </p>
+
+        {isOpen1 && (
+          <CashInputModal
+            open={isOpen1}
+            onClose={(e) => {
+              setIsOpen1(false);
+              e.stopPropagation();
+              setSelect(!select);
+            }}
+            title={"수정"}
+            dateString={dateString}
+            cashbook={cashbook}
+            cashbookFinance={cashbook.cashbookFinance}
+            setCashbookFinance={setCashbookFinance}
+            cashbookDate={cashbookDate}
+            setCashbookDate={setCashbookDate}
+            cashbookLoop={cashbookLoop}
+            setCashbookLoop={setCashbookLoop}
+            loopMonth={loopMonth}
+            setLoopMonth={setLoopMonth}
+            cashbookAsset={cashbookAsset}
+            setCashbookAsset={setCashbookAsset}
+            assetList={assetList}
+            cashbookCategory={cashbookCategory}
+            setCashbookCategory={setCashbookCategory}
+            cashbookMoney={cashbookMoney}
+            setCashbookMoney={setCashbookMoney}
+            cashbookContent={cashbookContent}
+            setCashbookContent={setCashbookContent}
+            cashbookMemo={cashbookMemo}
+            setCashbookMemo={setCashbookMemo}
+            challengeNo={challengeNo}
+            setChallengeNo={setChallengeNo}
+            challengeCate={challengeCate}
+            setChallengeCate={setChallengeCate}
+            incomeCate={incomeCate}
+            spendingCate={spendingCate}
+            key={cashbook.cashbookNo}
+            clickEvent={modify}
+            delNo={cashbookNo}
+            select={select}
+            setSelect={setSelect}
+          />
+        )}
       </div>
-      {isOpen1 && (
-        <CashInputModal
-          open={isOpen1}
-          onClose={(e) => {
-            setIsOpen1(false);
-            e.stopPropagation();
-            setSelect(!select);
-          }}
-          title={"수정"}
-          dateString={dateString}
-          cashbook={cashbook}
-          cashbookFinance={cashbook.cashbookFinance}
-          setCashbookFinance={setCashbookFinance}
-          cashbookDate={cashbookDate}
-          setCashbookDate={setCashbookDate}
-          cashbookLoop={cashbookLoop}
-          setCashbookLoop={setCashbookLoop}
-          loopMonth={loopMonth}
-          setLoopMonth={setLoopMonth}
-          cashbookAsset={cashbookAsset}
-          setCashbookAsset={setCashbookAsset}
-          assetList={assetList}
-          cashbookCategory={cashbookCategory}
-          setCashbookCategory={setCashbookCategory}
-          cashbookMoney={cashbookMoney}
-          setCashbookMoney={setCashbookMoney}
-          cashbookContent={cashbookContent}
-          setCashbookContent={setCashbookContent}
-          cashbookMemo={cashbookMemo}
-          setCashbookMemo={setCashbookMemo}
-          challengeNo={challengeNo}
-          setChallengeNo={setChallengeNo}
-          challengeCate={challengeCate}
-          setChallengeCate={setChallengeCate}
-          incomeCate={incomeCate}
-          spendingCate={spendingCate}
-          key={cashbook.cashbookNo}
-          clickEvent={modify}
-          delNo={cashbookNo}
-          select={select}
-          setSelect={setSelect}
-        />
-      )}
       {showSnackbar && (
         <Snackbar
           anchorOrigin={{

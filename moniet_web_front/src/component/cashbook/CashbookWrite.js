@@ -1,5 +1,5 @@
 import { useState } from "react";
-import CashbookFrm from "./CashbookFrm";
+
 import axios from "axios";
 import AddIcon from "@mui/icons-material/Add";
 import Snackbar from "@mui/material/Snackbar";
@@ -147,41 +147,6 @@ const CashbookWrite = (props) => {
           clickEvent={write}
         />
       )}
-      {/*
-      <CashbookFrm
-        isOpen={addFrmOpen}
-        closeFrm={closeFrm}
-        title={"입력"}
-        dateString={dateString}
-        cashbookFinance={cashbookFinance}
-        setCashbookFinance={setCashbookFinance}
-        cashbookDate={cashbookDate}
-        setCashbookDate={setCashbookDate}
-        cashbookLoop={cashbookLoop}
-        setCashbookLoop={setCashbookLoop}
-        loopMonth={loopMonth}
-        setLoopMonth={setLoopMonth}
-        cashbookAsset={cashbookAsset}
-        setCashbookAsset={setCashbookAsset}
-        assetList={assetList}
-        cashbookCategory={cashbookCategory}
-        setCashbookCategory={setCashbookCategory}
-        cashbookMoney={cashbookMoney}
-        setCashbookMoney={setCashbookMoney}
-        cashbookContent={cashbookContent}
-        setCashbookContent={setCashbookContent}
-        cashbookMemo={cashbookMemo}
-        setCashbookMemo={setCashbookMemo}
-        challengeNo={challengeNo}
-        setChallengeNo={setChallengeNo}
-        challengeCate={challengeCate}
-        setChallengeCate={setChallengeCate}
-        incomeCate={incomeCate}
-        spendingCate={spendingCate}
-        clickEvent={write}
-        className={modalClass}
-      />
-      */}
 
       {showSnackbar && (
         <Snackbar
