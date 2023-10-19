@@ -90,6 +90,8 @@ public class CashbookController {
 	
 	@PostMapping(value="/insert")
 	public int insertCashbook(@RequestBody Cashbook cashbook, @RequestAttribute String memberId) {
+		System.out.println(cashbook);
+		System.out.println(memberId);
 		cashbook.setMemberId(memberId);
 		return cashbookService.insertCashbook(cashbook);
 	}
