@@ -8,7 +8,6 @@ import CommunityFrm from "./CommunityFrm";
 const CommunityModify = () => {
   const location = useLocation();
   const community = location.state.community;
-  console.log(community);
 
   const [communityTitle, setCommunityTitle] = useState(
     community.communityTitle
@@ -57,13 +56,13 @@ const CommunityModify = () => {
         if (res.isConfirmed) {
           const checkbox = document.querySelectorAll("[name=types]:checked");
 
-          console.log("수정할 제목 : " + communityTitle);
-          console.log("수정할 소제목 : " + communitySubTitle);
-          console.log("수정 전 썸네일 : " + communityThumb);
-          console.log("썸네일 수정시 파일 : " + thumbnail);
-          console.log("수정할 내용 : " + communityContent);
-          console.log(checkbox);
-          console.log("type : " + communityType);
+          // console.log("수정할 제목 : " + communityTitle);
+          // console.log("수정할 소제목 : " + communitySubTitle);
+          // console.log("수정 전 썸네일 : " + communityThumb);
+          // console.log("썸네일 수정시 파일 : " + thumbnail);
+          // console.log("수정할 내용 : " + communityContent);
+          // console.log(checkbox);
+          // console.log("type : " + communityType);
 
           const form = new FormData();
           form.append("communityNo", community.communityNo);

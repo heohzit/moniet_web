@@ -810,7 +810,6 @@
 
 .board-item-like {
   padding-bottom: 30px;
-  border-bottom: 1px solid #ccc;
   overflow: hidden;
   width: 100%;
 }
@@ -910,6 +909,7 @@
 .board-item-comment {
   padding: 30px;
   overflow: hidden;
+  border-top: 1px solid #ccc;
 }
 
 .board-item-comment > .board-item-comment-arrow,
@@ -1179,4 +1179,19 @@
   top: 50%;
   left: 50%;
   position: sticky;
+}
+
+.community-view-join-btn > .st3:hover {
+  background-color: #fff;
+  color: #323673;
+  border: 1px solid #ccc;
+  transition: all 0.2s linear;
+  box-sizing: border-box;
+}
+
+.community-view-join-btn > .st6:hover {
+  background-color: #323673;
+  color: #fff;
+  transition: all 0.2s linear;
+  box-sizing: border-box;
 }

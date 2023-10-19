@@ -89,8 +89,6 @@ const RecommentItem = (props) => {
         axios
           .get("/community/removeComment/" + recomment.comuBoardCommentNo)
           .then((res) => {
-            console.log(res.data);
-            console.log("성공");
             setRenderingRecomment(!renderingRecomment);
           })
           .catch((res) => {

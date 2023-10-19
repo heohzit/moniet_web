@@ -43,3 +43,10 @@
   cursor: auto;
   background-color: gray;
 }
+
+.st6 {
+  cursor: pointer;
+  background-color: #fff;
+  color: #151426;
+  border: 1px solid rgba(106, 109, 166, 0.3);
+}

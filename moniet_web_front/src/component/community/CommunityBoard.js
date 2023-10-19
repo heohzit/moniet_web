@@ -13,6 +13,8 @@ const CommunityBoard = (props) => {
   const [communityBoardList, setCommunityBoardList] = useState([]);
   const [reqPage, setReqPage] = useState(1);
 
+  const [renderingBoard, setRenderingBoard] = useState(false);
+
   const rendering = props.rendering;
   const setRendering = props.setRendering;
 
@@ -27,13 +29,12 @@ const CommunityBoard = (props) => {
         },
       })
       .then((res) => {
-        console.log(res.data);
         setCommunityBoardList(res.data);
       })
       .catch((res) => {
         console.log(res.response.status);
       });
-  }, [reqPage, props]);
+  }, [reqPage, props, renderingBoard]);
 
   return (
     <div className="community-view-board">
@@ -47,6 +48,8 @@ const CommunityBoard = (props) => {
             communityBoardNo={board.communityBoardNo}
             rendering={rendering}
             setRendering={setRendering}
+            renderingBoard={renderingBoard}
+            setRenderingBoard={setRenderingBoard}
           />
         );
       })}
@@ -64,6 +67,9 @@ const CommunityBoardItem = (props) => {
   const rendering = props.rendering;
   const setRendering = props.setRendering;
 
+  const renderingBoard = props.renderingBoard;
+  const setRenderingBoard = props.setRenderingBoard;
+
   const [like, setLike] = useState(false);
 
   const BoardLike = () => {
@@ -74,8 +80,6 @@ const CommunityBoardItem = (props) => {
     )[index];
 
     likeBtn.classList.toggle("thumb_up2");
-
-    console.log("likeBtn : " + likeBtn.className);
 
     const token = window.localStorage.getItem("token");
     if (likeBtn.className === "material-icons thumb_up thumb_up2") {
@@ -88,8 +92,7 @@ const CommunityBoardItem = (props) => {
           },
         })
         .then((res) => {
-          console.log(res.data);
-          console.log("게시물 좋아요 성공");
+          setRenderingBoard(!renderingBoard);
         })
         .catch((res) => {
           console.log(res.response.status);
@@ -104,8 +107,7 @@ const CommunityBoardItem = (props) => {
           },
         })
         .then((res) => {
-          console.log(res.data);
-          console.log("게시물 좋아요취소 성공");
+          setRenderingBoard(!renderingBoard);
         })
         .catch((res) => {
           console.log(res.response.status);
@@ -135,7 +137,6 @@ const CommunityBoardItem = (props) => {
   };
 
   const deleteBoard = () => {
-    console.log(board);
     Swal.fire({
       icon: "warning",
       text: "게시물을 삭제하시겠습니까?",
@@ -147,7 +148,6 @@ const CommunityBoardItem = (props) => {
         axios
           .get("/community/deleteBoard/" + board.communityBoardNo)
           .then((res) => {
-            console.log(res.data);
             if (res.data > 0) {
               Swal.fire(
                 "삭제 완료",
@@ -165,8 +165,6 @@ const CommunityBoardItem = (props) => {
       }
     });
   };
-
-  console.log("board like : " + board.communityBoardLike);
 
   return (
     <>
@@ -246,6 +244,8 @@ const CommunityBoardItem = (props) => {
               isLogin={isLogin}
               index={index}
               member={member}
+              renderingBoard={renderingBoard}
+              setRenderingBoard={setRenderingBoard}
             />
           </div>
         </div>

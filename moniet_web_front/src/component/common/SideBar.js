@@ -143,7 +143,13 @@ const SideBar = (props) => {
                 alignItems="center"
                 ml="15px"
               >
-                <Typography variant="h5" color={colors.grey[100]}>
+                <Typography
+                  style={{
+                    fontWeight: "900",
+                  }}
+                  variant="h5"
+                  color={colors.grey[100]}
+                >
                   머니어터
                 </Typography>
                 <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
@@ -183,25 +189,25 @@ const SideBar = (props) => {
             <Box paddingLeft={isCollapsed ? undefined : "10%"}>
               <Typography
                 style={{
-                  fontSize: "20px",
+                  fontSize: "17px",
                 }}
                 variant="h6"
                 color={colors.grey[300]}
                 sx={{ m: "15px 0 5px 10px" }}
               >
-                관리자페이지
+                ADMIN
               </Typography>
               <Item
                 title="회원 관리"
                 to="/memberlist"
-                icon={<AddCardIcon />}
+                icon={<AdminPanelSettingsIcon />}
                 selected={selected}
                 setSelected={setSelected}
               />
               <Item
                 title="커뮤니티 관리"
                 to="/adminCommunityList"
-                icon={<CalendarMonthIcon />}
+                icon={<AdminPanelSettingsIcon />}
                 selected={selected}
                 setSelected={setSelected}
               />
@@ -225,12 +231,12 @@ const SideBar = (props) => {
 
               <Typography
                 style={{
-                  fontSize: "20px",
+                  fontSize: "17px",
                 }}
                 variant="h6"
                 color={colors.grey[300]}
               >
-                가계부
+                ACCOUNT BOOK
               </Typography>
               <Item
                 title="내역"
@@ -246,8 +252,14 @@ const SideBar = (props) => {
                 selected={selected}
                 setSelected={setSelected}
               />
-              <Typography variant="h6" color={colors.grey[300]}>
-                Charts
+              <Typography
+                style={{
+                  fontSize: "17px",
+                }}
+                variant="h6"
+                color={colors.grey[300]}
+              >
+                CHARTS
               </Typography>
               <Item
                 title="Bar Chart"
@@ -265,12 +277,12 @@ const SideBar = (props) => {
               />
               <Typography
                 style={{
-                  fontSize: "20px",
+                  fontSize: "17px",
                 }}
                 variant="h6"
                 color={colors.grey[300]}
               >
-                챌린지
+                CHALLENGE
               </Typography>
               <Item
                 title="챌린지"
@@ -281,12 +293,12 @@ const SideBar = (props) => {
               />
               <Typography
                 style={{
-                  fontSize: "20px",
+                  fontSize: "17px",
                 }}
                 variant="h6"
                 color={colors.grey[300]}
               >
-                커뮤니티
+                COMMUNITY
               </Typography>
               <Item
                 title="커뮤니티"
@@ -302,12 +314,12 @@ const SideBar = (props) => {
               ></Typography>
               <Typography
                 style={{
-                  fontSize: "20px",
+                  fontSize: "17px",
                 }}
                 variant="h6"
                 color={colors.grey[300]}
               >
-                마이페이지
+                MY PAGE
               </Typography>
               <Item
                 title="마이페이지"

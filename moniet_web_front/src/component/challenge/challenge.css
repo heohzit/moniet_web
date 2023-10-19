@@ -138,6 +138,9 @@
   padding: 30px;
   max-width: 1000px;
 }
+.challenge-view-content div {
+  width: 100%;
+}
 .challenge-kind > div {
   width: 80px;
   text-align: center;
@@ -158,18 +161,13 @@
   color: #6a6da6;
   float: right;
 }
-.challenge-startEnd div {
-  width: 100%;
-}
 .challenge-progress {
   overflow: hidden;
 }
 .progress-bar {
-  float: left;
-}
-.amount-info {
-  margin-top: 70px;
-  float: left;
+  height: 250px;
+  display: flex;
+  justify-content: center;
 }
 .challenge-content-wrap {
   display: flex;
@@ -182,8 +180,14 @@
   text-align: center;
 }
 .amount-info {
-  font-size: 16px;
+  font-size: 20px;
   margin-bottom: 10px;
+  text-align: center;
+  margin-bottom: 80px;
+}
+.challenge-startEnd {
+  float: right;
+  font-size: 20px;
 }
 
 /*challenge-ing-end*/
@@ -236,6 +240,7 @@
   width: 100%;
   height: 80px;
   float: left;
+  text-align: center;
 }
 .challengeDay {
   width: 100%;

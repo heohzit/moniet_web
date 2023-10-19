@@ -19,11 +19,13 @@ const CommunityBoardComment = (props) => {
   const [renderingComment, setRenderingComment] = useState(false);
   const [renderingRecomment, setRenderingRecomment] = useState(false);
 
+  const renderingBoard = props.renderingBoard;
+  const setRenderingBoard = props.setRenderingBoard;
+
   useEffect(() => {
     axios
       .get("/community/boardCommentList/" + reqPage + "/" + communityBoardNo)
       .then((res) => {
-        console.log(res.data);
         setBoardCommentList(res.data);
       })
       .catch((res) => {
@@ -44,6 +46,8 @@ const CommunityBoardComment = (props) => {
           index={index}
           renderingComment={renderingComment}
           setRenderingComment={setRenderingComment}
+          renderingBoard={renderingBoard}
+          setRenderingBoard={setRenderingBoard}
         />
       </div>
       <div className="board-item-comment-list-wrap">
@@ -158,7 +162,6 @@ const CommentItem = (props) => {
   // console.log(comment);
 
   const deleteComment = () => {
-    console.log(comment);
     Swal.fire({
       icon: "warning",
       text: "댓글을 삭제하시겠습니까?",
@@ -170,8 +173,6 @@ const CommentItem = (props) => {
         axios
           .get("/community/removeComment/" + comment.comuBoardCommentNo)
           .then((res) => {
-            console.log(res.data);
-            console.log("성공");
             setRenderingComment(!renderingComment);
           })
           .catch((res) => {

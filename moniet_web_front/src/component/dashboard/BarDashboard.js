@@ -139,7 +139,7 @@ const BarDashboard = () => {
       });
   }, [month]);
   return (
-    <div className="dashboard-content">
+    <div className="barDashboard-content">
       <select defaultValue={month} onChange={onChangeHanlder}>
         {months.map((item, index) => (
           <option key={item.key} value={item.key} selected>
@@ -147,10 +147,10 @@ const BarDashboard = () => {
           </option>
         ))}
       </select>
-      <div className="dashboard1">
+      <div className="barDashboard">
         <Bar options={options1} data={incomeBar} />
       </div>
-      <div className="dashboard2">
+      <div className="barDashboard">
         <Bar options={options2} data={spendingBar} />
       </div>
     </div>

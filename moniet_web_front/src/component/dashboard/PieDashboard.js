@@ -97,7 +97,7 @@ const PieDashboard = () => {
       });
   }, [month]);
   return (
-    <div>
+    <div className="pieDashboard-content">
       <select defaultValue={month} onChange={onChangeHanlder}>
         {months.map((item, index) => (
           <option key={item.key} value={item.key} selected>
@@ -105,7 +105,7 @@ const PieDashboard = () => {
           </option>
         ))}
       </select>
-      <div>
+      <div className="pieDashboard">
         <Pie data={data} options={options} />
       </div>
     </div>

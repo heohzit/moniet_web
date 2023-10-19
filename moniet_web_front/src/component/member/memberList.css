@@ -36,19 +36,15 @@
 }
 .membertable td {
   text-align: center;
-  padding: 10px 0px;
+  padding: 15px 0px;
   width: calc(100% / 7);
   border-bottom: 1px solid #ccc;
 }
-.membertable tr:hover{
-  background-color: rgb(240,241,242,0.5);
+.membertable tr:hover {
+  background-color: rgb(240, 241, 242, 0.5);
 }
 .membertable > thead > td {
   background-color: #010440;
   color: #fff;
   font-family: ns-r;
-}
-.admin-icon{
-  color: #010440;
-  padding:5px 0px; 
 }

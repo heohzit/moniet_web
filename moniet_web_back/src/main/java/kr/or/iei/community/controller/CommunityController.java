@@ -40,8 +40,9 @@ public class CommunityController {
 	private String root;
 	
 	@GetMapping(value="/list/{reqPage}")
-	public List list(@PathVariable int reqPage) {
-		List list = communityService.communityList(reqPage);
+	public List list(@PathVariable int reqPage, @RequestAttribute String memberId) {
+		List list = communityService.communityList(reqPage, memberId);
+		System.out.println("controller list : "+list);
 		return list;
 	}
 	
@@ -97,8 +98,10 @@ public class CommunityController {
 	}
 
 	@GetMapping(value="/view/{communityNo}")
-	public Community view(@PathVariable int communityNo) {
-		return communityService.selectOneCommunity(communityNo);
+	public Community view(@PathVariable int communityNo, @RequestAttribute String memberId) {
+		Community c = communityService.selectOneCommunity(communityNo, memberId);
+		System.out.println("asdfdsafasdf : "+c);
+		return c;
 	}
 	
 //	@GetMapping(value="/delete/{communityNo}")
@@ -253,29 +256,32 @@ public class CommunityController {
 	
 	}
 	
-	
-	
-	
-	
-	
 
 	
+
+	@GetMapping(value="/insertParti/{communityNo}")
+	public int insertParti(@PathVariable int communityNo, @RequestAttribute String memberId) {
+		int result = communityService.insertParti(communityNo, memberId);
+		return result;
+	}
 	
+	@GetMapping(value="/outParti/{communityNo}")
+	public int outParti(@PathVariable int communityNo, @RequestAttribute String memberId) {
+		int result = communityService.outParti(communityNo, memberId);
+		return result;
+	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-//	//관리자 
+	//관리자 
 	@GetMapping(value="/allCommunityList/{reqPage}")
 	public List allCommunityList(@PathVariable int reqPage) {
 		return communityService.allCommunityList(reqPage);
 	}
+
+
+	//체크된 데이터 지우기
+	@GetMapping(value="/checkDelete/{communityNo}")
+		public String checkDelete(@PathVariable String communityNo) {
+			System.out.println(communityNo);
+			return null;
 	
 }
