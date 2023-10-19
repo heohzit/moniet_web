@@ -234,22 +234,22 @@ public class CommunityController {
 	}
 	
 	@PostMapping(value="/modifyCommunity")
-	public int modifyCommunity(@ModelAttribute Community c, @ModelAttribute MultipartFile communityImg, String communityType) {
+	public int modifyCommunity(@ModelAttribute Community c, @ModelAttribute MultipartFile thumbnail, String communityType) {
 		System.out.println("컨트롤에서 c : "+c);
 		System.out.println("컨트롤에서 커뮤니티 타입 : "+communityType);
-		if (c.getCommunityThumb().equals("null")) {
+		if (c.getCommunityThumb() == null) {
 			c.setCommunityThumb(null);
 		}
 		
 		String savepath = root+"community/";
 		
-		if (communityImg != null) {
-			String filepath = fileUtil.getFilepath(savepath, communityImg.getOriginalFilename(), communityImg);
+		if (thumbnail != null) {
+			String filepath = fileUtil.getFilepath(savepath, thumbnail.getOriginalFilename(), thumbnail);
 			c.setCommunityThumb(filepath);
 		}
 		
-		
-		return 0;
+		int result = communityService.modifyCommunity(c, communityType);
+		return result;
 	
 	}
 	
@@ -258,7 +258,7 @@ public class CommunityController {
 	
 	
 	
-	
+
 	
 	
 	

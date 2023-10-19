@@ -16,18 +16,25 @@ const CommunityModify = () => {
   const [communitySubTitle, setCommunitySubTitle] = useState(
     community.communitySubTitle
   );
-  const [communityThumb, setCommunityThumb] = useState(community.communityImg);
-  const [communityImg, setCommunityImg] = useState({});
+  const [communityThumb, setCommunityThumb] = useState(
+    community.communityThumb
+  );
+  const [communityImg, setCommunityImg] = useState(community.communityThumb);
   const [communityContent, setCommunityContent] = useState(
     community.communityContent
   );
   const [communityType, setCommunityType] = useState([]);
+
   const [typeList, setTypeList] = useState([
     { name: "types", text: "저축하기 🐷", value: 1 },
     { name: "types", text: "지출줄이기 💰", value: 2 },
     { name: "types", text: "투자하기 📈", value: 4 },
     { name: "types", text: "기타 💸", value: 8 },
   ]);
+
+  const [typeList1, setTypeList1] = useState(community.typeList);
+
+  const [thumbnail, setThumbnail] = useState({});
   // const [typeList, setTypeList] = useState(community.typeList);
   const [delTypeNo, setDelTypeNo] = useState([]);
 
@@ -53,7 +60,7 @@ const CommunityModify = () => {
           console.log("수정할 제목 : " + communityTitle);
           console.log("수정할 소제목 : " + communitySubTitle);
           console.log("수정 전 썸네일 : " + communityThumb);
-          console.log("썸네일 수정시 파일 : " + communityImg);
+          console.log("썸네일 수정시 파일 : " + thumbnail);
           console.log("수정할 내용 : " + communityContent);
           console.log(checkbox);
           console.log("type : " + communityType);
@@ -66,6 +73,11 @@ const CommunityModify = () => {
           form.append("communityImg", communityImg);
           form.append("communityContent", communityContent);
           form.append("communityType", communityType);
+          form.append("thumbnail", thumbnail);
+          form.append("communityThumb", communityThumb);
+
+          form.append("typeList", typeList);
+          form.append("typeList1", typeList1);
 
           form.append("delTypeNo", delTypeNo.join("/"));
 
@@ -123,6 +135,8 @@ const CommunityModify = () => {
         setTypeList={setTypeList}
         delTypeNo={delTypeNo}
         setDelTypeNo={setDelTypeNo}
+        thumbnail={thumbnail}
+        setThumbnail={setThumbnail}
         buttonEvent={modify}
         type="modify"
       />

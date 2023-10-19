@@ -16,6 +16,8 @@ const CommunityBoardComment = (props) => {
   const [boardCommentList, setBoardCommentList] = useState([]);
   const [reqPage, setReqPage] = useState(1);
   const communityBoardNo = props.communityBoardNo;
+  const [renderingComment, setRenderingComment] = useState(false);
+  const [renderingRecomment, setRenderingRecomment] = useState(false);
 
   useEffect(() => {
     axios
@@ -27,7 +29,7 @@ const CommunityBoardComment = (props) => {
       .catch((res) => {
         console.log(res.response.status);
       });
-  }, [reqPage]);
+  }, [renderingComment]);
 
   return (
     <div className="board-item-comment">
@@ -40,6 +42,8 @@ const CommunityBoardComment = (props) => {
         <CommunityBoardCommentWrite
           communityBoardNo={communityBoardNo}
           index={index}
+          renderingComment={renderingComment}
+          setRenderingComment={setRenderingComment}
         />
       </div>
       <div className="board-item-comment-list-wrap">
@@ -51,6 +55,10 @@ const CommunityBoardComment = (props) => {
               indexComment={indexComment}
               index={index}
               member={member}
+              renderingComment={renderingComment}
+              setRenderingComment={setRenderingComment}
+              renderingRecomment={renderingRecomment}
+              setRenderingRecomment={setRenderingRecomment}
             />
           );
         })}
@@ -129,6 +137,10 @@ const CommentItem = (props) => {
   const navigate = useNavigate();
   const member = props.member;
   const indexComment = props.indexComment;
+  const renderingComment = props.renderingComment;
+  const setRenderingComment = props.setRenderingComment;
+  const renderingRecomment = props.renderingRecomment;
+  const setRenderingRecomment = props.setRenderingRecomment;
 
   const ToggleRecomment = () => {
     const recommentBtn = document.querySelectorAll(
@@ -160,6 +172,7 @@ const CommentItem = (props) => {
           .then((res) => {
             console.log(res.data);
             console.log("성공");
+            setRenderingComment(!renderingComment);
           })
           .catch((res) => {
             console.log(res.response.status);
@@ -205,12 +218,16 @@ const CommentItem = (props) => {
           index={index}
           indexComment={indexComment}
           member={member}
+          renderingRecomment={renderingRecomment}
+          setRenderingRecomment={setRenderingRecomment}
         />
         <RecommentList
           communityBoardNo={comment.comuBoardRef}
           comuBoardCommentNo={comment.comuBoardCommentNo}
           index={index}
           member={member}
+          renderingRecomment={renderingRecomment}
+          setRenderingRecomment={setRenderingRecomment}
         />
       </div>
     </div>

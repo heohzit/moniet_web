@@ -213,14 +213,37 @@ public class CommunityService {
 	
 	
 	//관리자
-//	public List allCommunityList(int reqPage) {
-//		return communityDao.allCommunityList(reqPage);
-//	}
+	public List allCommunityList(int reqPage) {
+		return communityDao.allCommunityList(reqPage);
+	}
 
 	@Transactional
 	public int deleteCommunity(int communityNo) {
 		int result = communityDao.deleteCommunity(communityNo);
 		return result;
+	}
+
+	public int modifyCommunity(Community c, String communityType) {
+		int result = communityDao.deleteCommunityType(c);
+		
+		if (result > 0) {
+			
+			String[] arr = communityType.split("/");
+			int[] typeArr = new int[arr.length];
+			
+			for(int i = 0; i < typeArr.length; i++) {
+				typeArr[i] = Integer.parseInt(arr[i]);
+				
+				CommunityType type = new CommunityType();
+				type.setCommunityNo(c.getCommunityNo());
+				type.setCommunityTypeDiv(typeArr[i]);
+				result += communityDao.modifyCommunityType(type);
+				result += communityDao.modifyCommunity(c);
+			}
+			return 1;
+		} else {
+			return 0;
+		}
 	}
 
 

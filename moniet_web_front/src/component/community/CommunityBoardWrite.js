@@ -94,7 +94,7 @@ const CommunityBoardWrite = (props) => {
     );
     const selectOption = document.querySelector(".board-write-options-select");
 
-    if (communityBoardContent !== "" && selectOption != 0) {
+    if (communityBoardContent !== "" && selectOption.value != 0) {
       Swal.fire({
         icon: "question",
         text: "게시글을 작성하시겠습니까?",
