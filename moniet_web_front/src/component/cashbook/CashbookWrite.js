@@ -32,7 +32,7 @@ const CashbookWrite = (props) => {
   const [challengeNo, setChallengeNo] = useState(0);
 
   const [showSnackbar, setShowSnackbar] = useState(false);
-  const onOpenClickHandler = () => {
+  const onOpenClickHandler = (e) => {
     setShowSnackbar(true);
   };
   const onCloseClickHandler = (event, reason) => {
@@ -44,7 +44,6 @@ const CashbookWrite = (props) => {
 
   const write = () => {
     const token = window.localStorage.getItem("token");
-    console.log(cashbookLoop);
     const cashbook = {
       cashbookFinance: cashbookFinance,
       cashbookDate: dateString(cashbookDate),

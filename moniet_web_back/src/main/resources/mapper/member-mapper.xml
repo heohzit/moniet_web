@@ -55,9 +55,47 @@
 		where member_id = #{memberId}
 	]]>
 	</update>
-	
 
+	<!--포기시 레벨다운-->
+	<update id="downMember">
+	<![CDATA[
+		update member set challenge_status =case
+			when challenge_status-1 < 0 then 0
+			else challenge_status-1
+		end
+		where member_no = #{memberNo}
+	]]>
+	</update>
+	
+	<!-- 관리자페이지 아이디검색 -->
+	<select id="allMember" resultType="member">
+		select
+			member_no,
+			member_grade,
+			member_id,
+			member_name,
+			member_phone,
+			member_email,
+			to_char(member_date, 'YYYY-MM-DD') as member_date
+		from member
+		order by decode(member_grade,'0',1), member_date desc
+	</select>
 	
 	
+	<select id="searchMemberId" resultType="member">
+		select
+			member_no,
+			member_grade,
+			member_id,
+			member_name,
+			member_phone,
+			member_email,
+			to_char(member_date, 'YYYY-MM-DD') as member_date
+		from member 
+		where member_id like '%'||#{memberId}||'%' 
+		order by decode(member_grade,'0',1), member_date desc
+	</select>
+
+
 	
 </mapper>

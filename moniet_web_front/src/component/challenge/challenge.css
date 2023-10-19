@@ -143,6 +143,7 @@
   border-radius: 10px;
   border: 2px solid #010440;
   color: #010440;
+  float: left;
 }
 .category-kind > div {
   width: 100px;
@@ -152,6 +153,10 @@
   border-radius: 10px;
   border: 2px solid #6a6da6;
   color: #6a6da6;
+  float: right;
+}
+.challenge-startEnd div {
+  width: 100%;
 }
 .challenge-progress {
   overflow: hidden;
@@ -160,6 +165,7 @@
   float: left;
 }
 .amount-info {
+  margin-top: 70px;
   float: left;
 }
 .challenge-content-wrap {
@@ -197,15 +203,28 @@
   width: 400px;
   height: 220px;
   float: left;
+  position: relative;
+  overflow: hidden;
 }
 .day-strong {
   font-size: x-large;
 }
-.challenge-item-info {
-  position: relative;
-}
 .challenge-item:hover {
   background-color: #f9f9f9;
+}
+.challenge-item-info {
+  width: 100%;
+  float: left;
+}
+
+.challengeTitle {
+  width: 100%;
+  height: 80px;
+  float: left;
+}
+.challengeDay {
+  width: 100%;
+  float: left;
 }
 .challenge-more {
   display: flex;
@@ -222,6 +241,17 @@
   color: #fff;
   font-size: 16px;
   cursor: pointer;
+}
+.challenge-result {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
+}
+.challenge-result > img {
+  opacity: 0.9;
+  width: 100%;
+  height: 100%;
 }
 /*
     메인 색상 (진한 순서대로)

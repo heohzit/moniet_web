@@ -65,15 +65,15 @@ public class ChallengeController {
 	
 	//챌린지 포기
 	@PostMapping (value="/changeChallenge")
-	public int changeChallenge (@RequestBody Challenge c) {
-		return challengeService.changeChallenge(c);
+	public int changeChallenge (@RequestBody Challenge c,@RequestAttribute String memberId) {
+		return challengeService.changeChallenge(c,memberId);
 	}
 	
 	//챌린지 레벨 조회
 	@PostMapping (value="/challengeLevel")
-	public String challengeLevel(@RequestAttribute String memberId) {
-		String challenge=challengeService.challengeLevel(memberId);
-		System.out.println(challenge);
+	public int challengeLevel(@RequestAttribute String memberId) {
+		int challenge=challengeService.challengeLevel(memberId);
+		System.out.println("챌린지레벨"+challenge);
 		return challenge;
 	}
 	

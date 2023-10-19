@@ -75,7 +75,7 @@
   	
   	<!--챌린지 포기-->
   	<update id="changeChallenge">
-  		update challenge set challenge_result = #{challengeResult},challenge where challenge_no = #{challengeNo}
+  		update challenge set challenge_result = #{challengeResult} where challenge_no = #{challengeNo}
   	</update>
   	
   	<!--챌린지 기간 종료-->
@@ -89,10 +89,8 @@
   	</update>
   	 	
   	 <!--챌린지 레벨 조회-->
-  	<select id="challengeLevel" resultType="String">
-  		select challenge_status 
-  		from(select  rownum as num,challenge_status from challenge join member on (member_no2 = member_no) 
-  		where member_no=(select member_no from member where member_id=#{memberId})) X where X.num=1
+  	<select id="challengeLevel" resultType="int">
+		select challenge_status from member where member_no=(select member_no from member where member_id=#{memberId})
   	</select>
   	
 

@@ -1,0 +1,54 @@
+.memberlist-wrap {
+  width: 1200px;
+  margin: 0 auto;
+}
+.memberlist-title {
+  color: #010440;
+  font-size: 24px;
+  font-family: ns-b;
+  text-align: center;
+  padding-bottom: 40px;
+}
+.id-search-input {
+  position: relative;
+  text-align: right;
+}
+.id-search-input > input {
+  border: 3px solid #010440;
+  font-size: 16px;
+  padding: 5px;
+  outline: none;
+}
+.seacrh-icon {
+  color: #010440;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  font-weight: 600;
+}
+.membertable-wrap {
+  margin-top: 50px;
+  width: 100%;
+  overflow: auto;
+}
+.membertable {
+  border-collapse: collapse;
+}
+.membertable td {
+  text-align: center;
+  padding: 10px 0px;
+  width: calc(100% / 7);
+  border-bottom: 1px solid #ccc;
+}
+.membertable tr:hover{
+  background-color: rgb(240,241,242,0.5);
+}
+.membertable > thead > td {
+  background-color: #010440;
+  color: #fff;
+  font-family: ns-r;
+}
+.admin-icon{
+  color: #010440;
+  padding:5px 0px; 
+}

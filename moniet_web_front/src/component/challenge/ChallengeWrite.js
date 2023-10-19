@@ -23,32 +23,39 @@ const ChallengeWrite = () => {
       challengeEnd !== "" &&
       challengeAmount !== ""
     ) {
-      const challenge = {
-        challengeKind,
-        challengeTitle,
-        challengeAmount,
-        challengeStart,
-        challengeEnd,
-        challengeCategory,
-      };
-
-      const token = window.localStorage.getItem("token");
-      axios
-        .post("/challenge/insert", challenge, {
-          headers: {
-            Authorization: "Bearer " + token,
-          },
-        })
-        .then((res) => {
-          if (res.data === 1) {
-            navigate("/challenge");
-          } else {
-            Swal.fire("챌린지 생성이 실패하였습니다. 다시 시도해주세요.");
-          }
-        })
-        .catch((res) => {
-          console.log(res.response.status);
-        });
+      Swal.fire({
+        text: "머니챌린지는 수정이 불가능합니다. 만드시겠습니까?",
+        showCancelButton: false,
+        confirmButtonText: "생성",
+        cancelButtonText: "취소",
+      }).then((res) => {
+        if (res.isConfirmed) {
+          const challenge = {
+            challengeKind,
+            challengeTitle,
+            challengeAmount,
+            challengeStart,
+            challengeEnd,
+            challengeCategory,
+          };
+          const token = window.localStorage.getItem("token");
+          axios
+            .post("/challenge/insert", challenge, {
+              headers: {
+                Authorization: "Bearer " + token,
+              },
+            })
+            .then((res) => {
+              if (res.data === 1) {
+                navigate("/challenge");
+              } else {
+                Swal.fire("챌린지 생성이 실패하였습니다. 다시 시도해주세요.");
+              }
+            });
+        } else {
+          return;
+        }
+      });
     } else {
       Swal.fire("입력값을 확인해주세요.");
     }

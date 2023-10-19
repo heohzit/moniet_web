@@ -9,13 +9,12 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import LinearProgress from "@mui/material/LinearProgress";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { blue } from "@mui/material/colors";
 import "./challenge.css";
 
 const theme = createTheme({
   palette: {
     secondary: {
-      main: "#6A6DA6",
+      main: "rgb(25, 118, 210)",
     },
   },
 });
@@ -130,7 +129,8 @@ const ChallengeLevel = () => {
     <div className="challenge-level">
       <br></br>
       <p>
-        현재 나의 챌린지 레벨은 <strong>{challengeLevel}</strong>입니다.
+        현재 나의 챌린지 레벨은
+        <strong> {challengeLevel}</strong>입니다.
       </p>
       <ThemeProvider theme={theme}>
         <LinearProgress

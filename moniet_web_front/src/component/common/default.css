@@ -65,17 +65,16 @@ footer {
   padding: 50px;
   background-color: #f0f1f2;
 }
+
 /*메인 css*/
 .App {
   display: flex;
-  flex-direction: column;
   min-height: 100vh;
 }
 .App-content {
-  flex: 1;
   width: 1000px;
-  margin: 0px auto;
-  padding-left: 100px;
+  margin: 80px;
+  margin-left: 300px;
 }
 
 /*member sub 메뉴 css*/
@@ -95,6 +94,6 @@ footer {
 }
 
 .menu > li:hover .submenu {
-  height: 45px;
+  height: 90px;
   transition-duration: 1s;
 }

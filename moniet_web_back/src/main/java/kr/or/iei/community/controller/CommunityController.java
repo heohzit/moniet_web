@@ -250,6 +250,32 @@ public class CommunityController {
 		
 		
 		return 0;
+	
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+//	//관리자 
+	@GetMapping(value="/allCommunityList/{reqPage}")
+	public List allCommunityList(@PathVariable int reqPage) {
+		return communityService.allCommunityList(reqPage);
 	}
 	
 }

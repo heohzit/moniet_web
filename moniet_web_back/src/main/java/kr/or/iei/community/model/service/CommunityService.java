@@ -189,6 +189,33 @@ public class CommunityService {
 		int updateLikeCount = communityDao.downLikeCount(communityBoardNo);
 		return result;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//관리자
+	public List allCommunityList(int reqPage) {
+		return communityDao.allCommunityList(reqPage);
+	}
 
 	@Transactional
 	public int deleteCommunity(int communityNo) {

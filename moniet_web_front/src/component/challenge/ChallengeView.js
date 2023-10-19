@@ -146,9 +146,17 @@ const ChallengeView = () => {
       cancelButtonText: "취소",
     }).then((res) => {
       if (res.isConfirmed) {
-        const obj = { challengeNo: challenge.challengeNo, challengeResult: 2 };
+        const obj = {
+          challengeNo: challenge.challengeNo,
+          challengeResult: 2,
+        };
+        const token = window.localStorage.getItem("token");
         axios
-          .post("/challenge/changeChallenge", obj)
+          .post("/challenge/changeChallenge", obj, {
+            headers: {
+              Authorization: "Bearer " + token,
+            },
+          })
           .then((res) => {
             if (res.data === 1) {
               navigate("/challenge");
@@ -168,18 +176,22 @@ const ChallengeView = () => {
   const dateString = today.toISOString().substring(0, 10);
   return (
     <div className="challenge-view-content">
-      <div className="challenge-kind">
-        {challenge.challengeKind === 1 ? <div>저축</div> : <div>지출</div>}
+      <div className="challenge-item-info">
+        <div className="challenge-kind">
+          {challenge.challengeKind === 1 ? <div>저축</div> : <div>지출</div>}
+        </div>
+        <div className="category-kind">
+          {challenge.categoryTitle === null ? (
+            <></>
+          ) : (
+            <div>{challenge.categoryTitle}</div>
+          )}
+        </div>
       </div>
-      <div className="category-kind">
-        {challenge.categoryTitle === null ? (
-          <></>
-        ) : (
-          <div>{challenge.categoryTitle}</div>
-        )}
+      <div className="challengeTitle">
+        <h2>{challenge.challengeTitle}</h2>
       </div>
-      <h2 className="challenge-view-title">{challenge.challengeTitle}</h2>
-      <div className="challenge-view-info">
+      <div className="challenge-startEnd">
         <div>{challenge.challengeStart}</div>
         <div>{challenge.challengeEnd}</div>
       </div>
@@ -196,8 +208,12 @@ const ChallengeView = () => {
           ></CircularProgressBar>
         </div>
         <div className="amount-info">
-          목표 금액: {goalAmount.toLocaleString()}원 현재 금액:
-          {currentAmount.toLocaleString()}원
+          <div className="goalAmount">
+            목표 금액: {goalAmount.toLocaleString()}원
+          </div>
+          <div className="currentAmount">
+            현재 금액:{currentAmount.toLocaleString()}원
+          </div>
         </div>
       </div>
       <div className="progress-ment">{ProgressMent(progress)}</div>
