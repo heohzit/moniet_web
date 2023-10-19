@@ -31,7 +31,7 @@
 }
 .cash-modal-title {
   font-size: 32px;
-  padding: 20px 30px;
+  padding-bottom: 20px;
   text-align: center;
   /*border-bottom: 1px solid #eee;*/
   font-weight: 600;
@@ -43,11 +43,95 @@
 }
 .finance-zone {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
 }
 .select-finance {
   width: 180px;
 }
+.select-finance > button {
+  font-size: 18px;
+}
 .finance-checked {
   background-color: #fff;
+}
+.cash-modal-detail-content {
+  position: relative;
+  width: 100%;
+}
+.cash-modal-detail {
+  display: flex;
+}
+.cash-modal-detail > div {
+  padding-top: 20px;
+}
+.cash-modal-detail p {
+  margin-top: 5px;
+  line-height: 30px;
+}
+.cash-modal-detail-content {
+  position: relative;
+  width: 100%;
+}
+#add-date {
+  cursor: pointer;
+}
+.select-div {
+  margin-bottom: 20px;
+}
+.select-div select {
+  font-size: 18px;
+  margin-top: 5px;
+  margin-right: 20px;
+  width: 40%;
+  padding: 0.3rem;
+  background-color: #fff;
+  outline: none;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  border-radius: 3px;
+}
+.select-div > div > input {
+  width: 30%;
+  display: inline-block;
+}
+#numChkMsg {
+  font-size: 12px;
+  flood-color: #002a54;
+}
+.cash-detail .cash-modal-detail-content {
+  text-align: left;
+}
+.challenge-select {
+  display: none;
+}
+.cash-modal-detail-content > input {
+  margin-bottom: 20px;
+  margin-top: 5px;
+}
+.calendar-div {
+  position: absolute;
+  z-index: 2000;
+  top: 90px;
+  /*display: none;*/
+}
+.calendar-div * {
+  font-size: 12px !important;
+}
+.modalBtn-area {
+  margin-top: 10px;
+  text-align: center;
+}
+.closeModalBtn {
+  background-color: transparent;
+  border: none;
+  font-size: 15px;
+  font-weight: 900;
+  color: #151426;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+  padding: 15px 0px 15px 0px;
+}
+.modalBtn-area > button {
+  font-size: 15px;
 }
