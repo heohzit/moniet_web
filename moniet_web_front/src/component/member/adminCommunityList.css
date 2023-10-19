@@ -1,4 +1,4 @@
-.admin-community-list-wrap{
+.admin-community-list-wrap {
   width: 1200px;
   margin: 0 auto;
 }
@@ -7,7 +7,61 @@
   font-size: 24px;
   color: #010440;
   font-family: ns-b;
+  padding-bottom: 30px;
+  margin-bottom: 30px;
 }
-.admin-community-list-table{
+.admin-community-list-table {
   width: 100%;
+  border-collapse: collapse;
+}
+.admin-community-list-table th {
+  border-top: 3px solid #010440;
+  border-bottom: 3px solid #010440;
+  color: #010440;
+  padding: 15px;
+}
+
+.admin-community-list-table th,
+.admin-community-list-table td {
+  text-align: center;
+}
+
+.admin-community-list-table td {
+  border-bottom: 1px solid #ccc;
+  padding: 10px;
+}
+
+.community-del {
+  border: none;
+  background-color: #010440;
+  color: #fff;
+  font-size: 15px;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+.chk {
+  width: 18px;
+  height: 18px;
+  accent-color: #010440;
+  cursor: pointer;
+  margin-top: 10px;
+  cursor: pointer;
+}
+.community-check-del-btn-wrap {
+  float: right;
+}
+.chk-del-btn {
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  height: 45px;
+  width: 80px;
+  font-size: 16px;
+  margin-right: 20px;
+}
+.chk-del-btn:hover {
+  background-color: #010440;
+  color: #fff;
 }
