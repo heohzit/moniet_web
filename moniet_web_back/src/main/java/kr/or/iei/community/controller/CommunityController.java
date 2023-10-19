@@ -255,16 +255,28 @@ public class CommunityController {
 	
 	}
 	
+
+	
+
+	@GetMapping(value="/insertParti/{communityNo}")
+	public int insertParti(@PathVariable int communityNo, @RequestAttribute String memberId) {
+		int result = communityService.insertParti(communityNo, memberId);
+		return result;
+	}
+	
 	//관리자 
 	@GetMapping(value="/allCommunityList/{reqPage}")
 	public List allCommunityList(@PathVariable int reqPage) {
 		return communityService.allCommunityList(reqPage);
 	}
-	
-	@GetMapping(value="/insertParti/{communityNo}")
-	public int insertParti(@PathVariable int communityNo, @RequestAttribute String memberId) {
-		int result = communityService.insertParti(communityNo, memberId);
-		return result;
+
+
+	//체크된 데이터 지우기
+	@GetMapping(value="/checkDelete/{communityNo}")
+		public String checkDelete(@PathVariable String communityNo) {
+			System.out.println(communityNo);
+			return null;
+		
 	}
 	
 }
