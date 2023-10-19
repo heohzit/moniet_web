@@ -111,6 +111,7 @@ const DateList = (props) => {
           <div>
             <p className="cal-list-label">내역</p>
           </div>
+
           <CashbookWrite
             isOpen={isOpen}
             addFrmOpen={addFrmOpen}

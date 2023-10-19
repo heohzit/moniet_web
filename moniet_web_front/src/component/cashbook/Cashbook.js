@@ -16,6 +16,9 @@ import CashbookDel from "./CashbookDel";
 import CashbookFrm from "./CashbookFrm";
 import CashbookDown from "./CashbookDown";
 import CashbookItem from "./CashbookItem";
+import AddIcon from "@mui/icons-material/Add";
+import ModalFrm from "../cashModal/ModalFrm";
+import CashInputModal from "../cashModal/CashInputModal";
 
 const Cashbook = (props) => {
   const isLogin = props.isLogin;
@@ -168,6 +171,8 @@ const Cashbook = (props) => {
   };
 
   //addFrm
+  {
+    /*모다루
   const [addFrmOpen, setAddFrmOpen] = useState(false);
   const isOpen = () => {
     setAddFrmOpen(true);
@@ -175,6 +180,8 @@ const Cashbook = (props) => {
   const closeFrm = () => {
     setAddFrmOpen(false);
   };
+ */
+  }
 
   //체크박스
   const [checkItems, setCheckItems] = useState([]);
@@ -271,9 +278,9 @@ const Cashbook = (props) => {
             setSelect={setSelect}
           />
           <CashbookWrite
-            isOpen={isOpen}
-            addFrmOpen={addFrmOpen}
-            closeFrm={closeFrm}
+            //모다루isOpen={isOpen}
+            //모다루addFrmOpen={addFrmOpen}
+            //모다루closeFrm={closeFrm}
             dateString={dateString}
             assetList={assetList}
             challengeCate={challengeCate}
@@ -361,7 +368,7 @@ const Cashbook = (props) => {
                       assetToString={assetToString}
                       selectChecked={selectChecked}
                       checkItems={checkItems}
-                      isOpen={isOpen}
+                      //모다루isOpen={isOpen}
                       dateString={dateString}
                       assetList={assetList}
                       challengeCate={challengeCate}
