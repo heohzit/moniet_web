@@ -186,7 +186,7 @@ const Join = () => {
       <div className="join-title">MEMBERSHIP</div>
       <div className="join-img-wrap">
         {memberImg === null ? (
-          <img src="/image/piggy.jpg" />
+          <img src="./image/piggy.jpg" />
         ) : (
           <img src={memberImg} />
         )}

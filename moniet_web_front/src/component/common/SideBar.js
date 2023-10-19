@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
 import { Link } from "react-router-dom";
@@ -12,6 +13,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import FeedIcon from "@mui/icons-material/Feed";
 import PersonIcon from "@mui/icons-material/Person";
+import axios from "axios";
 const tokens = () => ({
   grey: {
     100: "#141414",
@@ -55,11 +57,54 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
     </Link>
   );
 };
-const SideBar = () => {
+const SideBar = (props) => {
+  const [member, setMember] = useState({});
+  const [memberImg, setMemberImg] = useState("");
+  const token = window.localStorage.getItem("token");
+  useEffect(() => {
+    axios
+      .post("/member/getMember", null, {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      })
+      .then((res) => {
+        setMember(res.data);
+        setMemberImg(res.data.imgFile);
+        console.log(res.data.imgFile);
+      })
+      .catch((res) => {
+        //로그인이 풀린상태
+        if (res.response.status === 403) {
+          alert("로그인 후 이용해주세요.");
+        }
+      });
+  }, []);
+  const LItem = ({ title, icon, selected, setSelected }) => {
+    const navigate = useNavigate();
+    return (
+      <MenuItem
+        onClick={() => {
+          setSelected(title);
+          logout();
+          navigate("/");
+        }}
+        icon={icon}
+      >
+        <Typography>{title}</Typography>
+      </MenuItem>
+    );
+  };
+  const isLogin = props.isLogin;
+  const setIsLogin = props.setIsLogin;
+  const logout = () => {
+    setIsLogin(false);
+    window.localStorage.removeItem("token");
+  };
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState(false);
-  const [selected, setSelected] = useState("dashboard");
+  const [selected, setSelected] = useState("Dashboard");
 
   return (
     <Box
@@ -110,17 +155,26 @@ const SideBar = () => {
           {!isCollapsed && (
             <Box mb="25px">
               <Box display="flex" justifyContent="center" alignItems="center">
-                <img
-                  alt="profile-user"
-                  width="180px"
-                  height="180px"
-                  src={"../image/piggy.jpg"}
-                  style={{ cursor: "pointer", borderRadius: "50%" }}
-                />
+                {memberImg === null ? (
+                  <img
+                    alt="profile-user"
+                    width="210px"
+                    height="180px"
+                    src="./image/piggy.jpg"
+                    style={{ borderRadius: "50%" }}
+                  />
+                ) : (
+                  <img
+                    width="210px"
+                    height="180px"
+                    src={memberImg}
+                    style={{ borderRadius: "50%" }}
+                  />
+                )}
               </Box>
               <Box textAlign="center">
                 <Typography color={colors.grey[100]} sx={{ m: "10px 0 0 0" }}>
-                  유저이름
+                  {member.memberId}
                 </Typography>
               </Box>
             </Box>
@@ -228,8 +282,9 @@ const SideBar = () => {
               selected={selected}
               setSelected={setSelected}
             />
-            <Item
+            <LItem
               title="로그아웃"
+              onClick={() => logout()}
               icon={<LogoutIcon />}
               selected={selected}
               setSelected={setSelected}

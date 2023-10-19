@@ -41,7 +41,11 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <div className="App">
-        <SideBar></SideBar>
+        {isLogin ? (
+          <SideBar isLogin={isLogin} setIsLogin={setIsLogin}></SideBar>
+        ) : (
+          <Main></Main>
+        )}
         <div className="App-content">
           <Routes>
             <Route path="/" element={<Main></Main>}></Route>
@@ -75,7 +79,7 @@ function App() {
             />
             <Route
               path="/AdminCommunityList"
-              element={<AdminCommunityList /> }
+              element={<AdminCommunityList />}
             />
             <Route path="/memberlist" element={<MemberList />} />
             <Route path="/join" element={<AgreeBox />} />
