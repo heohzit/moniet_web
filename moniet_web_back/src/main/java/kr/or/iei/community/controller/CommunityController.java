@@ -272,10 +272,19 @@ public class CommunityController {
 	
 	
 	
-//	//관리자 
+	//관리자 
 	@GetMapping(value="/allCommunityList/{reqPage}")
 	public List allCommunityList(@PathVariable int reqPage) {
 		return communityService.allCommunityList(reqPage);
 	}
+	
+	//체크된 데이터 지우기
+	@GetMapping(value="/checkDelete/{communityNo}")
+		public String checkDelete(@PathVariable String communityNo) {
+			System.out.println(communityNo);
+			return null;
+		
+	}
+	
 	
 }
