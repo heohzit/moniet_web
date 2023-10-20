@@ -13,17 +13,18 @@ const CommunityBoardComment = (props) => {
   const member = props.member;
   const index = props.index;
   const isLogin = props.isLogin;
-  const [boardCommentList, setBoardCommentList] = useState([]);
-  const [reqPage, setReqPage] = useState(1);
   const communityBoardNo = props.communityBoardNo;
-  const [renderingComment, setRenderingComment] = useState(false);
-  const [renderingRecomment, setRenderingRecomment] = useState(false);
-
+  // const [renderingComment, setRenderingComment] = useState(false);
   const renderingBoard = props.renderingBoard;
   const setRenderingBoard = props.setRenderingBoard;
-
   const isParti = props.isParti;
   const community = props.community;
+  const renderingComment = props.renderingComment;
+  const setRenderingComment = props.setRenderingComment;
+
+  const [boardCommentList, setBoardCommentList] = useState([]);
+  const [reqPage, setReqPage] = useState(1);
+  const [renderingRecomment, setRenderingRecomment] = useState(false);
 
   useEffect(() => {
     axios
@@ -47,7 +48,7 @@ const CommunityBoardComment = (props) => {
       </div>
 
       {isParti === 0 && member.memberNo != community.communityWriter ? (
-        ""
+        <span className="warningMsg">커뮤니티 참여 후 이용가능합니다.</span>
       ) : (
         <>
           <div className="board-item-comment-write-wrap">
@@ -78,6 +79,10 @@ const CommunityBoardComment = (props) => {
               setRenderingRecomment={setRenderingRecomment}
               isParti={isParti}
               community={community}
+              renderingBoard={renderingBoard}
+              setRenderingBoard={setRenderingBoard}
+              boardCommentList={boardCommentList}
+              setBoardCommentList={setBoardCommentList}
             />
           );
         })}
@@ -151,9 +156,10 @@ const CommunityBoardComment = (props) => {
 // };
 
 const CommentItem = (props) => {
+  const navigate = useNavigate();
+
   const index = props.index;
   const comment = props.comment;
-  const navigate = useNavigate();
   const member = props.member;
   const indexComment = props.indexComment;
   const renderingComment = props.renderingComment;
@@ -162,6 +168,10 @@ const CommentItem = (props) => {
   const setRenderingRecomment = props.setRenderingRecomment;
   const isParti = props.isParti;
   const community = props.community;
+  const renderingBoard = props.renderingBoard;
+  const setRenderingBoard = props.setRenderingBoard;
+  const boardCommentList = props.boardCommentList;
+  const setBoardCommentList = props.setBoardCommentList;
 
   const ToggleRecomment = () => {
     const recommentBtn = document.querySelectorAll(
@@ -178,6 +188,26 @@ const CommentItem = (props) => {
 
   // console.log(comment);
 
+  const updateComment = () => {
+    Swal.fire({
+      icon: "warning",
+      text: "댓글을 수정하시겠습니까?",
+      showCancelButton: true,
+      confirmButtonText: "확인",
+      cancelButtonText: "취소",
+    }).then((res) => {
+      if (res.isConfirmed) {
+        // 수정하시겠습니까? 확인 누르면 textarea로 바뀌면서 수정하는 법
+        // const commentContent = document.querySelector(
+        //   ".board-item-comment-list > .comment-content"
+        // )[(index, indexComment)];
+        // commentContent.value = "";
+      } else {
+        return;
+      }
+    });
+  };
+
   const deleteComment = () => {
     Swal.fire({
       icon: "warning",
@@ -190,6 +220,7 @@ const CommentItem = (props) => {
         axios
           .get("/community/removeComment/" + comment.comuBoardCommentNo)
           .then((res) => {
+            setBoardCommentList([]);
             setRenderingComment(!renderingComment);
           })
           .catch((res) => {
@@ -219,7 +250,9 @@ const CommentItem = (props) => {
             </div>
             {member && member.memberNo == comment.comuBoardCommentWriter ? (
               <>
-                <div className="comment-update">수정</div>
+                {/* <div className="comment-update" onClick={updateComment}>
+                  수정
+                </div> */}
                 <div className="comment-delete" onClick={deleteComment}>
                   삭제
                 </div>
@@ -247,6 +280,8 @@ const CommentItem = (props) => {
           setRenderingRecomment={setRenderingRecomment}
           isParti={isParti}
           community={community}
+          renderingBoard={renderingBoard}
+          setRenderingBoard={setRenderingBoard}
         />
         <RecommentList
           communityBoardNo={comment.comuBoardRef}
@@ -257,6 +292,8 @@ const CommentItem = (props) => {
           setRenderingRecomment={setRenderingRecomment}
           isParti={isParti}
           community={community}
+          renderingBoard={renderingBoard}
+          setRenderingBoard={setRenderingBoard}
         />
       </div>
     </div>

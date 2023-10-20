@@ -7,6 +7,8 @@ import CommunityFrm from "./CommunityFrm";
 
 const CommunityModify = () => {
   const location = useLocation();
+  const navigate = useNavigate();
+
   const community = location.state.community;
 
   const [communityTitle, setCommunityTitle] = useState(
@@ -23,21 +25,16 @@ const CommunityModify = () => {
     community.communityContent
   );
   const [communityType, setCommunityType] = useState([]);
-
   const [typeList, setTypeList] = useState([
     { name: "types", text: "저축하기 🐷", value: 1 },
     { name: "types", text: "지출줄이기 💰", value: 2 },
     { name: "types", text: "투자하기 📈", value: 4 },
     { name: "types", text: "기타 💸", value: 8 },
   ]);
-
   const [typeList1, setTypeList1] = useState(community.typeList);
-
   const [thumbnail, setThumbnail] = useState({});
   // const [typeList, setTypeList] = useState(community.typeList);
   const [delTypeNo, setDelTypeNo] = useState([]);
-
-  const navigate = useNavigate();
 
   const modify = () => {
     if (

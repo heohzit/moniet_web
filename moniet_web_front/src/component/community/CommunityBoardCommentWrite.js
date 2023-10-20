@@ -6,12 +6,12 @@ import { Button1, Button2, Button3, Button4 } from "../util/Buttons";
 import Swal from "sweetalert2";
 
 const CommunityBoardCommentWrite = (props) => {
+  const navigate = useNavigate();
+
   const index = props.index;
   const communityBoardNo = props.communityBoardNo;
   const renderingComment = props.renderingComment;
   const setRenderingComment = props.setRenderingComment;
-  const navigate = useNavigate();
-
   const renderingBoard = props.renderingBoard;
   const setRenderingBoard = props.setRenderingBoard;
 

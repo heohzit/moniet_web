@@ -10,18 +10,21 @@ const CommunityBoard = (props) => {
   const member = props.member;
   const isLogin = props.isLogin;
   const communityNo = props.communityNo;
-  const [communityBoardList, setCommunityBoardList] = useState([]);
-  const [reqPage, setReqPage] = useState(1);
-
-  const [renderingBoard, setRenderingBoard] = useState(false);
-
   const rendering = props.rendering;
   const setRendering = props.setRendering;
-
   const isParti = props.isParti;
   const community = props.community;
+  const renderingComment = props.renderingComment;
+  const setRenderingComment = props.setRenderingComment;
+  const renderingBoard = props.renderingBoard;
+  const setRenderingBoard = props.setRenderingBoard;
+  const communityBoardList = props.communityBoardList;
+  const setCommunityBoardList = props.setCommunityBoardList;
 
+  // const [communityBoardList, setCommunityBoardList] = useState([]);
+  const [reqPage, setReqPage] = useState(1);
   useEffect(() => {
+    console.log(reqPage, props, renderingBoard);
     const token = window.localStorage.getItem("token");
     axios
       .get("/community/communityBoardList/" + reqPage + "/" + communityNo, {
@@ -37,7 +40,7 @@ const CommunityBoard = (props) => {
       .catch((res) => {
         console.log(res.response.status);
       });
-  }, [reqPage, props, renderingBoard]);
+  }, [reqPage, renderingBoard]);
 
   return (
     <div className="community-view-board">
@@ -55,6 +58,10 @@ const CommunityBoard = (props) => {
             setRenderingBoard={setRenderingBoard}
             isParti={isParti}
             community={community}
+            renderingComment={renderingComment}
+            setRenderingComment={setRenderingComment}
+            communityBoardList={communityBoardList}
+            setCommunityBoardList={setCommunityBoardList}
           />
         );
       })}
@@ -63,21 +70,24 @@ const CommunityBoard = (props) => {
 };
 
 const CommunityBoardItem = (props) => {
+  const navigate = useNavigate();
+
   const member = props.member;
   const board = props.board;
   const index = props.index;
-  const navigate = useNavigate();
   const isLogin = props.isLogin;
-
   const rendering = props.rendering;
   const setRendering = props.setRendering;
-
   const renderingBoard = props.renderingBoard;
   const setRenderingBoard = props.setRenderingBoard;
-
-  const [like, setLike] = useState(false);
+  const renderingComment = props.renderingComment;
+  const setRenderingComment = props.setRenderingComment;
   const isParti = props.isParti;
   const community = props.community;
+  const communityBoardList = props.communityBoardList;
+  const setCommunityBoardList = props.setCommunityBoardList;
+
+  const [like, setLike] = useState(false);
 
   const BoardLike = () => {
     const communityBoardNo = props.communityBoardNo;
@@ -143,6 +153,26 @@ const CommunityBoardItem = (props) => {
     commentBtn.classList.toggle("chat2");
   };
 
+  const updateBoard = () => {
+    Swal.fire({
+      icon: "warning",
+      text: "게시물을 수정하시겠습니까?",
+      showCancelButton: true,
+      confirmButtonText: "확인",
+      cancelButtonText: "취소",
+    })
+      .then((res) => {
+        if (res.isConfirmed) {
+          navigate("/community/modifyBoard", { state: {} });
+        } else {
+          return;
+        }
+      })
+      .catch((res) => {
+        console.log(res.response.status);
+      });
+  };
+
   const deleteBoard = () => {
     Swal.fire({
       icon: "warning",
@@ -155,6 +185,8 @@ const CommunityBoardItem = (props) => {
         axios
           .get("/community/deleteBoard/" + board.communityBoardNo)
           .then((res) => {
+            setCommunityBoardList([]);
+            setRenderingBoard(!renderingBoard);
             if (res.data > 0) {
               Swal.fire(
                 "삭제 완료",
@@ -185,12 +217,12 @@ const CommunityBoardItem = (props) => {
                   return <BoardTypesItem key={"types" + index} types={types} />;
                 })
               : ""}
-            {member &&
-            member.memberNo == board.communityBoardWriter &&
-            isParti != 0 ? (
+            {member && member.memberNo == board.communityBoardWriter ? (
               <>
                 <div className="board-item-update">
-                  <span class="material-icons">settings</span>
+                  <span class="material-icons" onClick={updateBoard}>
+                    settings
+                  </span>
                 </div>
                 <div className="board-item-delete">
                   <span class="material-icons" onClick={deleteBoard}>
@@ -259,6 +291,8 @@ const CommunityBoardItem = (props) => {
               setRenderingBoard={setRenderingBoard}
               isParti={isParti}
               community={community}
+              renderingComment={renderingComment}
+              setRenderingComment={setRenderingComment}
             />
           </div>
         </div>

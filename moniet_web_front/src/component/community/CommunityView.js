@@ -16,15 +16,20 @@ import CommunityBoard from "./CommunityBoard";
 import CommunityBoardWrite from "./CommunityBoardWrite";
 
 const CommunityView = (props) => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const isLogin = props.isLogin;
   const setIsLogin = props.setIsLogin;
-  const location = useLocation();
   const communityNo = location.state.communityNo;
+
   const [community, setCommunity] = useState({});
   const [member, setMember] = useState(null);
-  const navigate = useNavigate();
   const [rendering, setRendering] = useState(false);
-
+  const [renderingComment, setRenderingComment] = useState(false);
+  const [renderingBoard, setRenderingBoard] = useState(false);
+  const [communityBoardList, setCommunityBoardList] = useState([]);
+  console.log("rendering", rendering);
   useEffect(() => {
     const token = window.localStorage.getItem("token");
     axios
@@ -96,12 +101,16 @@ const CommunityView = (props) => {
   //   });
   // };
 
+  const backList = () => {
+    navigate("community");
+  };
+
   const modifyCommunity = () => {
     Swal.fire({
       icon: "warning",
       text: "커뮤니티를 수정하시겠습니까?",
       showCancelButton: true,
-      confirmButtonText: "삭제",
+      confirmButtonText: "확인",
       cancelButtonText: "취소",
     })
       .then((res) => {
@@ -216,6 +225,42 @@ const CommunityView = (props) => {
   console.log(community);
   console.log(member);
 
+  const communityLike = () => {
+    const token = window.localStorage.getItem("token");
+    axios
+      .get("/community/insertCommunityLike/" + community.communityNo, {
+        headers: {
+          contentType: "multipart/form-data",
+          processdData: false,
+          Authorization: "Bearer " + token,
+        },
+      })
+      .then((res) => {
+        setRendering(!rendering);
+      })
+      .catch((res) => {
+        console.log(res.response.status);
+      });
+  };
+
+  const communityRemoveLike = () => {
+    const token = window.localStorage.getItem("token");
+    axios
+      .get("/community/removeCommunityLike/" + community.communityNo, {
+        headers: {
+          contentType: "multipart/form-data",
+          processdData: false,
+          Authorization: "Bearer " + token,
+        },
+      })
+      .then((res) => {
+        setRendering(!rendering);
+      })
+      .catch((res) => {
+        console.log(res.response.status);
+      });
+  };
+
   return (
     <div className="community-view-wrap">
       <div className="community-view-thumbnail">
@@ -264,11 +309,14 @@ const CommunityView = (props) => {
             </div>
             <div className="community-view-like-btn">
               {community.isWish === 0 ? (
-                <span class="material-icons ab-btn1" onClick={""}>
+                <span class="material-icons ab-btn1" onClick={communityLike}>
                   favorite_border
                 </span>
               ) : (
-                <span class="material-icons ab-btn2" onClick={""}>
+                <span
+                  class="material-icons ab-btn2"
+                  onClick={communityRemoveLike}
+                >
                   favorite
                 </span>
               )}
@@ -286,6 +334,11 @@ const CommunityView = (props) => {
       ></div>
 
       <div className="community-view-bottom-btns">
+        <div className="community-view-back">
+          <span className="community-view-back-btn" onClick={backList}>
+            목록으로
+          </span>
+        </div>
         {isLogin ? (
           member && member.memberNo == community.communityWriter ? (
             <>
@@ -312,6 +365,7 @@ const CommunityView = (props) => {
 
       <div className="community-view-board-zone">
         {community.isParti === 0 &&
+        member &&
         member.memberNo != community.communityWriter ? (
           ""
         ) : (
@@ -322,6 +376,12 @@ const CommunityView = (props) => {
                 communityNo={communityNo}
                 rendering={rendering}
                 setRendering={setRendering}
+                renderingComment={renderingComment}
+                setRenderingComment={setRenderingComment}
+                renderingBoard={renderingBoard}
+                setRenderingBoard={setRenderingBoard}
+                communityBoardList={communityBoardList}
+                setCommunityBoardList={setCommunityBoardList}
               />
             </div>
           </>
@@ -336,6 +396,12 @@ const CommunityView = (props) => {
             member={member}
             isParti={community.isParti}
             community={community}
+            renderingComment={renderingComment}
+            setRenderingComment={setRenderingComment}
+            renderingBoard={renderingBoard}
+            setRenderingBoard={setRenderingBoard}
+            communityBoardList={communityBoardList}
+            setCommunityBoardList={setCommunityBoardList}
           />
         </div>
       </div>

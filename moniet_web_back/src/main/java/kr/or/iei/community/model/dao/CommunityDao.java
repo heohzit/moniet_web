@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import kr.or.iei.PageInfo;
 import kr.or.iei.community.model.vo.Community;
 import kr.or.iei.community.model.vo.CommunityBoard;
 import kr.or.iei.community.model.vo.CommunityBoardFile;
@@ -74,8 +75,10 @@ public interface CommunityDao {
 	
 	
 	//관리자
-	List allCommunityList(int reqPage);
-
+	int totalCount();
+	
+	List allCommunityList(PageInfo pi);
+	
 	int modifyCommunityType(CommunityType type);
 
 	int deleteCommunityType(Community c);
@@ -89,6 +92,8 @@ public interface CommunityDao {
 	int outParti(Map map);
 
 	int downPartiCount(int communityNo);
+
+
 
 
 }

@@ -3,11 +3,15 @@ package kr.or.iei.community.model.service;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.StringTokenizer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import kr.or.iei.PageInfo;
+import kr.or.iei.Pagination;
 import kr.or.iei.community.model.dao.CommunityDao;
 import kr.or.iei.community.model.vo.Community;
 import kr.or.iei.community.model.vo.CommunityBoard;
@@ -26,6 +30,9 @@ public class CommunityService {
 	
 	@Autowired
 	private MemberDao memberDao;
+	
+	@Autowired
+	private Pagination pagination;
 	
 	public List communityList(int reqPage, String memberId) {
 		Member member = memberDao.selectOneMember(memberId);
@@ -234,8 +241,16 @@ public class CommunityService {
 	
 	
 	//관리자
-	public List allCommunityList(int reqPage) {
-		return communityDao.allCommunityList(reqPage);
+	public Map allCommunityList(int reqPage) {
+		int numPerPage = 2; //한 페이지당 게시물 수
+		int pageNaviSize = 3;
+		int totalCount = communityDao.totalCount(); //전체페이지수 
+		PageInfo pi = pagination.getPageInfo(reqPage, numPerPage, pageNaviSize, totalCount);
+		List communityList = communityDao.allCommunityList(pi);
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("communityList", communityList);
+		map.put("pi",pi);
+		return map;
 	}
 
 	@Transactional
@@ -289,6 +304,24 @@ public class CommunityService {
 		int downPartiCount = communityDao.downPartiCount(communityNo);
 		return result;
 	}
+
+	
+	@Transactional
+	public boolean checkDelete(String community) {
+	StringTokenizer sT1 = new StringTokenizer(community,"/");
+	boolean result = true;
+		while(sT1.hasMoreTokens()) {
+			int communityNo = Integer.parseInt(sT1.nextToken());
+			int deleteResult = deleteCommunity(communityNo);
+			if(deleteResult == 0) {
+				result = false;
+				break;
+			}
+		}
+		return result;
+		 
+	}
+	
 
 
 }
