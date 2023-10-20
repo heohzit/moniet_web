@@ -6,6 +6,7 @@ import Input from "../util/InputFrm";
 import { Calendar } from "react-date-range";
 import ko from "date-fns/locale/ko";
 import useModal from "../cashCalendar/useModal";
+import { Alert, Snackbar } from "@mui/material";
 
 const CashInputModal = (props) => {
   const cashbook = props.cashbook;
@@ -87,6 +88,9 @@ const CashInputModal = (props) => {
 
   const changeLoop = (e) => {
     setCashbookLoop(e.currentTarget.value);
+    e.currentTarget.value === "0"
+      ? setLoopMsg("")
+      : setLoopMsg("반복/할부는 2025년 12월 31일까지만 자동 입력됩니다.");
   };
   const changeLoopMonth = (e) => {
     if (e.currentTargetValue === "") {
@@ -124,17 +128,20 @@ const CashInputModal = (props) => {
         onClose();
         e.stopPropagation();
         setSelect(!select);
-        onOpenClickHandler();
+        onOpenClickHandler("가계부 삭제 성공!", "success");
       })
       .catch((res) => {
-        console.log(cashbookNos);
-        console.log(res);
+        onOpenClickHandler("삭제할 항목이 없습니다.", "info");
       });
   };
   //삭제 스낵바
   const [showSnackbar, setShowSnackbar] = useState(false);
-  const onOpenClickHandler = () => {
+  const [snackbarMsg, setSnackbarMsg] = useState("");
+  const [snackbarResult, setSnackbarResult] = useState("");
+  const onOpenClickHandler = (msg, result) => {
     setShowSnackbar(true);
+    setSnackbarMsg(msg);
+    setSnackbarResult(result);
   };
   const onCloseClickHandler = (event, reason) => {
     if (reason === "clickaway") {
@@ -144,6 +151,9 @@ const CashInputModal = (props) => {
   };
 
   const { isOpen, open, close } = useModal();
+
+  //반복/할부 알림 멘트
+  const [loopMsg, setLoopMsg] = useState("");
   return (
     <ModalFrm onClick={open} onClose={onClose} isOpen={isOpen}>
       <div className="cash-modal-title">{title}</div>
@@ -202,6 +212,7 @@ const CashInputModal = (props) => {
           </div>
           <div className="cash-modal-detail-content select-div">
             <label htmlFor="add-loop">반복/할부</label>
+            <span id="loop-msg">{loopMsg}</span>
             <span id="numChkMsg"></span>
             <div>
               <select
@@ -355,6 +366,26 @@ const CashInputModal = (props) => {
               닫기
             </button>{" "}
           </>
+        )}
+        {showSnackbar && (
+          <Snackbar
+            anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+            open //갑자기 에러나서 open 함수 삭제함
+            autoHideDuration={1000}
+            onClose={onCloseClickHandler}
+          >
+            <Alert
+              variant="filled"
+              onClose={onCloseClickHandler}
+              severity={snackbarResult}
+              sx={{
+                width: "100%",
+                backgroundColor: "#6a6da6",
+              }}
+            >
+              {snackbarMsg}
+            </Alert>
+          </Snackbar>
         )}
       </div>
     </ModalFrm>

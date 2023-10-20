@@ -20,9 +20,14 @@ const CashbookWrite = (props) => {
   const setSelect = props.setSelect;
   const className = props.className;
   const modalClass = props.modalClass;
+  const datePick = props.datePick;
 
   const [cashbookFinance, setCashbookFinance] = useState(2);
-  const [cashbookDate, setCashbookDate] = useState(new Date());
+  const [cashbookDate, setCashbookDate] = useState(
+    datePick !== null && datePick !== undefined
+      ? new Date(datePick)
+      : new Date()
+  );
   const [cashbookLoop, setCashbookLoop] = useState(0);
   const [loopMonth, setLoopMonth] = useState(0);
   const [cashbookAsset, setCashbookAsset] = useState(1);
