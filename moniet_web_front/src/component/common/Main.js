@@ -1,11 +1,8 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./default.css";
 import { Button2, Button5 } from "../util/Buttons";
 
-const Main = (props) => {
-  const isLogin = props.isLogin;
-  const navigate = useNavigate();
-
+const Main = () => {
   return (
     <div className="main-wrapper">
       <div className="header-wrap">

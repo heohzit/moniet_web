@@ -29,6 +29,7 @@ const theme = createTheme({
 
 function App() {
   const [isLogin, setIsLogin] = useState(true);
+  const [num, setNum] = useState(0);
 
   useEffect(() => {
     const token = window.localStorage.getItem("token");
@@ -37,7 +38,7 @@ function App() {
     } else {
       setIsLogin(true);
     }
-  }, []);
+  }, [num]);
 
   return (
     <ThemeProvider theme={theme}>
@@ -101,6 +102,7 @@ function App() {
                     <MemberMain setIsLogin={setIsLogin} isLogin={isLogin} />
                   }
                 />
+                <Route path="*" element={<DashboardMain />} />
               </Routes>
             </div>
           </>
