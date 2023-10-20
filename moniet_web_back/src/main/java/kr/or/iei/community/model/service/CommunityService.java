@@ -307,12 +307,15 @@ public class CommunityService {
 
 	
 	@Transactional
-	public boolean checkDelete(String community) {
-	StringTokenizer sT1 = new StringTokenizer(community,"/");
+	public boolean checkDelete(String communityNumber) {
+	StringTokenizer sT1 = new StringTokenizer(communityNumber,"/");
+	System.out.println("서비스"+communityNumber);
 	boolean result = true;
 		while(sT1.hasMoreTokens()) {
 			int communityNo = Integer.parseInt(sT1.nextToken());
-			int deleteResult = deleteCommunity(communityNo);
+			int deleteResult = communityDao.deleteCommunity(communityNo);
+			System.out.println("cn " +communityNo);
+			System.out.println("dr "+deleteResult);
 			if(deleteResult == 0) {
 				result = false;
 				break;
