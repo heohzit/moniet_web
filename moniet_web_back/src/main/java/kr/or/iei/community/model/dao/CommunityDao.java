@@ -93,6 +93,8 @@ public interface CommunityDao {
 
 	int downPartiCount(int communityNo);
 
+	int communityTotalCount();
+
 
 
 

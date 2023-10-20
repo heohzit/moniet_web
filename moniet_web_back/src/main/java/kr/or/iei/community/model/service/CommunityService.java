@@ -35,9 +35,18 @@ public class CommunityService {
 	private Pagination pagination;
 	
 	public List communityList(int reqPage, String memberId) {
+		
+		int totalCount = communityDao.communityTotalCount();
+		int numPerPage = 5;
+		int pageNaviSize = 1;
+		
+		PageInfo pi = pagination.getPageInfo(reqPage, numPerPage, pageNaviSize, totalCount);
 		Member member = memberDao.selectOneMember(memberId);
+		
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("reqPage", reqPage);
+		
+		map.put("start", pi.getStart());
+		map.put("end", pi.getEnd());
 		map.put("memberNo", member.getMemberNo());
 		
 		List list = communityDao.communityList(map);

@@ -11,13 +11,14 @@ const CommuintyList = (props) => {
   const isLogin = props.isLogin;
 
   const [communityList, setCommunityList] = useState([]);
-  const [reqPage, setReqPage] = useState(1);
   const [communityTitle, setCommunityTitle] = useState("");
   const [communityWriter, setCommunityWriter] = useState("");
   const [renderingList, setRenderingList] = useState(false);
+  const [reqPage, setReqPage] = useState(1);
 
   useEffect(() => {
     const token = window.localStorage.getItem("token");
+    // console.log(reqPage);
     axios
       .get("/community/list/" + reqPage, {
         headers: {
@@ -27,14 +28,28 @@ const CommuintyList = (props) => {
         },
       })
       .then((res) => {
+        // console.log(communityList);
+        // console.log(communityList.length);
         // console.log(res.data);
-        setCommunityList(res.data);
+        // console.log(res.data.length);
+        //const arr = [...communityList, ...res.data];
+        const arr = new Array();
+        for (let i = 0; i < communityList.length; i++) {
+          arr.push(communityList[i]);
+        }
+
+        for (let i = 0; i < res.data.length; i++) {
+          arr.push(res.data[i]);
+        }
+
+        // setRenderingList(!renderingList);
+        setCommunityList(arr);
         // setCommunityList(res.data.communityList);
       })
       .catch((res) => {
         console.log(res.response.status);
       });
-  }, [renderingList]);
+  }, [renderingList, reqPage]);
 
   const navigate = useNavigate();
   const write = () => {
@@ -44,7 +59,10 @@ const CommuintyList = (props) => {
   const searchCommunity = () => {};
 
   const moreList = () => {
-    alert("확인");
+    console.log(reqPage);
+    setReqPage(reqPage + 1);
+    // const startIndex = reqPage * numperPage;
+    // const endIndex = startIndex + numperPage;
   };
 
   return (
@@ -79,6 +97,8 @@ const CommuintyList = (props) => {
               community={community}
               isLogin={isLogin}
               index={index}
+              communityList={communityList}
+              setCommunityList={setCommunityList}
               renderingList={renderingList}
               setRenderingList={setRenderingList}
             />
@@ -96,10 +116,20 @@ const CommuintyList = (props) => {
 const CommunityItem = (props) => {
   const index = props.index;
   const isLogin = props.isLogin;
-  const community = props.community;
+  const [community, setCommunity] = useState(props.community);
+  const communityList = props.communityList;
+  const setCommunityList = props.setCommunityList;
   const navigate = useNavigate();
   const [heart, setHeart] = useState(false);
-
+  console.log(community);
+  const likeChange = (isLike) => {
+    if (isLike) {
+      community.isWish = 1;
+    } else {
+      community.isWish = 0;
+    }
+    setCommunity({ ...community });
+  };
   const renderingList = props.renderingList;
   const setRenderingList = props.setRenderingList;
 
@@ -125,7 +155,7 @@ const CommunityItem = (props) => {
         },
       })
       .then((res) => {
-        setRenderingList(!renderingList);
+        likeChange(true);
       })
       .catch((res) => {
         console.log(res.response.status);
@@ -145,7 +175,7 @@ const CommunityItem = (props) => {
         },
       })
       .then((res) => {
-        setRenderingList(!renderingList);
+        likeChange(false);
       })
       .catch((res) => {
         console.log(res.response.status);
