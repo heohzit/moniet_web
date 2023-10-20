@@ -8,6 +8,7 @@
   text-align: center;
   padding-bottom: 50px;
   color: #010440;
+  margin-top: 80px;
 }
 .join-input-wrap input {
   font-size: 15px;
@@ -89,6 +90,7 @@
   cursor: pointer;
   font-size: 15px;
   margin-top: 5px;
+  outline: none;
 }
 .email-auth-btn:hover {
   background-color: #010440;

@@ -89,8 +89,6 @@ function App() {
                   element={<AdminCommunityList />}
                 />
                 <Route path="/memberlist" element={<MemberList />} />
-                <Route path="/findId" element={<FindID />} />
-                <Route path="/findPw" element={<FindPw />} />
                 <Route
                   path="/member/myinfo"
                   element={<Myinfo isLogin={isLogin} setIsLogin={setIsLogin} />}
@@ -107,6 +105,8 @@ function App() {
         ) : (
           <Routes>
             <Route path="/" element={<Main></Main>}></Route>
+            <Route path="/findId" element={<FindID />} />
+            <Route path="/findPw" element={<FindPw />} />
             <Route path="/join" element={<AgreeBox />} />
             <Route path="/joinfrm" element={<Join />} />
             <Route path="/login" element={<Login setIsLogin={setIsLogin} />} />
