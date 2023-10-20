@@ -172,14 +172,12 @@
   	</select>
   	
   	<!--라인대시보드-->
-	<select id="lineDash" resultType="int">
-	select
-	    extract (month from cashbook_date) as month,
-	    sum(case when cashbook_finance = 1 then cashbook_money else 0 end) as income,
-	    sum(case when cashbook_finance = 2 then cashbook_money else 0 end) as spending
-	from cashbook 
-	where extract(year from cashbook_date) = 2023 
-	group by extract(month from cashbook_date)
-	order by extract(month from cashbook_date);
+	<select id="selectChart" resultType="chartData">
+	
+		select
+     #{month} as month,
+     nvl(sum(cashbook_money),0) as money
+from cashbook 
+where extract(year from cashbook_date) = 2023 and extract(month from cashbook_date)=#{month} and member_no=(select member_no from member where member_id=#{memberId}) and cashbook_finance=#{type}
 	</select>
 </mapper>

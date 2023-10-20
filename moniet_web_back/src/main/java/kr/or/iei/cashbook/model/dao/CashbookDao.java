@@ -1,10 +1,12 @@
 package kr.or.iei.cashbook.model.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
 import kr.or.iei.cashbook.model.vo.Cashbook;
+import kr.or.iei.cashbook.model.vo.ChartData;
 
 @Mapper
 public interface CashbookDao {
@@ -47,9 +49,10 @@ public interface CashbookDao {
 
 	
 	List viewData(String memberId);
-	
-	//라인 차트
-	List lineDash(String memberId);
+
+	ChartData selectChart(HashMap<String, Object> param);
+
+	int spendingLine(String memberId);
 
 
 

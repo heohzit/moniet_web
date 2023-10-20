@@ -96,3 +96,7 @@ footer {
   padding: 50px;
   background-color: #f0f1f2;
 }
+.lineChart {
+  width: 500px;
+  height: 300px;
+}
