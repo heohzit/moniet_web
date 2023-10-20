@@ -511,8 +511,9 @@ const CashbookItem = (props) => {
           <CashInputModal
             open={isOpen1}
             onClose={(e) => {
+              console.log(22222);
               setIsOpen1(false);
-              e.stopPropagation();
+              //e.stopPropagation();
               setSelect(!select);
             }}
             title={"수정"}

@@ -89,6 +89,7 @@ const CashbookModify = (props) => {
         <CashInputModal
           isOpen={isOpen2}
           onClose={() => {
+            console.log(33);
             setIsOpen2(false);
             setSelect(!select);
           }}

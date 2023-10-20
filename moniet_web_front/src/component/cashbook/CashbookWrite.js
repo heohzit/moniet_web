@@ -114,6 +114,7 @@ const CashbookWrite = (props) => {
         <CashInputModal
           open={isOpen1}
           onClose={() => {
+            console.log(444);
             setIsOpen1(false);
             setSelect(!select);
           }}

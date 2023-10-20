@@ -5,10 +5,15 @@ import { Button1, Button5 } from "../util/Buttons";
 import Input from "../util/InputFrm";
 import { Calendar } from "react-date-range";
 import ko from "date-fns/locale/ko";
+import useModal from "../cashCalendar/useModal";
 
 const CashInputModal = (props) => {
   const cashbook = props.cashbook;
   const onClose = props.onClose;
+  const onClose2 = (e) => {
+    onClose();
+    e.stopPropagation();
+  };
   const title = props.title;
   const dateString = props.dateString;
   const assetList = props.assetList;
@@ -22,6 +27,7 @@ const CashInputModal = (props) => {
   const cashbookLoopList = ["없음", "반복", "할부"];
   const loopMonth = props.loopMonth;
   const setLoopMonth = props.setLoopMonth;
+  console.log("onClose", onClose);
   const loopMonthMap = [
     { i: 1, cycle: "1개월" },
     { i: 2, cycle: "2개월" },
@@ -105,7 +111,7 @@ const CashInputModal = (props) => {
   const delNo = props.delNo;
   const select = props.select;
   const setSelect = props.setSelect;
-  const deleteOne = () => {
+  const deleteOne = (e) => {
     const token = window.localStorage.getItem("token");
     const cashbookNos = delNo;
     axios
@@ -116,6 +122,7 @@ const CashInputModal = (props) => {
       })
       .then((res) => {
         onClose();
+        e.stopPropagation();
         setSelect(!select);
         onOpenClickHandler();
       })
@@ -135,8 +142,10 @@ const CashInputModal = (props) => {
     }
     setShowSnackbar(false);
   };
+
+  const { isOpen, open, close } = useModal();
   return (
-    <ModalFrm onClose={onClose}>
+    <ModalFrm onClick={open} onClose={onClose} isOpen={isOpen}>
       <div className="cash-modal-title">{title}</div>
       <div className="modalBtn-area finance-zone">
         {cashbookFinance === 1 ? (
@@ -326,7 +335,11 @@ const CashInputModal = (props) => {
         {title === "입력" ? (
           <>
             <Button1 text={"등록"} clickEvent={clickEvent} />
-            <button className="closeModalBtn" id="closeModal" onClick={onClose}>
+            <button
+              className="closeModalBtn"
+              id="closeModal"
+              onClick={onClose2}
+            >
               닫기
             </button>{" "}
           </>
@@ -334,7 +347,11 @@ const CashInputModal = (props) => {
           <>
             <Button1 text={"수정"} clickEvent={clickEvent} />
             <Button5 text={"삭제"} clickEvent={deleteOne} />
-            <button className="closeModalBtn" id="closeModal" onClick={onClose}>
+            <button
+              className="closeModalBtn"
+              id="closeModal"
+              onClick={onClose2}
+            >
               닫기
             </button>{" "}
           </>

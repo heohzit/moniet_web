@@ -120,7 +120,7 @@ const DateList = (props) => {
   };
   const { isOpen, open, close } = useModal();
   return (
-    <ModalFrm onClick={open}>
+    <ModalFrm onClick={open} onClose={onClose} isOpen={isOpen}>
       <div className="cash-modal-title">{info.dateStr}</div>
       <div className="cal-title-zone">
         <div>
@@ -189,11 +189,7 @@ const DateList = (props) => {
           })}
       </div>
       <div className="modalBtn-area">
-        <button
-          className="closeModalBtn"
-          id="closeModal"
-          onClick={closeListFrm}
-        >
+        <button className="closeModalBtn" id="closeModal" onClick={onClose}>
           닫기
         </button>
       </div>
@@ -309,8 +305,9 @@ const DateCashItem = (props) => {
           <CashInputModal
             open={isOpen1}
             onClose={(e) => {
+              console.log(111);
               setIsOpen1(false);
-              e.stopPropagation();
+              //e.stopPropagation();
               setSelect(!select);
             }}
             title={"수정"}
