@@ -7,8 +7,7 @@ import Swal from "sweetalert2";
 
 const RecommentList = (props) => {
   const index = props.index;
-  const [recommentList, setRecommentList] = useState([]);
-  const [reqPage, setReqPage] = useState(1);
+
   const communityBoardNo = props.communityBoardNo;
   const comuBoardCommentNo = props.comuBoardCommentNo;
   const member = props.member;
@@ -16,6 +15,11 @@ const RecommentList = (props) => {
   const setRenderingRecomment = props.setRenderingRecomment;
   const isParti = props.isParti;
   const community = props.community;
+  const renderingBoard = props.renderingBoard;
+  const setRenderingBoard = props.setRenderingBoard;
+
+  const [recommentList, setRecommentList] = useState([]);
+  const [reqPage, setReqPage] = useState(1);
 
   useEffect(() => {
     axios
@@ -49,6 +53,8 @@ const RecommentList = (props) => {
             setRenderingRecomment={setRenderingRecomment}
             isParti={isParti}
             community={community}
+            renderingBoard={renderingBoard}
+            setRenderingBoard={setRenderingBoard}
           />
         );
       })}
@@ -57,14 +63,17 @@ const RecommentList = (props) => {
 };
 
 const RecommentItem = (props) => {
+  const navigate = useNavigate();
+
   const member = props.member;
   const index = props.index;
   const recomment = props.recomment;
-  const navigate = useNavigate();
   const renderingRecomment = props.renderingRecomment;
   const setRenderingRecomment = props.setRenderingRecomment;
   const isParti = props.isParti;
   const community = props.community;
+  const renderingBoard = props.renderingBoard;
+  const setRenderingBoard = props.setRenderingBoard;
 
   const updateComment = () => {
     Swal.fire({
@@ -96,6 +105,7 @@ const RecommentItem = (props) => {
           .get("/community/removeComment/" + recomment.comuBoardCommentNo)
           .then((res) => {
             setRenderingRecomment(!renderingRecomment);
+            setRenderingBoard(!renderingBoard);
           })
           .catch((res) => {
             console.log(res.response.status);
@@ -106,9 +116,6 @@ const RecommentItem = (props) => {
     });
   };
 
-  console.log(member);
-  console.log(recomment);
-
   return (
     <>
       <div className="comment-recomment-list">
@@ -118,13 +125,11 @@ const RecommentItem = (props) => {
         <div className="recomment-writer">{recomment.memberId}</div>
         <div className="recomment-date">{recomment.comuBoardCommentDate}</div>
         <div className="recomment-recomment-btn"></div>
-        {member &&
-        member.memberNo === recomment.comuBoardCommentWriter &&
-        isParti != 0 ? (
+        {member && member.memberNo === recomment.comuBoardCommentWriter ? (
           <>
-            <div className="recomment-update" onClick={updateComment}>
+            {/* <div className="recomment-update" onClick={updateComment}>
               수정
-            </div>
+            </div> */}
             <div className="recomment-delete" onClick={deleteComment}>
               삭제
             </div>

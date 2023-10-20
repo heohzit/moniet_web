@@ -517,9 +517,12 @@
 .community-view-bottom-btns {
   margin-top: 50px;
   float: right;
-  width: 75px;
   display: flex;
   justify-content: space-between;
+}
+
+.community-view-bottom-btns > div {
+  padding-left: 5px;
 }
 
 .community-view-bottom-btns span {
@@ -528,7 +531,8 @@
 }
 
 .community-view-update,
-.community-view-delete {
+.community-view-delete,
+.community-view-back {
   float: left;
   cursor: pointer;
 }
@@ -536,7 +540,7 @@
 .community-view-board-zone {
   width: 100%;
   float: left;
-  margin-top: 30px;
+  margin-top: 10px;
 }
 
 .community-item-types {

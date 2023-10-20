@@ -21,11 +21,9 @@ const CommunityFrm = (props) => {
   const setCommunityImg = props.setCommunityImg;
   const communityType = props.communityType;
   const setCommunityType = props.setCommunityType;
-
   const typeList = props.typeList;
   const setTypeList = props.setTypeList;
   const buttonEvent = props.buttonEvent;
-
   const type = props.type;
 
   // const typeList = [

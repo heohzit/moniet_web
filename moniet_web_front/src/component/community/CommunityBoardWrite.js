@@ -7,18 +7,23 @@ import Swal from "sweetalert2";
 
 const CommunityBoardWrite = (props) => {
   const location = useLocation();
+  const navigate = useNavigate();
+
   const communityNo = props.communityNo;
   const rendering = props.rendering;
   const setRendering = props.setRendering;
-  const [val, setVal] = useState("");
   const community = props.community;
+  const renderingComment = props.renderingComment;
+  const setRenderingComment = props.setRenderingComment;
+  const renderingBoard = props.renderingBoard;
+  const setRenderingBoard = props.setRenderingBoard;
+  const communityBoardList = props.communityBoardList;
+  const setCommunityBoardList = props.setCommunityBoardList;
 
+  const [val, setVal] = useState("");
   const [boardFile, setBoardFile] = useState([]); // 전송용
   const [boardImg, setBoardImg] = useState([]); // 미리보기용
   const [newFileList, setNewFileList] = useState([]);
-
-  const navigate = useNavigate();
-
   const [reqPage, setReqPage] = useState(1);
 
   const changeFile = (e) => {
@@ -89,7 +94,7 @@ const CommunityBoardWrite = (props) => {
     });
   };
 
-  const insertBoard = (props) => {
+  const InsertBoard = (props) => {
     const communityBoardContent = document.querySelector(
       ".board-write-textarea-text"
     );
@@ -122,6 +127,9 @@ const CommunityBoardWrite = (props) => {
               },
             })
             .then((res) => {
+              // 게시물 초기화
+              setCommunityBoardList([]);
+              setRenderingBoard(!renderingBoard);
               if (res.data > 0) {
                 Swal.fire(
                   "작성 완료",
@@ -129,6 +137,7 @@ const CommunityBoardWrite = (props) => {
                   "success"
                 );
                 setRendering(!rendering);
+                setRenderingComment(!renderingComment);
                 communityBoardContent.value = "";
                 selectOption.value = 0;
                 setBoardFile([]);
@@ -225,7 +234,7 @@ const CommunityBoardWrite = (props) => {
             onChange={changeFile}
             multiple
           />
-          <Button2 text="등록하기" clickEvent={insertBoard} />
+          <Button2 text="등록하기" clickEvent={InsertBoard} />
         </div>
         <div className="insert-image-preview">
           {boardImg.length !== 0 ? (

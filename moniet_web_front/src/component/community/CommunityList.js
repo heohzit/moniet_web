@@ -9,12 +9,11 @@ import Swal from "sweetalert2";
 
 const CommuintyList = (props) => {
   const isLogin = props.isLogin;
+
   const [communityList, setCommunityList] = useState([]);
   const [reqPage, setReqPage] = useState(1);
-
   const [communityTitle, setCommunityTitle] = useState("");
   const [communityWriter, setCommunityWriter] = useState("");
-
   const [renderingList, setRenderingList] = useState(false);
 
   useEffect(() => {

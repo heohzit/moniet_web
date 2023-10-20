@@ -7,16 +7,19 @@ import Swal from "sweetalert2";
 import CommunityBoardCommentWrite from "./CommunityBoardCommentWrite";
 
 const RecommentWrite = (props) => {
+  const location = useLocation();
+
   const index = props.index;
   const indexComment = props.indexComment;
   const communityBoardNo = props.communityBoardNo;
   const comuBoardCommentNo = props.comuBoardCommentNo;
-  const location = useLocation();
   const renderingRecomment = props.renderingRecomment;
   const setRenderingRecomment = props.setRenderingRecomment;
   const isParti = props.isParti;
   const community = props.community;
   const member = props.member;
+  const renderingBoard = props.renderingBoard;
+  const setRenderingBoard = props.setRenderingBoard;
 
   const insertRecomment = () => {
     // const recommentContent = document.querySelectorAll(
@@ -65,6 +68,7 @@ const RecommentWrite = (props) => {
                   "success"
                 );
                 recommentContent.value = "";
+                setRenderingBoard(!renderingBoard);
                 setRenderingRecomment(!renderingRecomment);
               }
             })
