@@ -3,7 +3,10 @@
   width: 1000px;
 }
 .challenge-title {
-  font-size: 20px;
+  font-size: 24px;
+  font-family: ns-eb;
+  color: #010440;
+  margin-bottom: 40px;
 }
 
 /*challengeList*/

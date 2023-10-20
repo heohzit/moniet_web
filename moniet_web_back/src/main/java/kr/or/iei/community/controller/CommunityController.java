@@ -286,5 +286,14 @@ public class CommunityController {
 			System.out.println(community);
 			return null;
 	}
+	
+	//인기커뮤니티
+	@PostMapping(value="/firstCommunity")
+	public Community firstCommunity() {
+		Community c = communityService.firstCommunity();
+		return c;		
+	}
 }
+
+
 

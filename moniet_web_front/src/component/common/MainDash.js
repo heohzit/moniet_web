@@ -2,7 +2,29 @@ import { Box, IconButton, Typography, useTheme } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
+import { Line } from "react-chartjs-2";
 
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend
+);
 const tokens = () => ({
   grey: {
     100: "#141414",
@@ -62,10 +84,77 @@ const tokens = () => ({
 });
 
 const MainDash = (props) => {
+  const navigate = useNavigate();
   const isLogin = props.isLogin;
   const setIsLogin = props.setIsLogin;
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  //1년 차트
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: "top",
+      },
+      title: {
+        display: true,
+        text: "Chart.js Line Chart",
+      },
+    },
+  };
+  const [data, setData] = useState({
+    labels: [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ],
+    datasets: [
+      {
+        label: "Dataset 1",
+        data: [],
+      },
+    ],
+  });
+  useEffect(() => {
+    const token = window.localStorage.getItem("token");
+    axios
+      .post("/dashboard/line", null, {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      })
+      .then((res) => {
+        setData({
+          labels: [res.data],
+          datasets: [
+            {
+              label: "Dataset 1",
+
+              borderColor: "rgb(255, 99, 132)",
+              backgroundColor: "rgba(255, 99, 132, 0.5)",
+            },
+            {
+              label: "Dataset 2",
+
+              borderColor: "rgb(53, 162, 235)",
+              backgroundColor: "rgba(53, 162, 235, 0.5)",
+            },
+          ],
+        });
+      })
+      .catch((res) => {
+        console.log(res.response.status);
+      });
+  }, []);
   //오늘의 수입
   const [todayIncome, setTodayIncome] = useState(0);
   useEffect(() => {
@@ -100,6 +189,32 @@ const MainDash = (props) => {
         console.log(res.response.status);
       });
   }, []);
+  //인기 커뮤니티
+  const [firstCommunity, setFirstCommunity] = useState([]);
+  useEffect(() => {
+    const token = window.localStorage.getItem("token");
+    axios
+      .post("/community/firstCommunity", null, {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      })
+      .then((res) => {
+        setFirstCommunity(res.data);
+      })
+      .catch((res) => {
+        console.log(res.response.status);
+      });
+  }, []);
+  const communityView = () => {
+    if (isLogin) {
+      navigate("/community/view", {
+        state: { communityNo: firstCommunity.communityNo },
+      });
+    } else {
+      Swal.fire("이용 제한", "로그인 후 이용해주시기 바랍니다.", "info");
+    }
+  };
   return (
     <Box display="flex" flexDirection="column" alignItems="center" mt="25px">
       <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
@@ -127,7 +242,8 @@ const MainDash = (props) => {
                     fontWeight="600"
                     color={colors.grey[100]}
                   >
-                    아이디어 없음
+                    1년 차트..
+                    <Line data={data} options={options} />
                   </Typography>
                   <Typography
                     variant="h5"
@@ -201,7 +317,53 @@ const MainDash = (props) => {
               >
                 인기 커뮤니티
               </Typography>
-              <Box height="200px"></Box>
+              <Box height="200px">
+                <div className="community-item" onClick={communityView}>
+                  <div className="community-item-img">
+                    {firstCommunity.communityThumb === null ? (
+                      <img src="/image/default.png" className="default-img" />
+                    ) : (
+                      <img
+                        src={"/community/" + firstCommunity.communityThumb}
+                      />
+                    )}
+                  </div>
+                  <div className="community-item-info">
+                    <div className="community-item-title">
+                      {firstCommunity.communityTitle}
+                    </div>
+                    <div className="community-item-subtitle">
+                      {firstCommunity.communitySubTitle}
+                    </div>
+                    <div className="community-types">
+                      <div className="type-name">
+                        {firstCommunity.communityType === 1 ? (
+                          <span className="keyword key1">저축하기</span>
+                        ) : firstCommunity.communityType === 2 ? (
+                          <span className="keyword key2">지출줄이기</span>
+                        ) : firstCommunity.communityType === 4 ? (
+                          <span className="keyword key4">투자하기</span>
+                        ) : (
+                          <span className="keyword key8">기타</span>
+                        )}
+                      </div>
+                    </div>
+                    <br></br>
+                    <div className="community-item-writer">
+                      <span>작성자 </span>
+                      {firstCommunity.memberId}
+                    </div>
+                    <div className="community-item-date">
+                      <span>작성일 </span>
+                      {firstCommunity.communityDate}
+                    </div>
+                    <div className="community-item-parti">
+                      <span>참여인원 </span>
+                      {firstCommunity.communityParti}
+                    </div>
+                  </div>
+                </div>
+              </Box>
             </Box>
           </Grid>
         </Grid>

@@ -23,7 +23,7 @@ public class DashboardController {
 	@Autowired
 	private CashbookService cashbookService;
 	
-	//파이대시보드
+	//파이 차트
 	@PostMapping (value="/pie")
 	public List pieDash(@RequestAttribute String memberId,@RequestBody Cashbook c) {
 		int month = c.getMonth();
@@ -31,7 +31,7 @@ public class DashboardController {
 		return cashbookService.pieDash(memberId,month);
 	}
 	
-	//바 대시보드
+	//바 차트
 	@PostMapping (value="/bar")
 	public Map barDash (@RequestAttribute String memberId ,@RequestBody Cashbook c1) {
 		int month = c1.getMonth();
@@ -52,14 +52,23 @@ public class DashboardController {
 		return map;
 	}
 	
+	//오늘의 수입
 	@PostMapping (value="todayIncome")
 	public int todayIncome(@RequestAttribute String memberId) {
 		return cashbookService.todayIncome(memberId);
 	}
 	
+	//오늘의 지출
 	@PostMapping (value="todaySpending")
 	public int todaySpending(@RequestAttribute String memberId) {
 		return cashbookService.todaySpending(memberId);
+	}
+	
+	//라인 차트
+	@PostMapping (value="/line")
+	public List lineDash (@RequestAttribute String memberId) {
+		List lineList = cashbookService.lineDash(memberId);
+		return lineList;
 	}
 
 }

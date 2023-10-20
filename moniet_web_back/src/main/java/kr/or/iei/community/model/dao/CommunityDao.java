@@ -92,6 +92,9 @@ public interface CommunityDao {
 	int outParti(Map map);
 
 	int downPartiCount(int communityNo);
+	
+	//인기커뮤니티
+	Community firstCommunity();
 
 
 

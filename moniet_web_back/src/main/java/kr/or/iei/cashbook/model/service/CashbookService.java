@@ -164,13 +164,13 @@ public class CashbookService {
 		return result;
 	}
 	
-	//파이 대시보드
+	//파이 차트
 	public List pieDash(String memberId, int month) {
 		List sum = cashbookDao.pieDash(memberId,month);
 		return sum;
 	}
 	
-	//바 대시보드
+	//바 차트
 	public List barDash(String memberId, int month) {
 		List list = cashbookDao.barDash(memberId,month);
 		return list;
@@ -203,13 +203,21 @@ public class CashbookService {
 		return cashbookDao.calList(cashbook);
 	}
 
+	//오늘의 수입
 	public int todayIncome(String memberId) {
 		// TODO Auto-generated method stub
 		return cashbookDao.todayIncome(memberId);
 	}
-
+	
+	//오늘의 지출
 	public int todaySpending(String memberId) {
 		// TODO Auto-generated method stub
 		return cashbookDao.todaySpending(memberId);
+	}
+	
+	//라인 차트
+	public List lineDash(String memberId) {
+		List list = cashbookDao.lineDash(memberId);
+		return list;
 	}
 }
