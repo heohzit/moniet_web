@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -273,15 +274,16 @@ public class CommunityController {
 	
 	//관리자 
 	@GetMapping(value="/allCommunityList/{reqPage}")
-	public List allCommunityList(@PathVariable int reqPage) {
-		return communityService.allCommunityList(reqPage);
+	public Map allCommunityList(@PathVariable int reqPage) {
+		Map map = communityService.allCommunityList(reqPage);
+		return map;
 	}
 
 
 	//체크된 데이터 지우기
-	@GetMapping(value="/checkDelete/{communityNo}")
-		public String checkDelete(@PathVariable String communityNo) {
-			System.out.println(communityNo);
+	@PostMapping(value="/checkDelete")
+		public String checkDelete(@RequestBody Community community) {
+			System.out.println(community);
 			return null;
 	}
 }
