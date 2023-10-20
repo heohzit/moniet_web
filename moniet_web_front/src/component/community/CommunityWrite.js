@@ -6,6 +6,9 @@ import Swal from "sweetalert2";
 import axios from "axios";
 
 const CommunityWrite = (props) => {
+  const isLogin = props.isLogin;
+  const navigate = useNavigate();
+
   const [communityTitle, setCommunityTitle] = useState("");
   const [communitySubTitle, setCommunitySubTitle] = useState("");
   const [thumbnail, setThumbnail] = useState({});
@@ -19,9 +22,6 @@ const CommunityWrite = (props) => {
     { name: "types", text: "투자하기 📈", value: 4 },
     { name: "types", text: "기타 💸", value: 8 },
   ]);
-
-  const isLogin = props.isLogin;
-  const navigate = useNavigate();
 
   const write = () => {
     if (

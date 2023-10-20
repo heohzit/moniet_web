@@ -4,6 +4,7 @@ import CommunityView from "./CommunityView";
 import CommunityWrite from "./CommunityWrite";
 import CommunityList from "./CommunityList";
 import CommunityModify from "./CommunityModify";
+import CommunityModifyBoard from "./CommunityModifyBoard";
 
 const CommunityMain = (props) => {
   const isLogin = props.isLogin;
@@ -27,6 +28,13 @@ const CommunityMain = (props) => {
           path="modify"
           element={
             <CommunityModify isLogin={isLogin} setIsLogin={setIsLogin} />
+          }
+        />
+
+        <Route
+          path="modifyBoard"
+          element={
+            <CommunityModifyBoard isLogin={isLogin} setIsLogin={setIsLogin} />
           }
         />
 
