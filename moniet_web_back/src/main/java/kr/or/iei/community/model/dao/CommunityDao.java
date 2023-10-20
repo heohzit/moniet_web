@@ -96,6 +96,8 @@ public interface CommunityDao {
 	//인기커뮤니티
 	Community firstCommunity();
 
+	int communityTotalCount();
+
 
 
 

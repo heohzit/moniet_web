@@ -2,6 +2,13 @@
   padding: 50px;
   padding-top: 0;
   position: relative;
+  width: 1000px;
+}
+.cashbook-title {
+  font-size: 24px;
+  font-family: ns-eb;
+  color: #010440;
+  margin-bottom: 40px;
 }
 .cashbook-content {
   position: absolute;
@@ -27,7 +34,7 @@
   height: 35px;
   cursor: pointer;
   color: #fff;
-  background-color: #6a6da6;
+  background-color: #323673;
   border-radius: 50%;
   box-shadow: rgba(0, 0, 0, 0.2) 0px 3px 5px -1px,
     rgba(0, 0, 0, 0.14) 0px 6px 10px 0px, rgba(0, 0, 0, 0.12) 0px 1px 18px 0px;
@@ -62,19 +69,24 @@
   display: flex;
   height: 60px;
 }
+.cashbook-btn-zone > button {
+  font-size: 18px;
+}
 .cashbook-btn-zone > button:nth-child(2) {
-  color: #6a6da6;
+  color: #323673;
 }
 .cashbook-btn-zone > button:nth-child(3) {
-  color: #e66eb2;
+  color: #993d3d;
 }
 .money-color {
   text-align: right;
-  color: #6a6da6;
+  color: #323673;
+  font-weight: 900;
 }
 .money-color-spending {
   text-align: right;
-  color: #e66eb2;
+  color: #993d3d;
+  font-weight: 900;
 }
 .rdrInputRanges {
   /*계속 사용안할부분이라 넌처리*/
@@ -122,7 +134,7 @@
   width: 60px;
   height: 60px;
   color: #fff;
-  background-color: #6a6da6;
+  background-color: #323673;
   border-radius: 50%;
   margin-left: 20px;
   margin-bottom: 20px;
@@ -138,11 +150,11 @@
   justify-content: flex-end;
 }
 .add-btn.etc-btn > svg {
-  color: #6a6da6;
+  color: #323673;
   background-color: #fff;
 }
 .add-btn.etc-btn > svg:hover {
-  background-color: #6a6da6;
+  background-color: #323673;
   color: #fff;
 }
 .cashbook-checkbox {
@@ -165,7 +177,8 @@
   border-collapse: collapse;
 }
 .cashbook-detail > table > thead > tr {
-  background-color: rgba(50, 54, 115, 0.2);
+  background-color: #323673;
+  color: #fff;
 }
 .cashbook-detail > table tr {
   border: 1px solid rgba(50, 54, 115, 0.3);
@@ -173,6 +186,9 @@
 .cashbook-detail > table td {
   padding: 10px;
   font-size: 16px;
+}
+.cashbook-tr {
+  font-weight: 600;
 }
 /*풀캘린더*/
 .fc-event-title-container {
@@ -190,18 +206,18 @@
   color: #323673;
 }
 .fc-event-title-container.spending-box {
-  color: #e66eb2;
+  color: #993d3d;
 }
 .fc .fc-toolbar.fc-header-toolbar {
   /*툴바 타이틀*/
   margin: 0;
   padding: 0 40px;
-  background-color: #010440;
+  background-color: #323673;
   height: 63px;
   font-weight: 600;
   font-size: 12px;
   line-height: 29px;
-  color: white;
+  color: #fff;
   border-radius: 20px 20px 0px 0px;
 }
 .fc-toolbar-chunk {
@@ -256,5 +272,5 @@
   cursor: pointer;
 }
 .loop-style {
-  color: #6a6da6;
+  color: #323673;
 }

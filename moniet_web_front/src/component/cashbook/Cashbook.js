@@ -254,7 +254,7 @@ const Cashbook = (props) => {
           ranges={dateRange}
           locale={ko}
           dateDisplayFormat="yyyy년 MMM d일"
-          rangeColors={["#6a6da6", "#3ecf8e", "#fed14c"]}
+          rangeColors={["#323673", "#3ecf8e", "#fed14c"]}
           monthDisplayFormat="yyyy년 MMM"
         />
         <div className="range-chg rdrDateRangePickerWrapper">
@@ -331,7 +331,7 @@ const Cashbook = (props) => {
  */}
           <table>
             <thead>
-              <tr>
+              <tr className="cashbook-tr">
                 <td width={"5%"}>
                   <input
                     type="checkbox"
@@ -571,7 +571,7 @@ const CashbookItem = (props) => {
               severity="success"
               sx={{
                 width: "100%",
-                backgroundColor: "#6a6da6",
+                backgroundColor: "#323673",
               }}
             >
               가계부 수정 성공!

@@ -140,7 +140,7 @@ const CashbookModify = (props) => {
             severity="success"
             sx={{
               width: "100%",
-              backgroundColor: "#6a6da6",
+              backgroundColor: "#323673",
             }}
           >
             가계부 수정 성공!

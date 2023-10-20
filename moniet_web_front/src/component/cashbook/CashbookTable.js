@@ -9,7 +9,6 @@ import {
   GridToolbarExport,
   useGridApiContext,
   useGridApiEventHandler,
-  
 } from "@mui/x-data-grid";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/DeleteOutlined";
@@ -17,7 +16,7 @@ import SaveIcon from "@mui/icons-material/Save";
 import CancelIcon from "@mui/icons-material/Close";
 import { useEffect, useState } from "react";
 import { Box, LinearProgress } from "@mui/material";
-import clsx from 'clsx';
+import clsx from "clsx";
 import CashbookDel from "./CashbookDel";
 import axios from "axios";
 
@@ -31,46 +30,48 @@ const CashbookTable = (props) => {
 
   const [rows, setRows] = useState([]);
   useEffect(() => {
-    console.log(incomeCate)
+    console.log(incomeCate);
     setRows(cashbookList);
   }, [cashbookList]);
   //console.log(cashbookList[0]); //3번씩 찍히는 거 확인필요
-  
+
   const [rowSelectionModel, setRowSelectionModel] = useState([]);
-  
-  const CustomToolbar = ()=>{
+
+  const CustomToolbar = () => {
     const apiRef = useGridApiContext();
     const handleRowClick = () => {
       console.log(rowSelectionModel);
       const delCashbookNo = "";
-      {rowSelectionModel.map((item)=>{
-        return (delCashbookNo += item+",")
-      })
+      {
+        rowSelectionModel.map((item) => {
+          return (delCashbookNo += item + ",");
+        });
       }
-      console.log("delCashbookNo = "+delCashbookNo);
+      console.log("delCashbookNo = " + delCashbookNo);
       const token = window.localStorage.getItem("token");
-      
+
       axios
-      .post("/cashbook/delete", {delCashbookNo : rowSelectionModel}, {
-          headers: {
-            Authorization: "Bearer " + token,
-          },
-        })
+        .post(
+          "/cashbook/delete",
+          { delCashbookNo: rowSelectionModel },
+          {
+            headers: {
+              Authorization: "Bearer " + token,
+            },
+          }
+        )
         .then((res) => {
           console.log(res.data);
-        })
-        
+        });
     };
-    
-    
-    return(
+
+    return (
       <GridToolbarContainer>
         <GridToolbarExport />
-        <GridDeleteIcon onClick={handleRowClick}/>
-        
+        <GridDeleteIcon onClick={handleRowClick} />
       </GridToolbarContainer>
-    )
-  }
+    );
+  };
 
   const columns = [
     {
@@ -81,7 +82,7 @@ const CashbookTable = (props) => {
       valueFormatter: (params) =>
         new Date(params.value).toLocaleDateString("ko-KR"),
       type: "date",
-      headerAlign: 'center',
+      headerAlign: "center",
     },
     {
       field: "cashbookAsset",
@@ -91,52 +92,54 @@ const CashbookTable = (props) => {
       type: "singleSelect",
       valueOptions: assetList,
       valueGetter: (params) => assetToString(params.value),
-      headerAlign: 'center',
+      headerAlign: "center",
     },
     {
       field: "cashbookCateogory",
       headerName: "분류",
       width: 130,
       editable: true,
-      headerAlign: 'center',
-      valueGetter:  (params) =>{
-        if(params.row.cashbookFinance===1){
-          const category = incomeCate.find(item => item.categoryNo===params.row.cashbookCategory);
+      headerAlign: "center",
+      valueGetter: (params) => {
+        if (params.row.cashbookFinance === 1) {
+          const category = incomeCate.find(
+            (item) => item.categoryNo === params.row.cashbookCategory
+          );
           return category.categoryTitle;
-        } else if(params.row.cashbookFinance===2){
-          const category = spendingCate.find(item => item.categoryNo===params.row.cashbookCategory);
+        } else if (params.row.cashbookFinance === 2) {
+          const category = spendingCate.find(
+            (item) => item.categoryNo === params.row.cashbookCategory
+          );
           return category.categoryTitle;
-        } else{
+        } else {
           return null;
         }
-      }
-      
+      },
     },
     {
       field: "cashbookMoney",
       headerName: "금액",
       width: 130,
       editable: true,
-      headerAlign: 'center',
+      headerAlign: "center",
       valueFormatter: (params) => params.value?.toLocaleString("ko-KR"),
-      cellClassName: (params) =>{
-        if(params.value == null){
+      cellClassName: (params) => {
+        if (params.value == null) {
           return "";
         }
-        return clsx ('moneyColor',{
+        return clsx("moneyColor", {
           incomeNum: params.row.cashbookFinance === 1,
-          spendingNum :params.row.cashbookFinance ===2,
-        })
-      }
+          spendingNum: params.row.cashbookFinance === 2,
+        });
+      },
     },
     {
       field: "cashbookContent",
       headerName: "내용",
       width: 260,
       editable: true,
-      headerAlign: 'center',
+      headerAlign: "center",
     },
-
   ];
 
   return (
@@ -148,13 +151,13 @@ const CashbookTable = (props) => {
           "& .textPrimary": {
             color: "text.primary",
           },
-          "& .moneyColor.incomeNum":{
-            color: "#e66eb2",
-            justifyContent:"flex-end",
+          "& .moneyColor.incomeNum": {
+            color: "",
+            justifyContent: "flex-end",
           },
-          "& .moneyColor.spendingNum":{
-            color: "#6a6da6",
-            justifyContent:"flex-end",
+          "& .moneyColor.spendingNum": {
+            color: "#323673",
+            justifyContent: "flex-end",
           },
         }}
       >
@@ -164,10 +167,7 @@ const CashbookTable = (props) => {
           rows={rows}
           columns={columns}
           getRowId={(row) => row.cashbookNo}
-          slots={
-            {toolbar: CustomToolbar,
-              loadingOverlay:LinearProgress,} 
-          }
+          slots={{ toolbar: CustomToolbar, loadingOverlay: LinearProgress }}
           onRowSelectionModelChange={(newRowSelectionModel) => {
             setRowSelectionModel(newRowSelectionModel);
           }}

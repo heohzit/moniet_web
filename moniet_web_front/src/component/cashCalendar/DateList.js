@@ -159,7 +159,7 @@ const DateList = (props) => {
               >
                 <span>지출</span>
                 <span> | </span>
-                <span style={{ color: "#e66eb2" }}>{item.title}원</span>
+                <span style={{ color: "#993D3D" }}>{item.title}원</span>
               </div>
             )
           ) : null
@@ -362,7 +362,7 @@ const DateCashItem = (props) => {
             severity="success"
             sx={{
               width: "100%",
-              backgroundColor: "#6a6da6",
+              backgroundColor: "#323673",
             }}
           >
             가계부 수정 성공!

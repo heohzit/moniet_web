@@ -6,7 +6,7 @@ const CashCalendarMain = (props) => {
   const setIsLogin = props.setIsLogin;
   return (
     <div className="cashbook-all-wrap">
-      <div className="cashbook-title">달력</div>
+      <div className="cashbook-title">CALENDAR</div>
       <Routes>
         <Route
           path="*"

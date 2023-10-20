@@ -48,7 +48,7 @@
 		    JOIN MEMBER ON (COMMUNITY_WRITER = MEMBER_NO)
 		    WHERE COMMUNITY_STATUS = 1
 		    ORDER BY 1 DESC)C)
-		WHERE RNUM BETWEEN 1 AND 5
+		WHERE RNUM BETWEEN #{start} AND #{end}
 	</select>
 	
 	<resultMap type="community" id="getCommunityList">
@@ -364,6 +364,10 @@
 	</update>
 	
 	<select id="totalCount" resultType="int">
+		select count(*) from community
+	</select>
+	
+	<select id="communityTotalCount" resultType="int">
 		select count(*) from community
 	</select>
 	

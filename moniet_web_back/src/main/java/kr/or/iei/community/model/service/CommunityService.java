@@ -35,9 +35,18 @@ public class CommunityService {
 	private Pagination pagination;
 	
 	public List communityList(int reqPage, String memberId) {
+		
+		int totalCount = communityDao.communityTotalCount();
+		int numPerPage = 5;
+		int pageNaviSize = 1;
+		
+		PageInfo pi = pagination.getPageInfo(reqPage, numPerPage, pageNaviSize, totalCount);
 		Member member = memberDao.selectOneMember(memberId);
+		
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("reqPage", reqPage);
+		
+		map.put("start", pi.getStart());
+		map.put("end", pi.getEnd());
 		map.put("memberNo", member.getMemberNo());
 		
 		List list = communityDao.communityList(map);
@@ -307,12 +316,15 @@ public class CommunityService {
 
 	
 	@Transactional
-	public boolean checkDelete(String community) {
-	StringTokenizer sT1 = new StringTokenizer(community,"/");
+	public boolean checkDelete(String communityNumber) {
+	StringTokenizer sT1 = new StringTokenizer(communityNumber,"/");
+	System.out.println("서비스"+communityNumber);
 	boolean result = true;
 		while(sT1.hasMoreTokens()) {
 			int communityNo = Integer.parseInt(sT1.nextToken());
-			int deleteResult = deleteCommunity(communityNo);
+			int deleteResult = communityDao.deleteCommunity(communityNo);
+			System.out.println("cn " +communityNo);
+			System.out.println("dr "+deleteResult);
 			if(deleteResult == 0) {
 				result = false;
 				break;

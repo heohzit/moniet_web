@@ -29,7 +29,6 @@ const CommunityView = (props) => {
   const [renderingComment, setRenderingComment] = useState(false);
   const [renderingBoard, setRenderingBoard] = useState(false);
   const [communityBoardList, setCommunityBoardList] = useState([]);
-  console.log("rendering", rendering);
   useEffect(() => {
     const token = window.localStorage.getItem("token");
     axios
@@ -221,9 +220,6 @@ const CommunityView = (props) => {
         Swal.fire("실패", "관리자에게 문의하세요.", "warning");
       });
   };
-
-  console.log(community);
-  console.log(member);
 
   const communityLike = () => {
     const token = window.localStorage.getItem("token");

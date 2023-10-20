@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 import kr.or.iei.FileUtil;
 import kr.or.iei.community.model.service.CommunityService;
 import kr.or.iei.community.model.vo.Community;
+import kr.or.iei.community.model.vo.Community2;
 import kr.or.iei.community.model.vo.CommunityBoard;
 import kr.or.iei.community.model.vo.CommunityBoardFile;
 import kr.or.iei.community.model.vo.CommunityBoardType;
@@ -282,9 +283,11 @@ public class CommunityController {
 
 	//체크된 데이터 지우기
 	@PostMapping(value="/checkDelete")
-		public String checkDelete(@RequestBody Community community) {
+		public String checkDelete(@RequestBody Community2 community) {
 			System.out.println(community);
-			return null;
+			String communityNumber = community.getCommunityNo();
+			boolean result = communityService.checkDelete(communityNumber);
+			return communityNumber;
 	}
 	
 	//인기커뮤니티
