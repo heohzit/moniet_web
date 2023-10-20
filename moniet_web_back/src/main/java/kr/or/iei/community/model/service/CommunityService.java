@@ -251,8 +251,8 @@ public class CommunityService {
 	
 	//관리자
 	public Map allCommunityList(int reqPage) {
-		int numPerPage = 2; //한 페이지당 게시물 수
-		int pageNaviSize = 3;
+		int numPerPage = 10; //한 페이지당 게시물 수
+		int pageNaviSize = 5;
 		int totalCount = communityDao.totalCount(); //전체페이지수 
 		PageInfo pi = pagination.getPageInfo(reqPage, numPerPage, pageNaviSize, totalCount);
 		List communityList = communityDao.allCommunityList(pi);
@@ -331,6 +331,13 @@ public class CommunityService {
 		 
 	}
 	
+	
+	//인기커뮤니티
+	public Community firstCommunity() {
+		Community c = communityDao.firstCommunity();
+		return c;
+	}
+
 
 
 }

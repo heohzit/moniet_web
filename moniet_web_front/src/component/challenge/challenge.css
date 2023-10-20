@@ -3,7 +3,10 @@
   width: 1000px;
 }
 .challenge-title {
-  font-size: 20px;
+  font-size: 24px;
+  font-family: ns-eb;
+  color: #010440;
+  margin-bottom: 40px;
 }
 
 /*challengeList*/
@@ -157,8 +160,8 @@
   font-size: large;
   height: 30px;
   border-radius: 10px;
-  border: 2px solid #6a6da6;
-  color: #6a6da6;
+  border: 2px solid #323673;
+  color: #323673;
   float: right;
 }
 .challenge-progress {
@@ -299,6 +302,6 @@
     #151426 rgb(21, 20, 38)
     #010440 rgb(1, 4, 64)
     #323673 rgb(50, 54, 115)
-    #6A6DA6 rgb(106, 109, 166)
+    #323673 rgb(106, 109, 166)
     #F0F1F2 rgb(240, 241, 242)
 */

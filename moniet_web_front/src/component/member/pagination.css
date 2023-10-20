@@ -1,19 +1,22 @@
-.paging-wrap{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.paging-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* span 태그 */
-.paging-wrap >.page-item{
-    min-width: 20px;
-    height: 20px;
-    text-align: center;
-    line-height: 20px;
-    padding: 5px;
-    cursor: pointer;
+.paging-wrap > .page-item {
+  min-width: 20px;
+  height: 20px;
+  text-align: center;
+  line-height: 20px;
+  padding: 5px;
+  cursor: pointer;
 }
-.page-item.active-page{
-    background-color: #010440;
-    color: #fff;
+.page-item.active-page {
+  background-color: #010440;
+  color: #fff;
+}
+.paging-wrap {
+  margin: 50px 0px;
 }

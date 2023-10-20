@@ -18,38 +18,23 @@ import PieChartOutlineOutlinedIcon from "@mui/icons-material/PieChartOutlineOutl
 import axios from "axios";
 const tokens = () => ({
   grey: {
-    100: "#141414",
-    200: "#323673",
-    300: "#3d3d3d",
-    400: "#525252",
-    500: "#666666",
-    600: "#858585",
-    700: "#a3a3a3",
-    800: "#c2c2c2",
-    900: "#e0e0e0",
+    300: "#fff",
   },
   primary: {
-    100: "#040509",
-    200: "#080b12",
-    300: "#0c101b",
-    400: "#f2f0f0",
-    500: "#141b2d",
-    600: "#1F2A40",
-    700: "#727681",
-    800: "#a1a4ab",
-    900: "#d0d1d5",
+    400: "#fff",
   },
 });
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
-  const colors = tokens(theme.palette.mode);
   return (
     <Link to={to}>
       <MenuItem
         active={selected === title}
         style={{
-          color: colors.grey[100],
+          color: "#fff",
+          backgroundColor: "#010440",
+          fontWeight: "900",
         }}
         onClick={() => setSelected(title)}
         icon={icon}
@@ -84,6 +69,7 @@ const SideBar = (props) => {
     const navigate = useNavigate();
     return (
       <MenuItem
+        style={{ color: "#fff", backgroundColor: "#010440" }}
         onClick={() => {
           setSelected(title);
           logout();
@@ -91,7 +77,7 @@ const SideBar = (props) => {
         }}
         icon={icon}
       >
-        <Typography>{title}</Typography>
+        <Typography style={{ color: "#fff" }}>{title}</Typography>
       </MenuItem>
     );
   };
@@ -108,31 +94,18 @@ const SideBar = (props) => {
 
   return (
     <Box
-      sx={{
-        "& .pro-sidebar-inner": {
-          background: `${colors.primary[400]} !important`,
-        },
-        "& .pro-icon-wrapper": {
-          backgroundColor: "transparent !important",
-        },
-        "& .pro-inner-item:hover": {
-          color: "#868dfb !important",
-        },
-        "& .pro-menu-item.active": {
-          color: "#6870fa !important",
-        },
-      }}
       style={{
         position: "fixed",
       }}
     >
       <Sidebar collapsed={isCollapsed}>
-        <Menu iconShape="square">
+        <Menu iconShape="square" style={{ backgroundColor: "#010440" }}>
           <MenuItem
             onClick={() => setIsCollapsed(!isCollapsed)}
             icon={isCollapsed ? <MenuOutlinedIcon /> : undefined}
             style={{
-              color: colors.grey[100],
+              color: colors.grey[300],
+              backgroundColor: "#010440",
             }}
           >
             {!isCollapsed && (
@@ -146,13 +119,19 @@ const SideBar = (props) => {
                 <Typography
                   style={{
                     fontWeight: "900",
+                    color: "#fff",
                   }}
                   variant="h5"
-                  color={colors.grey[100]}
                 >
                   머니어터
                 </Typography>
-                <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
+                <IconButton
+                  style={{
+                    fontWeight: "900",
+                    color: "#fff",
+                  }}
+                  onClick={() => setIsCollapsed(!isCollapsed)}
+                >
                   <MenuOutlinedIcon />
                 </IconButton>
               </Box>
@@ -179,7 +158,7 @@ const SideBar = (props) => {
                 )}
               </Box>
               <Box textAlign="center">
-                <Typography color={colors.grey[100]} sx={{ m: "10px 0 0 0" }}>
+                <Typography style={{ color: "#fff" }} sx={{ m: "10px 0 0 0" }}>
                   <strong>{member.memberId}</strong>님 환영합니다.
                 </Typography>
               </Box>
@@ -239,14 +218,14 @@ const SideBar = (props) => {
                 ACCOUNT BOOK
               </Typography>
               <Item
-                title="내역"
+                title="Statements"
                 to="/cashbook"
                 icon={<AddCardIcon />}
                 selected={selected}
                 setSelected={setSelected}
               />
               <Item
-                title="달력"
+                title="Calendar"
                 to="/cashCalendar"
                 icon={<CalendarMonthIcon />}
                 selected={selected}
@@ -285,7 +264,7 @@ const SideBar = (props) => {
                 CHALLENGE
               </Typography>
               <Item
-                title="챌린지"
+                title="머니챌린지"
                 to="/challenge"
                 icon={<SavingsIcon />}
                 selected={selected}

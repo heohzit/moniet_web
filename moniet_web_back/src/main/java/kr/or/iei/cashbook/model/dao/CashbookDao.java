@@ -24,10 +24,10 @@ public interface CashbookDao {
 
 	int insertCashbook(Cashbook cashbook);
 	
-	//파이 대시보드
+	//파이 차트
 	List pieDash(String memberId, int month);
 	
-	//바 대시보드
+	//바 차트
 	List barDash(String memberId, int month);
 	
 
@@ -38,12 +38,18 @@ public interface CashbookDao {
 	List cashbookListIncome(Cashbook cashbook);
 
 	List calList(Cashbook cashbook);
-
+	
+	//오늘의 수입
 	int todayIncome(String memberId);
 
+	//오늘의 지출
 	int todaySpending(String memberId);
 
+	
 	List viewData(String memberId);
+	
+	//라인 차트
+	List lineDash(String memberId);
 
 
 

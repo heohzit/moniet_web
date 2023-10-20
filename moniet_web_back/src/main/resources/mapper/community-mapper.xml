@@ -371,4 +371,9 @@
 		select count(*) from community
 	</select>
 	
+	<select id="firstCommunity">
+		select c.* , m.member_id from community  c
+		JOIN MEMBER m ON (COMMUNITY_WRITER = MEMBER_NO)
+		where community_parti =(select max(community_parti) from community)
+	</select>
 </mapper>

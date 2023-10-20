@@ -7,7 +7,7 @@ const CashbookMain = (props) => {
   const setIsLogin = props.setIsLogin;
   return (
     <div className="cashbook-all-wrap">
-      <div className="cashbook-title">내역</div>
+      <div className="cashbook-title">STATEMENTS</div>
       <Routes>
         <Route path="write" element={<CashbookWrite />} />
         <Route
