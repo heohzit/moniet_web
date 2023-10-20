@@ -105,7 +105,6 @@ const CommunityWrite = (props) => {
         setTypeList={setTypeList}
         buttonEvent={write}
         type="write"
-        maxlength="35"
       />
     </div>
   );

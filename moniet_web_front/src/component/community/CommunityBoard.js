@@ -5,6 +5,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { Button1, Button2, Button3, Button4 } from "../util/Buttons";
 import CommunityBoardComment from "./CommunityBoardComment";
 import Swal from "sweetalert2";
+import ModalImg from "./ModalImg";
 
 const CommunityBoard = (props) => {
   const member = props.member;
@@ -340,13 +341,31 @@ const FileItem = (props) => {
   // };
 
   const [modal, setModal] = useState(false);
+  const [modalImg, setModalImg] = useState(null);
 
-  const Modal = () => {};
+  const clickImg = (e) => {
+    // const img = document.querySelector(
+    //   ".board-item-img-list > .board-item-img > img"
+    // );
+
+    const img = e.currentTarget;
+
+    console.log(img.src);
+    setModalImg(img.src);
+    setModal(!modal);
+  };
 
   return (
-    <div className="board-item-img">
-      <img src={"/community/" + file.filepath} />
-    </div>
+    <>
+      <div className="board-item-img">
+        <img src={"/community/" + file.filepath} onClick={clickImg} />
+      </div>
+      {modal ? (
+        <ModalImg modal={modal} setModal={setModal} modalImg={modalImg} />
+      ) : (
+        ""
+      )}
+    </>
   );
 };
 
