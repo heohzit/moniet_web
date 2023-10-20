@@ -164,4 +164,10 @@
 	<select id="todaySpending" resultType="int">
 		select sum(cashbook_money) from cashbook where member_no=(select member_no from member where member_id=#{memberId}) and cashbook_finance=2 and cashbook_date=TO_CHAR(SYSDATE,'YYYYMMDD')
 	</select>
+	
+	 <!--챌린지 금액 상세 조회-->
+  	<select id="viewData" resultType="cashbook">
+  		select * from cashbook
+		where member_no = (select m.member_no from member m where m.member_id = #{memberId})
+  	</select>
 </mapper>

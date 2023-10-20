@@ -84,17 +84,6 @@ const ChallengeItem = (props) => {
       },
     });
   };
-  //챌린지 성공/실패 이미지
-  const ImgDiv = (num) => {
-    switch (num) {
-      case 0:
-        return "";
-      case 1:
-        return <img src="../image/success.PNG"></img>;
-      case 2:
-        return <img src="../image/fail.jpg"></img>;
-    }
-  };
   return (
     <div className="challenge-item" onClick={challengeView}>
       <div className="challenge-item-info">

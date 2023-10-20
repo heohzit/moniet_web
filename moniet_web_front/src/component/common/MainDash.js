@@ -199,7 +199,7 @@ const MainDash = (props) => {
                 fontWeight="600"
                 sx={{ marginBottom: "15px" }}
               >
-                뭐하지
+                인기 커뮤니티
               </Typography>
               <Box height="200px"></Box>
             </Box>

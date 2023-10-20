@@ -43,6 +43,8 @@ public interface CashbookDao {
 
 	int todaySpending(String memberId);
 
+	List viewData(String memberId);
+
 
 
 

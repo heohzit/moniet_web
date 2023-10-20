@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import kr.or.iei.cashbook.model.dao.CashbookDao;
 import kr.or.iei.challenge.model.dao.ChallengeDao;
 import kr.or.iei.challenge.model.vo.Challenge;
 import kr.or.iei.member.model.dao.MemberDao;
@@ -18,6 +19,8 @@ public class ChallengeService {
 	private ChallengeDao challengeDao;
 	@Autowired
 	private MemberDao memberDao;
+	@Autowired
+	private CashbookDao cashbookDao; 
 	
 	//챌린지 목록
 	public Map challengeList1(String memberId) {
@@ -89,4 +92,13 @@ public class ChallengeService {
 	public List challengeListsByMember(String memberId) {
 		return challengeDao.challengeListsByMember(memberId);
 	}
+
+	//챌린지 금액 상세 조회
+	public Map viewData(String memberId) {
+		List viewData = cashbookDao.viewData(memberId);
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("viewData", viewData);
+		return map;
+	}
+	
 }

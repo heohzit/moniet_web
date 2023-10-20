@@ -45,4 +45,5 @@ public interface ChallengeDao {
 	int resultChallenge2(String memberId);
 
 
+
 }

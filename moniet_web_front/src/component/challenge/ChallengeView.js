@@ -56,6 +56,31 @@ const ChallengeView = () => {
         });
     }
   }, []);
+  const [modalData, setModalData] = useState([]);
+  const openModalWithData = () => {
+    const token = window.localStorage.getItem("token");
+    axios
+      .post("/challenge/viewData", null, {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      })
+      .then((res) => {
+        setModalData(res.data.viewData);
+        console.log(res.data.viewData);
+        toggleModal();
+      })
+      .catch((res) => {
+        console.log(res.response.status);
+      });
+  };
+  const [isModalVisible, setModalVisible] = useState(false);
+  const toggleModal = () => {
+    setModalVisible(!isModalVisible);
+  };
+  const handleViewDetailsClick = () => {
+    openModalWithData();
+  };
   const goalAmount = [[challenge.challengeAmount]];
   const currentAmount = [[challenge.total]];
   const rawProgress = Math.floor((currentAmount / goalAmount) * 100);
@@ -215,7 +240,21 @@ const ChallengeView = () => {
           <div className="currentAmount">
             현재 금액 : {currentAmount.toLocaleString()}원
           </div>
+          <div>
+            <button onClick={handleViewDetailsClick}>상세보기</button>
+          </div>
         </div>
+        {isModalVisible && (
+          <div className="challenge-modal">
+            <div className="challenge-modal-content" style={{ width: "500px" }}>
+              {modalData &&
+                modalData.map((item, index) => {
+                  return <ModalItem key={item + index} item={item} />;
+                })}
+              <button onClick={toggleModal}>닫기</button>
+            </div>
+          </div>
+        )}
       </div>
       <div className="progress-ment">📢{ProgressMent(progress)}📢</div>
 
@@ -233,5 +272,9 @@ const ChallengeView = () => {
       </div>
     </div>
   );
+};
+const ModalItem = (props) => {
+  const item = props.item;
+  return <div>{item.cashbookMoney}</div>;
 };
 export default ChallengeView;
