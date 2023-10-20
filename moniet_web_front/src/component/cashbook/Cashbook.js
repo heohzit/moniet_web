@@ -472,7 +472,11 @@ const CashbookItem = (props) => {
       key={"item" + cashbook.cashbookNo}
       onClick={onClickButton1}
     >
-      <td>
+      <td
+        onClick={(e) => {
+          e.stopPropagation();
+        }}
+      >
         <input
           type="checkbox"
           className="cashbook-checkbox cash-chk"
