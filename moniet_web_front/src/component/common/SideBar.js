@@ -239,14 +239,14 @@ const SideBar = (props) => {
                 ACCOUNT BOOK
               </Typography>
               <Item
-                title="내역"
+                title="Statements"
                 to="/cashbook"
                 icon={<AddCardIcon />}
                 selected={selected}
                 setSelected={setSelected}
               />
               <Item
-                title="달력"
+                title="Calendar"
                 to="/cashCalendar"
                 icon={<CalendarMonthIcon />}
                 selected={selected}
