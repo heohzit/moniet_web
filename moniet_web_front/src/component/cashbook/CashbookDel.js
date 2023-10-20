@@ -71,7 +71,7 @@ const CashbookDel = (props) => {
             severity={snackbarResult}
             sx={{
               width: "100%",
-              backgroundColor: "#6a6da6",
+              backgroundColor: "#323673",
             }}
           >
             {snackbarMsg}

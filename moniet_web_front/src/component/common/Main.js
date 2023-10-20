@@ -1,20 +1,42 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./default.css";
+import { Button2, Button5 } from "../util/Buttons";
 
-const Main = () => {
+const Main = (props) => {
+  const isLogin = props.isLogin;
+  const navigate = useNavigate();
+
   return (
-    <div className="header-link">
-      <div className="header-title">
-        <Link to="/">머니어터</Link>
+    <div className="main-wrapper">
+      <div className="header-wrap">
+        <div className="header-title">
+          <Link to="/">
+            <div>
+              <img src="./image/M_logo.png" alt="logo" />
+            </div>
+            <div>
+              <span>머니어터</span>
+            </div>
+          </Link>
+        </div>
+        <div className="header-title">
+          <div>
+            <Link to="/login">
+              <Button5 text={"로그인"} />
+            </Link>
+          </div>
+          <div>
+            <Link to="/join">
+              <Button2 text={"회원가입"} />
+            </Link>
+          </div>
+        </div>
       </div>
-      안녕하세요 메인입니다 로그인하세요
-      <img src="./image/IMG_0608.jpg"></img>
-      <Link to="/login">
-        <span className="material-icons icon">login</span>
-      </Link>
-      <Link to="/join">
-        <span className="material-icons">person_add_alt</span>
-      </Link>
+      <div className="main-contents">
+        <div className="main-con">
+          <img src="./image/bg1.png" alt="bg" />
+        </div>
+      </div>
     </div>
   );
 };

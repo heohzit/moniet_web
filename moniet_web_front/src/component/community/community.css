@@ -3,7 +3,7 @@
     #151426 rgb(21, 20, 38)
     #010440 rgb(1, 4, 64)
     #323673 rgb(50, 54, 115)
-    #6A6DA6 rgb(106, 109, 166)
+    #323673 rgb(106, 109, 166)
     #F0F1F2 rgb(240, 241, 242)
 */
 
@@ -124,7 +124,7 @@
   transition: all 0.2s linear;
   transform: scale(1.01);
   cursor: pointer;
-  /* #6A6DA6 rgb(106, 109, 166)
+  /* #323673 rgb(106, 109, 166)
   #F0F1F2 rgb(240, 241, 242) */
 }
 
@@ -297,7 +297,7 @@
 .community-item-parti,
 .community-item-parti > span {
   font-family: ns-b;
-  color: #6a6da6;
+  color: #323673;
 }
 
 .community-item-date > span {
@@ -436,7 +436,7 @@
 }
 
 .key8 {
-  background-color: #6a6da6;
+  background-color: #323673;
 }
 
 .community-view-writer,
@@ -447,7 +447,7 @@
 }
 
 .community-view-parti {
-  color: #6a6da6;
+  color: #323673;
   padding-bottom: 20px;
   border-bottom: 1px solid #ccc;
   font-family: ns-b;
@@ -784,7 +784,7 @@
 }
 
 .preview-delete {
-  color: #6a6da6;
+  color: #323673;
   font-weight: 500;
   position: absolute;
   top: 1.4cm;
@@ -870,7 +870,7 @@
   height: 22px;
   padding: 5px;
   padding-bottom: 4px;
-  color: #6a6da6;
+  color: #323673;
 
   cursor: pointer;
   right: 2cm;
@@ -888,13 +888,13 @@
 }
 
 .board-item-like > .board-item-like-icon > .thumb_up:hover {
-  color: #6a6da6;
+  color: #323673;
   transition: all 0.2s linear;
   transform: rotate(-15deg);
 }
 
 .board-item-like > .board-item-like-icon > .chat:hover {
-  color: #6a6da6;
+  color: #323673;
   transition: all 0.2s linear;
   transform: rotate(-15deg);
 }
@@ -1062,7 +1062,7 @@
 }
 
 .comment-recomment-write-wrap > .comment-write > .comment-write-btn button {
-  background-color: #6a6da6;
+  background-color: #323673;
 }
 
 .comment-recomment-list {

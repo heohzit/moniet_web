@@ -6,6 +6,7 @@
 }
 .date-list.total-box {
   padding: 10px;
+  font-weight: 900;
 }
 .list-box {
   margin-bottom: 20px;
@@ -53,4 +54,7 @@
 .cal-title-zone > .add-btn > .css-i4bv87-MuiSvgIcon-root {
   width: 20px;
   height: 20px;
+}
+.fc-event-title.fc-sticky {
+  font-weight: 900;
 }

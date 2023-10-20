@@ -86,9 +86,12 @@ public class CashbookService {
 			result = cashbookDao.insertCashbook(cashbook);
 		} else if(cashbookLoop == 2) {	//할부 일때 
 			for(int i =0 ; i<cashbook.getLoopMonth() ; i++ ) {
-				System.out.println("할부"+i);
 				cashbook.setLoopRound(i+1);
 				cashbook.setCashbookMoney(money/loopMonth);
+				//if(cal.getActualMaximum(Calendar.DAY_OF_MONTH) == date.get)
+				
+				
+				
 				if(i==0) {
 					cal.add(Calendar.MONTH, 0);					
 				} else {
