@@ -2,22 +2,25 @@ import { useEffect, useState } from "react";
 import "./adminCommunityList.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Pagination from "./Pagination";
 const AdminCommunityList = (props) => {
   const isLogin = props.isLogin;
   const [communityList, setCommunityList] = useState([]);
   const [reqPage, setReqPage] = useState(1);
+  const [pageInfo, setPageInfo] = useState({});
 
   useEffect(() => {
     axios
       .get("/community/allCommunityList/" + reqPage)
       .then((res) => {
         console.log(res.data);
-        setCommunityList(res.data);
+        setCommunityList(res.data.communityList); //communityList -> key값
+        setPageInfo(res.data.pi);
       })
       .catch((res) => {
-        console.log(res);
+        console.log(res.response.status);
       });
-  }, []);
+  }, [reqPage]);
   return (
     <div className="admin-community-list-wrap">
       <div className="admin-community-list-title">커뮤니티 목록</div>
@@ -32,7 +35,7 @@ const AdminCommunityList = (props) => {
             <th>선택</th>
             <th>글번호</th>
             <th width={"30%"}>글제목</th>
-            <th>썸네일</th>
+            <th>공개여부</th>
             <th>작성자</th>
             <th>참여인원수</th>
             <th>작성일</th>
@@ -40,7 +43,7 @@ const AdminCommunityList = (props) => {
             <th>게시글 상세</th>
           </thead>
           <tbody>
-            {communityList.map((community, index) => {
+          {communityList.map((community, index) => {
               return (
                 <CommunityItem
                   community={community}
@@ -48,10 +51,14 @@ const AdminCommunityList = (props) => {
                   isLogin={isLogin}
                 />
               );
-            })}
+            })}            
           </tbody>
         </table>
       </div>
+      <Pagination 
+        reqPage={reqPage} 
+        setReqPage={setReqPage} 
+        pageInfo={pageInfo}/>
     </div>
   );
 };
@@ -70,9 +77,11 @@ const checkDel = () => {
       const communityNo = item.parentElement.nextElementSibling.innerText;
       console.log(communityNo);
       no.push(communityNo);
-      console.log(no);
+
+      const community = {communityNo : no.join("/")}
+      console.log(community);
       axios
-        .post("/community/checkDelete", { communityNo: no.join("/") })
+        .post("/community/checkDelete", community)
         .then((res) => {
           console.log(res);
         })
@@ -123,7 +132,7 @@ const CommunityItem = (props) => {
       </td>
       <td>{community.communityNo}</td>
       <td>{community.communityTitle}</td>
-      <td>{community.communityThumb === null ? "N" : "Y"}</td>
+      <td>{community.communityStatus === 1 ? "Y" : "N"}</td>
       <td>{community.memberId}</td>
       <td>{community.communityParti}</td>
       <td>{community.communityDate}</td>
@@ -140,4 +149,7 @@ const CommunityItem = (props) => {
     </tr>
   );
 };
+
+
+
 export default AdminCommunityList;
