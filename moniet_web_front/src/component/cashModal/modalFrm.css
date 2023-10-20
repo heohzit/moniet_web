@@ -135,3 +135,8 @@
 .modalBtn-area > button {
   font-size: 15px;
 }
+#loop-msg {
+  font-size: 10px;
+  color: #e66eb2;
+  padding-left: 15px;
+}

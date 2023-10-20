@@ -10,8 +10,12 @@ const CashbookDel = (props) => {
   const setSelect = props.setSelect;
 
   const [showSnackbar, setShowSnackbar] = useState(false);
-  const onOpenClickHandler = () => {
+  const [snackbarMsg, setSnackbarMsg] = useState("");
+  const [snackbarResult, setSnackbarResult] = useState("");
+  const onOpenClickHandler = (msg, result) => {
     setShowSnackbar(true);
+    setSnackbarMsg(msg);
+    setSnackbarResult(result);
   };
   const onCloseClickHandler = (event, reason) => {
     if (reason === "clickaway") {
@@ -21,8 +25,8 @@ const CashbookDel = (props) => {
   };
 
   const deleteCashbook = () => {
-    if (checkItems === null) {
-      console.log("삭제할 거 없음");
+    if (checkItems.length === 0) {
+      onOpenClickHandler("삭제할 항목이 없습니다.", "info");
       return;
     } else {
       const no = new Array();
@@ -43,7 +47,7 @@ const CashbookDel = (props) => {
         .then((res) => {
           setCheckItems([]);
           setSelect(!select);
-          onOpenClickHandler();
+          onOpenClickHandler("가계부 삭제 성공!", "success");
         })
         .catch((res) => {
           console.log(cashbookNos);
@@ -64,13 +68,13 @@ const CashbookDel = (props) => {
           <Alert
             variant="filled"
             onClose={onCloseClickHandler}
-            severity="success"
+            severity={snackbarResult}
             sx={{
               width: "100%",
               backgroundColor: "#6a6da6",
             }}
           >
-            가계부 삭제 성공!
+            {snackbarMsg}
           </Alert>
         </Snackbar>
       )}

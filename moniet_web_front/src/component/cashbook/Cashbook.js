@@ -293,7 +293,7 @@ const Cashbook = (props) => {
               "합계(" +
               addComma(cashbookSum.totalCount) +
               "건) " +
-              cashbookSum.total +
+              cashbookSum.total?.toLocaleString("ko-KR") +
               "원"
             }
           />
@@ -472,7 +472,11 @@ const CashbookItem = (props) => {
       key={"item" + cashbook.cashbookNo}
       onClick={onClickButton1}
     >
-      <td>
+      <td
+        onClick={(e) => {
+          e.stopPropagation();
+        }}
+      >
         <input
           type="checkbox"
           className="cashbook-checkbox cash-chk"
@@ -511,14 +515,15 @@ const CashbookItem = (props) => {
           <CashInputModal
             open={isOpen1}
             onClose={(e) => {
+              console.log(22222);
               setIsOpen1(false);
-              e.stopPropagation();
+              //e.stopPropagation();
               setSelect(!select);
             }}
             title={"수정"}
             dateString={dateString}
             cashbook={cashbook}
-            cashbookFinance={cashbook.cashbookFinance}
+            cashbookFinance={cashbookFinance}
             setCashbookFinance={setCashbookFinance}
             cashbookDate={cashbookDate}
             setCashbookDate={setCashbookDate}
