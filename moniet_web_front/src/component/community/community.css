@@ -47,6 +47,7 @@
 }
 
 .community-main-top {
+  margin-top: 20px;
   font-size: 24px;
   font-family: ns-eb;
   color: #010440;
@@ -145,10 +146,10 @@
 }
 
 .community-more > button {
-  height: 100%;
+  height: 80%;
   font-size: 20px;
   letter-spacing: 0.2ch;
-  background-color: #323673;
+  background-color: #151426;
 }
 
 /* communityWrite/Frm */
