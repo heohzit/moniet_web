@@ -74,7 +74,7 @@ public class CashbookService {
 		int money = cashbook.getCashbookMoney();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Calendar cal = Calendar.getInstance();
-		Calendar finalCal = Calendar.getInstance();
+		Calendar checkCal = Calendar.getInstance();
 		try {
 			Date date = sdf.parse(cashbook.getCashbookDate());	//str>date
 			cal.setTime(date);
@@ -105,9 +105,9 @@ public class CashbookService {
 		} else if(cashbookLoop == 1) {	//반복일 때
 			try {
 				Date date = sdf.parse(cashbook.getCashbookDate());
-				String finalDateStr = "2024-12-31";
-				Date finalDate = sdf.parse(finalDateStr);
-				System.out.println("finalDate: "+finalDate);
+				String checkDateStr = "2024-12-31";
+				Date checkDate = sdf.parse(checkDateStr);
+				System.out.println("checkDate: "+checkDate);
 				cal.setTime(date);
 				//최초로 들어온 날짜에 한번삽입
 				cal.add(Calendar.MONTH, 0);
@@ -117,23 +117,23 @@ public class CashbookService {
 				System.out.println("cashDate : "+cashDate);
 				//반복개월만큼 삽입
 				
-				while(date.before(finalDate)) {
+				while(date.before(checkDate)) {
 					cal.add(Calendar.MONTH, loopMonth);
 					cashDate = sdf.format(cal.getTime());
 					System.out.println("cashDate : "+cashDate);
 					cashbook.setCashbookDate(cashDate);
 					result+=cashbookDao.insertCashbook(cashbook);
 					date=cal.getTime();
-					if(date.after(finalDate)) {
+					if(date.after(checkDate)) {
 						break;
 					}
 				}
 				//성공여부 확인 위한 개월수 구하기
 				int year = Integer.parseInt(cashbook.getCashbookDate().substring(0, 4));
 				int month = Integer.parseInt(cashbook.getCashbookDate().substring(5, 7));
-				int finalYear = Integer.parseInt(finalDateStr.substring(0, 4));
-				int finalMonth = Integer.parseInt(finalDateStr.substring(5, 7));
-				int month_diff = (year-finalYear)*12+(month-finalMonth);
+				int checkYear = Integer.parseInt(checkDateStr.substring(0, 4));
+				int checkMonth = Integer.parseInt(checkDateStr.substring(5, 7));
+				int month_diff = (year-checkYear)*12+(month-checkMonth);
 				
 				int resultChk = Math.abs(month_diff/cashbook.getLoopMonth());
 				System.out.println("resultChk : "+resultChk);

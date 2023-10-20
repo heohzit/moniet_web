@@ -26,7 +26,6 @@ const CashbookDel = (props) => {
 
   const deleteCashbook = () => {
     if (checkItems.length === 0) {
-      console.log("삭제할 거 없음");
       onOpenClickHandler("삭제할 항목이 없습니다.", "info");
       return;
     } else {

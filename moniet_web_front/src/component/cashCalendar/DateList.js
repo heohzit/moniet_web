@@ -126,7 +126,6 @@ const DateList = (props) => {
         <div>
           <p className="cal-list-label">내역</p>
         </div>
-
         <CashbookWrite
           open={isOpen}
           dateString={dateString}
@@ -138,6 +137,7 @@ const DateList = (props) => {
           select={select}
           setSelect={setSelect}
           modalClass={"flex-no-end"}
+          datePick={datePick}
         />
       </div>
       <div className="cash-modal-detail date-finance">
@@ -313,7 +313,7 @@ const DateCashItem = (props) => {
             title={"수정"}
             dateString={dateString}
             cashbook={cashbook}
-            cashbookFinance={cashbook.cashbookFinance}
+            cashbookFinance={cashbookFinance}
             setCashbookFinance={setCashbookFinance}
             cashbookDate={cashbookDate}
             setCashbookDate={setCashbookDate}

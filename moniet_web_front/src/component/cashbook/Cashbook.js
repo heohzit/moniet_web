@@ -293,7 +293,7 @@ const Cashbook = (props) => {
               "합계(" +
               addComma(cashbookSum.totalCount) +
               "건) " +
-              cashbookSum.total +
+              cashbookSum.total?.toLocaleString("ko-KR") +
               "원"
             }
           />
@@ -523,7 +523,7 @@ const CashbookItem = (props) => {
             title={"수정"}
             dateString={dateString}
             cashbook={cashbook}
-            cashbookFinance={cashbook.cashbookFinance}
+            cashbookFinance={cashbookFinance}
             setCashbookFinance={setCashbookFinance}
             cashbookDate={cashbookDate}
             setCashbookDate={setCashbookDate}
