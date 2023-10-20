@@ -59,11 +59,7 @@ const SideBar = (props) => {
         setMember(res.data);
         setMemberImg(res.data.imgFile);
       })
-      .catch((res) => {
-        if (res.response.status === 403) {
-          alert("로그인 후 이용해주세요.");
-        }
-      });
+      .catch((res) => {});
   }, []);
   const LItem = ({ title, icon, selected, setSelected }) => {
     const navigate = useNavigate();

@@ -297,6 +297,19 @@
   box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
   overflow: scroll;
 }
+
+.view-list {
+  margin-bottom: 20px;
+  padding: 20px;
+  display: flex;
+  justify-content: flex-start;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+.view-list > div {
+  width: 300px;
+}
 /*
     메인 색상 (진한 순서대로)
     #151426 rgb(21, 20, 38)

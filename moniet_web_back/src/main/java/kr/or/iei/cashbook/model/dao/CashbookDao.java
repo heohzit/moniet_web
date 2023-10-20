@@ -47,14 +47,11 @@ public interface CashbookDao {
 	//오늘의 지출
 	int todaySpending(String memberId);
 
-	
-	List viewData(String memberId);
-
+	//라인차트
 	ChartData selectChart(HashMap<String, Object> param);
-
-	int spendingLine(String memberId);
-
-
+	
+	//챌린지 금액 상세 조회
+	List viewData(String memberId);
 
 
 }

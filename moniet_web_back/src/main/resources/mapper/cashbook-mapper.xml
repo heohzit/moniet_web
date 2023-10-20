@@ -167,17 +167,17 @@
 	
 	 <!--챌린지 금액 상세 조회-->
   	<select id="viewData" resultType="cashbook">
-  		select * from cashbook
-		where member_no = (select m.member_no from member m where m.member_id = #{memberId})
+  		select cb.cashbook_money,cb.cashbook_finance,ct.category_title,to_char(cb.cashbook_date, 'yyyy-mm-dd') as cashbook_date
+		from cashbook cb
+		join category_tbl ct on cb.cashbook_category = ct.category_no
+		where cb.member_no = (select m.member_no from member m where m.member_id = #{memberId})
   	</select>
   	
   	<!--라인대시보드-->
-	<select id="selectChart" resultType="chartData">
-	
-		select
-     #{month} as month,
-     nvl(sum(cashbook_money),0) as money
-from cashbook 
-where extract(year from cashbook_date) = 2023 and extract(month from cashbook_date)=#{month} and member_no=(select member_no from member where member_id=#{memberId}) and cashbook_finance=#{type}
+	<select id="selectChart" resultType="chartData">	
+		select #{month} as month,nvl(sum(cashbook_money),0) as money
+		from cashbook 
+		where extract(year from cashbook_date) = 2023 and extract(month from cashbook_date)=#{month} 
+		and member_no=(select member_no from member where member_id=#{memberId}) and cashbook_finance=#{type}
 	</select>
 </mapper>

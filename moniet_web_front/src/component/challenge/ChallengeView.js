@@ -1,6 +1,6 @@
 import { CircularProgressBar } from "@tomickigrzegorz/react-circular-progress-bar";
 import axios from "axios";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Button3 } from "../util/Buttons";
 import Swal from "sweetalert2";
@@ -12,6 +12,7 @@ const ChallengeView = () => {
   const categoryNo = location.state.categoryNo;
   const [challenge, setChallenge] = useState([]);
   const navigate = useNavigate();
+  const modalBackground = useRef();
 
   useEffect(() => {
     const token = window.localStorage.getItem("token");
@@ -67,7 +68,6 @@ const ChallengeView = () => {
       })
       .then((res) => {
         setModalData(res.data.viewData);
-        console.log(res.data.viewData);
         toggleModal();
       })
       .catch((res) => {
@@ -241,17 +241,30 @@ const ChallengeView = () => {
             현재 금액 : {currentAmount.toLocaleString()}원
           </div>
           <div>
-            <button onClick={handleViewDetailsClick}>상세보기</button>
+            <Button3 clickEvent={handleViewDetailsClick}>상세보기</Button3>
           </div>
         </div>
         {isModalVisible && (
-          <div className="challenge-modal">
-            <div className="challenge-modal-content" style={{ width: "500px" }}>
-              {modalData &&
-                modalData.map((item, index) => {
-                  return <ModalItem key={item + index} item={item} />;
-                })}
-              <button onClick={toggleModal}>닫기</button>
+          <div
+            className={"modal-container"}
+            ref={modalBackground}
+            onClick={(e) => {
+              if (e.target === modalBackground.current) {
+                setModalVisible(!isModalVisible);
+              }
+            }}
+          >
+            <div className="challenge-modal">
+              <div
+                className="challenge-modal-content"
+                style={{ width: "500px" }}
+              >
+                {modalData &&
+                  modalData.map((item, index) => {
+                    return <ModalItem key={item + index} item={item} />;
+                  })}
+                <Button3 clickEvent={toggleModal}>닫기</Button3>
+              </div>
             </div>
           </div>
         )}
@@ -275,6 +288,15 @@ const ChallengeView = () => {
 };
 const ModalItem = (props) => {
   const item = props.item;
-  return <div>{item.cashbookMoney}</div>;
+  return (
+    <div className="view-list-wrap">
+      <div className="view-list">
+        <div>{item.cashbookFinance === 1 ? "저축" : "지출"}</div>
+        <div>{item.categoryTitle}</div>
+        <div>{item.cashbookMoney.toLocaleString()}원</div>
+        <div>{item.cashbookDate}</div>
+      </div>
+    </div>
+  );
 };
 export default ChallengeView;
