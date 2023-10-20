@@ -15,7 +15,6 @@ const ChallengeWrite = () => {
   const navigate = useNavigate();
 
   const write = () => {
-    console.log(challengeCategory);
     if (
       challengeKind !== "" &&
       challengeTitle !== "" &&

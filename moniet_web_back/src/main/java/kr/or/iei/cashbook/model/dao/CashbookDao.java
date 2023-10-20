@@ -50,10 +50,10 @@ public interface CashbookDao {
 	//라인차트
 	ChartData selectChart(HashMap<String, Object> param);
 	
-	//챌린지 금액 상세 조회
+	//챌린지 금액 상세 조회(지출)
 	List viewData(String memberId, int challengeNo);
 	
-	
+	//챌린지 금액 상세 조회(저축)
 	List viewData2(String memberId, int challengeNo);
 
 

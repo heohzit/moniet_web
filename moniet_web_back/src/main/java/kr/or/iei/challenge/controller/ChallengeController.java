@@ -73,23 +73,20 @@ public class ChallengeController {
 	@PostMapping (value="/challengeLevel")
 	public int challengeLevel(@RequestAttribute String memberId) {
 		int challenge=challengeService.challengeLevel(memberId);
-		System.out.println("챌린지레벨"+challenge);
 		return challenge;
 	}
 	
-	//챌린지 금액 상세 조회
+	//챌린지 금액 상세 조회(지출)
 	@PostMapping (value="/viewData/{challengeNo}")
 	public Map viewData(@RequestAttribute String memberId,@PathVariable int challengeNo) {
 		Map map = challengeService.viewData(memberId,challengeNo);
-		System.out.println(map);
 		return map;
 	}
 	
-	//챌린지 금액 상세 조회
+	//챌린지 금액 상세 조회(저축)
 	@PostMapping (value="/viewData2/{challengeNo}")
 	public Map viewData2(@RequestAttribute String memberId,@PathVariable int challengeNo) {
 		Map map = challengeService.viewData2(memberId,challengeNo);
-		System.out.println(map);
 		return map;
 	}
 	

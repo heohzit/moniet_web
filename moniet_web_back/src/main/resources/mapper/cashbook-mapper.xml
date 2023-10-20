@@ -165,7 +165,7 @@
 		select sum(cashbook_money) from cashbook where member_no=(select member_no from member where member_id=#{memberId}) and cashbook_finance=2 and cashbook_date=TO_CHAR(SYSDATE,'YYYYMMDD')
 	</select>
 	
-	 <!--챌린지 금액 상세 조회-->
+	 <!--챌린지 금액 상세 조회(지출)-->
   	<select id="viewData" resultType="cashbook">
   		select challenge_kind,c.category_no,cb.cashbook_money, to_char(cb.cashbook_date, 'yyyy-mm-dd') as cashbook_date, ct.category_title
 		from challenge c
@@ -178,7 +178,7 @@
 		where c.challenge_no = #{challengeNo}
   	</select>
   	
-  	<!--챌린지 금액 상세 조회-->
+  	<!--챌린지 금액 상세 조회(저축)-->
   	<select id="viewData2" resultType="cashbook">
   		select challenge_kind,c.category_no,cb.cashbook_money, to_char(cb.cashbook_date, 'yyyy-mm-dd') as cashbook_date, ct.category_title
 		from challenge c

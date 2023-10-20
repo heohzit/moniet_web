@@ -29,7 +29,6 @@ const ChallengeView = () => {
             challenge.challengeResult !== 1 &&
             challenge.challengeResult !== 2
           ) {
-            console.log(res.data);
             setChallenge(res.data);
           }
         })
@@ -44,12 +43,10 @@ const ChallengeView = () => {
           },
         })
         .then((res) => {
-          console.log(res.data);
           if (
             challenge.challengeResult !== 1 &&
             challenge.challengeResult !== 2
           ) {
-            console.log(res);
             setChallenge(res.data);
           }
         })
@@ -310,7 +307,7 @@ const ModalItem = (props) => {
   return (
     <div className="view-list-wrap">
       <div className="view-list">
-        <div>{item.cashbookFinance === 1 ? "저축" : "지출"}</div>
+        <div>{item.challengeKind === 1 ? "저축" : "지출"}</div>
         <div>{item.categoryTitle}</div>
         <div>{item.cashbookMoney.toLocaleString()}원</div>
         <div>{item.cashbookDate}</div>

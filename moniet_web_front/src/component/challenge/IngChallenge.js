@@ -21,7 +21,6 @@ const IngChallenge = () => {
         },
       })
       .then((res) => {
-        console.log(res.data);
         setChallengeList(res.data.challengeList);
         const allChallenge = res.data.challengeList;
         const oneChallenge = allChallenge.slice(0, loadCount);

@@ -74,7 +74,6 @@ const ChallengeFrm = (props) => {
       })
       .then((res) => {
         setSpendingCate(res.data.spendingCategory);
-        console.log(res.data.spendingCategory);
       })
       .catch((res) => {
         console.log(res.response.status);

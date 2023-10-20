@@ -36,5 +36,6 @@ public class Cashbook {
 	private String endDate;
 	
 	private int month;
+	private int challengeKind;
 	
 }

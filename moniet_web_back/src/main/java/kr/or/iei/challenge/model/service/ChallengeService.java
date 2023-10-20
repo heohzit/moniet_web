@@ -47,7 +47,6 @@ public class ChallengeService {
 	//챌린지 상세보기(저축)
 	public Challenge selectOneChallenge2(int challengeNo,String memberId) {
 		Challenge c = challengeDao.selectOneChallenge2(challengeNo,memberId);
-		System.out.println(c);
 		return c;
 	}
 	
@@ -69,7 +68,6 @@ public class ChallengeService {
 	@Transactional
 	public int changeChallenge(Challenge c,String memberId) {
 		int result = challengeDao.changeChallenge(c);
-		System.out.println(result);
 		if(result==1) {
 			memberDao.downLevel(memberId);
 		}
@@ -93,14 +91,15 @@ public class ChallengeService {
 		return challengeDao.challengeListsByMember(memberId);
 	}
 
-	//챌린지 금액 상세 조회
+	//챌린지 금액 상세 조회(지출)
 	public Map viewData(String memberId, int challengeNo) {
 		List viewData = cashbookDao.viewData(memberId,challengeNo);
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("viewData", viewData);
 		return map;
 	}
-
+	
+	//챌린지 금액 상세 조회(저축)
 	public Map viewData2(String memberId, int challengeNo) {
 		List viewData = cashbookDao.viewData2(memberId,challengeNo);
 		HashMap<String, Object> map = new HashMap<String, Object>();
