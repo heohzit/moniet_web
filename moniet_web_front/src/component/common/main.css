@@ -46,6 +46,42 @@
   font-size: 13.5px;
   font-family: ns-b;
 }
-.main-con > img {
-  width: 100vw;
+.main-bg {
+  position: relative;
+}
+.main-text {
+  position: absolute;
+  left: 200px;
+  top: 300px;
+}
+.main-text-title {
+  width: 700px;
+  flex-wrap: wrap;
+  font-size: 54px;
+  font-family: "ns-eb";
+  font-weight: 900;
+}
+.main-text-title > span {
+  color: #323673;
+}
+.text-margin {
+  margin-bottom: 40px;
+}
+.main-text-content {
+  font-family: ns-r;
+  font-size: 24px;
+}
+.main-btn-zone {
+  display: flex;
+  justify-content: flex-start;
+}
+.main-btn-zone button {
+  width: 180px;
+  height: 56px;
+  margin-right: 15px;
+  font-size: 18px;
+  font-family: ns-b;
+}
+.main-btn-color-chg {
+  background-color: transparent;
 }
