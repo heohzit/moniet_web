@@ -454,7 +454,7 @@
 }
 
 .community-view-btns {
-  padding-top: 39px;
+  padding-top: 28px;
 }
 
 .community-view-btns div {
@@ -1206,4 +1206,33 @@
   line-height: 100px;
   padding-left: 20px;
   font-family: ns-b;
+}
+
+.modal-img-wrap {
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgb(0, 0, 0, 0.5);
+  cursor: pointer;
+}
+
+.modal-img-wrap > .modal-img {
+  position: absolute;
+  left: 25%;
+  top: 25%;
+  border-radius: 5px;
+  padding: 20px;
+  margin: 0 auto;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.modal-img-wrap > .modal-img > img {
+  width: 600px;
+  height: 600px;
+  object-fit: contain;
 }

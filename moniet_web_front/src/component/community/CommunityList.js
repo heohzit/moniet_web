@@ -188,7 +188,7 @@ const CommunityItem = (props) => {
       <div className="community-item" onClick={communityView}>
         <div className="community-item-img">
           {community.communityThumb === null ? (
-            <img src="/image/default.png" className="default-img" />
+            <img src="/image/piggy.jpg" className="default-img" />
           ) : (
             <img src={"/community/" + community.communityThumb} />
           )}
