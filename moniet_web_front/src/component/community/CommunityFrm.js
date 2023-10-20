@@ -129,7 +129,11 @@ const CommunityFrm = (props) => {
     <div className="community-frm-wrap">
       <div className="community-frm-top">
         <div className="community-thumbnail">
-          {communityImg === null ? "" : <img src={communityImg} />}
+          {communityImg === null ? (
+            <img src={"/image/piggy.jpg"} />
+          ) : (
+            <img src={communityImg} />
+          )}
         </div>
 
         <div className="community-info">
