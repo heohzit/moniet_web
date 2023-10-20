@@ -48,7 +48,7 @@
 		    JOIN MEMBER ON (COMMUNITY_WRITER = MEMBER_NO)
 		    WHERE COMMUNITY_STATUS = 1
 		    ORDER BY 1 DESC)C)
-		WHERE RNUM BETWEEN 1 AND 100
+		WHERE RNUM BETWEEN 1 AND 5
 	</select>
 	
 	<resultMap type="community" id="getCommunityList">
