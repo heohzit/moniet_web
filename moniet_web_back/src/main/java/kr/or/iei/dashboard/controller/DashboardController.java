@@ -53,22 +53,22 @@ public class DashboardController {
 	}
 	
 	//오늘의 수입
-	@PostMapping (value="todayIncome")
+	@PostMapping (value="/todayIncome")
 	public int todayIncome(@RequestAttribute String memberId) {
 		return cashbookService.todayIncome(memberId);
 	}
 	
 	//오늘의 지출
-	@PostMapping (value="todaySpending")
+	@PostMapping (value="/todaySpending")
 	public int todaySpending(@RequestAttribute String memberId) {
 		return cashbookService.todaySpending(memberId);
 	}
 	
 	//라인 차트
 	@PostMapping (value="/line")
-	public List lineDash (@RequestAttribute String memberId) {
-		List lineList = cashbookService.lineDash(memberId);
-		return lineList;
+	public Map lineDash (@RequestAttribute String memberId) {
+		Map map = cashbookService.lineDash(memberId);
+		return map;
 	}
 
 }

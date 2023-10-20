@@ -2,6 +2,7 @@ package kr.or.iei.cashbook.model.service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -16,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import kr.or.iei.cashbook.model.dao.CashbookDao;
 import kr.or.iei.cashbook.model.vo.Cashbook;
 import kr.or.iei.cashbook.model.vo.Category;
+import kr.or.iei.cashbook.model.vo.ChartData;
 import kr.or.iei.challenge.model.dao.ChallengeDao;
 import kr.or.iei.member.model.dao.MemberDao;
 
@@ -219,8 +221,24 @@ public class CashbookService {
 	}
 	
 	//라인 차트
-	public List lineDash(String memberId) {
-		List list = cashbookDao.lineDash(memberId);
-		return list;
+	public Map lineDash(String memberId) {
+		HashMap<String, Object> param = new HashMap<String, Object>();
+		param.put("memberId", memberId);
+		ArrayList<ChartData> incomeList = new ArrayList<ChartData>();
+		ArrayList<ChartData> spendList = new ArrayList<ChartData>();
+		for(int i=1;i<13;i++) {
+			param.put("month",i);
+			param.put("type",1);
+			ChartData income = cashbookDao.selectChart(param);
+			incomeList.add(income);
+			param.put("type",2);
+			ChartData spend = cashbookDao.selectChart(param);
+			spendList.add(spend);			
+		}
+		HashMap<String, List> map = new HashMap<String, List>();
+		map.put("incomeList",incomeList);
+		map.put("spendList",spendList);
+		return map;
 	}
+
 }

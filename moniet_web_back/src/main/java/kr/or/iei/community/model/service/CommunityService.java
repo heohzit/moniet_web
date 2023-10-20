@@ -337,8 +337,9 @@ public class CommunityService {
 	
 	//인기커뮤니티
 	public Community firstCommunity() {
-		Community c = communityDao.firstCommunity();
-		return c;
+//		Community c = communityDao.firstCommunity();
+//		return c;
+		return null;
 	}
 
 

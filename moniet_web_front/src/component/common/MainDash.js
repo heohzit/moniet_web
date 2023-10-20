@@ -96,33 +96,11 @@ const MainDash = (props) => {
       legend: {
         position: "top",
       },
-      title: {
-        display: true,
-        text: "Chart.js Line Chart",
-      },
     },
   };
   const [data, setData] = useState({
-    labels: [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec",
-    ],
-    datasets: [
-      {
-        label: "Dataset 1",
-        data: [],
-      },
-    ],
+    labels: [],
+    datasets: [{}],
   });
   useEffect(() => {
     const token = window.localStorage.getItem("token");
@@ -133,18 +111,32 @@ const MainDash = (props) => {
         },
       })
       .then((res) => {
+        console.log(res.data);
         setData({
-          labels: [res.data],
+          labels: [
+            "Jan",
+            "Feb",
+            "Mar",
+            "Apr",
+            "May",
+            "Jun",
+            "Jul",
+            "Aug",
+            "Sep",
+            "Oct",
+            "Nov",
+            "Dec",
+          ],
           datasets: [
             {
-              label: "Dataset 1",
-
+              label: "수입",
+              data: res.data.incomeList.map((item) => item.money),
               borderColor: "rgb(255, 99, 132)",
               backgroundColor: "rgba(255, 99, 132, 0.5)",
             },
             {
-              label: "Dataset 2",
-
+              label: "지출",
+              data: res.data.spendList.map((item) => item.money),
               borderColor: "rgb(53, 162, 235)",
               backgroundColor: "rgba(53, 162, 235, 0.5)",
             },
@@ -237,27 +229,14 @@ const MainDash = (props) => {
                 alignItems="center"
               >
                 <Box>
-                  <Typography
-                    variant="h5"
-                    fontWeight="600"
-                    color={colors.grey[100]}
-                  >
-                    1년 차트..
+                  <Typography variant="h5" fontWeight="600">
+                    2023년 한눈에 보기
+                  </Typography>
+                  <div className="lineChart">
                     <Line data={data} options={options} />
-                  </Typography>
-                  <Typography
-                    variant="h5"
-                    fontWeight="600"
-                    color={colors.greenAccent[500]}
-                  >
-                    $58,373,698
-                  </Typography>
-                </Box>
-                <Box>
-                  <IconButton></IconButton>
+                  </div>
                 </Box>
               </Box>
-              <Box height="250px" m="-20px 0 0 0"></Box>
             </Box>
           </Grid>
           <Grid xs={12} sm={12} md={6}>
