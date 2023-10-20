@@ -217,9 +217,7 @@ const CommunityBoardItem = (props) => {
                   return <BoardTypesItem key={"types" + index} types={types} />;
                 })
               : ""}
-            {member &&
-            member.memberNo == board.communityBoardWriter &&
-            isParti != 0 ? (
+            {member && member.memberNo == board.communityBoardWriter ? (
               <>
                 <div className="board-item-update">
                   <span class="material-icons" onClick={updateBoard}>
