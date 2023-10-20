@@ -94,8 +94,15 @@ public class ChallengeService {
 	}
 
 	//챌린지 금액 상세 조회
-	public Map viewData(String memberId) {
-		List viewData = cashbookDao.viewData(memberId);
+	public Map viewData(String memberId, int challengeNo) {
+		List viewData = cashbookDao.viewData(memberId,challengeNo);
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("viewData", viewData);
+		return map;
+	}
+
+	public Map viewData2(String memberId, int challengeNo) {
+		List viewData = cashbookDao.viewData2(memberId,challengeNo);
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("viewData", viewData);
 		return map;

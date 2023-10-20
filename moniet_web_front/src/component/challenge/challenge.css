@@ -310,6 +310,10 @@
 .view-list > div {
   width: 300px;
 }
+.challenge-view-btn {
+  float: right;
+  cursor: pointer;
+}
 /*
     메인 색상 (진한 순서대로)
     #151426 rgb(21, 20, 38)

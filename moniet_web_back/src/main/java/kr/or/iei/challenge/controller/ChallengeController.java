@@ -78,9 +78,17 @@ public class ChallengeController {
 	}
 	
 	//챌린지 금액 상세 조회
-	@PostMapping (value="/viewData")
-	public Map viewData(@RequestAttribute String memberId) {
-		Map map = challengeService.viewData(memberId);
+	@PostMapping (value="/viewData/{challengeNo}")
+	public Map viewData(@RequestAttribute String memberId,@PathVariable int challengeNo) {
+		Map map = challengeService.viewData(memberId,challengeNo);
+		System.out.println(map);
+		return map;
+	}
+	
+	//챌린지 금액 상세 조회
+	@PostMapping (value="/viewData2/{challengeNo}")
+	public Map viewData2(@RequestAttribute String memberId,@PathVariable int challengeNo) {
+		Map map = challengeService.viewData2(memberId,challengeNo);
 		System.out.println(map);
 		return map;
 	}

@@ -167,10 +167,27 @@
 	
 	 <!--챌린지 금액 상세 조회-->
   	<select id="viewData" resultType="cashbook">
-  		select cb.cashbook_money,cb.cashbook_finance,ct.category_title,to_char(cb.cashbook_date, 'yyyy-mm-dd') as cashbook_date
-		from cashbook cb
-		join category_tbl ct on cb.cashbook_category = ct.category_no
-		where cb.member_no = (select m.member_no from member m where m.member_id = #{memberId})
+  		select challenge_kind,c.category_no,cb.cashbook_money, to_char(cb.cashbook_date, 'yyyy-mm-dd') as cashbook_date, ct.category_title
+		from challenge c
+		left join category_tbl ct on (c.category_no = ct.category_no)
+		inner join cashbook cb on (
+		    cb.member_no = (select member_no from member where member_id = #{memberId})
+		    and cb.cashbook_finance = c.challenge_kind
+		    and c.category_no = cb.cashbook_category
+		    and cb.cashbook_date between challenge_start and challenge_end)
+		where c.challenge_no = #{challengeNo}
+  	</select>
+  	
+  	<!--챌린지 금액 상세 조회-->
+  	<select id="viewData2" resultType="cashbook">
+  		select challenge_kind,c.category_no,cb.cashbook_money, to_char(cb.cashbook_date, 'yyyy-mm-dd') as cashbook_date, ct.category_title
+		from challenge c
+		left join category_tbl ct on (c.category_no = ct.category_no)
+		inner join cashbook cb on (
+		    cb.member_no = (select member_no from member where member_id = #{memberId})
+		    and c.challenge_no = cb.challenge_no
+		    and cb.cashbook_date between challenge_start and challenge_end)
+		where c.challenge_no = #{challengeNo}
   	</select>
   	
   	<!--라인대시보드-->

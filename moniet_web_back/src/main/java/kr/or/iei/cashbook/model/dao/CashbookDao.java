@@ -51,7 +51,10 @@ public interface CashbookDao {
 	ChartData selectChart(HashMap<String, Object> param);
 	
 	//챌린지 금액 상세 조회
-	List viewData(String memberId);
+	List viewData(String memberId, int challengeNo);
+	
+	
+	List viewData2(String memberId, int challengeNo);
 
 
 }

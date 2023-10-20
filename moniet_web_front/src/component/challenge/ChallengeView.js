@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Button3 } from "../util/Buttons";
 import Swal from "sweetalert2";
+import FactCheckIcon from "@mui/icons-material/FactCheck";
 
 //챌린지 상세보기
 const ChallengeView = () => {
@@ -60,19 +61,35 @@ const ChallengeView = () => {
   const [modalData, setModalData] = useState([]);
   const openModalWithData = () => {
     const token = window.localStorage.getItem("token");
-    axios
-      .post("/challenge/viewData", null, {
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      })
-      .then((res) => {
-        setModalData(res.data.viewData);
-        toggleModal();
-      })
-      .catch((res) => {
-        console.log(res.response.status);
-      });
+    if (categoryNo !== 0) {
+      axios
+        .post("/challenge/viewData/" + challenge.challengeNo, null, {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        })
+        .then((res) => {
+          setModalData(res.data.viewData);
+          toggleModal();
+        })
+        .catch((res) => {
+          console.log(res.response.status);
+        });
+    } else {
+      axios
+        .post("/challenge/viewData2/" + challenge.challengeNo, null, {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        })
+        .then((res) => {
+          setModalData(res.data.viewData);
+          toggleModal();
+        })
+        .catch((res) => {
+          console.log(res.response.status);
+        });
+    }
   };
   const [isModalVisible, setModalVisible] = useState(false);
   const toggleModal = () => {
@@ -240,8 +257,8 @@ const ChallengeView = () => {
           <div className="currentAmount">
             현재 금액 : {currentAmount.toLocaleString()}원
           </div>
-          <div>
-            <Button3 clickEvent={handleViewDetailsClick}>상세보기</Button3>
+          <div className="challenge-view-btn" style={{ width: "300px" }}>
+            <FactCheckIcon onClick={handleViewDetailsClick}></FactCheckIcon>
           </div>
         </div>
         {isModalVisible && (
@@ -263,7 +280,9 @@ const ChallengeView = () => {
                   modalData.map((item, index) => {
                     return <ModalItem key={item + index} item={item} />;
                   })}
-                <Button3 clickEvent={toggleModal}>닫기</Button3>
+                <div className="challenge-btn-box">
+                  <Button3 clickEvent={toggleModal} text="닫기"></Button3>
+                </div>
               </div>
             </div>
           </div>

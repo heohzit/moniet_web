@@ -375,5 +375,6 @@
 		select c.* , m.member_id from community  c
 		JOIN MEMBER m ON (COMMUNITY_WRITER = MEMBER_NO)
 		where community_parti =(select max(community_parti) from community)
+		and community_no =(select max(community_no) from community)
 	</select>
 </mapper>

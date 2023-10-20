@@ -193,6 +193,7 @@ const MainDash = (props) => {
       })
       .then((res) => {
         setFirstCommunity(res.data);
+        console.log(res.data);
       })
       .catch((res) => {
         console.log(res.response.status);
