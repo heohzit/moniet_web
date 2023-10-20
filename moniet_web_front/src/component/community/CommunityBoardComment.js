@@ -48,7 +48,7 @@ const CommunityBoardComment = (props) => {
       </div>
 
       {isParti === 0 && member.memberNo != community.communityWriter ? (
-        ""
+        <span className="warningMsg">커뮤니티 참여 후 이용가능합니다.</span>
       ) : (
         <>
           <div className="board-item-comment-write-wrap">

@@ -1200,3 +1200,9 @@
   transition: all 0.2s linear;
   box-sizing: border-box;
 }
+
+.warningMsg {
+  line-height: 100px;
+  padding-left: 20px;
+  font-family: ns-b;
+}
