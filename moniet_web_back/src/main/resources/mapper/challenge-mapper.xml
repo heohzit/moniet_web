@@ -121,4 +121,5 @@
   		select challenge_no, challenge_title, challenge_start, challenge_end from CHALLENGE where member_no2 = (select member_no from member where member_id=#{memberId}) and challenge_result=0 and CHALLENGE_KIND=1 and (sysdate >= challenge_start and sysdate <= challenge_end )
   	]]>
   	</select>
+  	
 </mapper>

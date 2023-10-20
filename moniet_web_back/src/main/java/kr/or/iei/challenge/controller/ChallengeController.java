@@ -77,4 +77,13 @@ public class ChallengeController {
 		return challenge;
 	}
 	
+	//챌린지 금액 상세 조회
+	@PostMapping (value="/viewData")
+	public Map viewData(@RequestAttribute String memberId) {
+		Map map = challengeService.viewData(memberId);
+		System.out.println(map);
+		return map;
+	}
+	
+	
 }

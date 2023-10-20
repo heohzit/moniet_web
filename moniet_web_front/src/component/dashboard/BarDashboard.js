@@ -156,4 +156,5 @@ const BarDashboard = () => {
     </div>
   );
 };
+
 export default BarDashboard;

@@ -182,6 +182,7 @@ const ChallengeFrm = (props) => {
                   keyUpEvent={dataOnlyNum}
                   onChange={(e) => onChangePoints(e)}
                   value={addComma(challengeAmount) || ""}
+                  style={{ width: "280px" }}
                 ></input>
               </td>
             </tr>
