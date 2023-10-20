@@ -327,7 +327,7 @@
 		    FROM COMMUNITY
 		    JOIN MEMBER ON (COMMUNITY_WRITER = MEMBER_NO)
 		    ORDER BY 1 DESC)C)
-		WHERE RNUM BETWEEN 1 AND 100
+		WHERE RNUM BETWEEN #{start} AND #{end}
 	</select>
 	
 	<delete id="deleteCommunityType">
@@ -363,4 +363,7 @@
 		update community set community_parti = community_parti-1 where community_no = #{communityNo}
 	</update>
 	
+	<select id="totalCount" resultType="int">
+		select count(*) from community
+	</select>
 </mapper>
