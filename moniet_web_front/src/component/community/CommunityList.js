@@ -43,6 +43,10 @@ const CommuintyList = (props) => {
 
   const searchCommunity = () => {};
 
+  const moreList = () => {
+    alert("확인");
+  };
+
   return (
     <div>
       {/* {isLogin ? ( */}
@@ -83,7 +87,7 @@ const CommuintyList = (props) => {
       </div>
 
       <div className="community-more">
-        <Button2 text="더보기" clickEvent={""} />
+        <Button2 text="더보기" clickEvent={moreList} />
       </div>
     </div>
   );
