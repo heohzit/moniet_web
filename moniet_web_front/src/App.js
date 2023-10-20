@@ -102,7 +102,15 @@ function App() {
                     <MemberMain setIsLogin={setIsLogin} isLogin={isLogin} />
                   }
                 />
-                <Route path="*" element={<DashboardMain />} />
+                <Route
+                  path="*"
+                  element={
+                    <MainDash
+                      isLogin={isLogin}
+                      setIsLogin={setIsLogin}
+                    ></MainDash>
+                  }
+                ></Route>
               </Routes>
             </div>
           </>
