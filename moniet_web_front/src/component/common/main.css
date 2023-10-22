@@ -47,11 +47,21 @@
   font-family: ns-b;
 }
 .main-bg {
+  background-color: #6a6da6;
+  height: 100vh;
   position: relative;
+}
+.main-bg-img {
+  position: absolute;
+  left: 900px;
+  top: 250px;
+}
+.main-bg-img > img {
+  width: 1200px;
 }
 .main-text {
   position: absolute;
-  left: 200px;
+  left: 300px;
   top: 300px;
 }
 .main-text-title {
@@ -62,7 +72,7 @@
   font-weight: 900;
 }
 .main-text-title > span {
-  color: #323673;
+  color: #010440;
 }
 .text-margin {
   margin-bottom: 40px;
