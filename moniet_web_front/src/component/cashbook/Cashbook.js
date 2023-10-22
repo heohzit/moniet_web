@@ -213,7 +213,7 @@ const Cashbook = (props) => {
   };
 
   return (
-    <div>
+    <div className="cashbook-wrap">
       <div className="date-range-icon">
         <PrevMonth
           dateRange={dateRange}
