@@ -59,12 +59,7 @@ const PieDashboard = () => {
   ];
   const [data, setData] = useState({
     labels: [],
-    datasets: [
-      {
-        label: "Dataset 1",
-        data: [],
-      },
-    ],
+    datasets: [],
   });
   const cashbook = {
     month: month,

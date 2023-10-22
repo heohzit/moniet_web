@@ -15,6 +15,7 @@ import FeedIcon from "@mui/icons-material/Feed";
 import PersonIcon from "@mui/icons-material/Person";
 import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
 import PieChartOutlineOutlinedIcon from "@mui/icons-material/PieChartOutlineOutlined";
+
 import axios from "axios";
 const tokens = () => ({
   grey: {
@@ -22,6 +23,39 @@ const tokens = () => ({
   },
   primary: {
     400: "#fff",
+  },
+  redAccent: {
+    100: "#2c100f",
+    200: "#58201e",
+    300: "#832f2c",
+    400: "#af3f3b",
+    500: "#db4f4a",
+    600: "#e2726e",
+    700: "#e99592",
+    800: "#f1b9b7",
+    900: "#f8dcdb",
+  },
+  blueAccent: {
+    100: "#151632",
+    200: "#2a2d64",
+    300: "#3e4396",
+    400: "#535ac8",
+    500: "#6870fa",
+    600: "#868dfb",
+    700: "#a4a9fc",
+    800: "#c3c6fd",
+    900: "#e1e2fe",
+  },
+  greenAccent: {
+    100: "#0f2922",
+    200: "#1e5245",
+    300: "#2e7c67",
+    400: "#3da58a",
+    500: "#4cceac",
+    600: "#70d8bd",
+    700: "#94e2cd",
+    800: "#b7ebde",
+    900: "#dbf5ee",
   },
 });
 
@@ -32,8 +66,8 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
       <MenuItem
         active={selected === title}
         style={{
-          color: "#fff",
-          backgroundColor: "#010440",
+          backgroundColor: selected === title ? "#fff" : "#010440",
+          color: selected === title ? "#010440" : "#fff",
           fontWeight: "900",
         }}
         onClick={() => setSelected(title)}
@@ -95,7 +129,10 @@ const SideBar = (props) => {
       }}
     >
       <Sidebar collapsed={isCollapsed}>
-        <Menu iconShape="square" style={{ backgroundColor: "#010440" }}>
+        <Menu
+          iconShape="square"
+          style={{ backgroundColor: "#010440", height: "1000px" }}
+        >
           <MenuItem
             onClick={() => setIsCollapsed(!isCollapsed)}
             icon={isCollapsed ? <MenuOutlinedIcon /> : undefined}

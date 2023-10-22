@@ -66,6 +66,7 @@ const ChallengeView = () => {
           },
         })
         .then((res) => {
+          console.log(res.data);
           setModalData(res.data.viewData);
           toggleModal();
         })
@@ -80,6 +81,7 @@ const ChallengeView = () => {
           },
         })
         .then((res) => {
+          console.log(res.data);
           setModalData(res.data.viewData);
           toggleModal();
         })
@@ -255,7 +257,11 @@ const ChallengeView = () => {
             현재 금액 : {currentAmount.toLocaleString()}원
           </div>
           <div className="challenge-view-btn" style={{ width: "300px" }}>
-            <FactCheckIcon onClick={handleViewDetailsClick}></FactCheckIcon>
+            <FactCheckIcon
+              onClick={handleViewDetailsClick}
+              style={{ height: "50px", width: "50px" }}
+            ></FactCheckIcon>
+            내역보기
           </div>
         </div>
         {isModalVisible && (
