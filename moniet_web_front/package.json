@@ -26,6 +26,7 @@
     "quill-image-resize-module-react": "^3.0.0",
     "react": "^18.2.0",
     "react-chartjs-2": "^5.2.0",
+    "react-countup": "^6.4.2",
     "react-date-range": "^1.4.0",
     "react-dom": "^18.2.0",
     "react-pro-sidebar": "^1.1.0-alpha.1",

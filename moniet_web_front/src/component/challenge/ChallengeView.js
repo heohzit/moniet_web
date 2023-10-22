@@ -259,16 +259,16 @@ const ChallengeView = () => {
           </div>
         </div>
         {isModalVisible && (
-          <div
-            className={"modal-container"}
-            ref={modalBackground}
-            onClick={(e) => {
-              if (e.target === modalBackground.current) {
-                setModalVisible(!isModalVisible);
-              }
-            }}
-          >
-            <div className="challenge-modal">
+          <div className="challenge-modal">
+            <div
+              className={"modal-container"}
+              ref={modalBackground}
+              onClick={(e) => {
+                if (e.target === modalBackground.current) {
+                  setModalVisible(!isModalVisible);
+                }
+              }}
+            >
               <div
                 className="challenge-modal-content"
                 style={{ width: "500px" }}

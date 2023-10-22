@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import CountUp from "react-countup";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -25,6 +26,7 @@ ChartJS.register(
   Tooltip,
   Legend
 );
+
 const tokens = () => ({
   grey: {
     100: "#141414",
@@ -59,30 +61,7 @@ const tokens = () => ({
     800: "#b7ebde",
     900: "#dbf5ee",
   },
-  redAccent: {
-    100: "#2c100f",
-    200: "#58201e",
-    300: "#832f2c",
-    400: "#af3f3b",
-    500: "#db4f4a",
-    600: "#e2726e",
-    700: "#e99592",
-    800: "#f1b9b7",
-    900: "#f8dcdb",
-  },
-  blueAccent: {
-    100: "#151632",
-    200: "#2a2d64",
-    300: "#3e4396",
-    400: "#535ac8",
-    500: "#6870fa",
-    600: "#868dfb",
-    700: "#a4a9fc",
-    800: "#c3c6fd",
-    900: "#e1e2fe",
-  },
 });
-
 const MainDash = (props) => {
   const navigate = useNavigate();
   const isLogin = props.isLogin;
@@ -208,40 +187,39 @@ const MainDash = (props) => {
       Swal.fire("이용 제한", "로그인 후 이용해주시기 바랍니다.", "info");
     }
   };
+
   return (
     <Box display="flex" flexDirection="column" alignItems="center" mt="25px">
       <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
         <Grid
-          xs={12}
-          sm={12}
-          md={8}
-          lg={8}
+          xs={15}
+          sm={15}
+          md={11}
+          lg={11}
           container
           rowSpacing={1}
           columnSpacing={{ xs: 1, sm: 2, md: 3 }}
         >
-          <Grid xs={12}>
-            <Box backgroundColor={colors.primary[400]}>
+          <div className="maindashboard-title">DASHBOARD</div>
+          <Grid xs={15}>
+            <Box backgroundColor={colors.primary[400]} p="20px">
+              <Typography variant="h5" fontWeight="600">
+                2023년 한눈에 보기
+              </Typography>
               <Box
-                mt="25px"
-                p="0 30px"
                 display="flex"
-                justifyContent="space-between"
+                flexDirection="column"
                 alignItems="center"
+                mt="25px"
               >
-                <Box>
-                  <Typography variant="h5" fontWeight="600">
-                    2023년 한눈에 보기
-                  </Typography>
-                  <div className="lineChart">
-                    <Line data={data} options={options} />
-                  </div>
-                </Box>
+                <div className="lineChart">
+                  <Line data={data} options={options} />
+                </div>
               </Box>
             </Box>
           </Grid>
           <Grid xs={12} sm={12} md={6}>
-            <Box backgroundColor={colors.primary[400]} p="30px">
+            <Box backgroundColor={colors.primary[400]} p="20px">
               <Typography variant="h5" fontWeight="600">
                 오늘의 수입
               </Typography>
@@ -249,23 +227,21 @@ const MainDash = (props) => {
                 display="flex"
                 flexDirection="column"
                 alignItems="center"
-                mt="25px"
+                mt="15px"
               >
                 <Typography
-                  variant="h5"
-                  color={colors.greenAccent[500]}
+                  variant="h4"
+                  color="#323673"
+                  fontWeight="800"
                   sx={{ mt: "15px" }}
                 >
-                  {todayIncome.toLocaleString()}원
-                </Typography>
-                <Typography>
-                  Includes extra misc expenditures and costs
+                  <CountUp end={todayIncome} />원
                 </Typography>
               </Box>
             </Box>
           </Grid>
           <Grid xs={12} sm={12} md={6}>
-            <Box backgroundColor={colors.primary[400]} p="30px">
+            <Box backgroundColor={colors.primary[400]} p="20px">
               <Typography variant="h5" fontWeight="600">
                 오늘의 지출
               </Typography>
@@ -273,23 +249,21 @@ const MainDash = (props) => {
                 display="flex"
                 flexDirection="column"
                 alignItems="center"
-                mt="25px"
+                mt="15px"
               >
                 <Typography
-                  variant="h5"
-                  color={colors.greenAccent[500]}
+                  variant="h4"
+                  color="#323673"
+                  fontWeight="800"
                   sx={{ mt: "15px" }}
                 >
-                  {todaySpending.toLocaleString()}원
-                </Typography>
-                <Typography>
-                  Includes extra misc expenditures and costs
+                  <CountUp end={todaySpending} />원
                 </Typography>
               </Box>
             </Box>
           </Grid>
           <Grid xs={12}>
-            <Box backgroundColor={colors.primary[400]} padding="30px">
+            <Box backgroundColor={colors.primary[400]} padding="20px">
               <Typography
                 variant="h5"
                 fontWeight="600"

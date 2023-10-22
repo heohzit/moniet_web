@@ -21,11 +21,11 @@
   width: 100%;
 }
 .my-title {
-  font-size: 28px;
-  font-family: ns-b;
-  text-align: center;
-  padding-bottom: 30px;
+  font-size: 24px;
+  font-family: ns-eb;
   color: #010440;
+  margin-top: 20px;
+  margin-bottom: 40px;
 }
 
 /* 비밀번호 확인 */

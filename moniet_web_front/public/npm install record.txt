@@ -32,3 +32,6 @@ npm install file-saver --save bower install file-saver      23.10.16
 //풀캘린더
 npm install --save @fullcalendar/react @fullcalendar/core @fullcalendar/daygrid     23.10.16
 npm install @fullcalendar/interaction       23-10-17 >> 한 번에 설치 안되면 npm update해주세요....
+
+//대시보드 애니메이션
+npm i react-countup   23.10.22

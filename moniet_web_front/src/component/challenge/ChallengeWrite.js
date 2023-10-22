@@ -20,7 +20,10 @@ const ChallengeWrite = () => {
       challengeTitle !== "" &&
       challengeStart !== "" &&
       challengeEnd !== "" &&
-      challengeAmount !== ""
+      challengeAmount !== "" &&
+      (challengeKind === 1
+        ? challengeCategory === ""
+        : challengeCategory !== "")
     ) {
       Swal.fire({
         text: "머니챌린지는 수정이 불가능합니다. 만드시겠습니까?",

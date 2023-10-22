@@ -97,6 +97,12 @@ footer {
   background-color: #f0f1f2;
 }
 .lineChart {
-  width: 500px;
+  width: 600px;
   height: 300px;
+}
+.maindashboard-title {
+  font-size: 24px;
+  font-family: ns-eb;
+  color: #010440;
+  margin-bottom: 20px;
 }
