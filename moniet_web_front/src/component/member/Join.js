@@ -83,7 +83,7 @@ const Join = () => {
   const idCheck = () => {
     const idReg = /^[a-zA-Z0-9]{4,8}$/;
     if (!idReg.test(memberId)) {
-      setCheckIdMsg("영문/숫자를 조합하여 4~8글자를 입력해주세요.");
+      setCheckIdMsg("영문/숫자로 4~8글자를 입력해주세요.");
     } else {
       axios
         .get("/member/checkId/", { params: { memberId: memberId } })
@@ -118,9 +118,9 @@ const Join = () => {
     }
   };
   const nameCheck = () => {
-    const nameReg = /^[가-힣]{2,4}$/;
+    const nameReg = /^[가-힣]{2,}$/;
     if (!nameReg.test(memberName)) {
-      setCheckNameMsg("한글 2~4글자를 입력해주세요.");
+      setCheckNameMsg("한글로 2글자 이상 입력해주세요.");
     } else {
       setCheckNameMsg("");
     }
