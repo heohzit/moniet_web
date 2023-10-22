@@ -56,7 +56,21 @@ const CommuintyList = (props) => {
     navigate("write");
   };
 
-  const searchCommunity = () => {};
+  const searchCommunity = () => {
+    const searchType = document.querySelector(".community-search-box > select");
+    const searchValue = document.querySelector(".community-search-box input");
+
+    if (searchValue.value == "") {
+      alert("검색어를 입력해주세요.");
+    } else {
+      navigate("/community/searchCommunity", {
+        state: {
+          searchType: searchType.value,
+          searchValue: searchValue.value,
+        },
+      });
+    }
+  };
 
   const moreList = () => {
     console.log(reqPage);
@@ -65,11 +79,17 @@ const CommuintyList = (props) => {
     // const endIndex = startIndex + numperPage;
   };
 
+  const onCheckEnter = (e) => {
+    if (e.key === "Enter") {
+      searchCommunity();
+    }
+  };
+
   return (
     <div>
       {/* {isLogin ? ( */}
       <div className="community-top-wrap">
-        <div className="community-search-box">
+        <div className="community-search-box" onKeyDown={onCheckEnter}>
           <Select />
           <ListInputWrap
             data={communityTitle}
@@ -245,7 +265,8 @@ const ListInputWrap = (props) => {
     <div className="list-input-wrap">
       <div>
         <div className="input">
-          <Input data={data} setData={setData} type={type} content={content} />
+          <input type="text" maxLength={35} />
+          {/* <Input data={data} setData={setData} type={type} content={content} /> */}
         </div>
       </div>
     </div>

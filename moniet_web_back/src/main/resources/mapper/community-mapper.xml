@@ -376,4 +376,101 @@
 		JOIN MEMBER m ON (COMMUNITY_WRITER = MEMBER_NO)
 		where community_no =(select max(community_no) from community)
 	</select>
+	
+	<select id="searchCoummunityByTitle" resultMap="getSearchList1">
+		select * from 
+    (select rownum as snum, s.* from
+        ((select 
+                COMMUNITY_NO,
+		        COMMUNITY_TITLE,
+                COMMUNITY_SUBTITLE,
+                COMMUNITY_WRITER,
+                MEMBER_NO,
+                MEMBER_ID,
+                MEMBER_EMAIL,
+                COMMUNITY_CONTENT,
+                TO_CHAR(COMMUNITY_DATE, 'YYYY-MM-DD') AS COMMUNITY_DATE,
+                COMMUNITY_THUMB,
+		        COMMUNITY_STATUS,
+		        COMMUNITY_PARTI
+        from 
+            (select * from 
+                (select rownum as rnum, n.* from
+                    (select * from community order by 1 desc)n) 
+                    JOIN MEMBER ON (COMMUNITY_WRITER = MEMBER_NO)
+                    where community_title like ('%'||#{searchValue}||'%') and community_status = 1))s))
+	</select>
+	
+	<resultMap type="community" id="getSearchList1">
+		<result column="community_no" property="communityNo" />
+		<result column="community_title" property="communityTitle" />
+		<result column="community_subtitle" property="communitySubTitle" />
+		<result column="community_writer" property="communityWriter" />
+		<result column="member_no" property="memberNo" />
+		<result column="member_id" property="memberId" />
+		<result column="member_email" property="memberEmail" />
+		<result column="community_content" property="communityContent" />
+		<result column="community_date" property="communityDate" />
+		<result column="community_thumb" property="communityThumb" />
+		<result column="community_status" property="communityStatus" />
+		<result column="community_parti" property="communityParti" />
+		
+		<collection 
+			property="typeList"
+			select="selectOneCommunityType"
+			column="community_no"
+			javaType="java.util.List"
+			ofType="communityType"
+		/>
+	</resultMap>
+	
+	
+	<select id="searchCoummunityByWriter" resultMap="getSearchList2">
+		<!-- select * from (select rownum as snum, s.* from ((select * from (select * from (select rownum as rnum, n.* from(select * from community order by 1 desc)n) join member on (community_writer = member_no) where member_id like ('%'||#{searchValue}||'%') and community_status = 1))s)) -->
+		select * from 
+    (select rownum as snum, s.* from
+        ((select 
+                COMMUNITY_NO,
+		        COMMUNITY_TITLE,
+                COMMUNITY_SUBTITLE,
+                COMMUNITY_WRITER,
+                MEMBER_NO,
+                MEMBER_ID,
+                MEMBER_EMAIL,
+                COMMUNITY_CONTENT,
+                TO_CHAR(COMMUNITY_DATE, 'YYYY-MM-DD') AS COMMUNITY_DATE,
+                COMMUNITY_THUMB,
+		        COMMUNITY_STATUS,
+		        COMMUNITY_PARTI
+        from 
+            (select * from 
+                (select rownum as rnum, n.* from
+                    (select * from community order by 1 desc)n) 
+                    JOIN MEMBER ON (COMMUNITY_WRITER = MEMBER_NO)
+                    where member_id like ('%'||#{searchValue}||'%') and community_status = 1))s))
+	</select>
+	
+	<resultMap type="community" id="getSearchList2">
+		<result column="community_no" property="communityNo" />
+		<result column="community_title" property="communityTitle" />
+		<result column="community_subtitle" property="communitySubTitle" />
+		<result column="community_writer" property="communityWriter" />
+		<result column="member_no" property="memberNo" />
+		<result column="member_id" property="memberId" />
+		<result column="member_email" property="memberEmail" />
+		<result column="community_content" property="communityContent" />
+		<result column="community_date" property="communityDate" />
+		<result column="community_thumb" property="communityThumb" />
+		<result column="community_status" property="communityStatus" />
+		<result column="community_parti" property="communityParti" />
+		
+		<collection 
+			property="typeList"
+			select="selectOneCommunityType"
+			column="community_no"
+			javaType="java.util.List"
+			ofType="communityType"
+		/>
+	</resultMap>
+	
 </mapper>

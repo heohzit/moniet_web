@@ -341,6 +341,14 @@ public class CommunityService {
 		return c;
 	}
 
-
+	public List searchCoummunity(int searchType, String searchValue) {
+		if (searchType == 1) {
+			List list = communityDao.searchCoummunityByTitle(searchValue);
+			return list;
+		} else {
+			List list = communityDao.searchCoummunityByWriter(searchValue);
+			return list;
+		}
+	}
 
 }

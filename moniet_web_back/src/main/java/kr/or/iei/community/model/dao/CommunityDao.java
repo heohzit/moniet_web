@@ -65,7 +65,9 @@ public interface CommunityDao {
 
 	int deleteCommunity(int communityNo);
 	
-	
+	List searchCoummunityByTitle(String searchValue);
+
+	List searchCoummunityByWriter(String searchValue);
 	
 	
 	
@@ -97,6 +99,8 @@ public interface CommunityDao {
 	Community firstCommunity();
 
 	int communityTotalCount();
+
+
 
 
 
