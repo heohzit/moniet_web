@@ -97,7 +97,7 @@ const CommuintyList = (props) => {
             type="type"
             content="searchBox"
           />
-          <span class="material-icons search-btn" onClick={searchCommunity}>
+          <span className="material-icons search-btn" onClick={searchCommunity}>
             search
           </span>
         </div>
@@ -241,11 +241,14 @@ const CommunityItem = (props) => {
         </div>
         <div className="heart-btns">
           {community.isWish === 0 ? (
-            <span class="material-icons ab-btn1" onClick={communityLike}>
+            <span className="material-icons ab-btn1" onClick={communityLike}>
               favorite_border
             </span>
           ) : (
-            <span class="material-icons ab-btn2" onClick={communityRemoveLike}>
+            <span
+              className="material-icons ab-btn2"
+              onClick={communityRemoveLike}
+            >
               favorite
             </span>
           )}

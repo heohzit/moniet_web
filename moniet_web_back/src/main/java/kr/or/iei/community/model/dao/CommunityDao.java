@@ -104,7 +104,7 @@ public interface CommunityDao {
 
 	int modifyBoardFile(CommunityBoardFile communityBoardFile);
 
-	int deleteBoardFile(CommunityBoardFile communityBoardFile);
+	int deleteBoardFile(CommunityBoard c);
 
 
 

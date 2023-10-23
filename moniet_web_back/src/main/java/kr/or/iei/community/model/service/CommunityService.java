@@ -353,11 +353,11 @@ public class CommunityService {
 
 	@Transactional
 	public int modifyBoard(CommunityBoard c, ArrayList<CommunityBoardFile> fileList) {
-		int result = communityDao.modifyBoard(c);
+		int result = communityDao.deleteBoardFile(c);
 		for (CommunityBoardFile communityBoardFile : fileList) {
 			communityBoardFile.setCommunityBoardNo(c.getCommunityBoardNo());
-			result += communityDao.deleteBoardFile(communityBoardFile);
 			result += communityDao.insertBoardFile(communityBoardFile);
+			result += communityDao.modifyBoard(c);
 		}
 		return result;
 	}

@@ -474,12 +474,12 @@
 		/>
 	</resultMap>
 	
-	<update id="modifyBoard">
-		update community_board set community_board_content = #{communityBoardContent}, community_board_date = sysdate where community_board_no = #{communityBoardNo}
-	</update>
-	
 	<delete id="deleteBoardFile">
 		delete community_board_file where community_board_no = #{communityBoardNo}
 	</delete>
+	
+	<update id="modifyBoard">
+		update community_board set community_board_content = #{communityBoardContent}, community_board_date = sysdate where community_board_no = #{communityBoardNo}
+	</update>
 	
 </mapper>

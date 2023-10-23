@@ -289,7 +289,6 @@ public class CommunityController {
 		}
 		
 		int result = communityService.modifyBoard(c, fileList);
-		System.out.println("컨트롤러에서 보내기 전 리절트 : "+result);
 		return result;
 	}
 	

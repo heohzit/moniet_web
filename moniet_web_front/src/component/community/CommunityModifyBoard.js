@@ -18,36 +18,49 @@ const CommunityModifyBoard = () => {
 
   const changeFile = (e) => {
     const files = e.currentTarget.files;
+
     if (files.length > 5) {
       Swal.fire({
         icon: "error",
         text: "첨부파일 최대 갯수는 5개입니다.",
       });
       return;
+    } else {
+      Swal.fire({
+        icon: "warning",
+        text: "기존 첨부파일이 삭제됩니다. 그래도 하시겠습니까?",
+        showCancelButton: true,
+        confirmButtonText: "확인",
+        cancelButtonText: "취소",
+      }).then((res) => {
+        if (res.isConfirmed) {
+          const arr = new Array();
+          const previewArr = new Array();
+
+          for (let i = 0; i < files.length; i++) {
+            arr.push(files[i]);
+
+            boardImg.push(files[i]);
+            setBoardImg(arr);
+
+            const reader = new FileReader();
+            reader.readAsDataURL(files[i]);
+            reader.onloadend = () => {
+              previewArr.push(reader.result);
+              setBoardImg([...previewArr]);
+            };
+          }
+          setBoardFile(arr);
+        } else {
+          return;
+        }
+      });
     }
-
-    const arr = new Array();
-    const previewArr = new Array();
-
-    for (let i = 0; i < files.length; i++) {
-      arr.push(files[i]);
-
-      boardImg.push(files[i]);
-      setBoardImg(arr);
-
-      const reader = new FileReader();
-      reader.readAsDataURL(files[i]);
-      reader.onloadend = () => {
-        previewArr.push(reader.result);
-        setBoardImg([...previewArr]);
-      };
-    }
-    setBoardFile(arr);
   };
-  console.log("boardImg", boardImg);
-  if (boardImg) {
-    console.log(typeof boardImg[0]);
-  }
+  // console.log("boardImg", boardImg);
+  // if (boardImg) {
+  //   console.log(typeof boardImg[0]);
+  // }
   const ModifyBoard = (props) => {
     const communityBoardContent = document.querySelector(
       ".board-modify-textarea"
