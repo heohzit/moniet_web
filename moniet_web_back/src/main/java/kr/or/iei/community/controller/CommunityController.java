@@ -273,6 +273,15 @@ public class CommunityController {
 		return result;
 	}
 	
+	@GetMapping(value="/searchCoummunity/{searchType}/{searchValue}")
+	public List searchCoummunity(@PathVariable int searchType, @PathVariable String searchValue) {
+		System.out.println("타입 : "+searchType);
+		System.out.println("밸류 : "+searchValue);
+		List list = communityService.searchCoummunity(searchType, searchValue);
+		System.out.println("list : "+list);
+		return list;
+	}
+	
 	//관리자 
 	@GetMapping(value="/allCommunityList/{reqPage}")
 	public Map allCommunityList(@PathVariable int reqPage) {

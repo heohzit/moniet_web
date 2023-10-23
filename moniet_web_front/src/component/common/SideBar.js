@@ -341,6 +341,13 @@ const SideBar = (props) => {
                 setSelected={setSelected}
               />
               <Item
+                title="참여 목록"
+                to="/member/mypage"
+                icon={<FavoriteIcon />}
+                selected={selected}
+                setSelected={setSelected}
+              />
+              <Item
                 title="찜하기"
                 to="/member/like"
                 icon={<FavoriteIcon />}

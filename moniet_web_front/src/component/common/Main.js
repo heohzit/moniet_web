@@ -31,7 +31,9 @@ const Main = () => {
       </div>
       <div className="main-contents">
         <div className="main-bg">
-          <img src="./image/bg1.png" alt="bg" />
+          <div className="main-bg-img">
+            <img src="./image/main-bg-img-removebg.png" alt="bg" />
+          </div>
           <div className="main-text">
             <div className="main-text-title">꼼꼼한 내 돈 관리</div>
             <div className="main-text-title text-margin">

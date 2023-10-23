@@ -54,8 +54,8 @@
 }
 .range-chg {
   position: absolute;
-  top: 320px;
-  right: 310px;
+  top: 300px;
+  left: 410px;
 }
 .range-chg > button {
   margin-top: 10px;
@@ -273,4 +273,7 @@
 }
 .loop-style {
   color: #323673;
+}
+.cashbook-all-wrap {
+  margin-top: 100px;
 }
