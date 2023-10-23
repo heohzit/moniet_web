@@ -304,6 +304,12 @@ public class CommunityController {
 		return list;
 	}
 	
+	@GetMapping(value="/likeCommunityList")
+	public List likeCommunityList(@RequestAttribute String memberId) {
+		List list = communityService.likeCommunityList(memberId);
+		return list;
+	}
+	
 	//관리자 
 	@GetMapping(value="/allCommunityList/{reqPage}")
 	public Map allCommunityList(@PathVariable int reqPage) {

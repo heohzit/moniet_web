@@ -110,6 +110,8 @@ public interface CommunityDao {
 
 	List myPartiCommunityList(int memberNo);
 
+	List likeCommunityList(int memberNo);
+
 
 
 

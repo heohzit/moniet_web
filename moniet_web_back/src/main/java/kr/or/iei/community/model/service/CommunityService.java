@@ -374,4 +374,10 @@ public class CommunityService {
 		return list;
 	}
 
+	public List likeCommunityList(String memberId) {
+		Member member = memberDao.selectOneMember(memberId);
+		List list = communityDao.likeCommunityList(member.getMemberNo());
+		return list;
+	}
+
 }

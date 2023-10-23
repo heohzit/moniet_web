@@ -31,7 +31,7 @@ const Input = (props) => {
         placeholder={placeholder}
         pattern={pattern}
         onKeyUp={keyUpEvent}
-        maxLength="35"
+        maxLength="30"
       ></input>
     </>
   );

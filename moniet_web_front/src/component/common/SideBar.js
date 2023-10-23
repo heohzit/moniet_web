@@ -350,7 +350,7 @@ const SideBar = (props) => {
               />
               <Item
                 title="찜하기"
-                to="/member/like"
+                to="/community/likeCommunity"
                 icon={<FavoriteIcon />}
                 selected={selected}
                 setSelected={setSelected}

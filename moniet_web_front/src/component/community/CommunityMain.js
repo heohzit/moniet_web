@@ -7,6 +7,7 @@ import CommunityModify from "./CommunityModify";
 import CommunityModifyBoard from "./CommunityModifyBoard";
 import CommunitySearch from "./CommunitySearch";
 import MyCommunity from "./MyCommunity";
+import LikeCommunity from "./LikeCommunity";
 
 const CommunityMain = (props) => {
   const isLogin = props.isLogin;
@@ -50,6 +51,11 @@ const CommunityMain = (props) => {
         <Route
           path="myCommunity"
           element={<MyCommunity isLogin={isLogin} setIsLogin={setIsLogin} />}
+        />
+
+        <Route
+          path="likeCommunity"
+          element={<LikeCommunity isLogin={isLogin} setIsLogin={setIsLogin} />}
         />
 
         <Route path="*" element={<CommunityList isLogin={isLogin} />} />
