@@ -81,10 +81,9 @@
   	<!--챌린지 기간 종료-->
   	<update id="challengeFinish">
   	<![CDATA[
-  		update challenge set challenge_result = 2
-		where challenge_no in 
-		(select challenge_no from challenge where challenge_result =0 
-		and to_char(challenge_end,'yyyy-mm-dd') < to_char(sysdate,'yyyy-mm-dd'))
+  		 update challenge set challenge_result = case when challenge_kind = 2 then 1 when challenge_kind = 1 then 2 end
+        where challenge_no in 
+		(select challenge_no from challenge where challenge_result =0 and to_char(challenge_end,'yyyy-mm-dd') < to_char(sysdate,'yyyy-mm-dd'))
 	]]>
   	</update>
   	 	

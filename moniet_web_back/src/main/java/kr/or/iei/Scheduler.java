@@ -17,5 +17,4 @@ public class Scheduler {
 			challengeService.challengeFinish();	
 		}
 
-	
 }
