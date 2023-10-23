@@ -292,8 +292,17 @@ public class CommunityController {
 		return result;
 	}
 	
+	@GetMapping(value="/myCommunityList")
+	public List myCommunityList(@RequestAttribute String memberId) {
+		List list = communityService.myCommunityList(memberId);
+		return list;
+	}
 	
-	
+	@GetMapping(value="/myPartiCommunityList")
+	public List myPartiCommunityList(@RequestAttribute String memberId) {
+		List list = communityService.myPartiCommunityList(memberId);
+		return list;
+	}
 	
 	//관리자 
 	@GetMapping(value="/allCommunityList/{reqPage}")

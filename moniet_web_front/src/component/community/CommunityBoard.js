@@ -25,7 +25,6 @@ const CommunityBoard = (props) => {
   // const [communityBoardList, setCommunityBoardList] = useState([]);
   const [reqPage, setReqPage] = useState(1);
   useEffect(() => {
-    console.log(reqPage, props, renderingBoard);
     const token = window.localStorage.getItem("token");
     axios
       .get("/community/communityBoardList/" + reqPage + "/" + communityNo, {

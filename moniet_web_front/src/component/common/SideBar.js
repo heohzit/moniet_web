@@ -338,7 +338,7 @@ const SideBar = (props) => {
               />
               <Item
                 title="참여 커뮤니티"
-                to="/member/myCommunity"
+                to="/community/myCommunity"
                 icon={<ForumIcon />}
                 selected={selected}
                 setSelected={setSelected}

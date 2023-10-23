@@ -268,7 +268,11 @@ const ListInputWrap = (props) => {
     <div className="list-input-wrap">
       <div>
         <div className="input">
-          <input type="text" maxLength={35} />
+          <input
+            type="text"
+            maxLength={35}
+            placeholder="검색어를 입력해주세요."
+          />
           {/* <Input data={data} setData={setData} type={type} content={content} /> */}
         </div>
       </div>

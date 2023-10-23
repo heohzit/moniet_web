@@ -362,4 +362,16 @@ public class CommunityService {
 		return result;
 	}
 
+	public List myCommunityList(String memberId) {
+		Member member = memberDao.selectOneMember(memberId);
+		List list = communityDao.myCommunityList(member.getMemberNo());
+		return list;
+	}
+
+	public List myPartiCommunityList(String memberId) {
+		Member member = memberDao.selectOneMember(memberId);
+		List list = communityDao.myPartiCommunityList(member.getMemberNo());
+		return list;
+	}
+
 }

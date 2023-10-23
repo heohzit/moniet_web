@@ -19,6 +19,7 @@ import SideBar from "./component/common/SideBar";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import MainDash from "./component/common/MainDash";
 import "./component/common/main.css";
+import MyCommunity from "./component/community/MyCommunity";
 const theme = createTheme({
   typography: {
     fontFamily: "ns-r",
@@ -92,6 +93,7 @@ function App() {
                   path="/member/myinfo"
                   element={<Myinfo isLogin={isLogin} setIsLogin={setIsLogin} />}
                 />
+
                 <Route
                   path="/member/*"
                   element={
