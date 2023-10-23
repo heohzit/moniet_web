@@ -57,7 +57,6 @@ const CommunityView = (props) => {
           },
         })
         .then((res) => {
-          console.log(res.data);
           setMember(res.data);
         })
         .catch((res) => {

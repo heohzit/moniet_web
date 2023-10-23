@@ -1360,3 +1360,58 @@
   top: 0.45cm;
   left: 2.3cm;
 }
+
+.my-community-list-wrap {
+  padding: 30px 0px;
+}
+
+.parti-community-list-wrap {
+  padding: 30px 0px;
+}
+
+.my-community-list-title,
+.parti-community-list-title {
+  font-family: ns-eb;
+  padding: 20px 0px;
+  font-size: 25px;
+}
+
+.parti-community-list-tbl > table,
+.my-community-list-tbl > table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.parti-community-list-tbl > table > thead td,
+.my-community-list-tbl > table > thead td {
+  padding: 10px 0px;
+  font-family: ns-b;
+  text-align: center;
+  background-color: #323673;
+  color: #fff;
+}
+
+.my-community-list-tbl > table > tbody > tr:hover,
+.parti-community-list-tbl > table > tbody > tr:hover {
+  background-color: rgb(106, 109, 166, 0.2);
+  cursor: pointer;
+}
+
+.my-community-list-tbl > table > tbody > tr > td,
+.parti-community-list-tbl > table > tbody > tr > td {
+  text-align: center;
+  padding: 15px;
+}
+
+.my-community-list-tbl > table > tbody .title-td,
+.parti-community-list-tbl > table > tbody .title-td {
+  text-align: left;
+}
+
+.my-community-list-tbl > table > tbody > tr > td:first-child {
+  font-weight: 900;
+}
+
+.parti-community-list-tbl > table > tbody > tr > td:first-child {
+  font-weight: 900;
+}

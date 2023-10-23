@@ -106,6 +106,10 @@ public interface CommunityDao {
 
 	int deleteBoardFile(CommunityBoard c);
 
+	List myCommunityList(int memberNo);
+
+	List myPartiCommunityList(int memberNo);
+
 
 
 

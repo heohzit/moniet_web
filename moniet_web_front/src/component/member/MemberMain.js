@@ -1,9 +1,10 @@
 import axios from "axios";
 import "./memberMain.css";
-import { useNavigate } from "react-router-dom";
+import { Route, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Input from "../util/InputFrm";
 import { Button1, Button2 } from "../util/Buttons";
+import MyCommunity from "../community/MyCommunity";
 
 const MemberMain = (props) => {
   const isLogin = props.isLogin;

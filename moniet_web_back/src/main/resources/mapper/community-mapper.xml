@@ -482,4 +482,21 @@
 		update community_board set community_board_content = #{communityBoardContent}, community_board_date = sysdate where community_board_no = #{communityBoardNo}
 	</update>
 	
+	<select id="myCommunityList" resultType="community">
+		select * from community where community_writer = #{memberNo}
+	</select>
+	
+	<select id="myPartiCommunityList" resultType="community">
+		SELECT
+		    COMMUNITY_NO,
+		    COMMUNITY_TITLE,
+		    COMMUNITY_WRITER,
+		    COMMUNITY_DATE,
+		    COMMUNITY_PARTI,
+		    MEMBER_ID
+		FROM COMMUNITY
+		JOIN MEMBER ON (COMMUNITY_WRITER = MEMBER_NO)
+		WHERE COMMUNITY_NO IN (SELECT COMMUNITY_NO FROM COMMUNITY_PARTI WHERE MEMBER_NO=#{memberNo})
+	</select>
+	
 </mapper>
