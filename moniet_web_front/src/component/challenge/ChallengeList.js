@@ -109,7 +109,7 @@ const ChallengeMenu = (props) => {
 //챌린지 레벨 조회
 const ChallengeLevel = () => {
   const token = window.localStorage.getItem("token");
-  const [challengeLevel, setChallengeLevel] = useState("");
+  const [challengeLevel, setChallengeLevel] = useState(0);
   useEffect(() => {
     axios
       .post("/challenge/challengeLevel", null, {
