@@ -141,7 +141,6 @@ const CommunityItem = (props) => {
   const setCommunityList = props.setCommunityList;
   const navigate = useNavigate();
   const [heart, setHeart] = useState(false);
-  console.log(community);
   const likeChange = (isLike) => {
     if (isLike) {
       community.isWish = 1;
