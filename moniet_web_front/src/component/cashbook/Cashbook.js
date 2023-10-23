@@ -454,7 +454,7 @@ const CashbookItem = (props) => {
         },
       })
       .then((res) => {
-        if (res.data === 1) {
+        if (res.data === 1 || -1) {
           onOpenClickHandler();
           setIsOpen1(false);
           setSelect(!select);

@@ -16,31 +16,31 @@ const CommunityMain = (props) => {
       <div className="community-main-top">COMMUNITY</div>
       <Routes>
         <Route
-          path="view"
+          path="/view"
           element={<CommunityView isLogin={isLogin} setIsLogin={setIsLogin} />}
         />
 
         <Route
-          path="write"
+          path="/write"
           element={<CommunityWrite isLogin={isLogin} setIsLogin={setIsLogin} />}
         />
 
         <Route
-          path="modify"
+          path="/modify"
           element={
             <CommunityModify isLogin={isLogin} setIsLogin={setIsLogin} />
           }
         />
 
         <Route
-          path="modifyBoard"
+          path="/modifyBoard"
           element={
             <CommunityModifyBoard isLogin={isLogin} setIsLogin={setIsLogin} />
           }
         />
 
         <Route
-          path="searchCommunity"
+          path="/searchCommunity"
           element={
             <CommunitySearch isLogin={isLogin} setIsLogin={setIsLogin} />
           }

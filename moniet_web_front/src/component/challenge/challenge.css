@@ -296,9 +296,15 @@
   background-color: rgb(255, 255, 255);
   border-radius: 10px;
   box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
-  overflow: scroll;
+  overflow-y: scroll;
 }
-
+.view-list-title {
+  margin-bottom: 20px;
+  padding: 10px;
+  display: flex;
+  justify-content: flex-start;
+  border-bottom: 2px solid #000;
+}
 .view-list {
   margin-bottom: 20px;
   padding: 20px;

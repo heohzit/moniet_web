@@ -271,7 +271,7 @@ const MainDash = (props) => {
               >
                 인기 커뮤니티
               </Typography>
-              <Box height="200px">
+              <Box height="220px">
                 <div className="community-item" onClick={communityView}>
                   <div className="community-item-img">
                     {firstCommunity.communityThumb === null ? (

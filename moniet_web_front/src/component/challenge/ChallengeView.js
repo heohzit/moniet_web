@@ -66,6 +66,7 @@ const ChallengeView = () => {
           },
         })
         .then((res) => {
+          console.log(res.data);
           setModalData(res.data.viewData);
           toggleModal();
         })
@@ -80,6 +81,7 @@ const ChallengeView = () => {
           },
         })
         .then((res) => {
+          console.log(res.data);
           setModalData(res.data.viewData);
           toggleModal();
         })
@@ -254,8 +256,11 @@ const ChallengeView = () => {
           <div className="currentAmount">
             현재 금액 : {currentAmount.toLocaleString()}원
           </div>
-          <div className="challenge-view-btn" style={{ width: "300px" }}>
-            <FactCheckIcon onClick={handleViewDetailsClick}></FactCheckIcon>
+          <div className="challenge-view-btn" style={{ width: "50px" }}>
+            <FactCheckIcon
+              onClick={handleViewDetailsClick}
+              style={{ height: "50px", width: "50px" }}
+            ></FactCheckIcon>
           </div>
         </div>
         {isModalVisible && (
@@ -273,6 +278,14 @@ const ChallengeView = () => {
                 className="challenge-modal-content"
                 style={{ width: "500px" }}
               >
+                <div className="view-list-wrap">
+                  <div className="view-list-title">
+                    <div>종류</div>
+                    <div>내용</div>
+                    <div>금액</div>
+                    <div>날짜</div>
+                  </div>
+                </div>
                 {modalData &&
                   modalData.map((item, index) => {
                     return <ModalItem key={item + index} item={item} />;
@@ -285,7 +298,9 @@ const ChallengeView = () => {
           </div>
         )}
       </div>
-      <div className="progress-ment">📢{ProgressMent(progress)}📢</div>
+      <div className="progress-ment">
+        <h3>📢{ProgressMent(progress)}📢</h3>
+      </div>
 
       <div className="challenge-btn-box">
         {challenge.challengeResult === 2 ||
@@ -308,7 +323,7 @@ const ModalItem = (props) => {
     <div className="view-list-wrap">
       <div className="view-list">
         <div>{item.challengeKind === 1 ? "저축" : "지출"}</div>
-        <div>{item.categoryTitle}</div>
+        <div>{item.cashbookContent}</div>
         <div>{item.cashbookMoney.toLocaleString()}원</div>
         <div>{item.cashbookDate}</div>
       </div>

@@ -1,5 +1,6 @@
 package kr.or.iei.cashbook.controller;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -104,7 +105,7 @@ public class CashbookController {
 	}
 	
 	@PostMapping(value="/update")
-	public int updateCashbook(@RequestBody Cashbook cashbook, @RequestAttribute String memberId) {
+	public int updateCashbook(@RequestBody Cashbook cashbook, @RequestAttribute String memberId) throws ParseException {
 		cashbook.setMemberId(memberId);
 		//System.out.println("아이디 : "+cashbook.getMemberId());
 		//System.out.println("번호:"+cashbook.getCashbookNo());

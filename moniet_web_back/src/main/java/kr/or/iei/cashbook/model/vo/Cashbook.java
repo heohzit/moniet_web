@@ -25,6 +25,7 @@ public class Cashbook {
 	private String cashbookMemo;
 	private int challengeNo;
 	private int loopRound;		//할부 회차 저장용(몇번째 할부인지 저장하기 위함)
+	private int loopRef;		//환불할때 최초 들어간 애(수정, 삭제할 때 한번에 작업하려면 필요)
 	
 	//화면 노출용
 	private String memberId;

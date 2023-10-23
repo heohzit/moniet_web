@@ -28,7 +28,7 @@ const theme = createTheme({
 });
 
 function App() {
-  const [isLogin, setIsLogin] = useState(true);
+  const [isLogin, setIsLogin] = useState(false);
   const [num, setNum] = useState(0);
 
   useEffect(() => {
@@ -51,10 +51,7 @@ function App() {
                 <Route
                   path="/maindash/*"
                   element={
-                    <MainDash
-                      isLogin={isLogin}
-                      setIsLogin={setIsLogin}
-                    ></MainDash>
+                    <MainDash isLogin={isLogin} setIsLogin={setIsLogin} />
                   }
                 ></Route>
                 <Route
@@ -63,15 +60,15 @@ function App() {
                 ></Route>
                 <Route
                   path="/challenge/*"
-                  element={<ChallengeMain />}
-                  isLogin={isLogin}
-                  setIsLogin={setIsLogin}
+                  element={
+                    <ChallengeMain isLogin={isLogin} setIsLogin={setIsLogin} />
+                  }
                 />
                 <Route
                   path="/cashbook/*"
-                  element={<CashbookMain />}
-                  isLogin={isLogin}
-                  setIsLogin={setIsLogin}
+                  element={
+                    <CashbookMain isLogin={isLogin} setIsLogin={setIsLogin} />
+                  }
                 />
                 <Route
                   path="/community/*"
@@ -81,9 +78,12 @@ function App() {
                 />
                 <Route
                   path="/cashCalendar/*"
-                  element={<CashCalendarMain />}
-                  isLogin={isLogin}
-                  setIsLogin={setIsLogin}
+                  element={
+                    <CashCalendarMain
+                      isLogin={isLogin}
+                      setIsLogin={setIsLogin}
+                    />
+                  }
                 />
                 <Route
                   path="/AdminCommunityList"
@@ -103,10 +103,7 @@ function App() {
                 <Route
                   path="*"
                   element={
-                    <MainDash
-                      isLogin={isLogin}
-                      setIsLogin={setIsLogin}
-                    ></MainDash>
+                    <MainDash isLogin={isLogin} setIsLogin={setIsLogin} />
                   }
                 ></Route>
               </Routes>
