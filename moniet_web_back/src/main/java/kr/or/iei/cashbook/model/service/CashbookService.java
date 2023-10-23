@@ -207,17 +207,16 @@ public class CashbookService {
 	@Transactional
 	public int updateCashbook(Cashbook cashbook) throws ParseException {
 		int result = 0;
-		System.out.println("cashbook : "+cashbook);
 		if(cashbook.getCashbookLoop()==0) {
 			result = cashbookDao.updateCashbook(cashbook);
 		} else if(cashbook.getCashbookLoop()==2) {//할부일 때 수정하기
-			ArrayList<Cashbook> updateList = cashbookDao.cashbookListByLoopRef(cashbook.getCashbookNo());
-			int loopRef = updateList.get(0).getLoopRef();
+			Cashbook standard = cashbookDao.selectOneCashbook(cashbook.getCashbookNo());
+			ArrayList<Cashbook> updateList = cashbookDao.cashbookListByLoopRef(standard.getLoopRef());
+			
 			System.out.println("updateList : "+updateList);
 			System.out.println("updateList.size() : "+updateList.size());
 			if(cashbook.getLoopMonth()==updateList.size()) {
 				for(Cashbook c : updateList) {
-					System.out.println("c : "+c);
 					c.setCashbookFinance(cashbook.getCashbookFinance());
 					c.setCashbookLoop(cashbook.getCashbookLoop());
 					c.setCashbookAsset(cashbook.getCashbookAsset());
@@ -235,7 +234,7 @@ public class CashbookService {
 				int updateResult = 0;
 				int delResult = 0;
 				for(Cashbook c : updateList) {
-					if(cashbook.getLoopMonth()<=updateList.size()) {
+					if(c.getLoopRound()<=cashbook.getLoopMonth()) {
 						c.setMemberId(cashbook.getMemberId());
 						c.setCashbookFinance(cashbook.getCashbookFinance());
 						c.setCashbookLoop(cashbook.getCashbookLoop());
@@ -249,7 +248,8 @@ public class CashbookService {
 						c.setLoopMonth(cashbook.getLoopMonth());
 						updateResult+=cashbookDao.updateCashbook(c);
 					} else {
-						delResult += cashbookDao.deleteCashbook(c.getCashbookNo(), c.getMemberId());
+						System.out.println("삭제할 c : " + c);
+						delResult += cashbookDao.deleteCashbook(c.getCashbookNo(), cashbook.getMemberId());
 					}
 				}	
 				result = updateResult - delResult;
@@ -270,20 +270,18 @@ public class CashbookService {
 					c.setChallengeNo(cashbook.getChallengeNo());
 					updateResult+=cashbookDao.updateCashbook(c);
 				}
-				int addMonth = updateList.size();
+				int loopRound = updateList.size()+1;
 				while(updateResult+insertResult<loopMonth) {
 					Cashbook addCashbook = new Cashbook();
-					addCashbook.setMemberNo(cashbook.getMemberNo());
+					addCashbook.setLoopRef(standard.getMemberNo());
 					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 					Calendar cal = Calendar.getInstance();
-					Cashbook standard = cashbookDao.selectOneCashbook(cashbook.getCashbookNo());
 					Date date = sdf.parse(standard.getCashbookDate());	//str>date
-					System.out.println("date : " + standard.getCashbookDate());
 					cal.setTime(date);
-					cal.add(Calendar.MONTH, addMonth);
+					cal.add(Calendar.MONTH, loopRound-1);
 					addCashbook.setCashbookDate(sdf.format(cal.getTime()));
-					addCashbook.setLoopRound(addMonth+1);
-					addCashbook.setLoopRef(loopRef);
+					addCashbook.setLoopRound(loopRound);
+					addCashbook.setLoopRef(standard.getLoopRef());
 					addCashbook.setMemberId(cashbook.getMemberId());
 					addCashbook.setCashbookFinance(cashbook.getCashbookFinance());
 					addCashbook.setCashbookLoop(cashbook.getCashbookLoop());
@@ -294,10 +292,8 @@ public class CashbookService {
 					addCashbook.setCashbookContent(cashbook.getCashbookContent());
 					addCashbook.setCashbookMemo(cashbook.getCashbookMemo());
 					addCashbook.setChallengeNo(cashbook.getChallengeNo());
-					System.out.println("삽입필요한c : " + addCashbook);
 					insertResult += cashbookDao.insertCashbookWithLoop(addCashbook);
-					System.out.println(insertResult);
-					addMonth++;
+					loopRound++;
 				}
 				result = updateResult+insertResult;		
 			}
