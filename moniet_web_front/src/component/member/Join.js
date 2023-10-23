@@ -27,7 +27,6 @@ const Join = () => {
   //이메일 인증번호 체크
   const authCheck = () => {
     const authValue = document.querySelector("#authInput").value;
-    console.log("클릭");
     if (authValue == authCode) {
       setCheckAuthMsg("인증이 완료되었습니다.");
     } else {
@@ -41,8 +40,6 @@ const Join = () => {
     const emailReg = /^[A-Za-z0-9_\\.\\-]+@[A-Za-z0-9\\-]+\.[A-za-z0-9\\-]+/;
     const authInput = document.querySelector(".auth-input-wrap");
     const member = { memberEmail };
-
-    console.log(emailValue);
     if (!emailReg.test(emailValue)) {
       setCheckEmailMsg("'@'를 포함하여 올바른 형식으로 입력해주세요.");
     } else {
@@ -88,7 +85,6 @@ const Join = () => {
       axios
         .get("/member/checkId/", { params: { memberId: memberId } })
         .then((res) => {
-          console.log(res.data);
           if (res.data == 0) {
             setCheckIdMsg("");
           } else {

@@ -63,5 +63,8 @@ public interface CashbookDao {
 
 	Cashbook selectOneCashbook(int cashbookNo);
 
+	int selectLoopRef(int cashbookNo);
+
+
 
 }

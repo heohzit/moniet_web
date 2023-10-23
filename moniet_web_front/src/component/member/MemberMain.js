@@ -34,7 +34,6 @@ const MemberMain = (props) => {
         } else {
           alert("비밀번호가 일치 하지 않습니다.");
         }
-        console.log(res.data);
       })
       .catch((res) => {
         if (res.response.status === 403) {
@@ -51,7 +50,6 @@ const MemberMain = (props) => {
         },
       })
       .then((res) => {
-        console.log(res.data);
         setMember(res.data);
       })
       .catch((res) => {

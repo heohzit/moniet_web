@@ -14,7 +14,6 @@ const AdminCommunityList = (props) => {
     axios
       .get("/community/allCommunityList/" + reqPage)
       .then((res) => {
-        console.log(res.data);
         setCommunityList(res.data.communityList); //communityList -> key값
         setPageInfo(res.data.pi);
       })
@@ -76,7 +75,6 @@ const AdminCommunityList = (props) => {
 const checkDel = (render, setRender) => {
   //체크된 체크박스
   const check = document.querySelectorAll(".chk:checked");
-  console.log(check);
   if (check.length == 0) {
     alert("삭제할 게시글을 선택해주세요.");
   } else {
@@ -85,20 +83,16 @@ const checkDel = (render, setRender) => {
     const no = new Array();
     check.forEach(function (item) {
       const communityNo = item.parentElement.nextElementSibling.innerText;
-      console.log(communityNo);
       no.push(communityNo);
     });
     const community = { communityNo: no.join("/") };
-    console.log(community);
     axios
       .post("/community/checkDelete", community)
       .then((res) => {
         alert("게시글이 삭제 되었습니다.");
         setRender(!render);
-        console.log(res.data);
         //체크박스 false
         const checkbox = document.querySelectorAll(".chk");
-        console.log(checkbox);
         for (let i = 0; i < checkbox.length; i++) {
           checkbox[i].checked = false;
         }
@@ -120,7 +114,6 @@ const CommunityItem = (props) => {
       e.target.parentNode.parentNode.previousSibling.previousSibling
         .previousSibling.previousSibling.previousSibling.previousSibling
         .innerText;
-    console.log(communityNo);
     if (window.confirm("게시글을 삭제 하시겠습니까?")) {
       axios
         .get("/community/deleteCommunity/" + communityNo)
@@ -139,7 +132,6 @@ const CommunityItem = (props) => {
 
   //상세 페이지로 이동
   const detailedPage = () => {
-    console.log(community.communityNo);
     navigate("/community/view", {
       state: { communityNo: community.communityNo },
     });

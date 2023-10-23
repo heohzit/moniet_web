@@ -15,13 +15,12 @@ const Login = (props) => {
     axios
       .post("/member/login", member)
       .then((res) => {
-        console.log(res);
         if (res.data === "실패") {
           alert("아이디 또는 비밀번호를 확인하세요");
         } else {
           window.localStorage.setItem("token", res.data);
           setIsLogin(true);
-          navigate("/maindash");
+          navigate(memberId === "Admin" ? "/memberlist" : "/maindash");
         }
       })
       .catch((res) => {

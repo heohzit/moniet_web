@@ -3,7 +3,6 @@ import { Button1 } from "../util/Buttons";
 import { useEffect, useState } from "react";
 import CashbookWrite from "../cashbook/CashbookWrite";
 import "./dateList.css";
-import CashbookModify from "../cashbook/CashbookModify";
 import CashInputModal from "../cashModal/CashInputModal";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
@@ -39,7 +38,7 @@ const DateList = (props) => {
         setCalList(res.data.cashbookList);
       })
       .catch((res) => {
-        console.log(res);
+        //console.log(res);
       });
   }, [datePick, select]);
 
@@ -81,7 +80,7 @@ const DateList = (props) => {
         setSpendingCate(res.data.spendingCategory);
       })
       .catch((res) => {
-        console.log(res.response.status);
+        //console.log(res.response.status);
       });
   }, []);
   {
@@ -95,17 +94,6 @@ const DateList = (props) => {
   };
  */
   }
-  // modify용
-  const [modifyFrmOpen, setModifyFrmOpen] = useState(false);
-
-  const isModiOpen = (cashbookNo) => {
-    console.log(cashbookNo);
-    setModifyFrmOpen(true);
-  };
-  const modiClose = (e) => {
-    setModifyFrmOpen(false);
-    e.stopPropagation();
-  };
 
   //스낵바 노출용
   const [showSnackbar, setShowSnackbar] = useState(false);
@@ -270,11 +258,11 @@ const DateCashItem = (props) => {
           setIsOpen1(false);
           setSelect(!select);
         } else {
-          console.log("등록 중 에러 발생");
+          //console.log("등록 중 에러 발생");
         }
       })
       .catch((res) => {
-        console.log(res.response);
+        //console.log(res.response);
       });
   };
   return (
@@ -305,7 +293,6 @@ const DateCashItem = (props) => {
           <CashInputModal
             open={isOpen1}
             onClose={(e) => {
-              console.log(111);
               setIsOpen1(false);
               //e.stopPropagation();
               setSelect(!select);

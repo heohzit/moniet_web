@@ -59,7 +59,6 @@ const tokens = () => ({
     900: "#dbf5ee",
   },
 });
-
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
   return (
@@ -203,6 +202,7 @@ const SideBar = (props) => {
               <Typography
                 style={{
                   fontSize: "17px",
+                  display: !isCollapsed ? "block" : "none",
                 }}
                 variant="h6"
                 color={colors.grey[300]}
@@ -245,6 +245,7 @@ const SideBar = (props) => {
               <Typography
                 style={{
                   fontSize: "17px",
+                  display: !isCollapsed ? "block" : "none",
                 }}
                 variant="h6"
                 color={colors.grey[300]}
@@ -252,14 +253,14 @@ const SideBar = (props) => {
                 ACCOUNT BOOK
               </Typography>
               <Item
-                title="Statements"
+                title="내역"
                 to="/cashbook"
                 icon={<AddCardIcon />}
                 selected={selected}
                 setSelected={setSelected}
               />
               <Item
-                title="Calendar"
+                title="달력"
                 to="/cashCalendar"
                 icon={<CalendarMonthIcon />}
                 selected={selected}
@@ -268,6 +269,7 @@ const SideBar = (props) => {
               <Typography
                 style={{
                   fontSize: "17px",
+                  display: !isCollapsed ? "block" : "none",
                 }}
                 variant="h6"
                 color={colors.grey[300]}
@@ -275,14 +277,14 @@ const SideBar = (props) => {
                 CHARTS
               </Typography>
               <Item
-                title="Bar Chart"
+                title="바 차트"
                 to="/dashboard/bar"
                 icon={<BarChartOutlinedIcon />}
                 selected={selected}
                 setSelected={setSelected}
               />
               <Item
-                title="Pie Chart"
+                title="원형 차트"
                 to="/dashboard/pie"
                 icon={<PieChartOutlineOutlinedIcon />}
                 selected={selected}
@@ -291,6 +293,7 @@ const SideBar = (props) => {
               <Typography
                 style={{
                   fontSize: "17px",
+                  display: !isCollapsed ? "block" : "none",
                 }}
                 variant="h6"
                 color={colors.grey[300]}
@@ -307,6 +310,7 @@ const SideBar = (props) => {
               <Typography
                 style={{
                   fontSize: "17px",
+                  display: !isCollapsed ? "block" : "none",
                 }}
                 variant="h6"
                 color={colors.grey[300]}
@@ -323,6 +327,7 @@ const SideBar = (props) => {
               <Typography
                 style={{
                   fontSize: "17px",
+                  display: !isCollapsed ? "block" : "none",
                 }}
                 variant="h6"
                 color={colors.grey[300]}

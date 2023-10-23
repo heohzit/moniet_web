@@ -9,17 +9,14 @@ const MemberList = () => {
   useEffect(() => {
     axios.get("/member/allMember").then((res) => {
       setMemberList(res.data);
-      console.log(res.data);
     });
   }, []);
 
   const searchMemberId = () => {
-    console.log(memberId);
     axios
       .get("/member/searchMemberId/" + memberId)
       .then((res) => {
         if (res.data !== "") {
-          console.log(res.data);
           setMemberList(res.data);
         } else {
           alert("조회되는 회원이 없습니다.");

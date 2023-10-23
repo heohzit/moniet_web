@@ -28,7 +28,6 @@ const CashInputModal = (props) => {
   const cashbookLoopList = ["없음", "반복", "할부"];
   const loopMonth = props.loopMonth;
   const setLoopMonth = props.setLoopMonth;
-  console.log("onClose", onClose);
   const loopMonthMap = [
     { i: 1, cycle: "1개월" },
     { i: 2, cycle: "2개월" },
@@ -62,7 +61,6 @@ const CashInputModal = (props) => {
     setToggleOn(!toggleOn);
   };
   const selectFinance = (e) => {
-    console.log(e.currentTarget.innerText);
     const financeBtn = document.querySelectorAll(".select-finance>.btn");
     financeBtn[0].classList.remove("finance-checked");
     financeBtn[1].classList.remove("finance-checked");
@@ -78,11 +76,8 @@ const CashInputModal = (props) => {
     loop.value = 0;
     setCashbookLoop(0);
   };
-  console.log(cashbookCategory);
-  console.log(cashbookFinance);
   const selectDate = (item) => {
     setCashbookDate(item);
-    console.log(challengeCate);
     toggle();
   };
 

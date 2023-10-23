@@ -30,24 +30,20 @@ const CashbookTable = (props) => {
 
   const [rows, setRows] = useState([]);
   useEffect(() => {
-    console.log(incomeCate);
     setRows(cashbookList);
   }, [cashbookList]);
-  //console.log(cashbookList[0]); //3번씩 찍히는 거 확인필요
 
   const [rowSelectionModel, setRowSelectionModel] = useState([]);
 
   const CustomToolbar = () => {
     const apiRef = useGridApiContext();
     const handleRowClick = () => {
-      console.log(rowSelectionModel);
       const delCashbookNo = "";
       {
         rowSelectionModel.map((item) => {
           return (delCashbookNo += item + ",");
         });
       }
-      console.log("delCashbookNo = " + delCashbookNo);
       const token = window.localStorage.getItem("token");
 
       axios
@@ -61,7 +57,7 @@ const CashbookTable = (props) => {
           }
         )
         .then((res) => {
-          console.log(res.data);
+          //console.log(res.data);
         });
     };
 

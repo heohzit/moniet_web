@@ -19,7 +19,6 @@ const FindPw = () => {
     axios
       .post("/member/memberCheck", member)
       .then((res) => {
-        console.log(res.data);
         if (res.data == 0) {
           alert("입력하신 정보로 가입 된 회원은 존재하지 않습니다.");
         } else {
@@ -27,9 +26,7 @@ const FindPw = () => {
           navigate("/login");
           axios
             .post("/member/sendPw", member)
-            .then((res) => {
-              console.log(res.data);
-            })
+            .then((res) => {})
             .catch((res) => {
               console.log(res);
             });

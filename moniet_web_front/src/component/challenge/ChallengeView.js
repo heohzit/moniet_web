@@ -66,7 +66,6 @@ const ChallengeView = () => {
           },
         })
         .then((res) => {
-          console.log(res.data);
           setModalData(res.data.viewData);
           toggleModal();
         })
@@ -81,7 +80,6 @@ const ChallengeView = () => {
           },
         })
         .then((res) => {
-          console.log(res.data);
           setModalData(res.data.viewData);
           toggleModal();
         })
