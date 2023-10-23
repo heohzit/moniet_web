@@ -187,6 +187,7 @@ const SideBar = (props) => {
                     height="170px"
                     src={"/member/" + memberImg}
                     style={{ borderRadius: "50%" }}
+                    alt="piggy"
                   />
                 )}
               </Box>
