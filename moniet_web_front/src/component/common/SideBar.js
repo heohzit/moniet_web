@@ -62,20 +62,19 @@ const tokens = () => ({
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
   return (
-    <Link to={to}>
-      <MenuItem
-        active={selected === title}
-        style={{
-          backgroundColor: selected === title ? "#fff" : "#010440",
-          color: selected === title ? "#010440" : "#fff",
-          fontWeight: "900",
-        }}
-        onClick={() => setSelected(title)}
-        icon={icon}
-      >
-        <Typography>{title}</Typography>
-      </MenuItem>
-    </Link>
+    <MenuItem
+      active={selected === title}
+      style={{
+        backgroundColor: selected === title ? "#fff" : "#010440",
+        color: selected === title ? "#010440" : "#fff",
+        fontWeight: "900",
+      }}
+      onClick={() => setSelected(title)}
+      icon={icon}
+      component={<Link to={to}></Link>}
+    >
+      <Typography>{title}</Typography>
+    </MenuItem>
   );
 };
 const SideBar = (props) => {

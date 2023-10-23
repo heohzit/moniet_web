@@ -1,5 +1,3 @@
-import Header from "./component/common/Header";
-import Footer from "./component/common/Footer";
 import { Link, Route, Routes } from "react-router-dom";
 import Main from "./component/common/Main";
 import DashboardMain from "./component/dashboard/DashboardMain";
@@ -101,7 +99,7 @@ function App() {
                   }
                 />
                 <Route
-                  path="*"
+                  path="/maindash/*"
                   element={
                     <MainDash isLogin={isLogin} setIsLogin={setIsLogin} />
                   }
