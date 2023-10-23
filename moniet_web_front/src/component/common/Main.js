@@ -16,18 +16,6 @@ const Main = () => {
             </div>
           </Link>
         </div>
-        <div className="header-title">
-          <div>
-            <Link to="/login">
-              <Button5 text={"로그인"} />
-            </Link>
-          </div>
-          <div>
-            <Link to="/join">
-              <Button2 text={"회원가입"} />
-            </Link>
-          </div>
-        </div>
       </div>
       <div className="main-contents">
         <div className="main-bg">
