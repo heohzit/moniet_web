@@ -59,7 +59,6 @@ const tokens = () => ({
     900: "#dbf5ee",
   },
 });
-
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
   return (
@@ -203,6 +202,7 @@ const SideBar = (props) => {
               <Typography
                 style={{
                   fontSize: "17px",
+                  display: !isCollapsed ? "block" : "none",
                 }}
                 variant="h6"
                 color={colors.grey[300]}
@@ -245,6 +245,7 @@ const SideBar = (props) => {
               <Typography
                 style={{
                   fontSize: "17px",
+                  display: !isCollapsed ? "block" : "none",
                 }}
                 variant="h6"
                 color={colors.grey[300]}
@@ -268,6 +269,7 @@ const SideBar = (props) => {
               <Typography
                 style={{
                   fontSize: "17px",
+                  display: !isCollapsed ? "block" : "none",
                 }}
                 variant="h6"
                 color={colors.grey[300]}
@@ -291,6 +293,7 @@ const SideBar = (props) => {
               <Typography
                 style={{
                   fontSize: "17px",
+                  display: !isCollapsed ? "block" : "none",
                 }}
                 variant="h6"
                 color={colors.grey[300]}
@@ -307,6 +310,7 @@ const SideBar = (props) => {
               <Typography
                 style={{
                   fontSize: "17px",
+                  display: !isCollapsed ? "block" : "none",
                 }}
                 variant="h6"
                 color={colors.grey[300]}
@@ -323,6 +327,7 @@ const SideBar = (props) => {
               <Typography
                 style={{
                   fontSize: "17px",
+                  display: !isCollapsed ? "block" : "none",
                 }}
                 variant="h6"
                 color={colors.grey[300]}
