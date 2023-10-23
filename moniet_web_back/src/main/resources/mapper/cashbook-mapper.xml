@@ -167,7 +167,7 @@
 	
 	 <!--챌린지 금액 상세 조회(지출)-->
   	<select id="viewData" resultType="cashbook">
-  		select challenge_kind,c.category_no,cb.cashbook_money, to_char(cb.cashbook_date, 'yyyy-mm-dd') as cashbook_date, ct.category_title
+  		select challenge_kind,c.category_no,cb.cashbook_money,cb.cashbook_content, to_char(cb.cashbook_date, 'yyyy-mm-dd') as cashbook_date, ct.category_title
 		from challenge c
 		left join category_tbl ct on (c.category_no = ct.category_no)
 		inner join cashbook cb on (
@@ -180,7 +180,7 @@
   	
   	<!--챌린지 금액 상세 조회(저축)-->
   	<select id="viewData2" resultType="cashbook">
-  		select challenge_kind,c.category_no,cb.cashbook_money, to_char(cb.cashbook_date, 'yyyy-mm-dd') as cashbook_date, ct.category_title
+  		select challenge_kind,c.category_no,cb.cashbook_money,cb.cashbook_content, to_char(cb.cashbook_date, 'yyyy-mm-dd') as cashbook_date, ct.category_title
 		from challenge c
 		left join category_tbl ct on (c.category_no = ct.category_no)
 		inner join cashbook cb on (
