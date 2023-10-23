@@ -95,7 +95,22 @@
 			(select member_no from member where member_id=#{memberId}),
 			 #{cashbookFinance},#{cashbookDate}, #{cashbookLoop},
 			 #{loopMonth}, #{cashbookAsset}, #{cashbookCategory},
-			 #{cashbookMoney}, #{cashbookContent}, #{cashbookMemo}, #{challengeNo}, #{loopRound})
+			 #{cashbookMoney}, #{cashbookContent}, #{cashbookMemo}, #{challengeNo}, #{loopRound}, 
+			 <choose>
+			 	<when test="cashbookLoop != 2">
+			 		0
+			 	</when>
+			 	<when test="loopRef != 0">
+			 		#{loopRef}
+			 	</when>
+			 	<otherwise>
+			 		CASHBOOK_SEQ.currval
+			 	</otherwise>
+			 </choose>
+			 )
+ 		<selectKey resultType="int" order="AFTER" keyProperty="loopRef">
+			select max(cashbook_no) from cashbook
+		</selectKey>
 	</insert>
 	
 	<!--파이 차트-->
@@ -133,7 +148,7 @@
 			 cashbook_content = #{cashbookContent},
 			 cashbook_memo = #{cashbookMemo},
 			 challenge_no = #{challengeNo}
-		 where cashbook_no = #{cashbookNo} and member_no = (select member_no from member where member_id=#{memberId})
+		 where cashbook_no = #{cashbookNo}
 	</update>
 
 	<!-- 풀캘린더 이벤트 조회용 -->
@@ -196,5 +211,34 @@
 		from cashbook 
 		where extract(year from cashbook_date) = 2023 and extract(month from cashbook_date)=#{month} 
 		and member_no=(select member_no from member where member_id=#{memberId}) and cashbook_finance=#{type}
+	</select>
+	
+	<!-- 반복/할부 수정용 리스트 조회 -->
+	<select id="cashbookListByLoopRef" resultType="cashbook">
+		select 
+			cashbook_no, member_no, cashbook_finance, to_char(cashbook_date, 'yyyy-mm-dd') as cashbook_date,
+  			cashbook_loop, loop_month, cashbook_asset, cashbook_category,
+  			(select category_title from category_tbl where category_no = cashbook.cashbook_category) as CATEGORY_TITLE,
+  			cashbook_money, cashbook_content, cashbook_memo, challenge_no, loop_round, loop_ref
+		from cashbook
+		where loop_ref = (select loop_ref from cashbook where cashbook_no = #{cashbookNo}) order by cashbook_no
+	</select>
+	<!-- 반복/할부 수정용 추가 삽입 -->
+	<insert id="insertCashbookWithLoop">
+		insert into cashbook values
+			(CASHBOOK_SEQ.nextval,
+			(select member_no from member where member_id=#{memberId}),
+			 #{cashbookFinance},#{cashbookDate}, #{cashbookLoop},
+			 #{loopMonth}, #{cashbookAsset}, #{cashbookCategory},
+			 #{cashbookMoney}, #{cashbookContent}, #{cashbookMemo}, #{challengeNo}, #{loopRound}, #{loopRef})
+	</insert>
+	<!-- 기준날짜 구하기용 -->
+	<select id="selectOneCashbook" resultType="cashbook">
+		select 
+			cashbook_no, member_no, cashbook_finance, to_char(cashbook_date, 'yyyy-mm-dd') as cashbook_date,
+  			cashbook_loop, loop_month, cashbook_asset, cashbook_category,
+  			(select category_title from category_tbl where category_no = cashbook.cashbook_category) as CATEGORY_TITLE,
+  			cashbook_money, cashbook_content, cashbook_memo, challenge_no, loop_round, loop_ref
+		from cashbook where cashbook_no = #{cashbookNo}
 	</select>
 </mapper>
