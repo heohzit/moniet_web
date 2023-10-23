@@ -141,7 +141,6 @@ const CommunityItem = (props) => {
   const setCommunityList = props.setCommunityList;
   const navigate = useNavigate();
   const [heart, setHeart] = useState(false);
-  console.log(community);
   const likeChange = (isLike) => {
     if (isLike) {
       community.isWish = 1;
@@ -203,6 +202,8 @@ const CommunityItem = (props) => {
     e.stopPropagation();
   };
 
+  const shareCommunity = () => {};
+
   return (
     <div className="community-item-wrap">
       <div className="community-item" onClick={communityView}>
@@ -249,7 +250,6 @@ const CommunityItem = (props) => {
             </span>
           )}
         </div>
-        <span class="material-icons sh-btn1">share</span>
       </div>
     </div>
   );

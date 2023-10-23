@@ -100,6 +100,12 @@ public interface CommunityDao {
 
 	int communityTotalCount();
 
+	int modifyBoard(CommunityBoard c);
+
+	int modifyBoardFile(CommunityBoardFile communityBoardFile);
+
+	int deleteBoardFile(CommunityBoardFile communityBoardFile);
+
 
 
 

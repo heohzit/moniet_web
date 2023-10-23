@@ -351,4 +351,15 @@ public class CommunityService {
 		}
 	}
 
+	@Transactional
+	public int modifyBoard(CommunityBoard c, ArrayList<CommunityBoardFile> fileList) {
+		int result = communityDao.modifyBoard(c);
+		for (CommunityBoardFile communityBoardFile : fileList) {
+			communityBoardFile.setCommunityBoardNo(c.getCommunityBoardNo());
+			result += communityDao.deleteBoardFile(communityBoardFile);
+			result += communityDao.insertBoardFile(communityBoardFile);
+		}
+		return result;
+	}
+
 }

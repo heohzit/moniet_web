@@ -145,6 +145,8 @@ const CommunityBoardWrite = (props) => {
               }
             })
             .catch((res) => {});
+        } else {
+          return;
         }
       });
     } else {
