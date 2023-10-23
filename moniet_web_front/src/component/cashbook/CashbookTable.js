@@ -32,7 +32,6 @@ const CashbookTable = (props) => {
   useEffect(() => {
     setRows(cashbookList);
   }, [cashbookList]);
-  //console.log(cashbookList[0]); //3번씩 찍히는 거 확인필요
 
   const [rowSelectionModel, setRowSelectionModel] = useState([]);
 
@@ -58,7 +57,7 @@ const CashbookTable = (props) => {
           }
         )
         .then((res) => {
-          console.log(res.data);
+          //console.log(res.data);
         });
     };
 

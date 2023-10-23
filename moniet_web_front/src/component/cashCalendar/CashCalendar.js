@@ -74,7 +74,7 @@ const CashCalendar = () => {
         setCashbookList(res.data.cashbookList);
       })
       .catch((res) => {
-        console.log(res);
+        //console.log(res);
       });
   }, [select]);
 
@@ -89,7 +89,7 @@ const CashCalendar = () => {
         setCalendarEventArr(res.data.calList);
       })
       .catch((res) => {
-        console.log(res);
+        //console.log(res);
       });
   }, [select]);
 
@@ -100,7 +100,6 @@ const CashCalendar = () => {
   const listModalOpen = (info) => {
     setListOpen(true);
     setDatePick(dateString(info.date));
-    console.log(info);
     setInfo(info);
   };
   const closeListFrm = (e) => {
