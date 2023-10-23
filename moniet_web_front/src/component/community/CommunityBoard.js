@@ -155,6 +155,7 @@ const CommunityBoardItem = (props) => {
   };
 
   const updateBoard = () => {
+    console.log(board);
     Swal.fire({
       icon: "warning",
       text: "게시물을 수정하시겠습니까?",
@@ -164,7 +165,7 @@ const CommunityBoardItem = (props) => {
     })
       .then((res) => {
         if (res.isConfirmed) {
-          navigate("/community/modifyBoard", { state: {} });
+          navigate("/community/modifyBoard", { state: { board: board } });
         } else {
           return;
         }

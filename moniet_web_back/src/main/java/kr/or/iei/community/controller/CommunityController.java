@@ -58,7 +58,6 @@ public class CommunityController {
 	
 	@PostMapping(value="/insert")
 	public int insertCommunity(@ModelAttribute Community c, @ModelAttribute MultipartFile thumbnail, String communityType, @RequestAttribute String memberId) {
-		System.out.println("최초 넘어온 커뮤니티타입 : "+communityType);
 		
 		c.setMemberId(memberId);
 		
@@ -102,7 +101,6 @@ public class CommunityController {
 	@GetMapping(value="/view/{communityNo}")
 	public Community view(@PathVariable int communityNo, @RequestAttribute String memberId) {
 		Community c = communityService.selectOneCommunity(communityNo, memberId);
-		System.out.println("asdfdsafasdf : "+c);
 		return c;
 	}
 	
@@ -114,7 +112,6 @@ public class CommunityController {
 	@GetMapping(value="/communityBoardList/{reqPage}/{communityNo}")
 	public List communityBoardList(@PathVariable int reqPage, @PathVariable int communityNo, @RequestAttribute String memberId) {
 		List list = communityService.communityBoardList(reqPage, communityNo, memberId);
-		System.out.println("list : "+list);
 		return list;
 	}
 	
@@ -142,7 +139,6 @@ public class CommunityController {
 		}
 		
 		int result = communityService.insertBoard(c, fileList);
-		System.out.println(result);
 		
 		return result;
 	}
@@ -150,7 +146,6 @@ public class CommunityController {
 	@GetMapping(value="/boardCommentList/{reqPage}/{communityBoardNo}")
 	public List boardCommentList(@PathVariable int reqPage, @PathVariable int communityBoardNo) {
 		List list = communityService.boardCommentList(reqPage, communityBoardNo);
-		System.out.println("controller list : "+list);
 		return list;
 	}
 	
@@ -159,15 +154,12 @@ public class CommunityController {
 									@RequestAttribute String memberId) {
 		c.setMemberId(memberId);
 		
-		System.out.println("c : "+c);
 		int result = communityService.insertBoardComment(c);
 		return result;
 	}
 	
 	@GetMapping(value="/recommentList/{reqPage}/{communityBoardNo}/{comuBoardCommentNo}")
 	public List recommentList(@PathVariable int reqPage, @PathVariable int communityBoardNo, @PathVariable int comuBoardCommentNo) {
-		System.out.println("communityBoardNo : "+communityBoardNo);
-		System.out.println("comuBoardCommentNo : "+comuBoardCommentNo);
 		
 		ComuBoardComment cbc = new ComuBoardComment();
 		cbc.setComuBoardCommentRef(comuBoardCommentNo);
@@ -181,7 +173,6 @@ public class CommunityController {
 	@ResponseBody
 	@GetMapping(value="/boardLike/{communityBoardNo}")
 	public int boardLike (@ModelAttribute CommunityBoard c ,@RequestAttribute String memberId ,int communityBoardNo) {
-		System.out.println("controller c : "+c);
 		c.setMemberId(memberId);
 		int likeCount = communityService.boardlike(c, communityBoardNo);
 		return likeCount;
@@ -240,8 +231,6 @@ public class CommunityController {
 	
 	@PostMapping(value="/modifyCommunity")
 	public int modifyCommunity(@ModelAttribute Community c, @ModelAttribute MultipartFile thumbnail, String communityType) {
-		System.out.println("컨트롤에서 c : "+c);
-		System.out.println("컨트롤에서 커뮤니티 타입 : "+communityType);
 		if (c.getCommunityThumb() == null) {
 			c.setCommunityThumb(null);
 		}
@@ -275,12 +264,37 @@ public class CommunityController {
 	
 	@GetMapping(value="/searchCoummunity/{searchType}/{searchValue}")
 	public List searchCoummunity(@PathVariable int searchType, @PathVariable String searchValue) {
-		System.out.println("타입 : "+searchType);
-		System.out.println("밸류 : "+searchValue);
 		List list = communityService.searchCoummunity(searchType, searchValue);
-		System.out.println("list : "+list);
 		return list;
 	}
+	
+	@PostMapping(value="/modifyBoard")
+	public int modifyBoard(@ModelAttribute CommunityBoard c, @ModelAttribute MultipartFile[] boardFile) {
+		System.out.println("컨트롤에서 커뮤니티보드 :"+c);
+		System.out.println("컨트롤에서 업로드할 파일 : "+boardFile);
+		
+		String savepath = root+"community/";
+		
+		ArrayList<CommunityBoardFile> fileList = new ArrayList<CommunityBoardFile>();
+		
+		if (boardFile != null) {
+			for (MultipartFile file : boardFile) {
+				String filename = file.getOriginalFilename();
+				String filepath = fileUtil.getFilepath(savepath, filename, file);
+				CommunityBoardFile cbf = new CommunityBoardFile();
+				cbf.setFilename(filename);
+				cbf.setFilepath(filepath);
+				fileList.add(cbf);
+			}
+		}
+		
+		int result = communityService.modifyBoard(c, fileList);
+		System.out.println("컨트롤러에서 보내기 전 리절트 : "+result);
+		return result;
+	}
+	
+	
+	
 	
 	//관리자 
 	@GetMapping(value="/allCommunityList/{reqPage}")

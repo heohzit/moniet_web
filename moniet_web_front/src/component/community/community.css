@@ -320,7 +320,7 @@
 .community-item-wrap > .community-item > .heart-btns > .ab-btn1 {
   position: absolute;
   bottom: 0;
-  right: 2.7%;
+  right: 1%;
   padding-right: 10px;
   padding-bottom: 10px;
   color: red;
@@ -334,7 +334,7 @@
 .community-item-wrap > .community-item > .heart-btns > .ab-btn2 {
   position: absolute;
   bottom: 0;
-  right: 2.7%;
+  right: 1%;
   padding-right: 10px;
   padding-bottom: 10px;
   color: red;
@@ -479,7 +479,7 @@
 }
 
 .community-view-btns .community-view-join-btn {
-  width: 80%;
+  width: 90%;
 }
 
 .community-view-like-btn,
@@ -769,7 +769,7 @@
 
 .insert-image-preview {
   width: 100%;
-  padding-top: 50px;
+  padding-top: 30px;
   float: left;
   overflow: hidden;
   position: relative;
@@ -796,7 +796,7 @@
   color: #323673;
   font-weight: 500;
   position: absolute;
-  top: 1.4cm;
+  top: 0.85cm;
   left: 2.3cm;
   cursor: pointer;
 }
@@ -1096,6 +1096,7 @@
 }
 
 .comment-recomment-list > .recomment-writer {
+  font-family: ns-b;
   padding-left: 3px;
   font-size: 15px;
   line-height: 25px;
@@ -1261,4 +1262,101 @@
   background-color: #010440;
   color: #fff;
   transition: all 0.2s linear;
+}
+
+.board-modify-wrap {
+}
+
+.board-modify-text-zone {
+  float: left;
+}
+
+.board-modify-textarea {
+  font-size: 15px;
+  font-family: ns-r;
+  width: 950px;
+  height: 150px;
+  resize: none;
+  padding: 10px;
+  box-sizing: border-box;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.board-modify-file-zone {
+  padding: 20px 0px;
+  width: 100%;
+  display: flex;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+}
+
+.board-modify-files > img {
+  box-sizing: border-box;
+  object-fit: contain;
+  width: 180px;
+  height: 80px;
+  padding-right: 10px;
+}
+
+.board-modify-btns {
+  float: left;
+  padding-left: 10px;
+}
+
+.modify-image-btn {
+  display: block;
+  font-size: 18px;
+  width: 200px;
+  text-align: center;
+  height: 70px;
+  line-height: 70px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-family: ns-eb;
+  border: none;
+  outline: none;
+  color: #fff;
+  background-color: #323673;
+}
+
+.board-modify-btns > button {
+  font-size: 18px;
+  width: 200px;
+  height: 70px;
+}
+
+.modify-image-preview-top {
+  font-size: 18px;
+  font-family: ns-b;
+  color: gray;
+  float: left;
+  width: 100%;
+  padding: 15px 0px;
+  position: relative;
+}
+
+.board-modify-btns {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 150px;
+  box-sizing: border-box;
+}
+
+/* .preview-delete {
+  color: #323673;
+  font-weight: 500;
+  position: absolute;
+  top: 0.85cm;
+  left: 2.3cm;
+  cursor: pointer;
+} */
+
+.modify-preview-delete {
+  color: #323673;
+  cursor: pointer;
+  position: absolute;
+  top: 0.45cm;
+  left: 2.3cm;
 }

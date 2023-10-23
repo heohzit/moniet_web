@@ -203,6 +203,8 @@ const CommunityItem = (props) => {
     e.stopPropagation();
   };
 
+  const shareCommunity = () => {};
+
   return (
     <div className="community-item-wrap">
       <div className="community-item" onClick={communityView}>
@@ -249,7 +251,6 @@ const CommunityItem = (props) => {
             </span>
           )}
         </div>
-        <span class="material-icons sh-btn1">share</span>
       </div>
     </div>
   );

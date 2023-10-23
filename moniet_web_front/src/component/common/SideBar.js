@@ -15,6 +15,7 @@ import FeedIcon from "@mui/icons-material/Feed";
 import PersonIcon from "@mui/icons-material/Person";
 import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
 import PieChartOutlineOutlinedIcon from "@mui/icons-material/PieChartOutlineOutlined";
+import ForumIcon from "@mui/icons-material/Forum";
 import axios from "axios";
 const tokens = () => ({
   grey: {
@@ -304,9 +305,9 @@ const SideBar = (props) => {
                 setSelected={setSelected}
               />
               <Item
-                title="참여 목록"
-                to="/member/mypage"
-                icon={<FavoriteIcon />}
+                title="참여 커뮤니티"
+                to="/member/myCommunity"
+                icon={<ForumIcon />}
                 selected={selected}
                 setSelected={setSelected}
               />

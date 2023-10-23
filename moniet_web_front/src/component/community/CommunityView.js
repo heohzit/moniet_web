@@ -317,9 +317,7 @@ const CommunityView = (props) => {
                 </span>
               )}
             </div>
-            <div className="community-view-share-btn">
-              <span class="material-icons sh-btn1">share</span>
-            </div>
+            <div className="community-view-share-btn"></div>
           </div>
         )}
       </div>
