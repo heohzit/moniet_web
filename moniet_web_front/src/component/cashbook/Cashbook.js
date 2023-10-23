@@ -55,7 +55,7 @@ const Cashbook = (props) => {
         setCashbookList(res.data.cashbookList);
       })
       .catch((res) => {
-        console.log(res.response.status);
+        //console.log(res.response.status);
       });
   }, [select]);
 
@@ -90,7 +90,7 @@ const Cashbook = (props) => {
         setSpendingCate(res.data.spendingCategory);
       })
       .catch((res) => {
-        console.log(res.response.status);
+        //console.log(res.response.status);
       });
   }, []);
 
@@ -129,7 +129,7 @@ const Cashbook = (props) => {
         setCashbookList(res.data.cashbookList);
       })
       .catch((res) => {
-        console.log(res.response.status);
+        //console.log(res.response.status);
       });
   };
   const listIncome = () => {
@@ -144,7 +144,7 @@ const Cashbook = (props) => {
         setCashbookList(res.data.cashbookList);
       })
       .catch((res) => {
-        console.log(res.response.status);
+        //console.log(res.response.status);
       });
   };
   const listSum = () => {
@@ -457,11 +457,11 @@ const CashbookItem = (props) => {
           setIsOpen1(false);
           setSelect(!select);
         } else {
-          console.log("등록 중 에러 발생");
+          //console.log("등록 중 에러 발생");
         }
       })
       .catch((res) => {
-        console.log(res.response);
+        //console.log(res.response);
       });
   };
   return (
