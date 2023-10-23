@@ -67,7 +67,6 @@ const CashbookWrite = (props) => {
       cashbookMemo: cashbookMemo,
       challengeNo: challengeNo,
     };
-    console.log(cashbook);
     axios
       .post("/cashbook/insert", cashbook, {
         headers: {
@@ -89,11 +88,11 @@ const CashbookWrite = (props) => {
           setIsOpen1(false);
           setSelect(!select);
         } else {
-          console.log("등록 중 에러 발생");
+          //console.log("등록 중 에러 발생");
         }
       })
       .catch((res) => {
-        console.log(res.response);
+        //console.log(res.response);
       });
   };
 
@@ -119,7 +118,6 @@ const CashbookWrite = (props) => {
         <CashInputModal
           open={isOpen1}
           onClose={() => {
-            console.log(444);
             setIsOpen1(false);
             setSelect(!select);
           }}

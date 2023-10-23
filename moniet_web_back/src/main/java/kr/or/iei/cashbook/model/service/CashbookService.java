@@ -103,7 +103,6 @@ public class CashbookService {
 				}
 				String cashDate = sdf.format(cal.getTime()); 
 				cashbook.setCashbookDate(cashDate);
-				System.out.println(i+"날짜 바뀌는 현황 : " + cashDate);
 				result+=cashbookDao.insertCashbook(cashbook);
 				if(i == 0) {
 					loopRef = cashbook.getLoopRef();
@@ -117,20 +116,17 @@ public class CashbookService {
 				Date date = sdf.parse(cashbook.getCashbookDate());
 				String checkDateStr = "2024-12-31";
 				Date checkDate = sdf.parse(checkDateStr);
-				System.out.println("checkDate: "+checkDate);
 				cal.setTime(date);
 				//최초로 들어온 날짜에 한번삽입
 				cal.add(Calendar.MONTH, 0);
 				String cashDate = sdf.format(cal.getTime()); 
 				cashbook.setCashbookDate(cashDate);
 				result=cashbookDao.insertCashbook(cashbook);
-				System.out.println("cashDate : "+cashDate);
 				//반복개월만큼 삽입
 				
 				while(date.before(checkDate)) {
 					cal.add(Calendar.MONTH, loopMonth);
 					cashDate = sdf.format(cal.getTime());
-					System.out.println("cashDate : "+cashDate);
 					cashbook.setCashbookDate(cashDate);
 					result+=cashbookDao.insertCashbook(cashbook);
 					date=cal.getTime();
@@ -146,7 +142,6 @@ public class CashbookService {
 				int month_diff = (year-checkYear)*12+(month-checkMonth);
 				
 				int resultChk = Math.abs(month_diff/cashbook.getLoopMonth());
-				System.out.println("resultChk : "+resultChk);
 				if(result == resultChk) {
 					result = -1;//성공여부 확인용
 				}
@@ -195,7 +190,6 @@ public class CashbookService {
 		while (sT1.hasMoreTokens()) {
 			int cashbookNo = Integer.parseInt(sT1.nextToken());
 			Cashbook cashbook = cashbookDao.selectOneCashbook(cashbookNo);
-			System.out.println(cashbook);
 			if(cashbook.getCashbookLoop()==0) {
 				int delResult = cashbookDao.deleteCashbook(cashbookNo, memberId);
 				if (delResult == 0) { // 실패
@@ -210,7 +204,6 @@ public class CashbookService {
 					c.setLoopMonth(cashbook.getLoopRound()-1);
 					updateResult = cashbookDao.updateCashbook(c);
 					if(c.getLoopRound()>=cashbook.getLoopRound()) {
-						System.out.println(c);
 						delResult = cashbookDao.deleteCashbook(c.getCashbookNo(), memberId);
 					}
 				}
@@ -232,8 +225,6 @@ public class CashbookService {
 			int loopRef = cashbookDao.selectLoopRef(cashbook.getCashbookNo());
 			ArrayList<Cashbook> updateList = cashbookDao.cashbookListByLoopRef(loopRef);
 			Cashbook standard = updateList.get(0);
-			System.out.println("updateList : "+updateList);
-			System.out.println("updateList.size() : "+updateList.size());
 			if(cashbook.getLoopMonth()==updateList.size()) {
 				for(Cashbook c : updateList) {
 					c.setCashbookFinance(cashbook.getCashbookFinance());
@@ -246,7 +237,6 @@ public class CashbookService {
 					c.setChallengeNo(cashbook.getChallengeNo());
 					c.setMemberId(cashbook.getMemberId());
 					c.setLoopMonth(cashbook.getLoopMonth());
-					System.out.println("c : "+c);
 					result+=cashbookDao.updateCashbook(c);
 				}
 			} else if(cashbook.getLoopMonth() < updateList.size()) {
