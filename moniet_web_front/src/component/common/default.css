@@ -64,38 +64,6 @@ li {
   height: 90px;
   transition-duration: 1s;
 }
-
-/*헤더 css*/
-.header-wrap {
-  width: 1200px;
-  margin: 0 auto;
-  justify-content: space-between;
-  align-items: center;
-}
-/*메뉴바 css*/
-.nav-side {
-  width: 300px;
-}
-
-.nav-side > ul {
-  background-color: #f0f1f2;
-  list-style-type: none;
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-  position: fixed;
-}
-.nav-side > ul > li > a {
-  display: block;
-  padding: 10px;
-  font-family: ns-b;
-  position: relative;
-}
-/*푸터 css*/
-footer {
-  padding: 50px;
-  background-color: #f0f1f2;
-}
 .lineChart {
   width: 600px;
   height: 300px;

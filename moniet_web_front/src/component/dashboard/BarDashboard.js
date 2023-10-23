@@ -142,7 +142,7 @@ const BarDashboard = () => {
     <div className="barDashboard-content">
       <select defaultValue={month} onChange={onChangeHanlder}>
         {months.map((item, index) => (
-          <option key={item.key} value={item.key} selected>
+          <option key={item.key} value={item.key}>
             {item.value}
           </option>
         ))}

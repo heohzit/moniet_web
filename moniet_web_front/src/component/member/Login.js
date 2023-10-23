@@ -21,7 +21,7 @@ const Login = (props) => {
         } else {
           window.localStorage.setItem("token", res.data);
           setIsLogin(true);
-          navigate("*");
+          navigate("/maindash");
         }
       })
       .catch((res) => {
