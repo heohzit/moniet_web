@@ -120,6 +120,7 @@ const SideBar = (props) => {
   const colors = tokens(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState("Dashboard");
+  const [selected1, setSelected1] = useState("회원 관리");
 
   return (
     <Box
@@ -214,15 +215,15 @@ const SideBar = (props) => {
                 title="회원 관리"
                 to="/memberlist"
                 icon={<AdminPanelSettingsIcon />}
-                selected={selected}
-                setSelected={setSelected}
+                selected={selected1}
+                setSelected={setSelected1}
               />
               <Item
                 title="커뮤니티 관리"
                 to="/adminCommunityList"
                 icon={<AdminPanelSettingsIcon />}
-                selected={selected}
-                setSelected={setSelected}
+                selected={selected1}
+                setSelected={setSelected1}
               />
               <LItem
                 title="로그아웃"
