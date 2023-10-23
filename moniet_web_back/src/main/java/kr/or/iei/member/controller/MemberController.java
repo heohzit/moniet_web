@@ -84,8 +84,7 @@ public class MemberController {
 			String filename = thumbnail.getOriginalFilename();
 			String filepath = fileUtil.getFilepath(savepath, filename, thumbnail);
 			m.setImgFile(filepath);
-		}
-		System.out.println(m);		
+		}		
 		int result = memberService.insertMember(m);
 		return result;
 	}
@@ -113,7 +112,6 @@ public class MemberController {
 			String filepath = fileUtil.getFilepath(savepath, filename, thumbnail);
 			m.setImgFile(filepath);
 		}
-		System.out.println(m);
 			return memberService.updateMemberInfo(m);
 		}
 
@@ -166,7 +164,6 @@ public class MemberController {
 	//관리자페이지 아이디검색
 	@GetMapping(value="/searchMemberId/{memberId}")
 	public List searchMemberId(@PathVariable String memberId) {
-		System.out.println(memberId);
 		List list = memberService.searchMemberId(memberId);
 		if(! list.isEmpty()) {
 			return list;

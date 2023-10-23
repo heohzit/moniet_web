@@ -67,7 +67,6 @@ const CashbookWrite = (props) => {
       cashbookMemo: cashbookMemo,
       challengeNo: challengeNo,
     };
-    console.log(cashbook);
     axios
       .post("/cashbook/insert", cashbook, {
         headers: {
@@ -119,7 +118,6 @@ const CashbookWrite = (props) => {
         <CashInputModal
           open={isOpen1}
           onClose={() => {
-            console.log(444);
             setIsOpen1(false);
             setSelect(!select);
           }}

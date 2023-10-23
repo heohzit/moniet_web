@@ -27,7 +27,6 @@ const FindID = () => {
         if (res.data === "") {
           alert("입력하신 정보로 가입 된 회원은 존재하지 않습니다.");
         } else {
-          console.log(res.data);
           setMember(res.data);
           first.classList.add("display");
           next.classList.remove("display");

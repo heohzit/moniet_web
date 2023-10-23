@@ -65,9 +65,7 @@ const AgreeBox = () => {
     }
   }, [ageCheck, useCheck, marketingCheck]);
 
-  const popUpForTerms = () => {
-    console.log("클릭");
-  };
+  const popUpForTerms = () => {};
 
   const joinFrm = () => {
     const nextBtn = document.querySelector(".next-button");

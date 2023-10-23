@@ -54,7 +54,6 @@ public class MemberService {
 
 	@Transactional // 회원정보수정
 	public int updateMemberInfo(Member m) {
-		System.out.println(m);
 		return memberDao.updateMemberInfo(m);
 	
 	}
@@ -81,9 +80,6 @@ public class MemberService {
 
 
 	public Member selectOneMemberPw(String memberId, String memberName, String memberEmail) {
-		//System.out.println(memberId);
-		//System.out.println(memberName);
-		//System.out.println(memberEmail);
 		return memberDao.selectOneMemberPw(memberId,memberName,memberEmail);
 		
 	}

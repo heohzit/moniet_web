@@ -50,7 +50,6 @@ const CashbookDel = (props) => {
           onOpenClickHandler("가계부 삭제 성공!", "success");
         })
         .catch((res) => {
-          console.log(cashbookNos);
           console.log(res.response.status);
         });
     }

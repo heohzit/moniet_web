@@ -163,7 +163,6 @@ const Myinfo = (props) => {
         })
         .catch((res) => {
           if (res.response.status === 403) {
-            console.log("로그아웃된 상태");
             setIsLogin(false);
           }
         });
@@ -180,8 +179,6 @@ const Myinfo = (props) => {
       form.append("memberPhone", member.memberPhone);
       form.append("member", member);
       form.append("thumbnail", thumbnail);
-      console.log(member);
-      console.log(thumbnail);
       axios
         .post("/member/updateMember", form, {
           headers: {
@@ -218,7 +215,6 @@ const Myinfo = (props) => {
       setCheckEmailMsg("");
     }
   };
-  console.log("memberImg", memberImg);
   return (
     <>
       <div className="my-title">MY PAGE</div>

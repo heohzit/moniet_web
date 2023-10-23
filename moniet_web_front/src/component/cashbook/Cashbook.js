@@ -163,7 +163,6 @@ const Cashbook = (props) => {
   //날짜 범위 토글용
   const [toggleOn, setToggleOn] = useState(false);
   const toggle = () => {
-    console.log(cashbookList);
     setToggleOn(!toggleOn);
   };
 
@@ -409,7 +408,6 @@ const CashbookItem = (props) => {
   const onClickButton1 = (e) => {
     setIsOpen1(true);
     e.stopPropagation();
-    console.log(e.currentTarget);
   };
 
   const [cashbookNo, setCashbookNo] = useState(cashbook.cashbookNo);
@@ -515,7 +513,6 @@ const CashbookItem = (props) => {
           <CashInputModal
             open={isOpen1}
             onClose={(e) => {
-              console.log(22222);
               setIsOpen1(false);
               //e.stopPropagation();
               setSelect(!select);
