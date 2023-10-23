@@ -171,20 +171,20 @@ const SideBar = (props) => {
             )}
           </MenuItem>
           {!isCollapsed && (
-            <Box mb="25px">
+            <Box>
               <Box display="flex" justifyContent="center" alignItems="center">
                 {memberImg === null ? (
                   <img
                     alt="profile-user"
-                    width="210px"
-                    height="180px"
+                    width="220px"
+                    height="170px"
                     src="./image/piggy.jpg"
                     style={{ borderRadius: "50%" }}
                   />
                 ) : (
                   <img
-                    width="210px"
-                    height="180px"
+                    width="220px"
+                    height="170px"
                     src={"/member/" + memberImg}
                     style={{ borderRadius: "50%" }}
                   />
@@ -319,11 +319,6 @@ const SideBar = (props) => {
                 selected={selected}
                 setSelected={setSelected}
               />
-              <Typography
-                variant="h6"
-                color={colors.grey[300]}
-                sx={{ m: "15px 0 5px 10px" }}
-              ></Typography>
               <Typography
                 style={{
                   fontSize: "17px",
