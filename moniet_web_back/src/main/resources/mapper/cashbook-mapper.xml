@@ -232,7 +232,12 @@
 			 #{loopMonth}, #{cashbookAsset}, #{cashbookCategory},
 			 #{cashbookMoney}, #{cashbookContent}, #{cashbookMemo}, #{challengeNo}, #{loopRound}, #{loopRef})
 	</insert>
-	<!-- 기준날짜 구하기용 -->
+	<!-- 할부 수정 삭제시 기준 구하기용 -->
+	<select id="selectLoopRef" resultType="int">
+		select loop_ref from cashbook where cashbook_no = #{cashbookNo}
+	</select>
+	
+	<!-- 한개 조회 -->
 	<select id="selectOneCashbook" resultType="cashbook">
 		select 
 			cashbook_no, member_no, cashbook_finance, to_char(cashbook_date, 'yyyy-mm-dd') as cashbook_date,
@@ -241,4 +246,5 @@
   			cashbook_money, cashbook_content, cashbook_memo, challenge_no, loop_round, loop_ref
 		from cashbook where cashbook_no = #{cashbookNo}
 	</select>
+	
 </mapper>
