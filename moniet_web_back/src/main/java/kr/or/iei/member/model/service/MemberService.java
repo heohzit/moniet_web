@@ -26,7 +26,7 @@ public class MemberService {
 
 	public MemberService() {
 		super();
-		expiredMs = 1000*60l;
+		expiredMs = 1000*60*60l;
 	}
 
 	
