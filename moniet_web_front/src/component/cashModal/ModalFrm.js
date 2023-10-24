@@ -5,14 +5,9 @@ import useOutSideClick from "./UseOutSideClick";
 
 const ModalFrm = ({ onClose, children, isOpen }) => {
   //모달 닫기
-  console.log(children);
-  console.log(onClose);
   const handleClose = (e) => {
     onClose();
-    console.log(e);
     e.stopPropagation();
-    console.log(8383);
-    console.log(isOpen);
   };
 
   //모달 프레임 바깥 눌러서 닫기
@@ -25,7 +20,6 @@ const ModalFrm = ({ onClose, children, isOpen }) => {
           className="cash-modal-wrap"
           ref={modalRef}
           onMouseDown={(e) => {
-            console.log(1);
             e.stopPropagation();
           }}
         >
