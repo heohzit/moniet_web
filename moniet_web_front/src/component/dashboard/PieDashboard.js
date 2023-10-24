@@ -25,23 +25,24 @@ ChartJS.register(
 const today = new Date();
 const formattedDate = `${today.getMonth() + 1}월`;
 const selectDate = `${today.getMonth() + 1}`;
-const options = {
-  responsive: true,
-  plugins: {
-    legend: {
-      position: "top",
-    },
-    title: {
-      display: true,
-      text: formattedDate + " 수입 / 지출",
-    },
-  },
-};
 
 const PieDashboard = () => {
+  const [titleText, setTitleText] = useState(formattedDate + "수입 / 지출");
   const [month, setMonth] = useState(selectDate);
   const onChangeHanlder = (e) => {
     setMonth(e.currentTarget.value);
+  };
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: "top",
+      },
+      title: {
+        display: true,
+        text: titleText,
+      },
+    },
   };
   const months = [
     { key: 1, value: "1월" },
@@ -86,6 +87,10 @@ const PieDashboard = () => {
             },
           ],
         });
+        setTitleText(
+          months.find((item) => item.key === parseInt(month)).value +
+            " 수입 / 지출"
+        );
       })
       .catch((res) => {
         console.log(res.response.status);
@@ -93,6 +98,7 @@ const PieDashboard = () => {
   }, [month]);
   return (
     <div className="pieDashboard-content">
+      <p>2023년</p>
       <select defaultValue={month} onChange={onChangeHanlder}>
         {months.map((item, index) => (
           <option key={item.key} value={item.key}>

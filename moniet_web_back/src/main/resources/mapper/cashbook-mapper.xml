@@ -116,7 +116,7 @@
 	<!--파이 차트-->
 	<select id="pieDash" resultType="int">
 		select sum(cashbook_money) from cashbook 
-		where TO_CHAR(cashbook_date,'MM')= #{month} 
+		where TO_CHAR(cashbook_date, 'YYYY') = '2023' and TO_CHAR(cashbook_date, 'MM') = #{month} 
 		and member_no=(select member_no from member where member_id=#{memberId}) 
 		group by cashbook_finance
 	</select>
@@ -126,7 +126,7 @@
 		select sum(cashbook_money) cashbook_money,category_title, category_ref
 		from cashbook c
 		join category_tbl ct on (cashbook_category = category_no)
-		where TO_CHAR(cashbook_date,'MM') = #{month}
+		where TO_CHAR(cashbook_date, 'YYYY') = '2023' and TO_CHAR(cashbook_date, 'MM') = #{month}
 		and c.member_no = (select member_no from member where member_id=#{memberId})
 		and (ct.member_no is null or ct.member_no = (select member_no from member where member_id=#{memberId}))
 		group by category_title, category_ref 

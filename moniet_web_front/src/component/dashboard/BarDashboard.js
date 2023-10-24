@@ -23,36 +23,37 @@ ChartJS.register(
 const today = new Date();
 const formattedDate = `${today.getMonth() + 1}월`;
 const selectDate = `${today.getMonth() + 1}`;
-const options1 = {
-  maxBarThickness: 40,
-  responsive: true,
-  plugins: {
-    legend: {
-      position: "top",
-    },
-    title: {
-      display: true,
-      text: formattedDate + " 의 저축",
-    },
-  },
-};
-const options2 = {
-  maxBarThickness: 40,
-  responsive: true,
-  plugins: {
-    legend: {
-      position: "top",
-    },
-    title: {
-      display: true,
-      text: formattedDate + " 의 지출",
-    },
-  },
-};
 const BarDashboard = () => {
   const [month, setMonth] = useState(selectDate);
   const onChangeHanlder = (e) => {
     setMonth(e.currentTarget.value);
+  };
+  const [titleText, setTitleText] = useState(formattedDate);
+  const options1 = {
+    maxBarThickness: 40,
+    responsive: true,
+    plugins: {
+      legend: {
+        position: "top",
+      },
+      title: {
+        display: true,
+        text: titleText + "의 수입",
+      },
+    },
+  };
+  const options2 = {
+    maxBarThickness: 40,
+    responsive: true,
+    plugins: {
+      legend: {
+        position: "top",
+      },
+      title: {
+        display: true,
+        text: titleText + "의 지출",
+      },
+    },
   };
   const months = [
     { key: 1, value: "1월" },
@@ -133,6 +134,7 @@ const BarDashboard = () => {
             },
           ],
         });
+        setTitleText(months.find((item) => item.key === parseInt(month)).value);
       })
       .catch((res) => {
         console.log(res.response.status);
@@ -140,6 +142,7 @@ const BarDashboard = () => {
   }, [month]);
   return (
     <div className="barDashboard-content">
+      <p>2023년</p>
       <select defaultValue={month} onChange={onChangeHanlder}>
         {months.map((item, index) => (
           <option key={item.key} value={item.key}>
