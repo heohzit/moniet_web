@@ -27,17 +27,6 @@ public class MonietWebConfig implements WebMvcConfigurer{
 		return new BCryptPasswordEncoder();
 	}
 
-	@Override
-	public void addInterceptors(InterceptorRegistry registry) {
-
-		registry.addInterceptor(new LoginInterceptor())
-		.addPathPatterns("/member/getMember","/member/updateMember","/member/delete","/member/pwCheck", "/member/updatePw", "/cashbook/*", "/challenge/*","/community/*")
-		//제외할 경로 .excludePathPatterns("/notice/list","/notice/view","/notice/filedown");
-		;
-		
-		registry.addInterceptor(new AdminInterceptor())
-		.addPathPatterns("/member/searchMemberId/*");
-	}
 	
 	
 }
