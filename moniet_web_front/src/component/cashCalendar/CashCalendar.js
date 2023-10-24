@@ -95,18 +95,6 @@ const CashCalendar = () => {
 
   const [info, setInfo] = useState([]);
 
-  //리스트 띄우는 모달
-  const [listOpen, setListOpen] = useState(false);
-  const listModalOpen = (info) => {
-    setListOpen(true);
-    setDatePick(dateString(info.date));
-    setInfo(info);
-  };
-  const closeListFrm = (e) => {
-    setListOpen(false);
-    setSelect(!select);
-    e.stopPropagation();
-  };
   //리스트용모달추가
   const [isListOpen, setIsListOpen] = useState(false);
   const onClickButton2 = (info) => {
