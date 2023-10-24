@@ -190,13 +190,7 @@ public class CashbookService {
 		while (sT1.hasMoreTokens()) {
 			int cashbookNo = Integer.parseInt(sT1.nextToken());
 			Cashbook cashbook = cashbookDao.selectOneCashbook(cashbookNo);
-			if(cashbook.getCashbookLoop()==0) {
-				int delResult = cashbookDao.deleteCashbook(cashbookNo, memberId);
-				if (delResult == 0) { // 실패
-					result = false;
-					break;
-				}
-			} else if(cashbook.getCashbookLoop()==2) {//할부일 때 삭제
+			if(cashbook.getCashbookLoop()==2) {//할부일 때 삭제
 				ArrayList<Cashbook> updateList = cashbookDao.cashbookListByLoopRef(cashbook.getLoopRef());
 				int updateResult =0;
 				int delResult =0;
@@ -211,7 +205,13 @@ public class CashbookService {
 					result = false;
 					break;
 				}
-			}
+			} else {
+				int delResult = cashbookDao.deleteCashbook(cashbookNo, memberId);
+				if (delResult == 0) { // 실패
+					result = false;
+					break;
+				}
+			} 
 		}
 		return result;
 	}
@@ -219,7 +219,8 @@ public class CashbookService {
 	@Transactional
 	public int updateCashbook(Cashbook cashbook) throws ParseException {
 		int result = 0;
-		if(cashbook.getCashbookLoop()==0) {
+		if(cashbook.getCashbookLoop()==0||cashbook.getCashbookLoop()==1) {
+			System.out.println("반복 수정 : "+cashbook);
 			result = cashbookDao.updateCashbook(cashbook);
 		} else if(cashbook.getCashbookLoop()==2) {//할부일 때 수정하기
 			int loopRef = cashbookDao.selectLoopRef(cashbook.getCashbookNo());
