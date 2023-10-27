@@ -17,8 +17,7 @@
 </div>
 <div align="center">
 	<img src="https://img.shields.io/badge/visualstudiocode-007ACC?style=flat&logo=visualstudiocode&logoColor=white" />
-	<img src="https://img.shields.io/badge/thymeleaf-005F0F?style=flat&logo=thymeleaf&logoColor=white" />
-	<img src="https://img.shields.io/badge/jquery-0769AD?style=flat&logo=jquery&logoColor=white" />
+	<img src="https://img.shields.io/badge/react-61DAFB?style=flat&logo=thymeleaf&logoColor=white" />
 </div>
 <div align="center">
 	<img src="https://img.shields.io/badge/springboot-6DB33F?style=flat&logo=springboot&logoColor=white" />
